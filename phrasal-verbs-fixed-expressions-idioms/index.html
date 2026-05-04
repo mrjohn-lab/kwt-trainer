@@ -364,9 +364,8 @@
       <h1>Lexical <span class="highlight">Transformation</span> Trainer</h1>
       <p>
         Practise phrasal verbs, fixed expressions and idioms through controlled randomised exercises.
-        This version follows real FCE logic: the key word may be the verb, the particle or a central
-        word in the expression, and the transformation is only split when the full answer would exceed
-        the official 2–5 word limit.
+        Multiple Choice now uses expression-specific distractors, so the incorrect options are structurally
+        plausible and train exact expression recognition rather than simple elimination.
       </p>
     </section>
 
@@ -448,8 +447,8 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.4</span>
-      <span>Expanded generated practice based on controlled FCE-style KWT patterns.</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.5</span>
+      <span>Multiple Choice with pedagogical distractors.</span>
     </footer>
   </main>
 
@@ -457,286 +456,46 @@
     const categories = ["All categories", "Phrasal verbs", "Fixed expressions", "Idioms"];
 
     const studyItems = [
-      {
-        type: "Phrasal verbs",
-        expression: "call off",
-        meaning: "cancel",
-        note: "Commonly used in passive transformations: was called off, has been called off, may be called off.",
-        example: "The organisers cancelled the event. → The event was called off."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "bring up",
-        meaning: "mention",
-        note: "Separable with noun objects: bring up the issue / bring the issue up.",
-        example: "She mentioned the issue. → She brought up the issue / She brought the issue up."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "turn down",
-        meaning: "reject",
-        note: "Separable with noun objects: turn down the offer / turn the offer down.",
-        example: "She rejected the invitation. → She turned down the invitation / She turned the invitation down."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "work out",
-        meaning: "solve; understand",
-        note: "Separable with noun objects: work out the problem / work the problem out.",
-        example: "He solved the problem. → He worked out the problem / He worked the problem out."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "pick up",
-        meaning: "collect",
-        note: "Separable with noun objects: pick up the children / pick the children up.",
-        example: "She collected the children. → She picked up the children / She picked the children up."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "put off",
-        meaning: "postpone",
-        note: "Can be active or passive: put off the meeting / the meeting was put off.",
-        example: "They postponed the meeting. → They put off the meeting / The meeting was put off."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "point out",
-        meaning: "indicate; mention",
-        note: "Separable with noun objects: point out the mistake / point the mistake out.",
-        example: "He indicated the mistake. → He pointed out the mistake / He pointed the mistake out."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "come across",
-        meaning: "find by chance",
-        note: "Not separable. Usually used for finding something unexpectedly.",
-        example: "I found an old photo by chance. → I came across an old photo."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "look after",
-        meaning: "take care of",
-        note: "Not separable.",
-        example: "She takes care of her brother. → She looks after her brother."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "come up with",
-        meaning: "think of an idea or solution",
-        note: "Three-part phrasal verb. Not separable.",
-        example: "She thought of a plan. → She came up with a plan."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "carry on",
-        meaning: "continue",
-        note: "Usually followed by -ing.",
-        example: "They continued working. → They carried on working."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "set up",
-        meaning: "establish; start",
-        note: "Often used with organisations, clubs, companies or systems.",
-        example: "They established a new club. → They set up a new club / They set a new club up."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "find out",
-        meaning: "discover",
-        note: "Separable with noun objects, but pronouns must go in the middle: find it out.",
-        example: "She discovered the truth. → She found out the truth / She found the truth out."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "take off",
-        meaning: "leave the ground; become successful",
-        note: "Intransitive when referring to planes or success.",
-        example: "The plane left the ground late. → The plane took off late."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "run into",
-        meaning: "meet unexpectedly",
-        note: "Not separable.",
-        example: "I met my teacher by chance. → I ran into my teacher."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "sort out",
-        meaning: "solve; organise",
-        note: "Separable with noun objects.",
-        example: "They solved the issue. → They sorted out the issue / They sorted the issue out."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "cut down on",
-        meaning: "reduce",
-        note: "Three-part phrasal verb. Not separable.",
-        example: "We should reduce sugar. → We should cut down on sugar."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "get away with",
-        meaning: "avoid punishment",
-        note: "Followed by a noun or -ing form.",
-        example: "He was not punished for cheating. → He got away with cheating."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "hand in",
-        meaning: "submit",
-        note: "Separable with noun objects.",
-        example: "She submitted the essay. → She handed in the essay / She handed the essay in."
-      },
-      {
-        type: "Phrasal verbs",
-        expression: "give up",
-        meaning: "stop doing something",
-        note: "Often followed by -ing or a noun.",
-        example: "He stopped smoking. → He gave up smoking."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "out of the question",
-        meaning: "impossible",
-        note: "Do not omit the article: out of the question.",
-        example: "It is impossible for us to finish today. → It is out of the question for us to finish today."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "be on the verge of",
-        meaning: "be about to",
-        note: "Followed by -ing: on the verge of leaving / signing / accepting.",
-        example: "She was about to leave. → She was on the verge of leaving."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "make ends meet",
-        meaning: "manage financially",
-        note: "Used with money, salary and financial difficulty.",
-        example: "They can’t manage financially. → They can’t make ends meet."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "put one’s finger on",
-        meaning: "identify exactly",
-        note: "The possessive changes: my / your / his / her.",
-        example: "I can’t identify the problem. → I can’t put my finger on the problem."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "to the best of my knowledge",
-        meaning: "as far as I know",
-        note: "The full expression has six words, so the sentence must split it.",
-        example: "As far as I know, he is abroad. → To the best of my knowledge, he is abroad."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "as far as I am concerned",
-        meaning: "in my opinion",
-        note: "A full five-word expression, valid as a complete answer.",
-        example: "In my opinion, it is unfair. → As far as I am concerned, it is unfair."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "bear in mind",
-        meaning: "remember; take into account",
-        note: "Often followed by that + clause.",
-        example: "Remember that it may rain. → Bear in mind that it may rain."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "come to terms with",
-        meaning: "accept a difficult situation",
-        note: "Followed by a noun phrase.",
-        example: "He accepted the situation. → He came to terms with the situation."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "face the music",
-        meaning: "accept the consequences",
-        note: "Informal fixed expression.",
-        example: "He had to accept the consequences. → He had to face the music."
-      },
-      {
-        type: "Fixed expressions",
-        expression: "get cold feet",
-        meaning: "become nervous at the last moment",
-        note: "Usually used before doing something important.",
-        example: "She became nervous before the exam. → She got cold feet before the exam."
-      },
-      {
-        type: "Idioms",
-        expression: "cost an arm and a leg",
-        meaning: "be very expensive",
-        note: "The full idiom has six words, so the sentence must include cost outside the gap.",
-        example: "The laptop was extremely expensive. → The laptop cost an arm and a leg."
-      },
-      {
-        type: "Idioms",
-        expression: "get the wrong end of the stick",
-        meaning: "misunderstand something",
-        note: "The full idiom is too long, so part of it must appear outside the gap.",
-        example: "He misunderstood the situation. → He got the wrong end of the stick."
-      },
-      {
-        type: "Idioms",
-        expression: "in the nick of time",
-        meaning: "just in time",
-        note: "This full answer has exactly five words.",
-        example: "We arrived just in time. → We arrived in the nick of time."
-      },
-      {
-        type: "Idioms",
-        expression: "keep an eye on",
-        meaning: "watch carefully",
-        note: "Full expression has four words.",
-        example: "Can you watch my bag? → Can you keep an eye on my bag?"
-      },
-      {
-        type: "Idioms",
-        expression: "speak your mind",
-        meaning: "say what you really think",
-        note: "Possessive changes according to the subject.",
-        example: "She says what she thinks. → She speaks her mind."
-      },
-      {
-        type: "Idioms",
-        expression: "put your foot in it",
-        meaning: "say something embarrassing",
-        note: "Possessive changes according to the subject.",
-        example: "I said something embarrassing. → I put my foot in it."
-      },
-      {
-        type: "Idioms",
-        expression: "safe and sound",
-        meaning: "safe and unharmed",
-        note: "Often used after arrive, get home or reach somewhere.",
-        example: "They arrived safely. → They arrived safe and sound."
-      },
-      {
-        type: "Idioms",
-        expression: "pull someone’s leg",
-        meaning: "joke with someone",
-        note: "Object pronoun changes: my, your, his, her.",
-        example: "Are you joking with me? → Are you pulling my leg?"
-      },
-      {
-        type: "Idioms",
-        expression: "go from bad to worse",
-        meaning: "deteriorate",
-        note: "Past form: went from bad to worse.",
-        example: "The situation deteriorated. → The situation went from bad to worse."
-      },
-      {
-        type: "Idioms",
-        expression: "wait and see",
-        meaning: "wait before deciding",
-        note: "Short fixed idiom.",
-        example: "We should wait before deciding. → We should wait and see."
-      }
+      { type: "Phrasal verbs", expression: "call off", meaning: "cancel", note: "Commonly used in passive transformations.", example: "The organisers cancelled the event. → The event was called off." },
+      { type: "Phrasal verbs", expression: "bring up", meaning: "mention", note: "Separable with noun objects.", example: "She mentioned the issue. → She brought up the issue / She brought the issue up." },
+      { type: "Phrasal verbs", expression: "turn down", meaning: "reject", note: "Separable with noun objects.", example: "She rejected the invitation. → She turned down the invitation / She turned the invitation down." },
+      { type: "Phrasal verbs", expression: "work out", meaning: "solve; understand", note: "Separable with noun objects.", example: "He solved the problem. → He worked out the problem / He worked the problem out." },
+      { type: "Phrasal verbs", expression: "pick up", meaning: "collect", note: "Separable with noun objects.", example: "She collected the children. → She picked up the children / She picked the children up." },
+      { type: "Phrasal verbs", expression: "put off", meaning: "postpone", note: "Can be active or passive.", example: "They postponed the meeting. → They put off the meeting / The meeting was put off." },
+      { type: "Phrasal verbs", expression: "point out", meaning: "indicate; mention", note: "Separable with noun objects.", example: "He indicated the mistake. → He pointed out the mistake / He pointed the mistake out." },
+      { type: "Phrasal verbs", expression: "come across", meaning: "find by chance", note: "Not separable.", example: "I found an old photo by chance. → I came across an old photo." },
+      { type: "Phrasal verbs", expression: "look after", meaning: "take care of", note: "Not separable.", example: "She takes care of her brother. → She looks after her brother." },
+      { type: "Phrasal verbs", expression: "come up with", meaning: "think of an idea or solution", note: "Three-part phrasal verb. Not separable.", example: "She thought of a plan. → She came up with a plan." },
+      { type: "Phrasal verbs", expression: "carry on", meaning: "continue", note: "Usually followed by -ing.", example: "They continued working. → They carried on working." },
+      { type: "Phrasal verbs", expression: "set up", meaning: "establish; start", note: "Often used with organisations or systems.", example: "They established a new club. → They set up a new club." },
+      { type: "Phrasal verbs", expression: "find out", meaning: "discover", note: "Separable with noun objects.", example: "She discovered the truth. → She found out the truth / She found the truth out." },
+      { type: "Phrasal verbs", expression: "take off", meaning: "leave the ground; become successful", note: "Intransitive when referring to planes or success.", example: "The plane left the ground late. → The plane took off late." },
+      { type: "Phrasal verbs", expression: "run into", meaning: "meet unexpectedly", note: "Not separable.", example: "I met my teacher by chance. → I ran into my teacher." },
+      { type: "Phrasal verbs", expression: "sort out", meaning: "solve; organise", note: "Separable with noun objects.", example: "They solved the issue. → They sorted out the issue / They sorted the issue out." },
+      { type: "Phrasal verbs", expression: "cut down on", meaning: "reduce", note: "Three-part phrasal verb. Not separable.", example: "We should reduce sugar. → We should cut down on sugar." },
+      { type: "Phrasal verbs", expression: "get away with", meaning: "avoid punishment", note: "Followed by a noun or -ing form.", example: "He was not punished for cheating. → He got away with cheating." },
+      { type: "Phrasal verbs", expression: "hand in", meaning: "submit", note: "Separable with noun objects.", example: "She submitted the essay. → She handed in the essay / She handed the essay in." },
+      { type: "Phrasal verbs", expression: "give up", meaning: "stop doing something", note: "Often followed by -ing or a noun.", example: "He stopped smoking. → He gave up smoking." },
+      { type: "Fixed expressions", expression: "out of the question", meaning: "impossible", note: "Do not omit the article.", example: "It is impossible. → It is out of the question." },
+      { type: "Fixed expressions", expression: "be on the verge of", meaning: "be about to", note: "Followed by -ing.", example: "She was about to leave. → She was on the verge of leaving." },
+      { type: "Fixed expressions", expression: "make ends meet", meaning: "manage financially", note: "Used with money and salary.", example: "They can’t manage financially. → They can’t make ends meet." },
+      { type: "Fixed expressions", expression: "put one’s finger on", meaning: "identify exactly", note: "Possessive changes.", example: "I can’t identify the problem. → I can’t put my finger on the problem." },
+      { type: "Fixed expressions", expression: "to the best of my knowledge", meaning: "as far as I know", note: "Often split because it has six words.", example: "As far as I know, he is abroad. → To the best of my knowledge, he is abroad." },
+      { type: "Fixed expressions", expression: "as far as I am concerned", meaning: "in my opinion", note: "Full five-word expression.", example: "In my opinion, it is unfair. → As far as I am concerned, it is unfair." },
+      { type: "Fixed expressions", expression: "bear in mind", meaning: "remember; take into account", note: "Often followed by that + clause.", example: "Remember that it may rain. → Bear in mind that it may rain." },
+      { type: "Fixed expressions", expression: "come to terms with", meaning: "accept a difficult situation", note: "Followed by a noun phrase.", example: "He accepted the situation. → He came to terms with the situation." },
+      { type: "Fixed expressions", expression: "face the music", meaning: "accept the consequences", note: "Informal fixed expression.", example: "He had to accept the consequences. → He had to face the music." },
+      { type: "Fixed expressions", expression: "get cold feet", meaning: "become nervous at the last moment", note: "Usually before doing something important.", example: "She became nervous before the exam. → She got cold feet before the exam." },
+      { type: "Idioms", expression: "cost an arm and a leg", meaning: "be very expensive", note: "The full idiom has six words, so the sentence includes cost outside the gap.", example: "The laptop was expensive. → The laptop cost an arm and a leg." },
+      { type: "Idioms", expression: "get the wrong end of the stick", meaning: "misunderstand something", note: "The full idiom is too long, so part of it appears outside the gap.", example: "He misunderstood. → He got the wrong end of the stick." },
+      { type: "Idioms", expression: "in the nick of time", meaning: "just in time", note: "This full answer has exactly five words.", example: "We arrived just in time. → We arrived in the nick of time." },
+      { type: "Idioms", expression: "keep an eye on", meaning: "watch carefully", note: "Full expression has four words.", example: "Can you watch my bag? → Can you keep an eye on my bag?" },
+      { type: "Idioms", expression: "speak your mind", meaning: "say what you really think", note: "Possessive changes.", example: "She says what she thinks. → She speaks her mind." },
+      { type: "Idioms", expression: "put your foot in it", meaning: "say something embarrassing", note: "Possessive changes.", example: "I said something embarrassing. → I put my foot in it." },
+      { type: "Idioms", expression: "safe and sound", meaning: "safe and unharmed", note: "Often used after arrive or get home.", example: "They arrived safely. → They arrived safe and sound." },
+      { type: "Idioms", expression: "pull someone’s leg", meaning: "joke with someone", note: "Object pronoun changes.", example: "Are you joking with me? → Are you pulling my leg?" },
+      { type: "Idioms", expression: "go from bad to worse", meaning: "deteriorate", note: "Past: went from bad to worse.", example: "The situation deteriorated. → The situation went from bad to worse." },
+      { type: "Idioms", expression: "wait and see", meaning: "wait before deciding", note: "Short fixed idiom.", example: "We should wait before deciding. → We should wait and see." }
     ];
 
     const data = {
@@ -753,7 +512,6 @@
       foundObject: ["an old photo", "an article", "a useful website", "an old letter", "a strange message"],
       caredPerson: ["her brother", "his sister", "the children", "their neighbour", "my cousin"],
       ideaObject: ["an idea", "a plan", "a solution", "a proposal", "an answer"],
-      problem: ["the noise", "the pressure", "the situation", "their complaints"],
       clubObject: ["a new club", "a small company", "a support group", "a new system"],
       truthObject: ["the truth", "the answer", "the reason", "the result"],
       flightObject: ["the plane", "the flight"],
@@ -762,10 +520,6 @@
       cheatingAction: ["cheating", "lying", "copying", "being late"],
       submitObject: ["the essay", "the form", "the project", "the homework"],
       giveUpObject: ["smoking", "sweets", "complaining", "gaming"],
-      changeObject: ["major changes", "serious problems", "unexpected results", "new difficulties"],
-      memoryObject: ["memories of school", "memories of summer", "old memories", "memories of home"],
-      activityVerb: ["seeing", "visiting", "starting", "meeting", "joining", "attending"],
-      activityObject: ["you again", "London", "university", "the team", "the project", "the exchange trip"],
       action: ["finish the project", "complete the form", "organise the event", "solve the problem", "change the timetable"],
       actionBase: ["sign", "leave", "accept", "announce", "make"],
       actionIng: ["signing", "leaving", "accepting", "announcing", "making"],
@@ -786,28 +540,24 @@
             keyOptions: ["OFF", "CALLED"],
             original: v => `The organisers cancelled ${v.event} because of ${v.reason}.`,
             second: v => `${v.Event} ______ because of ${v.reason}.`,
-            answers: v => ["was called off"]
+            answers: v => ["was called off"],
+            distractors: v => ["was put off", "was called out", "was taken off"]
           },
           {
             name: "present perfect passive",
             keyOptions: ["OFF", "CALLED"],
             original: v => `The school has cancelled ${v.event}.`,
             second: v => `${v.Event} ______.`,
-            answers: v => ["has been called off"]
+            answers: v => ["has been called off"],
+            distractors: v => ["has been put off", "has called off", "has been taken off"]
           },
           {
             name: "future passive",
             keyOptions: ["OFF", "CALLED"],
             original: v => `They will cancel ${v.event} if ${v.condition}.`,
             second: v => `${v.Event} ______ if ${v.condition}.`,
-            answers: v => ["will be called off"]
-          },
-          {
-            name: "modal passive",
-            keyOptions: ["OFF", "CALLED"],
-            original: v => `They might cancel ${v.event} because of ${v.reason}.`,
-            second: v => `${v.Event} ______ because of ${v.reason}.`,
-            answers: v => ["might be called off"]
+            answers: v => ["will be called off"],
+            distractors: v => ["will call off", "will be put out", "will be taken off"]
           }
         ]
       },
@@ -821,30 +571,16 @@
             keyOptions: ["BROUGHT", "UP"],
             original: v => `${v.person} mentioned ${v.issue} during the tutorial.`,
             second: v => `${v.person} ______ during the tutorial.`,
-            answers: v => [
-              `brought up ${v.issue}`,
-              `brought ${v.issue} up`
-            ]
-          },
-          {
-            name: "present perfect active",
-            keyOptions: ["BROUGHT", "UP"],
-            original: v => `${v.person} has mentioned ${v.issue} several times.`,
-            second: v => `${v.person} ______ several times.`,
-            answers: v => [
-              `has brought up ${v.issue}`,
-              `has brought ${v.issue} up`
-            ]
+            answers: v => [`brought up ${v.issue}`, `brought ${v.issue} up`],
+            distractors: v => [`brought down ${v.issue}`, `brought out ${v.issue}`, `brought ${v.issue} down`]
           },
           {
             name: "modal active",
             keyOptions: ["BRING", "UP"],
             original: v => `${v.person} should mention ${v.issue} in the meeting.`,
             second: v => `${v.person} should ______ in the meeting.`,
-            answers: v => [
-              `bring up ${v.issue}`,
-              `bring ${v.issue} up`
-            ]
+            answers: v => [`bring up ${v.issue}`, `bring ${v.issue} up`],
+            distractors: v => [`bring down ${v.issue}`, `bring out ${v.issue}`, `bring ${v.issue} down`]
           }
         ]
       },
@@ -858,37 +594,16 @@
             keyOptions: ["TURNED", "DOWN"],
             original: v => `${v.person} rejected ${v.offer}.`,
             second: v => `${v.person} ______.`,
-            answers: v => [
-              `turned down ${v.offer}`,
-              `turned ${v.offer} down`
-            ]
-          },
-          {
-            name: "present perfect active",
-            keyOptions: ["TURNED", "DOWN"],
-            original: v => `${v.person} has rejected ${v.offer}.`,
-            second: v => `${v.person} ______.`,
-            answers: v => [
-              `has turned down ${v.offer}`,
-              `has turned ${v.offer} down`
-            ]
+            answers: v => [`turned down ${v.offer}`, `turned ${v.offer} down`],
+            distractors: v => [`turned up ${v.offer}`, `turned off ${v.offer}`, `turned ${v.offer} off`]
           },
           {
             name: "modal active",
             keyOptions: ["TURN", "DOWN"],
             original: v => `${v.person} should not reject ${v.offer}.`,
             second: v => `${v.person} should not ______.`,
-            answers: v => [
-              `turn down ${v.offer}`,
-              `turn ${v.offer} down`
-            ]
-          },
-          {
-            name: "passive",
-            keyOptions: ["TURNED", "DOWN"],
-            original: v => `${cap(v.offer)} was rejected immediately.`,
-            second: v => `${cap(v.offer)} ______ immediately.`,
-            answers: v => ["was turned down"]
+            answers: v => [`turn down ${v.offer}`, `turn ${v.offer} down`],
+            distractors: v => [`turn up ${v.offer}`, `turn off ${v.offer}`, `turn ${v.offer} off`]
           }
         ]
       },
@@ -902,30 +617,16 @@
             keyOptions: ["WORKED", "OUT"],
             original: v => `${v.person} solved ${v.solvableProblem} in a few minutes.`,
             second: v => `${v.person} ______ in a few minutes.`,
-            answers: v => [
-              `worked out ${v.solvableProblem}`,
-              `worked ${v.solvableProblem} out`
-            ]
-          },
-          {
-            name: "present perfect active",
-            keyOptions: ["WORKED", "OUT"],
-            original: v => `${v.person} has solved ${v.solvableProblem} at last.`,
-            second: v => `${v.person} ______ at last.`,
-            answers: v => [
-              `has worked out ${v.solvableProblem}`,
-              `has worked ${v.solvableProblem} out`
-            ]
+            answers: v => [`worked out ${v.solvableProblem}`, `worked ${v.solvableProblem} out`],
+            distractors: v => [`worked on ${v.solvableProblem}`, `worked over ${v.solvableProblem}`, `worked ${v.solvableProblem} up`]
           },
           {
             name: "modal active",
             keyOptions: ["WORK", "OUT"],
             original: v => `${v.person} should solve ${v.solvableProblem} before tomorrow.`,
             second: v => `${v.person} should ______ before tomorrow.`,
-            answers: v => [
-              `work out ${v.solvableProblem}`,
-              `work ${v.solvableProblem} out`
-            ]
+            answers: v => [`work out ${v.solvableProblem}`, `work ${v.solvableProblem} out`],
+            distractors: v => [`work on ${v.solvableProblem}`, `work ${v.solvableProblem} up`, `work over ${v.solvableProblem}`]
           }
         ]
       },
@@ -939,20 +640,8 @@
             keyOptions: ["PICKED", "UP"],
             original: v => `${v.person} collected ${v.collectObject} after school.`,
             second: v => `${v.person} ______ after school.`,
-            answers: v => [
-              `picked up ${v.collectObject}`,
-              `picked ${v.collectObject} up`
-            ]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["PICK", "UP"],
-            original: v => `${v.person} must collect ${v.collectObject} before five.`,
-            second: v => `${v.person} must ______ before five.`,
-            answers: v => [
-              `pick up ${v.collectObject}`,
-              `pick ${v.collectObject} up`
-            ]
+            answers: v => [`picked up ${v.collectObject}`, `picked ${v.collectObject} up`],
+            distractors: v => [`picked out ${v.collectObject}`, `picked on ${v.collectObject}`, `picked ${v.collectObject} out`]
           }
         ]
       },
@@ -966,24 +655,16 @@
             keyOptions: ["PUT", "OFF"],
             original: v => `They postponed ${v.event} until Monday.`,
             second: v => `They ______ until Monday.`,
-            answers: v => [
-              `put off ${v.event}`,
-              `put ${v.event} off`
-            ]
+            answers: v => [`put off ${v.event}`, `put ${v.event} off`],
+            distractors: v => [`put out ${v.event}`, `put away ${v.event}`, `put ${v.event} out`]
           },
           {
             name: "past passive",
             keyOptions: ["PUT", "OFF"],
             original: v => `They postponed ${v.event} until Monday.`,
             second: v => `${v.Event} ______ until Monday.`,
-            answers: v => ["was put off"]
-          },
-          {
-            name: "present perfect passive",
-            keyOptions: ["PUT", "OFF"],
-            original: v => `They have postponed ${v.event}.`,
-            second: v => `${v.Event} ______.`,
-            answers: v => ["has been put off"]
+            answers: v => ["was put off"],
+            distractors: v => ["was put out", "was put away", "was taken off"]
           }
         ]
       },
@@ -997,20 +678,8 @@
             keyOptions: ["POINTED", "OUT"],
             original: v => `${v.person} indicated ${v.mistake} in my essay.`,
             second: v => `${v.person} ______ in my essay.`,
-            answers: v => [
-              `pointed out ${v.mistake}`,
-              `pointed ${v.mistake} out`
-            ]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["POINT", "OUT"],
-            original: v => `${v.person} should mention ${v.mistake} in the report.`,
-            second: v => `${v.person} should ______ in the report.`,
-            answers: v => [
-              `point out ${v.mistake}`,
-              `point ${v.mistake} out`
-            ]
+            answers: v => [`pointed out ${v.mistake}`, `pointed ${v.mistake} out`],
+            distractors: v => [`pointed at ${v.mistake}`, `pointed to ${v.mistake}`, `pointed ${v.mistake} up`]
           }
         ]
       },
@@ -1024,14 +693,16 @@
             keyOptions: ["CAME", "ACROSS"],
             original: v => `${v.person} found ${v.foundObject} while tidying the room.`,
             second: v => `${v.person} ______ while tidying the room.`,
-            answers: v => [`came across ${v.foundObject}`]
+            answers: v => [`came across ${v.foundObject}`],
+            distractors: v => [`came along ${v.foundObject}`, `came over ${v.foundObject}`, `came into ${v.foundObject}`]
           },
           {
             name: "present perfect active",
             keyOptions: ["COME", "ACROSS"],
             original: v => `${v.person} has found ${v.foundObject} by chance.`,
             second: v => `${v.person} has ______ by chance.`,
-            answers: v => [`come across ${v.foundObject}`]
+            answers: v => [`come across ${v.foundObject}`],
+            distractors: v => [`come along ${v.foundObject}`, `come over ${v.foundObject}`, `come into ${v.foundObject}`]
           }
         ]
       },
@@ -1045,14 +716,8 @@
             keyOptions: ["LOOKS", "AFTER"],
             original: v => `${v.person} takes care of ${v.caredPerson} every afternoon.`,
             second: v => `${v.person} ______ every afternoon.`,
-            answers: v => [`looks after ${v.caredPerson}`]
-          },
-          {
-            name: "past simple active",
-            keyOptions: ["LOOKED", "AFTER"],
-            original: v => `${v.person} took care of ${v.caredPerson} last weekend.`,
-            second: v => `${v.person} ______ last weekend.`,
-            answers: v => [`looked after ${v.caredPerson}`]
+            answers: v => [`looks after ${v.caredPerson}`],
+            distractors: v => [`looks for ${v.caredPerson}`, `looks at ${v.caredPerson}`, `looks into ${v.caredPerson}`]
           }
         ]
       },
@@ -1066,14 +731,8 @@
             keyOptions: ["CAME", "UP", "WITH"],
             original: v => `${v.person} thought of ${v.ideaObject} during the discussion.`,
             second: v => `${v.person} ______ during the discussion.`,
-            answers: v => [`came up with ${v.ideaObject}`]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["COME", "UP", "WITH"],
-            original: v => `${v.person} should think of ${v.ideaObject} before tomorrow.`,
-            second: v => `${v.person} should ______ before tomorrow.`,
-            answers: v => [`come up with ${v.ideaObject}`]
+            answers: v => [`came up with ${v.ideaObject}`],
+            distractors: v => [`came out with ${v.ideaObject}`, `came across ${v.ideaObject}`, `came up to ${v.ideaObject}`]
           }
         ]
       },
@@ -1087,14 +746,8 @@
             keyOptions: ["CARRIED", "ON"],
             original: v => `${v.people} continued working despite the noise.`,
             second: v => `${v.people} ______ despite the noise.`,
-            answers: v => ["carried on working"]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["CARRY", "ON"],
-            original: v => `${v.people} should continue practising every day.`,
-            second: v => `${v.people} should ______ every day.`,
-            answers: v => ["carry on practising"]
+            answers: v => ["carried on working"],
+            distractors: v => ["carried out working", "carried up working", "carried away working"]
           }
         ]
       },
@@ -1108,17 +761,8 @@
             keyOptions: ["SET", "UP"],
             original: v => `${v.people} established ${v.clubObject} last year.`,
             second: v => `${v.people} ______ last year.`,
-            answers: v => [
-              `set up ${v.clubObject}`,
-              `set ${v.clubObject} up`
-            ]
-          },
-          {
-            name: "past passive",
-            keyOptions: ["SET", "UP"],
-            original: v => `${v.people} established ${v.clubObject} last year.`,
-            second: v => `${cap(v.clubObject)} ______ last year.`,
-            answers: v => ["was set up"]
+            answers: v => [`set up ${v.clubObject}`, `set ${v.clubObject} up`],
+            distractors: v => [`set off ${v.clubObject}`, `set out ${v.clubObject}`, `set ${v.clubObject} off`]
           }
         ]
       },
@@ -1132,20 +776,8 @@
             keyOptions: ["FOUND", "OUT"],
             original: v => `${v.person} discovered ${v.truthObject} yesterday.`,
             second: v => `${v.person} ______ yesterday.`,
-            answers: v => [
-              `found out ${v.truthObject}`,
-              `found ${v.truthObject} out`
-            ]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["FIND", "OUT"],
-            original: v => `${v.person} should discover ${v.truthObject} soon.`,
-            second: v => `${v.person} should ______ soon.`,
-            answers: v => [
-              `find out ${v.truthObject}`,
-              `find ${v.truthObject} out`
-            ]
+            answers: v => [`found out ${v.truthObject}`, `found ${v.truthObject} out`],
+            distractors: v => [`found in ${v.truthObject}`, `found up ${v.truthObject}`, `found ${v.truthObject} in`]
           }
         ]
       },
@@ -1159,14 +791,8 @@
             keyOptions: ["TOOK", "OFF"],
             original: v => `${cap(v.flightObject)} left the ground late.`,
             second: v => `${cap(v.flightObject)} ______ late.`,
-            answers: v => ["took off"]
-          },
-          {
-            name: "present perfect active",
-            keyOptions: ["TAKEN", "OFF"],
-            original: v => `${cap(v.flightObject)} has left the ground on time.`,
-            second: v => `${cap(v.flightObject)} has ______ on time.`,
-            answers: v => ["taken off"]
+            answers: v => ["took off"],
+            distractors: v => ["took out", "took up", "took over"]
           }
         ]
       },
@@ -1180,14 +806,8 @@
             keyOptions: ["RAN", "INTO"],
             original: v => `${v.person} met ${v.unexpectedPerson} by chance.`,
             second: v => `${v.person} ______ by chance.`,
-            answers: v => [`ran into ${v.unexpectedPerson}`]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["RUN", "INTO"],
-            original: v => `${v.person} might meet ${v.unexpectedPerson} unexpectedly.`,
-            second: v => `${v.person} might ______ unexpectedly.`,
-            answers: v => [`run into ${v.unexpectedPerson}`]
+            answers: v => [`ran into ${v.unexpectedPerson}`],
+            distractors: v => [`ran over ${v.unexpectedPerson}`, `ran across ${v.unexpectedPerson}`, `ran through ${v.unexpectedPerson}`]
           }
         ]
       },
@@ -1201,20 +821,8 @@
             keyOptions: ["SORTED", "OUT"],
             original: v => `${v.people} solved ${v.solvableProblem} quickly.`,
             second: v => `${v.people} ______ quickly.`,
-            answers: v => [
-              `sorted out ${v.solvableProblem}`,
-              `sorted ${v.solvableProblem} out`
-            ]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["SORT", "OUT"],
-            original: v => `${v.people} should solve ${v.solvableProblem} today.`,
-            second: v => `${v.people} should ______ today.`,
-            answers: v => [
-              `sort out ${v.solvableProblem}`,
-              `sort ${v.solvableProblem} out`
-            ]
+            answers: v => [`sorted out ${v.solvableProblem}`, `sorted ${v.solvableProblem} out`],
+            distractors: v => [`sorted up ${v.solvableProblem}`, `sorted over ${v.solvableProblem}`, `sorted ${v.solvableProblem} up`]
           }
         ]
       },
@@ -1228,14 +836,8 @@
             keyOptions: ["CUT", "DOWN"],
             original: v => `${v.people} should reduce ${v.reduceObject}.`,
             second: v => `${v.people} should ______ ${v.reduceObject}.`,
-            answers: v => ["cut down on"]
-          },
-          {
-            name: "past simple active",
-            keyOptions: ["CUT", "DOWN"],
-            original: v => `${v.people} reduced ${v.reduceObject} last month.`,
-            second: v => `${v.people} ______ ${v.reduceObject} last month.`,
-            answers: v => ["cut down on"]
+            answers: v => ["cut down on"],
+            distractors: v => ["cut off on", "cut out on", "cut down in"]
           }
         ]
       },
@@ -1249,14 +851,8 @@
             keyOptions: ["GOT", "AWAY"],
             original: v => `${v.person} was not punished for ${v.cheatingAction}.`,
             second: v => `${v.person} ______.`,
-            answers: v => [`got away with ${v.cheatingAction}`]
-          },
-          {
-            name: "present perfect active",
-            keyOptions: ["GOT", "AWAY"],
-            original: v => `${v.person} has not been punished for ${v.cheatingAction}.`,
-            second: v => `${v.person} has ______.`,
-            answers: v => [`got away with ${v.cheatingAction}`]
+            answers: v => [`got away with ${v.cheatingAction}`],
+            distractors: v => [`got out of ${v.cheatingAction}`, `got over with ${v.cheatingAction}`, `got away from ${v.cheatingAction}`]
           }
         ]
       },
@@ -1270,20 +866,8 @@
             keyOptions: ["HANDED", "IN"],
             original: v => `${v.person} submitted ${v.submitObject} on time.`,
             second: v => `${v.person} ______ on time.`,
-            answers: v => [
-              `handed in ${v.submitObject}`,
-              `handed ${v.submitObject} in`
-            ]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["HAND", "IN"],
-            original: v => `${v.person} must submit ${v.submitObject} tomorrow.`,
-            second: v => `${v.person} must ______ tomorrow.`,
-            answers: v => [
-              `hand in ${v.submitObject}`,
-              `hand ${v.submitObject} in`
-            ]
+            answers: v => [`handed in ${v.submitObject}`, `handed ${v.submitObject} in`],
+            distractors: v => [`handed out ${v.submitObject}`, `handed over ${v.submitObject}`, `handed ${v.submitObject} out`]
           }
         ]
       },
@@ -1297,14 +881,8 @@
             keyOptions: ["GAVE", "UP"],
             original: v => `${v.person} stopped ${v.giveUpObject} last year.`,
             second: v => `${v.person} ______ last year.`,
-            answers: v => [`gave up ${v.giveUpObject}`]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["GIVE", "UP"],
-            original: v => `${v.person} should stop ${v.giveUpObject}.`,
-            second: v => `${v.person} should ______.`,
-            answers: v => [`give up ${v.giveUpObject}`]
+            answers: v => [`gave up ${v.giveUpObject}`],
+            distractors: v => [`gave out ${v.giveUpObject}`, `gave away ${v.giveUpObject}`, `gave over ${v.giveUpObject}`]
           }
         ]
       },
@@ -1318,14 +896,8 @@
             keyOptions: ["QUESTION", "OUT"],
             original: v => `It is impossible for us to ${v.action} today.`,
             second: v => `It is ______ for us to ${v.action} today.`,
-            answers: v => ["out of the question"]
-          },
-          {
-            name: "past",
-            keyOptions: ["QUESTION", "OUT"],
-            original: v => `It was impossible for them to ${v.action} on time.`,
-            second: v => `It was ______ for them to ${v.action} on time.`,
-            answers: v => ["out of the question"]
+            answers: v => ["out of the question"],
+            distractors: v => ["out of question", "out the question", "outside of the question"]
           }
         ]
       },
@@ -1335,18 +907,12 @@
         hint: "Be about to can become be on the verge of + -ing.",
         frames: [
           {
-            name: "past",
-            keyOptions: ["VERGE", "ON"],
-            original: v => `${v.person} was about to ${v.actionBase} when the phone rang.`,
-            second: v => `${v.person} ______ ${v.actionIng} when the phone rang.`,
-            answers: v => ["was on the verge of"]
-          },
-          {
             name: "present",
             keyOptions: ["VERGE", "ON"],
             original: v => `${v.person} is about to ${v.actionBase} a major decision.`,
             second: v => `${v.person} ______ ${v.actionIng} a major decision.`,
-            answers: v => ["is on the verge of"]
+            answers: v => ["is on the verge of"],
+            distractors: v => ["is in the verge of", "is at the verge of", "is on verge of"]
           }
         ]
       },
@@ -1360,14 +926,8 @@
             keyOptions: ["ENDS", "MAKE"],
             original: v => `${v.people} can’t manage financially on ${v.money}.`,
             second: v => `${v.people} can’t ______ on ${v.money}.`,
-            answers: v => ["make ends meet"]
-          },
-          {
-            name: "past",
-            keyOptions: ["ENDS", "MAKE"],
-            original: v => `${v.people} found it difficult to manage financially on ${v.money}.`,
-            second: v => `${v.people} found it difficult to ______ on ${v.money}.`,
-            answers: v => ["make ends meet"]
+            answers: v => ["make ends meet"],
+            distractors: v => ["make ends match", "make the ends meet", "meet the ends"]
           }
         ]
       },
@@ -1381,21 +941,23 @@
             keyOptions: ["FINGER", "PUT"],
             original: v => `I can’t identify exactly what the problem is.`,
             second: v => `I can’t ______ what the problem is.`,
-            answers: v => ["put my finger on"]
+            answers: v => ["put my finger on"],
+            distractors: v => ["put my hand on", "place my finger in", "put the finger on"]
           }
         ]
       },
       {
         type: "Fixed expressions",
         target: "to the best of my knowledge",
-        hint: "As far as I know can become to the best of my knowledge. The expression is split because the full phrase has six words.",
+        hint: "As far as I know can become to the best of my knowledge.",
         frames: [
           {
             name: "formal expression",
             keyOptions: ["KNOWLEDGE"],
             original: v => `As far as I know, ${v.person.toLowerCase()} is abroad.`,
             second: v => `To the best ______, ${v.person.toLowerCase()} is abroad.`,
-            answers: v => ["of my knowledge"]
+            answers: v => ["of my knowledge"],
+            distractors: v => ["of my knowing", "of the knowledge", "in my knowledge"]
           }
         ]
       },
@@ -1409,7 +971,8 @@
             keyOptions: ["FAR", "CONCERNED"],
             original: v => `In my opinion, the decision is unfair.`,
             second: v => `______, the decision is unfair.`,
-            answers: v => ["as far as I am concerned"]
+            answers: v => ["as far as I am concerned"],
+            distractors: v => ["as long as I know", "as far I am concerned", "as far as I mind"]
           }
         ]
       },
@@ -1423,14 +986,8 @@
             keyOptions: ["BEAR", "MIND"],
             original: v => `Remember that the deadline is tomorrow.`,
             second: v => `______ that the deadline is tomorrow.`,
-            answers: v => ["bear in mind"]
-          },
-          {
-            name: "modal expression",
-            keyOptions: ["BEAR", "MIND"],
-            original: v => `${v.people} should remember that it might rain.`,
-            second: v => `${v.people} should ______ that it might rain.`,
-            answers: v => ["bear in mind"]
+            answers: v => ["bear in mind"],
+            distractors: v => ["keep in head", "bear on mind", "have in mind"]
           }
         ]
       },
@@ -1444,14 +1001,8 @@
             keyOptions: ["TERMS", "COME"],
             original: v => `${v.person} finally accepted the situation.`,
             second: v => `${v.person} finally ______ the situation.`,
-            answers: v => ["came to terms with"]
-          },
-          {
-            name: "modal expression",
-            keyOptions: ["TERMS", "COME"],
-            original: v => `${v.person} must accept the result.`,
-            second: v => `${v.person} must ______ the result.`,
-            answers: v => ["come to terms with"]
+            answers: v => ["came to terms with"],
+            distractors: v => ["came in terms with", "came to term with", "went to terms with"]
           }
         ]
       },
@@ -1461,18 +1012,12 @@
         hint: "Accept the consequences can become face the music.",
         frames: [
           {
-            name: "past obligation",
-            keyOptions: ["FACE", "MUSIC"],
-            original: v => `${v.person} had to accept the consequences.`,
-            second: v => `${v.person} had to ______.`,
-            answers: v => ["face the music"]
-          },
-          {
             name: "modal expression",
             keyOptions: ["FACE", "MUSIC"],
             original: v => `${v.person} should accept the consequences.`,
             second: v => `${v.person} should ______.`,
-            answers: v => ["face the music"]
+            answers: v => ["face the music"],
+            distractors: v => ["face the song", "hear the music", "meet the music"]
           }
         ]
       },
@@ -1486,14 +1031,8 @@
             keyOptions: ["COLD", "FEET"],
             original: v => `${v.person} became nervous before the interview.`,
             second: v => `${v.person} ______ before the interview.`,
-            answers: v => ["got cold feet"]
-          },
-          {
-            name: "future possibility",
-            keyOptions: ["COLD", "FEET"],
-            original: v => `${v.person} might become nervous before the performance.`,
-            second: v => `${v.person} might ______ before the performance.`,
-            answers: v => ["get cold feet"]
+            answers: v => ["got cold feet"],
+            distractors: v => ["got cold foot", "had cold feet", "got nervous feet"]
           }
         ]
       },
@@ -1507,14 +1046,16 @@
             keyOptions: ["ARM"],
             original: v => `${cap(v.object)} was extremely expensive.`,
             second: v => `${cap(v.object)} cost ______.`,
-            answers: v => ["an arm and a leg"]
+            answers: v => ["an arm and a leg"],
+            distractors: v => ["an arm and leg", "an arm and the leg", "one arm and a leg"]
           },
           {
             name: "present perfect",
             keyOptions: ["ARM"],
             original: v => `${cap(v.object)} has been extremely expensive this year.`,
             second: v => `${cap(v.object)} has cost ______ this year.`,
-            answers: v => ["an arm and a leg"]
+            answers: v => ["an arm and a leg"],
+            distractors: v => ["an arm and leg", "the arm and a leg", "one arm and one leg"]
           }
         ]
       },
@@ -1528,14 +1069,16 @@
             keyOptions: ["END"],
             original: v => `I think ${v.person.toLowerCase()} misunderstood what I meant.`,
             second: v => `I think ${v.person.toLowerCase()} got the wrong ______.`,
-            answers: v => ["end of the stick"]
+            answers: v => ["end of the stick"],
+            distractors: v => ["end of stick", "end of the story", "side of the stick"]
           },
           {
             name: "present perfect",
             keyOptions: ["END"],
             original: v => `${v.person} has misunderstood the situation completely.`,
             second: v => `${v.person} has got the wrong ______ completely.`,
-            answers: v => ["end of the stick"]
+            answers: v => ["end of the stick"],
+            distractors: v => ["end of stick", "end of the story", "side of the stick"]
           }
         ]
       },
@@ -1549,14 +1092,8 @@
             keyOptions: ["NICK", "TIME"],
             original: v => `${v.people} arrived just in time to catch ${v.transport}.`,
             second: v => `${v.people} arrived ______ to catch ${v.transport}.`,
-            answers: v => ["in the nick of time"]
-          },
-          {
-            name: "past with place",
-            keyOptions: ["NICK", "TIME"],
-            original: v => `${v.people} reached ${v.place} just in time.`,
-            second: v => `${v.people} reached ${v.place} ______.`,
-            answers: v => ["in the nick of time"]
+            answers: v => ["in the nick of time"],
+            distractors: v => ["in nick of time", "at the nick of time", "in the time nick"]
           }
         ]
       },
@@ -1570,35 +1107,31 @@
             keyOptions: ["EYE", "KEEP"],
             original: v => `Can you watch my bag for a moment?`,
             second: v => `Can you ______ my bag for a moment?`,
-            answers: v => ["keep an eye on"]
-          },
-          {
-            name: "modal advice",
-            keyOptions: ["EYE", "KEEP"],
-            original: v => `${v.people} should watch the children carefully.`,
-            second: v => `${v.people} should ______ the children.`,
-            answers: v => ["keep an eye on"]
+            answers: v => ["keep an eye on"],
+            distractors: v => ["keep eye on", "have an eye on", "keep the eye on"]
           }
         ]
       },
       {
         type: "Idioms",
         target: "speak your mind",
-        hint: "Say what you really think can become speak your mind. The possessive changes with the subject.",
+        hint: "Say what you really think can become speak your mind.",
         frames: [
           {
             name: "present simple",
             keyOptions: ["MIND", "SPEAKS"],
             original: v => `She always says what she really thinks.`,
             second: v => `She always ______.`,
-            answers: v => ["speaks her mind"]
+            answers: v => ["speaks her mind"],
+            distractors: v => ["speaks her head", "says her mind", "speaks the mind"]
           },
           {
             name: "modal advice",
             keyOptions: ["MIND", "SPEAK"],
             original: v => `You should say what you really think.`,
             second: v => `You should ______.`,
-            answers: v => ["speak your mind"]
+            answers: v => ["speak your mind"],
+            distractors: v => ["speak your head", "say your mind", "speak the mind"]
           }
         ]
       },
@@ -1612,14 +1145,8 @@
             keyOptions: ["FOOT", "PUT"],
             original: v => `I said something really embarrassing at dinner.`,
             second: v => `I really ______ at dinner.`,
-            answers: v => ["put my foot in it"]
-          },
-          {
-            name: "past simple third person",
-            keyOptions: ["FOOT", "PUT"],
-            original: v => `He said something really embarrassing in the meeting.`,
-            second: v => `He really ______ in the meeting.`,
-            answers: v => ["put his foot in it"]
+            answers: v => ["put my foot in it"],
+            distractors: v => ["put my feet in it", "put my foot on it", "put the foot in it"]
           }
         ]
       },
@@ -1633,14 +1160,8 @@
             keyOptions: ["SAFE", "SOUND"],
             original: v => `${v.people} arrived safely after the journey.`,
             second: v => `${v.people} arrived ______ after the journey.`,
-            answers: v => ["safe and sound"]
-          },
-          {
-            name: "home expression",
-            keyOptions: ["SAFE", "SOUND"],
-            original: v => `${v.people} got home safely.`,
-            second: v => `${v.people} got home ______.`,
-            answers: v => ["safe and sound"]
+            answers: v => ["safe and sound"],
+            distractors: v => ["safe and well", "safely and sound", "sound and safe"]
           }
         ]
       },
@@ -1654,14 +1175,8 @@
             keyOptions: ["LEG", "PULLING"],
             original: v => `Are you joking with me?`,
             second: v => `Are you ______?`,
-            answers: v => ["pulling my leg"]
-          },
-          {
-            name: "past continuous",
-            keyOptions: ["LEG", "PULLING"],
-            original: v => `He was joking with her.`,
-            second: v => `He was ______.`,
-            answers: v => ["pulling her leg"]
+            answers: v => ["pulling my leg"],
+            distractors: v => ["pulling my arm", "taking my leg", "pulling the leg"]
           }
         ]
       },
@@ -1675,7 +1190,8 @@
             keyOptions: ["BAD", "WORSE"],
             original: v => `The situation deteriorated rapidly.`,
             second: v => `The situation went ______ rapidly.`,
-            answers: v => ["from bad to worse"]
+            answers: v => ["from bad to worse"],
+            distractors: v => ["from worse to bad", "from bad to worst", "bad to worse"]
           }
         ]
       },
@@ -1689,7 +1205,8 @@
             keyOptions: ["WAIT", "SEE"],
             original: v => `${v.people} should wait before making a decision.`,
             second: v => `${v.people} should ______.`,
-            answers: v => ["wait and see"]
+            answers: v => ["wait and see"],
+            distractors: v => ["wait to see", "wait and look", "wait or see"]
           }
         ]
       }
@@ -1754,10 +1271,7 @@
     }
 
     function getAcceptedAnswers(exercise) {
-      if (Array.isArray(exercise.answers) && exercise.answers.length > 0) {
-        return exercise.answers;
-      }
-      return [exercise.answer];
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
     }
 
     function primaryAnswer(exercise) {
@@ -1774,7 +1288,6 @@
 
     function isValidExercise(exercise) {
       const answers = getAcceptedAnswers(exercise);
-
       return answers.length > 0 && answers.every(answer => {
         const count = wordCount(answer);
         return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
@@ -1783,9 +1296,7 @@
 
     function fillVars() {
       const vars = {};
-      Object.keys(data).forEach(key => {
-        vars[key] = pick(data[key]);
-      });
+      Object.keys(data).forEach(key => vars[key] = pick(data[key]));
       vars.Event = cap(vars.event);
       vars.Offer = cap(vars.offer);
       vars.Object = cap(vars.object);
@@ -1810,9 +1321,7 @@
         const frame = pick(generator.frames);
         const vars = fillVars();
         const answers = frame.answers(vars);
-        const validKeys = shuffle(frame.keyOptions).filter(key =>
-          answers.every(answer => keyIsIncluded(answer, key))
-        );
+        const validKeys = shuffle(frame.keyOptions).filter(key => answers.every(answer => keyIsIncluded(answer, key)));
 
         if (!validKeys.length) continue;
 
@@ -1825,7 +1334,8 @@
           original: frame.original(vars),
           second: frame.second(vars),
           answer: answers[0],
-          answers: answers
+          answers: answers,
+          distractors: typeof frame.distractors === "function" ? frame.distractors(vars) : []
         };
 
         if (isValidExercise(exercise)) return exercise;
@@ -1840,7 +1350,8 @@
         original: "No valid exercise could be generated.",
         second: "Please choose another category.",
         answer: "system error",
-        answers: ["system error"]
+        answers: ["system error"],
+        distractors: ["try again", "new item", "other category"]
       };
     }
 
@@ -1886,43 +1397,23 @@
     }
 
     function makeDistractors(exercise) {
-      const wrong = [
-        "was put off",
-        "turned up",
-        "turned into",
-        "looked forward",
-        "put out with",
-        "on the point of",
-        "out of question",
-        "made ends up",
-        "an arm and leg",
-        "in nick of time",
-        "side of the stick",
-        "was cancelled off",
-        "has turned down",
-        "end of stick",
-        "cost an arm",
-        "the wrong end",
-        "forward for seeing",
-        "was called out",
-        "brought down the issue",
-        "worked in the problem",
-        "made the music",
-        "cold the feet",
-        "safe and well",
-        "from worse to bad",
-        "wait to see"
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+      const specific = Array.isArray(exercise.distractors) ? exercise.distractors : [];
+
+      const cleanSpecific = specific.filter(item =>
+        wordCount(item) >= 2 &&
+        wordCount(item) <= 5 &&
+        !accepted.includes(normalise(item))
+      );
+
+      const emergency = [
+        "wrong expression",
+        "incorrect phrase",
+        "not the phrase",
+        "almost correct"
       ];
 
-      const accepted = getAcceptedAnswers(exercise).map(normalise);
-
-      return shuffle(
-        wrong.filter(item =>
-          wordCount(item) >= 2 &&
-          wordCount(item) <= 5 &&
-          !accepted.includes(normalise(item))
-        )
-      ).slice(0, 3);
+      return shuffle([...cleanSpecific, ...emergency]).slice(0, 3);
     }
 
     function newMcQuestion() {
@@ -1951,7 +1442,6 @@
       $("mcQuestion").innerHTML = `
         <p>${q.original}</p>
         <div class="box">${q.second}</div>
-        <p><span class="badge badge-orange">Key word: ${q.key}</span></p>
       `;
 
       $("mcOptions").innerHTML = "";
@@ -1979,6 +1469,7 @@
         $("mcFeedback").innerHTML = `
           <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
           <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
           <p>${q.hint}</p>
           <p class="muted"><strong>Target expression:</strong> ${q.target} · <strong>Pattern:</strong> ${q.frame}</p>
         `;
@@ -1989,14 +1480,9 @@
 
     function chooseMc(option) {
       if (state.mcSelected) return;
-
       state.mcSelected = option;
       state.mcAttempts++;
-
-      if (isCorrectAnswer(option, state.mcCurrent)) {
-        state.mcScore++;
-      }
-
+      if (isCorrectAnswer(option, state.mcCurrent)) state.mcScore++;
       renderMc();
     }
 
@@ -2043,7 +1529,6 @@
 
       state.trChecked = true;
       state.trAttempts++;
-
       if (correct) state.trScore++;
 
       $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
@@ -2135,9 +1620,7 @@
       $("trInput").addEventListener("input", renderTransformation);
 
       $("trInput").addEventListener("keydown", event => {
-        if (event.key === "Enter") {
-          checkTransformation(false);
-        }
+        if (event.key === "Enter") checkTransformation(false);
       });
 
       renderStudy();
