@@ -364,8 +364,7 @@
       <h1>Lexical <span class="highlight">Transformation</span> Trainer</h1>
       <p>
         Practise phrasal verbs, fixed expressions and idioms through controlled randomised exercises.
-        Multiple Choice now uses expression-specific distractors, so the incorrect options are structurally
-        plausible and train exact expression recognition rather than simple elimination.
+        Multiple Choice now uses only expression-specific distractors: no generic filler options.
       </p>
     </section>
 
@@ -447,8 +446,8 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.5</span>
-      <span>Multiple Choice with pedagogical distractors.</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.5.1</span>
+      <span>Multiple Choice without generic filler options.</span>
     </footer>
   </main>
 
@@ -550,14 +549,6 @@
             second: v => `${v.Event} ______.`,
             answers: v => ["has been called off"],
             distractors: v => ["has been put off", "has called off", "has been taken off"]
-          },
-          {
-            name: "future passive",
-            keyOptions: ["OFF", "CALLED"],
-            original: v => `They will cancel ${v.event} if ${v.condition}.`,
-            second: v => `${v.Event} ______ if ${v.condition}.`,
-            answers: v => ["will be called off"],
-            distractors: v => ["will call off", "will be put out", "will be taken off"]
           }
         ]
       },
@@ -618,7 +609,7 @@
             original: v => `${v.person} solved ${v.solvableProblem} in a few minutes.`,
             second: v => `${v.person} ______ in a few minutes.`,
             answers: v => [`worked out ${v.solvableProblem}`, `worked ${v.solvableProblem} out`],
-            distractors: v => [`worked on ${v.solvableProblem}`, `worked over ${v.solvableProblem}`, `worked ${v.solvableProblem} up`]
+            distractors: v => [`worked on ${v.solvableProblem}`, `worked ${v.solvableProblem} up`, `worked over ${v.solvableProblem}`]
           },
           {
             name: "modal active",
@@ -1313,10 +1304,21 @@
       return generators.filter(generator => generator.type === category);
     }
 
-    function generateExercise(category = "All categories") {
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+      const specific = Array.isArray(exercise.distractors) ? exercise.distractors : [];
+
+      return specific.filter(item =>
+        wordCount(item) >= 2 &&
+        wordCount(item) <= 5 &&
+        !accepted.includes(normalise(item))
+      );
+    }
+
+    function generateExercise(category = "All categories", mode = "transform") {
       const possible = filteredGenerators(category);
 
-      for (let attempt = 0; attempt < 300; attempt++) {
+      for (let attempt = 0; attempt < 500; attempt++) {
         const generator = pick(possible);
         const frame = pick(generator.frames);
         const vars = fillVars();
@@ -1338,7 +1340,14 @@
           distractors: typeof frame.distractors === "function" ? frame.distractors(vars) : []
         };
 
-        if (isValidExercise(exercise)) return exercise;
+        if (!isValidExercise(exercise)) continue;
+
+        if (mode === "multiple") {
+          const goodDistractors = cleanDistractors(exercise);
+          if (goodDistractors.length < 3) continue;
+        }
+
+        return exercise;
       }
 
       return {
@@ -1351,7 +1360,7 @@
         second: "Please choose another category.",
         answer: "system error",
         answers: ["system error"],
-        distractors: ["try again", "new item", "other category"]
+        distractors: ["system option one", "system option two", "system option three"]
       };
     }
 
@@ -1397,28 +1406,13 @@
     }
 
     function makeDistractors(exercise) {
-      const accepted = getAcceptedAnswers(exercise).map(normalise);
-      const specific = Array.isArray(exercise.distractors) ? exercise.distractors : [];
-
-      const cleanSpecific = specific.filter(item =>
-        wordCount(item) >= 2 &&
-        wordCount(item) <= 5 &&
-        !accepted.includes(normalise(item))
-      );
-
-      const emergency = [
-        "wrong expression",
-        "incorrect phrase",
-        "not the phrase",
-        "almost correct"
-      ];
-
-      return shuffle([...cleanSpecific, ...emergency]).slice(0, 3);
+      return shuffle(cleanDistractors(exercise)).slice(0, 3);
     }
 
     function newMcQuestion() {
-      const exercise = generateExercise(state.mcCategory);
-      const options = shuffle([primaryAnswer(exercise), ...makeDistractors(exercise)]).slice(0, 4);
+      const exercise = generateExercise(state.mcCategory, "multiple");
+      const distractors = makeDistractors(exercise);
+      const options = shuffle([primaryAnswer(exercise), ...distractors]).slice(0, 4);
 
       state.mcCurrent = { ...exercise, options };
       state.mcSelected = null;
@@ -1487,7 +1481,7 @@
     }
 
     function newTransformation() {
-      state.trCurrent = generateExercise(state.trCategory);
+      state.trCurrent = generateExercise(state.trCategory, "transform");
       state.trChecked = false;
       $("trInput").value = "";
       $("trFeedback").classList.add("hidden");
