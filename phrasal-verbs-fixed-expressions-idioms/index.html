@@ -448,7 +448,7 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.3</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.3.1</span>
       <span>Generated practice based on controlled FCE-style KWT patterns.</span>
     </footer>
   </main>
@@ -1294,7 +1294,7 @@
         return;
       }
 
-      $("mcType").textContent = `${q.type} · ${q.target} · ${q.frame}`;
+      $("mcType").textContent = `${q.type} · Generated transformation`;
 
       $("mcQuestion").innerHTML = `
         <p>${q.original}</p>
@@ -1328,6 +1328,7 @@
           <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
           <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
           <p>${q.hint}</p>
+          <p class="muted"><strong>Target expression:</strong> ${q.target} · <strong>Pattern:</strong> ${q.frame}</p>
         `;
       } else {
         $("mcFeedback").classList.add("hidden");
@@ -1371,7 +1372,7 @@
       const input = $("trInput").value.trim();
       const words = input ? input.split(/\s+/).length : 0;
 
-      $("trType").textContent = `${q.type} · ${q.target} · ${q.frame}`;
+      $("trType").textContent = `${q.type} · Generated transformation`;
       $("trWords").textContent = `Words: ${words}/2–5`;
       $("trWords").className = `pill ${
         words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
@@ -1398,6 +1399,7 @@
         <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
         <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
         <p>${state.trCurrent.hint}</p>
+        <p class="muted"><strong>Target expression:</strong> ${state.trCurrent.target} · <strong>Pattern:</strong> ${state.trCurrent.frame}</p>
         <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
       `;
 
