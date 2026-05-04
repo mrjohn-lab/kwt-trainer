@@ -95,7 +95,7 @@
       background: rgba(255, 255, 255, 0.94);
       border: 1px solid var(--border);
       border-radius: 30px;
-      padding: 38px;
+      padding: 34px;
       box-shadow: var(--shadow);
       margin-bottom: 22px;
     }
@@ -115,9 +115,9 @@
     h1 {
       margin: 0;
       color: var(--navy);
-      font-size: clamp(36px, 5vw, 62px);
+      font-size: clamp(34px, 5vw, 58px);
       line-height: 1;
-      letter-spacing: -1.7px;
+      letter-spacing: -1.4px;
     }
 
     .highlight { color: var(--orange); }
@@ -127,6 +127,13 @@
       color: var(--muted);
       font-size: 18px;
       max-width: 900px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
     }
 
     .tabs {
@@ -250,7 +257,7 @@
     }
 
     .flashcard h2 {
-      font-size: clamp(36px, 6vw, 58px);
+      font-size: clamp(34px, 6vw, 54px);
       color: var(--navy);
       margin: 14px 0;
     }
@@ -363,9 +370,16 @@
       <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
       <h1>Lexical <span class="highlight">Transformation</span> Trainer</h1>
       <p>
-        Practise phrasal verbs, fixed expressions and idioms through controlled randomised exercises.
-        Multiple Choice now uses only expression-specific distractors: no generic filler options.
+        Bulk vocabulary version. This lab now includes a wide bank of phrasal verbs, fixed expressions,
+        set phrases and idioms, with parallel generated examples, controlled distractors and the official
+        2–5-word answer limit.
       </p>
+      <div class="stats">
+        <span id="totalCount" class="pill"></span>
+        <span id="phrasalCount" class="pill"></span>
+        <span id="fixedCount" class="pill"></span>
+        <span id="idiomCount" class="pill"></span>
+      </div>
     </section>
 
     <nav class="tabs">
@@ -446,764 +460,875 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.5.1</span>
-      <span>Multiple Choice without generic filler options.</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 7 · v1.6</span>
+      <span>Bulk vocabulary expansion · Parallel generated practice</span>
     </footer>
   </main>
 
   <script>
     const categories = ["All categories", "Phrasal verbs", "Fixed expressions", "Idioms"];
 
-    const studyItems = [
-      { type: "Phrasal verbs", expression: "call off", meaning: "cancel", note: "Commonly used in passive transformations.", example: "The organisers cancelled the event. → The event was called off." },
-      { type: "Phrasal verbs", expression: "bring up", meaning: "mention", note: "Separable with noun objects.", example: "She mentioned the issue. → She brought up the issue / She brought the issue up." },
-      { type: "Phrasal verbs", expression: "turn down", meaning: "reject", note: "Separable with noun objects.", example: "She rejected the invitation. → She turned down the invitation / She turned the invitation down." },
-      { type: "Phrasal verbs", expression: "work out", meaning: "solve; understand", note: "Separable with noun objects.", example: "He solved the problem. → He worked out the problem / He worked the problem out." },
-      { type: "Phrasal verbs", expression: "pick up", meaning: "collect", note: "Separable with noun objects.", example: "She collected the children. → She picked up the children / She picked the children up." },
-      { type: "Phrasal verbs", expression: "put off", meaning: "postpone", note: "Can be active or passive.", example: "They postponed the meeting. → They put off the meeting / The meeting was put off." },
-      { type: "Phrasal verbs", expression: "point out", meaning: "indicate; mention", note: "Separable with noun objects.", example: "He indicated the mistake. → He pointed out the mistake / He pointed the mistake out." },
-      { type: "Phrasal verbs", expression: "come across", meaning: "find by chance", note: "Not separable.", example: "I found an old photo by chance. → I came across an old photo." },
-      { type: "Phrasal verbs", expression: "look after", meaning: "take care of", note: "Not separable.", example: "She takes care of her brother. → She looks after her brother." },
-      { type: "Phrasal verbs", expression: "come up with", meaning: "think of an idea or solution", note: "Three-part phrasal verb. Not separable.", example: "She thought of a plan. → She came up with a plan." },
-      { type: "Phrasal verbs", expression: "carry on", meaning: "continue", note: "Usually followed by -ing.", example: "They continued working. → They carried on working." },
-      { type: "Phrasal verbs", expression: "set up", meaning: "establish; start", note: "Often used with organisations or systems.", example: "They established a new club. → They set up a new club." },
-      { type: "Phrasal verbs", expression: "find out", meaning: "discover", note: "Separable with noun objects.", example: "She discovered the truth. → She found out the truth / She found the truth out." },
-      { type: "Phrasal verbs", expression: "take off", meaning: "leave the ground; become successful", note: "Intransitive when referring to planes or success.", example: "The plane left the ground late. → The plane took off late." },
-      { type: "Phrasal verbs", expression: "run into", meaning: "meet unexpectedly", note: "Not separable.", example: "I met my teacher by chance. → I ran into my teacher." },
-      { type: "Phrasal verbs", expression: "sort out", meaning: "solve; organise", note: "Separable with noun objects.", example: "They solved the issue. → They sorted out the issue / They sorted the issue out." },
-      { type: "Phrasal verbs", expression: "cut down on", meaning: "reduce", note: "Three-part phrasal verb. Not separable.", example: "We should reduce sugar. → We should cut down on sugar." },
-      { type: "Phrasal verbs", expression: "get away with", meaning: "avoid punishment", note: "Followed by a noun or -ing form.", example: "He was not punished for cheating. → He got away with cheating." },
-      { type: "Phrasal verbs", expression: "hand in", meaning: "submit", note: "Separable with noun objects.", example: "She submitted the essay. → She handed in the essay / She handed the essay in." },
-      { type: "Phrasal verbs", expression: "give up", meaning: "stop doing something", note: "Often followed by -ing or a noun.", example: "He stopped smoking. → He gave up smoking." },
-      { type: "Fixed expressions", expression: "out of the question", meaning: "impossible", note: "Do not omit the article.", example: "It is impossible. → It is out of the question." },
-      { type: "Fixed expressions", expression: "be on the verge of", meaning: "be about to", note: "Followed by -ing.", example: "She was about to leave. → She was on the verge of leaving." },
-      { type: "Fixed expressions", expression: "make ends meet", meaning: "manage financially", note: "Used with money and salary.", example: "They can’t manage financially. → They can’t make ends meet." },
-      { type: "Fixed expressions", expression: "put one’s finger on", meaning: "identify exactly", note: "Possessive changes.", example: "I can’t identify the problem. → I can’t put my finger on the problem." },
-      { type: "Fixed expressions", expression: "to the best of my knowledge", meaning: "as far as I know", note: "Often split because it has six words.", example: "As far as I know, he is abroad. → To the best of my knowledge, he is abroad." },
-      { type: "Fixed expressions", expression: "as far as I am concerned", meaning: "in my opinion", note: "Full five-word expression.", example: "In my opinion, it is unfair. → As far as I am concerned, it is unfair." },
-      { type: "Fixed expressions", expression: "bear in mind", meaning: "remember; take into account", note: "Often followed by that + clause.", example: "Remember that it may rain. → Bear in mind that it may rain." },
-      { type: "Fixed expressions", expression: "come to terms with", meaning: "accept a difficult situation", note: "Followed by a noun phrase.", example: "He accepted the situation. → He came to terms with the situation." },
-      { type: "Fixed expressions", expression: "face the music", meaning: "accept the consequences", note: "Informal fixed expression.", example: "He had to accept the consequences. → He had to face the music." },
-      { type: "Fixed expressions", expression: "get cold feet", meaning: "become nervous at the last moment", note: "Usually before doing something important.", example: "She became nervous before the exam. → She got cold feet before the exam." },
-      { type: "Idioms", expression: "cost an arm and a leg", meaning: "be very expensive", note: "The full idiom has six words, so the sentence includes cost outside the gap.", example: "The laptop was expensive. → The laptop cost an arm and a leg." },
-      { type: "Idioms", expression: "get the wrong end of the stick", meaning: "misunderstand something", note: "The full idiom is too long, so part of it appears outside the gap.", example: "He misunderstood. → He got the wrong end of the stick." },
-      { type: "Idioms", expression: "in the nick of time", meaning: "just in time", note: "This full answer has exactly five words.", example: "We arrived just in time. → We arrived in the nick of time." },
-      { type: "Idioms", expression: "keep an eye on", meaning: "watch carefully", note: "Full expression has four words.", example: "Can you watch my bag? → Can you keep an eye on my bag?" },
-      { type: "Idioms", expression: "speak your mind", meaning: "say what you really think", note: "Possessive changes.", example: "She says what she thinks. → She speaks her mind." },
-      { type: "Idioms", expression: "put your foot in it", meaning: "say something embarrassing", note: "Possessive changes.", example: "I said something embarrassing. → I put my foot in it." },
-      { type: "Idioms", expression: "safe and sound", meaning: "safe and unharmed", note: "Often used after arrive or get home.", example: "They arrived safely. → They arrived safe and sound." },
-      { type: "Idioms", expression: "pull someone’s leg", meaning: "joke with someone", note: "Object pronoun changes.", example: "Are you joking with me? → Are you pulling my leg?" },
-      { type: "Idioms", expression: "go from bad to worse", meaning: "deteriorate", note: "Past: went from bad to worse.", example: "The situation deteriorated. → The situation went from bad to worse." },
-      { type: "Idioms", expression: "wait and see", meaning: "wait before deciding", note: "Short fixed idiom.", example: "We should wait before deciding. → We should wait and see." }
+    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "") {
+      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note };
+    }
+
+    const items = [
+      item("Phrasal verbs", "break down", "stop functioning",
+        "The photocopier stopped working during the lesson.",
+        "The photocopier ______ during the lesson.",
+        ["broke down"], ["BROKE", "DOWN"],
+        ["broke up", "went down", "shut down"],
+        "Intransitive. No object is needed."),
+
+      item("Phrasal verbs", "bring about", "cause; make something happen",
+        "The new timetable caused several changes in the department.",
+        "The new timetable ______ several changes in the department.",
+        ["brought about"], ["BROUGHT", "ABOUT"],
+        ["brought up", "brought out", "brought back"],
+        "Used with changes, consequences or results."),
+
+      item("Phrasal verbs", "bring back", "remind someone of something",
+        "This photograph reminds me of my first year at school.",
+        "This photograph ______ memories of my first year at school.",
+        ["brings back"], ["BRINGS", "BACK"],
+        ["brings up", "brings out", "brings about"],
+        "Often used with memories."),
+
+      item("Phrasal verbs", "bring up", "mention",
+        "The student mentioned the issue during the tutorial.",
+        "The student ______ during the tutorial.",
+        ["brought up the issue", "brought the issue up"], ["BROUGHT", "UP"],
+        ["brought down the issue", "brought out the issue", "brought the issue down"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "call back", "phone again",
+        "I will phone you again after lunch.",
+        "I will ______ after lunch.",
+        ["call you back"], ["CALL", "BACK"],
+        ["call you off", "call you out", "call back you"],
+        "With pronouns, the object goes in the middle."),
+
+      item("Phrasal verbs", "call off", "cancel",
+        "The organisers cancelled the rehearsal because of the storm.",
+        "The rehearsal ______ because of the storm.",
+        ["was called off"], ["CALLED", "OFF"],
+        ["was put off", "was taken off", "was called out"],
+        "Very common in passive transformations."),
+
+      item("Phrasal verbs", "carry on", "continue",
+        "The students continued working despite the noise.",
+        "The students ______ despite the noise.",
+        ["carried on working"], ["CARRIED", "ON"],
+        ["carried out working", "carried up working", "carried away working"],
+        "Usually followed by -ing."),
+
+      item("Phrasal verbs", "catch up with", "reach the same point as someone",
+        "After missing two lessons, he had to reach the same level as the class.",
+        "After missing two lessons, he had to ______ the class.",
+        ["catch up with"], ["CATCH", "UP", "WITH"],
+        ["catch on with", "catch up to", "catch out with"],
+        "Three-part phrasal verb."),
+
+      item("Phrasal verbs", "come across", "find by chance",
+        "She found a useful article while researching online.",
+        "She ______ while researching online.",
+        ["came across a useful article"], ["CAME", "ACROSS"],
+        ["came along a useful article", "came into a useful article", "came over a useful article"],
+        "Not separable."),
+
+      item("Phrasal verbs", "come back", "return",
+        "They returned from the exchange trip last night.",
+        "They ______ from the exchange trip last night.",
+        ["came back"], ["CAME", "BACK"],
+        ["came up", "came out", "came over"],
+        "Often used with places and journeys."),
+
+      item("Phrasal verbs", "come out", "be published; appear",
+        "The school magazine will be published in June.",
+        "The school magazine will ______ in June.",
+        ["come out"], ["COME", "OUT"],
+        ["come up", "come over", "come along"],
+        "Used for books, magazines, films and results."),
+
+      item("Phrasal verbs", "come up with", "think of an idea or solution",
+        "Our group thought of a clever solution during the meeting.",
+        "Our group ______ during the meeting.",
+        ["came up with a clever solution"], ["CAME", "UP", "WITH"],
+        ["came out with a clever solution", "came across a clever solution", "came up to a clever solution"],
+        "Not separable."),
+
+      item("Phrasal verbs", "cut down on", "reduce",
+        "We should reduce the amount of plastic we use.",
+        "We should ______ plastic.",
+        ["cut down on"], ["CUT", "DOWN"],
+        ["cut off on", "cut out on", "cut down in"],
+        "Three-part phrasal verb."),
+
+      item("Phrasal verbs", "drop out", "leave a course before finishing",
+        "He left the course before finishing it.",
+        "He ______ the course.",
+        ["dropped out of"], ["DROPPED", "OUT"],
+        ["dropped off from", "dropped away from", "dropped out from"],
+        "Usually followed by of + school/course/university."),
+
+      item("Phrasal verbs", "end up", "finally be in a place or situation",
+        "After walking for hours, we finally arrived in a tiny village.",
+        "After walking for hours, we ______ in a tiny village.",
+        ["ended up"], ["ENDED", "UP"],
+        ["ended out", "ended in", "ended over"],
+        "Used for unexpected final situations."),
+
+      item("Phrasal verbs", "figure out", "understand; solve",
+        "They finally understood the instructions.",
+        "They finally ______ the instructions.",
+        ["figured out", "figured the instructions out"], ["FIGURED", "OUT"],
+        ["figured up", "figured on", "figured the instructions up"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "fill in", "complete a form",
+        "Please complete the application form before Friday.",
+        "Please ______ before Friday.",
+        ["fill in the application form", "fill the application form in"], ["FILL", "IN"],
+        ["fill out the application", "fill up the application form", "fill the application form out"],
+        "In British English, fill in is common for forms."),
+
+      item("Phrasal verbs", "find out", "discover",
+        "The teacher discovered the truth after the lesson.",
+        "The teacher ______ after the lesson.",
+        ["found out the truth", "found the truth out"], ["FOUND", "OUT"],
+        ["found in the truth", "found up the truth", "found the truth in"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "get on / get along", "have a good relationship",
+        "The two classmates have a very good relationship.",
+        "The two classmates ______ together.",
+        ["get on well"], ["GET", "ON"],
+        ["get up well", "get out well", "get over well"],
+        "Get on well is the most common British English form."),
+
+      item("Phrasal verbs", "get away with", "avoid punishment",
+        "He was not punished for cheating in the test.",
+        "He ______ in the test.",
+        ["got away with cheating"], ["GOT", "AWAY"],
+        ["got out of cheating", "got over with cheating", "got away from cheating"],
+        "Followed by a noun or -ing."),
+
+      item("Phrasal verbs", "get back", "return",
+        "We returned from the school trip after midnight.",
+        "We ______ from the school trip after midnight.",
+        ["got back"], ["GOT", "BACK"],
+        ["got out", "got over", "got away"],
+        "Common with journeys and holidays."),
+
+      item("Phrasal verbs", "get by", "manage with difficulty",
+        "It is hard to manage financially on such a small salary.",
+        "It is hard to ______ such a small salary.",
+        ["get by on"], ["GET", "BY"],
+        ["get over on", "get along on", "get through on"],
+        "Often used with money or limited resources."),
+
+      item("Phrasal verbs", "get over", "recover from",
+        "It took him weeks to recover from the illness.",
+        "It took him weeks to ______ the illness.",
+        ["get over"], ["GET", "OVER"],
+        ["get out", "get through", "get by"],
+        "Used with illness, shock or difficult experiences."),
+
+      item("Phrasal verbs", "give away", "reveal; give something for free",
+        "She revealed the ending of the film by accident.",
+        "She ______ by accident.",
+        ["gave away the ending", "gave the ending away"], ["GAVE", "AWAY"],
+        ["gave out the ending", "gave up the ending", "gave the ending out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "give back", "return something",
+        "Please return the book before Friday.",
+        "Please ______ before Friday.",
+        ["give back the book", "give the book back"], ["GIVE", "BACK"],
+        ["give up the book", "give out the book", "give the book out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "give in", "stop resisting; surrender",
+        "After a long discussion, he stopped resisting.",
+        "After a long discussion, he finally ______.",
+        ["gave in"], ["GAVE", "IN"],
+        ["gave up", "gave out", "gave away"],
+        "Intransitive in this meaning."),
+
+      item("Phrasal verbs", "give up", "stop doing something",
+        "She stopped eating sweets last month.",
+        "She ______ last month.",
+        ["gave up sweets"], ["GAVE", "UP"],
+        ["gave out sweets", "gave away sweets", "gave over sweets"],
+        "Often followed by a noun or -ing."),
+
+      item("Phrasal verbs", "go ahead", "proceed",
+        "The event will proceed despite the bad weather.",
+        "The event will ______ despite the bad weather.",
+        ["go ahead"], ["GO", "AHEAD"],
+        ["go forward", "go on", "go away"],
+        "Used when plans continue."),
+
+      item("Phrasal verbs", "go on", "continue; happen",
+        "Please continue with your explanation.",
+        "Please ______ with your explanation.",
+        ["go on"], ["GO", "ON"],
+        ["go up", "go over", "go out"],
+        "Can mean continue."),
+
+      item("Phrasal verbs", "grow up", "spend your childhood; become an adult",
+        "She spent her childhood in a small town near Cádiz.",
+        "She ______ in a small town near Cádiz.",
+        ["grew up"], ["GREW", "UP"],
+        ["grew out", "grew over", "grew on"],
+        "Used with childhood and places."),
+
+      item("Phrasal verbs", "hand in", "submit",
+        "He submitted the essay before the deadline.",
+        "He ______ before the deadline.",
+        ["handed in the essay", "handed the essay in"], ["HANDED", "IN"],
+        ["handed out the essay", "handed over the essay", "handed the essay out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "hold on", "wait",
+        "Please wait for a second.",
+        "Please ______ for a second.",
+        ["hold on"], ["HOLD", "ON"],
+        ["hold up", "hold out", "hold over"],
+        "Common in spoken English."),
+
+      item("Phrasal verbs", "keep on", "continue doing something repeatedly",
+        "He continued interrupting during the presentation.",
+        "He ______ during the presentation.",
+        ["kept on interrupting"], ["KEPT", "ON"],
+        ["kept up interrupting", "kept out interrupting", "kept away interrupting"],
+        "Followed by -ing."),
+
+      item("Phrasal verbs", "let down", "disappoint",
+        "You disappointed the whole team yesterday.",
+        "You ______ yesterday.",
+        ["let down the whole team", "let the whole team down"], ["LET", "DOWN"],
+        ["let up the whole team", "let off the whole team", "let the whole team up"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "look after", "take care of",
+        "He takes care of his little cousin after school.",
+        "He ______ after school.",
+        ["looks after his little cousin"], ["LOOKS", "AFTER"],
+        ["looks for his little cousin", "looks at his little cousin", "looks into his little cousin"],
+        "Not separable."),
+
+      item("Phrasal verbs", "look for", "try to find",
+        "I am trying to find my notes.",
+        "I am ______ my notes.",
+        ["looking for"], ["LOOKING", "FOR"],
+        ["looking after", "looking up", "looking into"],
+        "Not separable."),
+
+      item("Phrasal verbs", "look forward to", "feel excited about the future",
+        "We are excited about visiting Ireland next month.",
+        "We are ______ visiting Ireland next month.",
+        ["looking forward to"], ["LOOKING", "FORWARD"],
+        ["looking forward for", "looking ahead to", "looking up to"],
+        "To is a preposition, so it is followed by -ing."),
+
+      item("Phrasal verbs", "look up", "search for information",
+        "I searched for the address online.",
+        "I ______ online.",
+        ["looked up the address", "looked the address up"], ["LOOKED", "UP"],
+        ["looked for the address", "looked into the address", "looked the address out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "make out", "manage to understand/hear/see",
+        "I could hardly understand the announcement.",
+        "I could hardly ______.",
+        ["make out the announcement"], ["MAKE", "OUT"],
+        ["make up the announcement", "make over the announcement", "make the announcement out"],
+        "Often used with can/could hardly."),
+
+      item("Phrasal verbs", "make up", "invent",
+        "He invented a strange story to avoid trouble.",
+        "He ______ to avoid trouble.",
+        ["made up a strange story", "made a strange story up"], ["MADE", "UP"],
+        ["made out a strange story", "made off a strange story", "made a strange story out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "pass away", "die",
+        "Her grandfather died peacefully last year.",
+        "Her grandfather ______ peacefully last year.",
+        ["passed away"], ["PASSED", "AWAY"],
+        ["passed out", "passed over", "passed off"],
+        "A softer way to say die."),
+
+      item("Phrasal verbs", "pick up", "collect",
+        "My aunt collected the tickets from the office.",
+        "My aunt ______ from the office.",
+        ["picked up the tickets", "picked the tickets up"], ["PICKED", "UP"],
+        ["picked out the tickets", "picked on the tickets", "picked the tickets out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "point out", "indicate; mention",
+        "The teacher indicated the error in my answer.",
+        "The teacher ______ in my answer.",
+        ["pointed out the error", "pointed the error out"], ["POINTED", "OUT"],
+        ["pointed at the error", "pointed to the error", "pointed the error up"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "put away", "put something in its place",
+        "He put the plates in the cupboard after dinner.",
+        "He ______ after dinner.",
+        ["put away the plates", "put the plates away"], ["PUT", "AWAY"],
+        ["put off the plates", "put out the plates", "put the plates off"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "put off", "postpone",
+        "They postponed the parents’ meeting until Thursday.",
+        "They ______ until Thursday.",
+        ["put off the parents' meeting", "put the parents' meeting off"], ["PUT", "OFF"],
+        ["put out the parents' meeting", "put away the parents' meeting", "put the parents' meeting out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "put on", "wear",
+        "He wore a warm coat before leaving.",
+        "He ______ before leaving.",
+        ["put on a warm coat", "put a warm coat on"], ["PUT", "ON"],
+        ["put off a warm coat", "put out a warm coat", "put a warm coat off"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "put out", "extinguish",
+        "The firefighters extinguished the small fire quickly.",
+        "The firefighters ______ quickly.",
+        ["put out the small fire", "put the small fire out"], ["PUT", "OUT"],
+        ["put off the small fire", "put away the small fire", "put the small fire off"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "put up with", "tolerate",
+        "I cannot tolerate that noise any longer.",
+        "I cannot ______ any longer.",
+        ["put up with that noise"], ["PUT", "UP"],
+        ["put out with that noise", "put on with that noise", "put up to that noise"],
+        "Three-part phrasal verb. Not separable."),
+
+      item("Phrasal verbs", "run into", "meet unexpectedly",
+        "I met an old classmate by chance at the station.",
+        "I ______ at the station.",
+        ["ran into an old classmate"], ["RAN", "INTO"],
+        ["ran over an old classmate", "ran across an old classmate", "ran through an old classmate"],
+        "Not separable."),
+
+      item("Phrasal verbs", "set off", "start a journey",
+        "They started their journey before dawn.",
+        "They ______ before dawn.",
+        ["set off"], ["SET", "OFF"],
+        ["set up", "set out", "set down"],
+        "Intransitive in this meaning."),
+
+      item("Phrasal verbs", "set up", "establish; start",
+        "They established a debating club last year.",
+        "They ______ last year.",
+        ["set up a debating club", "set a debating club up"], ["SET", "UP"],
+        ["set off a debating club", "set out a debating club", "set a debating club off"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "show up", "arrive; appear",
+        "He arrived late for the interview.",
+        "He ______ for the interview.",
+        ["showed up late"], ["SHOWED", "UP"],
+        ["showed out late", "showed off late", "showed over late"],
+        "Informal for arrive."),
+
+      item("Phrasal verbs", "sort out", "solve; organise",
+        "We solved the problem before the lesson started.",
+        "We ______ before the lesson started.",
+        ["sorted out the problem", "sorted the problem out"], ["SORTED", "OUT"],
+        ["sorted up the problem", "sorted over the problem", "sorted the problem up"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "take after", "resemble a relative",
+        "She resembles her grandmother a lot.",
+        "She really ______ her grandmother.",
+        ["takes after"], ["TAKES", "AFTER"],
+        ["takes over", "takes on", "takes up"],
+        "Usually used for family resemblance."),
+
+      item("Phrasal verbs", "take off", "leave the ground",
+        "The plane left the ground twenty minutes late.",
+        "The plane ______ twenty minutes late.",
+        ["took off"], ["TOOK", "OFF"],
+        ["took out", "took up", "took over"],
+        "Intransitive for planes."),
+
+      item("Phrasal verbs", "take on", "accept work or responsibility",
+        "She accepted too many responsibilities this term.",
+        "She ______ this term.",
+        ["took on too many responsibilities"], ["TOOK", "ON"],
+        ["took over too many responsibilities", "took up too many responsibilities", "took off too many responsibilities"],
+        "Used with work, tasks and responsibility."),
+
+      item("Phrasal verbs", "think over", "consider carefully",
+        "You should consider the proposal carefully.",
+        "You should ______ carefully.",
+        ["think over the proposal", "think the proposal over"], ["THINK", "OVER"],
+        ["think up the proposal", "think out the proposal", "think the proposal up"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "throw away", "discard",
+        "Don’t discard those old documents.",
+        "Don’t ______.",
+        ["throw away those old documents", "throw those old documents away"], ["THROW", "AWAY"],
+        ["throw out those old documents", "throw up those old documents", "throw those old documents out"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "turn down", "reject",
+        "She rejected the invitation immediately.",
+        "She ______ immediately.",
+        ["turned down the invitation", "turned the invitation down"], ["TURNED", "DOWN"],
+        ["turned up the invitation", "turned off the invitation", "turned the invitation off"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "turn into", "become",
+        "The old building became a modern library.",
+        "The old building ______ a modern library.",
+        ["turned into"], ["TURNED", "INTO"],
+        ["turned onto", "turned up", "turned out"],
+        "Not separable."),
+
+      item("Phrasal verbs", "turn off", "switch off",
+        "Please switch off the projector before leaving.",
+        "Please ______ before leaving.",
+        ["turn off the projector", "turn the projector off"], ["TURN", "OFF"],
+        ["turn on the projector", "turn up the projector", "turn the projector on"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "turn on", "switch on",
+        "He switched on the computer after lunch.",
+        "He ______ after lunch.",
+        ["turned on the computer", "turned the computer on"], ["TURNED", "ON"],
+        ["turned off the computer", "turned up the computer", "turned the computer off"],
+        "Separable with noun objects."),
+
+      item("Phrasal verbs", "turn out", "happen in the end; result",
+        "The activity was better than we expected in the end.",
+        "The activity ______ than we expected.",
+        ["turned out better"], ["TURNED", "OUT"],
+        ["turned up better", "turned into better", "turned over better"],
+        "Used for final results."),
+
+      item("Phrasal verbs", "turn up", "arrive unexpectedly; be found",
+        "The missing folder was found in the staff room.",
+        "The missing folder ______ in the staff room.",
+        ["turned up"], ["TURNED", "UP"],
+        ["turned out", "turned into", "turned over"],
+        "Can mean appear or be found."),
+
+      item("Phrasal verbs", "work out", "solve; understand",
+        "He solved the issue in a few minutes.",
+        "He ______ in a few minutes.",
+        ["worked out the issue", "worked the issue out"], ["WORKED", "OUT"],
+        ["worked on the issue", "worked the issue up", "worked over the issue"],
+        "Separable with noun objects."),
+
+      item("Fixed expressions", "as far as I know", "to the best of my knowledge",
+        "As far as I know, the exchange starts in March.",
+        "______ , the exchange starts in March.",
+        ["to the best of my knowledge"], ["KNOWLEDGE"],
+        ["to my best knowledge", "in the best of my knowledge", "to the better of my knowledge"],
+        "Formal equivalent of as far as I know."),
+
+      item("Fixed expressions", "as far as I am concerned", "in my opinion",
+        "In my opinion, the plan is too risky.",
+        "______ , the plan is too risky.",
+        ["as far as I am concerned"], ["FAR", "CONCERNED"],
+        ["as long as I am concerned", "as far I am concerned", "as far as I mind"],
+        "Useful for opinion transformations."),
+
+      item("Fixed expressions", "be about to", "be on the verge of / point of",
+        "She was just going to leave when the phone rang.",
+        "She was ______ leaving when the phone rang.",
+        ["on the point of"], ["POINT"],
+        ["in the point of", "at the point of", "on point of"],
+        "Be about to can be transformed with on the point/verge of + -ing."),
+
+      item("Fixed expressions", "be on the verge of", "be about to",
+        "He was about to announce his decision.",
+        "He was ______ announcing his decision.",
+        ["on the verge of"], ["VERGE"],
+        ["in the verge of", "at the verge of", "on verge of"],
+        "Followed by -ing."),
+
+      item("Fixed expressions", "be under the impression", "believe; think",
+        "I believed that the meeting had been cancelled.",
+        "I was ______ that the meeting had been cancelled.",
+        ["under the impression"], ["IMPRESSION"],
+        ["under impression", "in the impression", "on the impression"],
+        "Often followed by that."),
+
+      item("Fixed expressions", "be out of the question", "be impossible",
+        "It is impossible for us to finish this today.",
+        "It is ______ for us to finish this today.",
+        ["out of the question"], ["QUESTION", "OUT"],
+        ["out of question", "out the question", "outside of the question"],
+        "Do not omit the article."),
+
+      item("Fixed expressions", "bear in mind", "remember; take into account",
+        "Remember that the deadline is tomorrow.",
+        "______ that the deadline is tomorrow.",
+        ["bear in mind"], ["BEAR", "MIND"],
+        ["bear on mind", "keep in head", "have on mind"],
+        "Common with that clauses."),
+
+      item("Fixed expressions", "bring to light", "reveal; make known",
+        "The report revealed several serious mistakes.",
+        "The report ______ several serious mistakes.",
+        ["brought to light"], ["BROUGHT", "LIGHT"],
+        ["brought in light", "brought to life", "brought into light"],
+        "Often used with investigations and reports."),
+
+      item("Fixed expressions", "come to terms with", "accept",
+        "He finally accepted the result.",
+        "He finally ______ the result.",
+        ["came to terms with"], ["TERMS"],
+        ["came in terms with", "came to term with", "went to terms with"],
+        "Used for accepting difficult situations."),
+
+      item("Fixed expressions", "do one’s best", "try as hard as possible",
+        "She tried as hard as possible to help the team.",
+        "She ______ to help the team.",
+        ["did her best"], ["BEST"],
+        ["made her best", "did the best", "made the best"],
+        "Possessive changes with the subject."),
+
+      item("Fixed expressions", "face the music", "accept the consequences",
+        "He should accept the consequences of his mistake.",
+        "He should ______ for his mistake.",
+        ["face the music"], ["FACE", "MUSIC"],
+        ["face the song", "hear the music", "meet the music"],
+        "Idiomatic fixed expression."),
+
+      item("Fixed expressions", "get cold feet", "become nervous at the last moment",
+        "She became nervous just before the interview.",
+        "She ______ just before the interview.",
+        ["got cold feet"], ["COLD", "FEET"],
+        ["got cold foot", "had cold feet", "got nervous feet"],
+        "Used before important events."),
+
+      item("Fixed expressions", "get straight to the point", "be direct",
+        "Let me be direct with you.",
+        "Let me ______ with you.",
+        ["get straight to the point"], ["STRAIGHT", "POINT"],
+        ["go straight to the point", "get direct to the point", "get straight at the point"],
+        "Means speak directly."),
+
+      item("Fixed expressions", "have a one-track mind", "think only about one thing",
+        "He only thinks about football.",
+        "He ______ when it comes to football.",
+        ["has a one-track mind"], ["TRACK", "MIND"],
+        ["has one track mind", "has a single-track mind", "has one-tracked mind"],
+        "Used critically when someone focuses on only one thing."),
+
+      item("Fixed expressions", "in my opinion", "as far as I am concerned",
+        "As far as I am concerned, the answer is clear.",
+        "______ , the answer is clear.",
+        ["in my opinion"], ["OPINION"],
+        ["on my opinion", "in my view point", "from my opinion"],
+        "Neutral opinion phrase."),
+
+      item("Fixed expressions", "it’s no good", "it is pointless/useless",
+        "It is pointless discussing the matter now.",
+        "It is ______ the matter now.",
+        ["no good discussing"], ["GOOD"],
+        ["not good discussing", "no use discuss", "not use discussing"],
+        "Followed by -ing."),
+
+      item("Fixed expressions", "it’s no use", "there is no point in",
+        "There is no point in worrying about it now.",
+        "It is ______ about it now.",
+        ["no use worrying"], ["USE"],
+        ["no good worry", "not use worrying", "no point worry"],
+        "Followed by -ing."),
+
+      item("Fixed expressions", "it’s high time", "something should happen now",
+        "We should start revising now.",
+        "It is ______ revising.",
+        ["high time we started"], ["TIME"],
+        ["high time to start", "the high time we start", "high moment we started"],
+        "Often followed by past simple with present meaning."),
+
+      item("Fixed expressions", "make ends meet", "manage financially",
+        "They cannot manage financially on that salary.",
+        "They cannot ______ on that salary.",
+        ["make ends meet"], ["ENDS", "MAKE"],
+        ["make ends match", "make the ends meet", "meet the ends"],
+        "Used with financial difficulty."),
+
+      item("Fixed expressions", "make up one’s mind", "decide",
+        "She finally decided to accept the offer.",
+        "She finally ______ to accept the offer.",
+        ["made up her mind"], ["MIND", "MADE"],
+        ["made her mind up", "made out her mind", "made her decision mind"],
+        "Possessive changes with the subject."),
+
+      item("Fixed expressions", "on the spur of the moment", "without planning",
+        "He bought the jacket without planning it.",
+        "He bought the jacket ______ of the moment.",
+        ["on the spur"], ["SPUR"],
+        ["in the spur", "at the spur", "on a spur"],
+        "The expression is split to respect the five-word limit."),
+
+      item("Fixed expressions", "put one’s finger on", "identify exactly",
+        "I cannot identify exactly what is wrong.",
+        "I cannot ______ what is wrong.",
+        ["put my finger on"], ["FINGER", "PUT"],
+        ["put my hand on", "place my finger in", "put the finger on"],
+        "Possessive changes with the subject."),
+
+      item("Fixed expressions", "see eye to eye", "agree",
+        "They never agree about school rules.",
+        "They never ______ about school rules.",
+        ["see eye to eye"], ["EYE"],
+        ["see eyes to eyes", "look eye to eye", "see eye by eye"],
+        "Used for agreement."),
+
+      item("Fixed expressions", "take for granted", "fail to appreciate properly",
+        "He failed to appreciate her support properly.",
+        "He ______.",
+        ["took her support for granted"], ["GRANTED"],
+        ["took her support as granted", "took her support for sure", "took her support by granted"],
+        "Used when someone does not value something enough."),
+
+      item("Fixed expressions", "there’s no point in", "it is useless to",
+        "It is useless to complain now.",
+        "There is ______ now.",
+        ["no point in complaining"], ["POINT"],
+        ["no point to complain", "not point in complaining", "no use to complain"],
+        "Followed by -ing."),
+
+      item("Fixed expressions", "turn a blind eye", "ignore deliberately",
+        "The teacher deliberately ignored the noise.",
+        "The teacher ______ the noise.",
+        ["turned a blind eye to"], ["BLIND"],
+        ["turned a closed eye to", "made a blind eye to", "turned blind eye to"],
+        "Means deliberately ignore."),
+
+      item("Fixed expressions", "win hands down", "win easily",
+        "Our team won the final easily.",
+        "Our team ______.",
+        ["won hands down"], ["HANDS"],
+        ["won hand down", "won hands up", "won by hands"],
+        "Means win easily."),
+
+      item("Idioms", "a dream come true", "something wonderful you really wanted",
+        "Getting into that university was something he had always wanted.",
+        "Getting into that university was ______ for him.",
+        ["a dream come true"], ["DREAM"],
+        ["a dream became true", "a true dream come", "a dream getting true"],
+        "Fixed idiom."),
+
+      item("Idioms", "back in the day", "a long time ago",
+        "People used to communicate very differently a long time ago.",
+        "______ , people used to communicate very differently.",
+        ["back in the day"], ["DAY"],
+        ["back on the day", "in the back day", "back at the day"],
+        "Used to refer to the past."),
+
+      item("Idioms", "best thing since sliced bread", "something extremely good",
+        "This new platform is absolutely fantastic.",
+        "This new platform is the best ______.",
+        ["thing since sliced bread"], ["BREAD"],
+        ["thing from sliced bread", "thing since slice bread", "thing after sliced bread"],
+        "The expression is split to keep the answer under five words."),
+
+      item("Idioms", "cost an arm and a leg", "be very expensive",
+        "The repair was extremely expensive.",
+        "The repair cost ______.",
+        ["an arm and a leg"], ["ARM"],
+        ["an arm and leg", "an arm and the leg", "one arm and a leg"],
+        "The verb cost is outside the gap to respect the limit."),
+
+      item("Idioms", "cross that bridge when you come to it", "deal with a problem later",
+        "We will decide what to do when the difficulty actually appears.",
+        "We will cross that bridge ______.",
+        ["when we come to it"], ["BRIDGE"],
+        ["when we arrive to it", "when it comes to us", "when we get into it"],
+        "The idiom is split because it is long."),
+
+      item("Idioms", "get the wrong end of the stick", "misunderstand something",
+        "I think you misunderstood my explanation.",
+        "I think you got the wrong ______.",
+        ["end of the stick"], ["END"],
+        ["end of stick", "end of the story", "side of the stick"],
+        "The idiom is split to respect the five-word limit."),
+
+      item("Idioms", "get to the point", "say the most important thing directly",
+        "Stop giving unnecessary details and say the main thing.",
+        "Stop giving unnecessary details and ______.",
+        ["get to the point"], ["POINT"],
+        ["go to the point", "get at the point", "come to the point"],
+        "Useful for direct communication."),
+
+      item("Idioms", "give someone a hand", "help someone",
+        "Can you help me with these boxes?",
+        "Can you ______ with these boxes?",
+        ["give me a hand"], ["HAND"],
+        ["give me hands", "make me a hand", "give my hand"],
+        "Object pronoun changes."),
+
+      item("Idioms", "go from bad to worse", "deteriorate",
+        "The situation deteriorated after the announcement.",
+        "The situation went ______ after the announcement.",
+        ["from bad to worse"], ["BAD", "WORSE"],
+        ["from worse to bad", "from bad to worst", "bad to worse"],
+        "Used when something deteriorates."),
+
+      item("Idioms", "in the heat of the moment", "without thinking because of emotion",
+        "He said it without thinking because he was angry.",
+        "He said it in ______.",
+        ["the heat of the moment"], ["HEAT"],
+        ["the hot of the moment", "the heat of moment", "the moment of heat"],
+        "Used for emotional reactions."),
+
+      item("Idioms", "in the nick of time", "just in time",
+        "We arrived just in time to catch the coach.",
+        "We arrived ______ to catch the coach.",
+        ["in the nick of time"], ["NICK", "TIME"],
+        ["in nick of time", "at the nick of time", "in the time nick"],
+        "Exactly five words."),
+
+      item("Idioms", "keep an eye on", "watch carefully",
+        "Can you watch my laptop for a minute?",
+        "Can you ______ my laptop for a minute?",
+        ["keep an eye on"], ["EYE", "KEEP"],
+        ["keep eye on", "have an eye on", "keep the eye on"],
+        "Full expression has four words."),
+
+      item("Idioms", "keep something at bay", "prevent something from affecting you",
+        "The medicine helps prevent the pain from becoming worse.",
+        "The medicine helps ______.",
+        ["keep the pain at bay"], ["BAY"],
+        ["keep the pain in bay", "hold the pain at bay", "keep pain at the bay"],
+        "Often used with pain, illness, problems or danger."),
+
+      item("Idioms", "keep a straight face", "try not to laugh",
+        "I tried not to laugh during the speech.",
+        "I tried to ______ during the speech.",
+        ["keep a straight face"], ["FACE"],
+        ["keep a serious face", "hold a straight face", "keep straight face"],
+        "Used when hiding amusement."),
+
+      item("Idioms", "law and order", "public control and respect for rules",
+        "The government promised stricter control of crime.",
+        "The government promised stronger ______.",
+        ["law and order"], ["ORDER"],
+        ["law and rules", "order and law", "laws and order"],
+        "Fixed collocation."),
+
+      item("Idioms", "lose touch", "stop being in contact",
+        "We stopped being in contact after school.",
+        "We ______ after school.",
+        ["lost touch"], ["TOUCH"],
+        ["lost contact", "missed touch", "left touch"],
+        "Used for relationships and communication."),
+
+      item("Idioms", "make a long story short", "explain briefly",
+        "To explain briefly, we decided to cancel the trip.",
+        "To make a long ______, we decided to cancel the trip.",
+        ["story short"], ["SHORT"],
+        ["story shorter", "history short", "tale short"],
+        "The idiom is split because it is long."),
+
+      item("Idioms", "mind your own business", "do not interfere",
+        "Do not interfere in my personal affairs.",
+        "______.",
+        ["mind your own business"], ["BUSINESS"],
+        ["mind your personal business", "care your own business", "mind the own business"],
+        "Everyday expression."),
+
+      item("Idioms", "nothing comes to mind", "you cannot think of anything",
+        "I cannot think of anything suitable to say.",
+        "______ suitable to say.",
+        ["nothing comes to mind"], ["MIND"],
+        ["nothing goes to mind", "anything comes to mind", "nothing comes in mind"],
+        "Fixed expression."),
+
+      item("Idioms", "peace and quiet", "calm and silence",
+        "After that noisy morning, we needed calm and silence.",
+        "After that noisy morning, we needed some ______.",
+        ["peace and quiet"], ["PEACE", "QUIET"],
+        ["peace and silence", "quiet and peace", "peaceful and quiet"],
+        "Fixed pair."),
+
+      item("Idioms", "pick someone’s brains", "ask someone for advice or ideas",
+        "I would like to ask you for some advice about the project.",
+        "I would like to ______ about the project.",
+        ["pick your brains"], ["BRAINS"],
+        ["pick your brain", "take your brains", "pick the brains"],
+        "Object changes depending on the person."),
+
+      item("Idioms", "pull someone’s leg", "joke with someone",
+        "Are you joking with me?",
+        "Are you ______?",
+        ["pulling my leg"], ["LEG", "PULLING"],
+        ["pulling my arm", "taking my leg", "pulling the leg"],
+        "Object changes depending on the person."),
+
+      item("Idioms", "put your foot in it", "say something embarrassing",
+        "I said something really embarrassing during the meeting.",
+        "I really ______ during the meeting.",
+        ["put my foot in it"], ["FOOT", "PUT"],
+        ["put my feet in it", "put my foot on it", "put the foot in it"],
+        "Possessive changes with the subject."),
+
+      item("Idioms", "safe and sound", "safe and unharmed",
+        "They arrived safely after the storm.",
+        "They arrived ______ after the storm.",
+        ["safe and sound"], ["SAFE", "SOUND"],
+        ["safe and well", "safely and sound", "sound and safe"],
+        "Often used after arrive/get home."),
+
+      item("Idioms", "see eye to eye", "agree",
+        "I do not agree with him on this issue.",
+        "I do not ______ with him on this issue.",
+        ["see eye to eye"], ["EYE"],
+        ["see eyes to eyes", "look eye to eye", "see eye by eye"],
+        "Also appears as a fixed expression."),
+
+      item("Idioms", "speak your mind", "say what you really think",
+        "You should say what you really think.",
+        "You should ______.",
+        ["speak your mind"], ["MIND", "SPEAK"],
+        ["speak your head", "say your mind", "speak the mind"],
+        "Possessive changes with the subject."),
+
+      item("Idioms", "talk someone into", "persuade someone to do something",
+        "He persuaded her to join the drama club.",
+        "He ______ the drama club.",
+        ["talked her into joining"], ["INTO"],
+        ["talked her to join", "talked her in joining", "talked her into join"],
+        "Followed by -ing."),
+
+      item("Idioms", "take your mind off", "stop thinking about something",
+        "I went cycling to stop thinking about the exam.",
+        "I went cycling to ______ the exam.",
+        ["take my mind off"], ["MIND", "OFF"],
+        ["take my head off", "put my mind off", "take the mind off"],
+        "Possessive changes with the subject."),
+
+      item("Idioms", "wait and see", "wait before deciding",
+        "We should wait before making a decision.",
+        "We should ______.",
+        ["wait and see"], ["WAIT", "SEE"],
+        ["wait to see", "wait and look", "wait or see"],
+        "Short fixed idiom."),
+
+      item("Idioms", "your guess is as good as mine", "I do not know either",
+        "I do not know what the answer is either.",
+        "Your ______.",
+        ["guess is as good as mine"], ["GUESS"],
+        ["guess is good as mine", "guess is as well as mine", "guess is as good like mine"],
+        "The idiom is split to respect the limit.")
     ];
 
-    const data = {
-      event: ["the school trip", "the meeting", "the concert", "the match", "the interview", "the final rehearsal"],
-      reason: ["the heavy rain", "a transport problem", "a power cut", "the storm", "a lack of participants", "unexpected circumstances"],
-      condition: ["the weather gets worse", "the teachers cannot attend", "the problem continues", "there are not enough students"],
-      person: ["She", "He", "My brother", "The student", "The manager", "Our teacher"],
-      people: ["They", "We", "My parents", "The students", "Several families"],
-      issue: ["the issue", "the problem", "this point", "the matter", "the question"],
-      offer: ["the offer", "the invitation", "the opportunity", "their help", "the proposal", "the job"],
-      solvableProblem: ["the problem", "the puzzle", "the exercise", "the mystery", "the issue", "the answer"],
-      collectObject: ["the children", "the package", "the documents", "the students", "the tickets"],
-      mistake: ["the mistake", "the error", "the weakness", "the main problem", "the missing detail"],
-      foundObject: ["an old photo", "an article", "a useful website", "an old letter", "a strange message"],
-      caredPerson: ["her brother", "his sister", "the children", "their neighbour", "my cousin"],
-      ideaObject: ["an idea", "a plan", "a solution", "a proposal", "an answer"],
-      clubObject: ["a new club", "a small company", "a support group", "a new system"],
-      truthObject: ["the truth", "the answer", "the reason", "the result"],
-      flightObject: ["the plane", "the flight"],
-      unexpectedPerson: ["my teacher", "an old friend", "his neighbour", "Sara", "Mr Brown"],
-      reduceObject: ["sugar", "coffee", "screen time", "plastic", "junk food"],
-      cheatingAction: ["cheating", "lying", "copying", "being late"],
-      submitObject: ["the essay", "the form", "the project", "the homework"],
-      giveUpObject: ["smoking", "sweets", "complaining", "gaming"],
-      action: ["finish the project", "complete the form", "organise the event", "solve the problem", "change the timetable"],
-      actionBase: ["sign", "leave", "accept", "announce", "make"],
-      actionIng: ["signing", "leaving", "accepting", "announcing", "making"],
-      money: ["that salary", "their monthly income", "such a small budget", "what they earn"],
-      object: ["that laptop", "the hotel room", "his new bike", "the plane ticket", "the repair", "the course"],
-      transport: ["the train", "the bus", "the flight", "the last coach"],
-      place: ["the station", "the airport", "the classroom", "the theatre", "the meeting room"]
-    };
-
-    const generators = [
-      {
-        type: "Phrasal verbs",
-        target: "call off",
-        hint: "Cancel can become call off. In passive transformations, use the correct auxiliary.",
-        frames: [
-          {
-            name: "past passive",
-            keyOptions: ["OFF", "CALLED"],
-            original: v => `The organisers cancelled ${v.event} because of ${v.reason}.`,
-            second: v => `${v.Event} ______ because of ${v.reason}.`,
-            answers: v => ["was called off"],
-            distractors: v => ["was put off", "was called out", "was taken off"]
-          },
-          {
-            name: "present perfect passive",
-            keyOptions: ["OFF", "CALLED"],
-            original: v => `The school has cancelled ${v.event}.`,
-            second: v => `${v.Event} ______.`,
-            answers: v => ["has been called off"],
-            distractors: v => ["has been put off", "has called off", "has been taken off"]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "bring up",
-        hint: "Mention can become bring up. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["BROUGHT", "UP"],
-            original: v => `${v.person} mentioned ${v.issue} during the tutorial.`,
-            second: v => `${v.person} ______ during the tutorial.`,
-            answers: v => [`brought up ${v.issue}`, `brought ${v.issue} up`],
-            distractors: v => [`brought down ${v.issue}`, `brought out ${v.issue}`, `brought ${v.issue} down`]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["BRING", "UP"],
-            original: v => `${v.person} should mention ${v.issue} in the meeting.`,
-            second: v => `${v.person} should ______ in the meeting.`,
-            answers: v => [`bring up ${v.issue}`, `bring ${v.issue} up`],
-            distractors: v => [`bring down ${v.issue}`, `bring out ${v.issue}`, `bring ${v.issue} down`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "turn down",
-        hint: "Reject can become turn down. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["TURNED", "DOWN"],
-            original: v => `${v.person} rejected ${v.offer}.`,
-            second: v => `${v.person} ______.`,
-            answers: v => [`turned down ${v.offer}`, `turned ${v.offer} down`],
-            distractors: v => [`turned up ${v.offer}`, `turned off ${v.offer}`, `turned ${v.offer} off`]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["TURN", "DOWN"],
-            original: v => `${v.person} should not reject ${v.offer}.`,
-            second: v => `${v.person} should not ______.`,
-            answers: v => [`turn down ${v.offer}`, `turn ${v.offer} down`],
-            distractors: v => [`turn up ${v.offer}`, `turn off ${v.offer}`, `turn ${v.offer} off`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "work out",
-        hint: "Solve or understand can become work out. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["WORKED", "OUT"],
-            original: v => `${v.person} solved ${v.solvableProblem} in a few minutes.`,
-            second: v => `${v.person} ______ in a few minutes.`,
-            answers: v => [`worked out ${v.solvableProblem}`, `worked ${v.solvableProblem} out`],
-            distractors: v => [`worked on ${v.solvableProblem}`, `worked ${v.solvableProblem} up`, `worked over ${v.solvableProblem}`]
-          },
-          {
-            name: "modal active",
-            keyOptions: ["WORK", "OUT"],
-            original: v => `${v.person} should solve ${v.solvableProblem} before tomorrow.`,
-            second: v => `${v.person} should ______ before tomorrow.`,
-            answers: v => [`work out ${v.solvableProblem}`, `work ${v.solvableProblem} out`],
-            distractors: v => [`work on ${v.solvableProblem}`, `work ${v.solvableProblem} up`, `work over ${v.solvableProblem}`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "pick up",
-        hint: "Collect can become pick up. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["PICKED", "UP"],
-            original: v => `${v.person} collected ${v.collectObject} after school.`,
-            second: v => `${v.person} ______ after school.`,
-            answers: v => [`picked up ${v.collectObject}`, `picked ${v.collectObject} up`],
-            distractors: v => [`picked out ${v.collectObject}`, `picked on ${v.collectObject}`, `picked ${v.collectObject} out`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "put off",
-        hint: "Postpone can become put off. It can be used actively or passively.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["PUT", "OFF"],
-            original: v => `They postponed ${v.event} until Monday.`,
-            second: v => `They ______ until Monday.`,
-            answers: v => [`put off ${v.event}`, `put ${v.event} off`],
-            distractors: v => [`put out ${v.event}`, `put away ${v.event}`, `put ${v.event} out`]
-          },
-          {
-            name: "past passive",
-            keyOptions: ["PUT", "OFF"],
-            original: v => `They postponed ${v.event} until Monday.`,
-            second: v => `${v.Event} ______ until Monday.`,
-            answers: v => ["was put off"],
-            distractors: v => ["was put out", "was put away", "was taken off"]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "point out",
-        hint: "Indicate or mention can become point out. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["POINTED", "OUT"],
-            original: v => `${v.person} indicated ${v.mistake} in my essay.`,
-            second: v => `${v.person} ______ in my essay.`,
-            answers: v => [`pointed out ${v.mistake}`, `pointed ${v.mistake} out`],
-            distractors: v => [`pointed at ${v.mistake}`, `pointed to ${v.mistake}`, `pointed ${v.mistake} up`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "come across",
-        hint: "Find by chance can become come across. This phrasal verb is not separable.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["CAME", "ACROSS"],
-            original: v => `${v.person} found ${v.foundObject} while tidying the room.`,
-            second: v => `${v.person} ______ while tidying the room.`,
-            answers: v => [`came across ${v.foundObject}`],
-            distractors: v => [`came along ${v.foundObject}`, `came over ${v.foundObject}`, `came into ${v.foundObject}`]
-          },
-          {
-            name: "present perfect active",
-            keyOptions: ["COME", "ACROSS"],
-            original: v => `${v.person} has found ${v.foundObject} by chance.`,
-            second: v => `${v.person} has ______ by chance.`,
-            answers: v => [`come across ${v.foundObject}`],
-            distractors: v => [`come along ${v.foundObject}`, `come over ${v.foundObject}`, `come into ${v.foundObject}`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "look after",
-        hint: "Take care of can become look after. This phrasal verb is not separable.",
-        frames: [
-          {
-            name: "present simple active",
-            keyOptions: ["LOOKS", "AFTER"],
-            original: v => `${v.person} takes care of ${v.caredPerson} every afternoon.`,
-            second: v => `${v.person} ______ every afternoon.`,
-            answers: v => [`looks after ${v.caredPerson}`],
-            distractors: v => [`looks for ${v.caredPerson}`, `looks at ${v.caredPerson}`, `looks into ${v.caredPerson}`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "come up with",
-        hint: "Think of an idea or solution can become come up with. This is not separable.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["CAME", "UP", "WITH"],
-            original: v => `${v.person} thought of ${v.ideaObject} during the discussion.`,
-            second: v => `${v.person} ______ during the discussion.`,
-            answers: v => [`came up with ${v.ideaObject}`],
-            distractors: v => [`came out with ${v.ideaObject}`, `came across ${v.ideaObject}`, `came up to ${v.ideaObject}`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "carry on",
-        hint: "Continue can become carry on. It is usually followed by -ing.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["CARRIED", "ON"],
-            original: v => `${v.people} continued working despite the noise.`,
-            second: v => `${v.people} ______ despite the noise.`,
-            answers: v => ["carried on working"],
-            distractors: v => ["carried out working", "carried up working", "carried away working"]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "set up",
-        hint: "Establish or start can become set up. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["SET", "UP"],
-            original: v => `${v.people} established ${v.clubObject} last year.`,
-            second: v => `${v.people} ______ last year.`,
-            answers: v => [`set up ${v.clubObject}`, `set ${v.clubObject} up`],
-            distractors: v => [`set off ${v.clubObject}`, `set out ${v.clubObject}`, `set ${v.clubObject} off`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "find out",
-        hint: "Discover can become find out. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["FOUND", "OUT"],
-            original: v => `${v.person} discovered ${v.truthObject} yesterday.`,
-            second: v => `${v.person} ______ yesterday.`,
-            answers: v => [`found out ${v.truthObject}`, `found ${v.truthObject} out`],
-            distractors: v => [`found in ${v.truthObject}`, `found up ${v.truthObject}`, `found ${v.truthObject} in`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "take off",
-        hint: "When a plane leaves the ground, it takes off.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["TOOK", "OFF"],
-            original: v => `${cap(v.flightObject)} left the ground late.`,
-            second: v => `${cap(v.flightObject)} ______ late.`,
-            answers: v => ["took off"],
-            distractors: v => ["took out", "took up", "took over"]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "run into",
-        hint: "Meet unexpectedly can become run into. This phrasal verb is not separable.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["RAN", "INTO"],
-            original: v => `${v.person} met ${v.unexpectedPerson} by chance.`,
-            second: v => `${v.person} ______ by chance.`,
-            answers: v => [`ran into ${v.unexpectedPerson}`],
-            distractors: v => [`ran over ${v.unexpectedPerson}`, `ran across ${v.unexpectedPerson}`, `ran through ${v.unexpectedPerson}`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "sort out",
-        hint: "Solve or organise can become sort out. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["SORTED", "OUT"],
-            original: v => `${v.people} solved ${v.solvableProblem} quickly.`,
-            second: v => `${v.people} ______ quickly.`,
-            answers: v => [`sorted out ${v.solvableProblem}`, `sorted ${v.solvableProblem} out`],
-            distractors: v => [`sorted up ${v.solvableProblem}`, `sorted over ${v.solvableProblem}`, `sorted ${v.solvableProblem} up`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "cut down on",
-        hint: "Reduce can become cut down on. This is a three-part phrasal verb.",
-        frames: [
-          {
-            name: "modal active",
-            keyOptions: ["CUT", "DOWN"],
-            original: v => `${v.people} should reduce ${v.reduceObject}.`,
-            second: v => `${v.people} should ______ ${v.reduceObject}.`,
-            answers: v => ["cut down on"],
-            distractors: v => ["cut off on", "cut out on", "cut down in"]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "get away with",
-        hint: "Avoid punishment can become get away with. It is followed by a noun or -ing form.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["GOT", "AWAY"],
-            original: v => `${v.person} was not punished for ${v.cheatingAction}.`,
-            second: v => `${v.person} ______.`,
-            answers: v => [`got away with ${v.cheatingAction}`],
-            distractors: v => [`got out of ${v.cheatingAction}`, `got over with ${v.cheatingAction}`, `got away from ${v.cheatingAction}`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "hand in",
-        hint: "Submit can become hand in. With noun objects, both positions are possible.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["HANDED", "IN"],
-            original: v => `${v.person} submitted ${v.submitObject} on time.`,
-            second: v => `${v.person} ______ on time.`,
-            answers: v => [`handed in ${v.submitObject}`, `handed ${v.submitObject} in`],
-            distractors: v => [`handed out ${v.submitObject}`, `handed over ${v.submitObject}`, `handed ${v.submitObject} out`]
-          }
-        ]
-      },
-      {
-        type: "Phrasal verbs",
-        target: "give up",
-        hint: "Stop doing something can become give up.",
-        frames: [
-          {
-            name: "past simple active",
-            keyOptions: ["GAVE", "UP"],
-            original: v => `${v.person} stopped ${v.giveUpObject} last year.`,
-            second: v => `${v.person} ______ last year.`,
-            answers: v => [`gave up ${v.giveUpObject}`],
-            distractors: v => [`gave out ${v.giveUpObject}`, `gave away ${v.giveUpObject}`, `gave over ${v.giveUpObject}`]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "out of the question",
-        hint: "Impossible can become out of the question.",
-        frames: [
-          {
-            name: "present",
-            keyOptions: ["QUESTION", "OUT"],
-            original: v => `It is impossible for us to ${v.action} today.`,
-            second: v => `It is ______ for us to ${v.action} today.`,
-            answers: v => ["out of the question"],
-            distractors: v => ["out of question", "out the question", "outside of the question"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "be on the verge of",
-        hint: "Be about to can become be on the verge of + -ing.",
-        frames: [
-          {
-            name: "present",
-            keyOptions: ["VERGE", "ON"],
-            original: v => `${v.person} is about to ${v.actionBase} a major decision.`,
-            second: v => `${v.person} ______ ${v.actionIng} a major decision.`,
-            answers: v => ["is on the verge of"],
-            distractors: v => ["is in the verge of", "is at the verge of", "is on verge of"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "make ends meet",
-        hint: "Manage financially can become make ends meet.",
-        frames: [
-          {
-            name: "negative present",
-            keyOptions: ["ENDS", "MAKE"],
-            original: v => `${v.people} can’t manage financially on ${v.money}.`,
-            second: v => `${v.people} can’t ______ on ${v.money}.`,
-            answers: v => ["make ends meet"],
-            distractors: v => ["make ends match", "make the ends meet", "meet the ends"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "put one's finger on",
-        hint: "Identify exactly can become put one’s finger on.",
-        frames: [
-          {
-            name: "negative present",
-            keyOptions: ["FINGER", "PUT"],
-            original: v => `I can’t identify exactly what the problem is.`,
-            second: v => `I can’t ______ what the problem is.`,
-            answers: v => ["put my finger on"],
-            distractors: v => ["put my hand on", "place my finger in", "put the finger on"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "to the best of my knowledge",
-        hint: "As far as I know can become to the best of my knowledge.",
-        frames: [
-          {
-            name: "formal expression",
-            keyOptions: ["KNOWLEDGE"],
-            original: v => `As far as I know, ${v.person.toLowerCase()} is abroad.`,
-            second: v => `To the best ______, ${v.person.toLowerCase()} is abroad.`,
-            answers: v => ["of my knowledge"],
-            distractors: v => ["of my knowing", "of the knowledge", "in my knowledge"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "as far as I am concerned",
-        hint: "In my opinion can become as far as I am concerned.",
-        frames: [
-          {
-            name: "opinion expression",
-            keyOptions: ["FAR", "CONCERNED"],
-            original: v => `In my opinion, the decision is unfair.`,
-            second: v => `______, the decision is unfair.`,
-            answers: v => ["as far as I am concerned"],
-            distractors: v => ["as long as I know", "as far I am concerned", "as far as I mind"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "bear in mind",
-        hint: "Remember or take into account can become bear in mind.",
-        frames: [
-          {
-            name: "imperative expression",
-            keyOptions: ["BEAR", "MIND"],
-            original: v => `Remember that the deadline is tomorrow.`,
-            second: v => `______ that the deadline is tomorrow.`,
-            answers: v => ["bear in mind"],
-            distractors: v => ["keep in head", "bear on mind", "have in mind"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "come to terms with",
-        hint: "Accept a difficult situation can become come to terms with.",
-        frames: [
-          {
-            name: "past expression",
-            keyOptions: ["TERMS", "COME"],
-            original: v => `${v.person} finally accepted the situation.`,
-            second: v => `${v.person} finally ______ the situation.`,
-            answers: v => ["came to terms with"],
-            distractors: v => ["came in terms with", "came to term with", "went to terms with"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "face the music",
-        hint: "Accept the consequences can become face the music.",
-        frames: [
-          {
-            name: "modal expression",
-            keyOptions: ["FACE", "MUSIC"],
-            original: v => `${v.person} should accept the consequences.`,
-            second: v => `${v.person} should ______.`,
-            answers: v => ["face the music"],
-            distractors: v => ["face the song", "hear the music", "meet the music"]
-          }
-        ]
-      },
-      {
-        type: "Fixed expressions",
-        target: "get cold feet",
-        hint: "Become nervous at the last moment can become get cold feet.",
-        frames: [
-          {
-            name: "past simple",
-            keyOptions: ["COLD", "FEET"],
-            original: v => `${v.person} became nervous before the interview.`,
-            second: v => `${v.person} ______ before the interview.`,
-            answers: v => ["got cold feet"],
-            distractors: v => ["got cold foot", "had cold feet", "got nervous feet"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "cost an arm and a leg",
-        hint: "Very expensive means cost an arm and a leg. The sentence includes cost outside the gap because the full expression would exceed five words.",
-        frames: [
-          {
-            name: "past",
-            keyOptions: ["ARM"],
-            original: v => `${cap(v.object)} was extremely expensive.`,
-            second: v => `${cap(v.object)} cost ______.`,
-            answers: v => ["an arm and a leg"],
-            distractors: v => ["an arm and leg", "an arm and the leg", "one arm and a leg"]
-          },
-          {
-            name: "present perfect",
-            keyOptions: ["ARM"],
-            original: v => `${cap(v.object)} has been extremely expensive this year.`,
-            second: v => `${cap(v.object)} has cost ______ this year.`,
-            answers: v => ["an arm and a leg"],
-            distractors: v => ["an arm and leg", "the arm and a leg", "one arm and one leg"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "get the wrong end of the stick",
-        hint: "Misunderstand can become get the wrong end of the stick. The answer is split to respect the five-word limit.",
-        frames: [
-          {
-            name: "past",
-            keyOptions: ["END"],
-            original: v => `I think ${v.person.toLowerCase()} misunderstood what I meant.`,
-            second: v => `I think ${v.person.toLowerCase()} got the wrong ______.`,
-            answers: v => ["end of the stick"],
-            distractors: v => ["end of stick", "end of the story", "side of the stick"]
-          },
-          {
-            name: "present perfect",
-            keyOptions: ["END"],
-            original: v => `${v.person} has misunderstood the situation completely.`,
-            second: v => `${v.person} has got the wrong ______ completely.`,
-            answers: v => ["end of the stick"],
-            distractors: v => ["end of stick", "end of the story", "side of the stick"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "in the nick of time",
-        hint: "Just in time can become in the nick of time.",
-        frames: [
-          {
-            name: "past",
-            keyOptions: ["NICK", "TIME"],
-            original: v => `${v.people} arrived just in time to catch ${v.transport}.`,
-            second: v => `${v.people} arrived ______ to catch ${v.transport}.`,
-            answers: v => ["in the nick of time"],
-            distractors: v => ["in nick of time", "at the nick of time", "in the time nick"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "keep an eye on",
-        hint: "Watch carefully can become keep an eye on.",
-        frames: [
-          {
-            name: "modal request",
-            keyOptions: ["EYE", "KEEP"],
-            original: v => `Can you watch my bag for a moment?`,
-            second: v => `Can you ______ my bag for a moment?`,
-            answers: v => ["keep an eye on"],
-            distractors: v => ["keep eye on", "have an eye on", "keep the eye on"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "speak your mind",
-        hint: "Say what you really think can become speak your mind.",
-        frames: [
-          {
-            name: "present simple",
-            keyOptions: ["MIND", "SPEAKS"],
-            original: v => `She always says what she really thinks.`,
-            second: v => `She always ______.`,
-            answers: v => ["speaks her mind"],
-            distractors: v => ["speaks her head", "says her mind", "speaks the mind"]
-          },
-          {
-            name: "modal advice",
-            keyOptions: ["MIND", "SPEAK"],
-            original: v => `You should say what you really think.`,
-            second: v => `You should ______.`,
-            answers: v => ["speak your mind"],
-            distractors: v => ["speak your head", "say your mind", "speak the mind"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "put your foot in it",
-        hint: "Say something embarrassing can become put your foot in it.",
-        frames: [
-          {
-            name: "past simple",
-            keyOptions: ["FOOT", "PUT"],
-            original: v => `I said something really embarrassing at dinner.`,
-            second: v => `I really ______ at dinner.`,
-            answers: v => ["put my foot in it"],
-            distractors: v => ["put my feet in it", "put my foot on it", "put the foot in it"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "safe and sound",
-        hint: "Safely and unharmed can become safe and sound.",
-        frames: [
-          {
-            name: "arrival expression",
-            keyOptions: ["SAFE", "SOUND"],
-            original: v => `${v.people} arrived safely after the journey.`,
-            second: v => `${v.people} arrived ______ after the journey.`,
-            answers: v => ["safe and sound"],
-            distractors: v => ["safe and well", "safely and sound", "sound and safe"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "pull someone’s leg",
-        hint: "Joke with someone can become pull someone’s leg.",
-        frames: [
-          {
-            name: "present continuous",
-            keyOptions: ["LEG", "PULLING"],
-            original: v => `Are you joking with me?`,
-            second: v => `Are you ______?`,
-            answers: v => ["pulling my leg"],
-            distractors: v => ["pulling my arm", "taking my leg", "pulling the leg"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "go from bad to worse",
-        hint: "Deteriorate can become go from bad to worse.",
-        frames: [
-          {
-            name: "past simple",
-            keyOptions: ["BAD", "WORSE"],
-            original: v => `The situation deteriorated rapidly.`,
-            second: v => `The situation went ______ rapidly.`,
-            answers: v => ["from bad to worse"],
-            distractors: v => ["from worse to bad", "from bad to worst", "bad to worse"]
-          }
-        ]
-      },
-      {
-        type: "Idioms",
-        target: "wait and see",
-        hint: "Wait before deciding can become wait and see.",
-        frames: [
-          {
-            name: "modal advice",
-            keyOptions: ["WAIT", "SEE"],
-            original: v => `${v.people} should wait before making a decision.`,
-            second: v => `${v.people} should ______.`,
-            answers: v => ["wait and see"],
-            distractors: v => ["wait to see", "wait and look", "wait or see"]
-          }
-        ]
-      }
-    ];
-
-    let state = {
+    const state = {
       studyCategory: "All categories",
       studyIndex: 0,
       studyFlipped: false,
@@ -1223,14 +1348,6 @@
       return document.getElementById(id);
     }
 
-    function cap(text) {
-      return text.charAt(0).toUpperCase() + text.slice(1);
-    }
-
-    function pick(array) {
-      return array[Math.floor(Math.random() * array.length)];
-    }
-
     function shuffle(array) {
       const copy = array.slice();
       for (let i = copy.length - 1; i > 0; i--) {
@@ -1238,6 +1355,10 @@
         [copy[i], copy[j]] = [copy[j], copy[i]];
       }
       return copy;
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
     }
 
     function normalise(text) {
@@ -1265,16 +1386,16 @@
       return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
     }
 
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
     function primaryAnswer(exercise) {
       return getAcceptedAnswers(exercise)[0];
     }
 
     function isCorrectAnswer(input, exercise) {
       return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
-    }
-
-    function acceptedAnswersText(exercise) {
-      return getAcceptedAnswers(exercise).join(" / ");
     }
 
     function isValidExercise(exercise) {
@@ -1285,82 +1406,59 @@
       });
     }
 
-    function fillVars() {
-      const vars = {};
-      Object.keys(data).forEach(key => vars[key] = pick(data[key]));
-      vars.Event = cap(vars.event);
-      vars.Offer = cap(vars.offer);
-      vars.Object = cap(vars.object);
-      return vars;
-    }
-
-    function filteredStudyItems() {
-      if (state.studyCategory === "All categories") return studyItems;
-      return studyItems.filter(item => item.type === state.studyCategory);
-    }
-
-    function filteredGenerators(category) {
-      if (category === "All categories") return generators;
-      return generators.filter(generator => generator.type === category);
-    }
-
     function cleanDistractors(exercise) {
       const accepted = getAcceptedAnswers(exercise).map(normalise);
-      const specific = Array.isArray(exercise.distractors) ? exercise.distractors : [];
-
-      return specific.filter(item =>
+      return (exercise.distractors || []).filter(item =>
         wordCount(item) >= 2 &&
         wordCount(item) <= 5 &&
         !accepted.includes(normalise(item))
       );
     }
 
+    function filteredItems(category) {
+      if (category === "All categories") return items;
+      return items.filter(item => item.type === category);
+    }
+
+    function makeExercise(raw, mode = "transform") {
+      const validKeys = shuffle(raw.keyOptions).filter(key =>
+        raw.answers.every(answer => keyIsIncluded(answer, key))
+      );
+
+      if (!validKeys.length) return null;
+
+      const exercise = {
+        ...raw,
+        key: pick(validKeys),
+        answer: raw.answers[0]
+      };
+
+      if (!isValidExercise(exercise)) return null;
+      if (mode === "multiple" && cleanDistractors(exercise).length < 3) return null;
+
+      return exercise;
+    }
+
     function generateExercise(category = "All categories", mode = "transform") {
-      const possible = filteredGenerators(category);
+      const possible = shuffle(filteredItems(category));
 
-      for (let attempt = 0; attempt < 500; attempt++) {
-        const generator = pick(possible);
-        const frame = pick(generator.frames);
-        const vars = fillVars();
-        const answers = frame.answers(vars);
-        const validKeys = shuffle(frame.keyOptions).filter(key => answers.every(answer => keyIsIncluded(answer, key)));
-
-        if (!validKeys.length) continue;
-
-        const exercise = {
-          type: generator.type,
-          target: generator.target,
-          key: pick(validKeys),
-          hint: generator.hint,
-          frame: frame.name,
-          original: frame.original(vars),
-          second: frame.second(vars),
-          answer: answers[0],
-          answers: answers,
-          distractors: typeof frame.distractors === "function" ? frame.distractors(vars) : []
-        };
-
-        if (!isValidExercise(exercise)) continue;
-
-        if (mode === "multiple") {
-          const goodDistractors = cleanDistractors(exercise);
-          if (goodDistractors.length < 3) continue;
-        }
-
-        return exercise;
+      for (const raw of possible) {
+        const exercise = makeExercise(raw, mode);
+        if (exercise) return exercise;
       }
 
       return {
         type: "System",
-        target: "No valid exercise",
-        key: "ERROR",
-        hint: "The generator could not create a valid item.",
-        frame: "error",
+        expression: "No valid item",
+        meaning: "No valid item could be generated.",
         original: "No valid exercise could be generated.",
         second: "Please choose another category.",
-        answer: "system error",
-        answers: ["system error"],
-        distractors: ["system option one", "system option two", "system option three"]
+        answers: ["try again"],
+        answer: "try again",
+        key: "TRY",
+        keyOptions: ["TRY"],
+        distractors: ["try later", "new question", "other category"],
+        note: "The generator could not create a valid item."
       };
     }
 
@@ -1368,6 +1466,18 @@
       $(id).innerHTML = categories
         .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
         .join("");
+    }
+
+    function updateStats() {
+      const total = items.length;
+      const phrasal = items.filter(i => i.type === "Phrasal verbs").length;
+      const fixed = items.filter(i => i.type === "Fixed expressions").length;
+      const idioms = items.filter(i => i.type === "Idioms").length;
+
+      $("totalCount").textContent = `${total} total items`;
+      $("phrasalCount").textContent = `${phrasal} phrasal verbs`;
+      $("fixedCount").textContent = `${fixed} fixed expressions`;
+      $("idiomCount").textContent = `${idioms} idioms`;
     }
 
     function showTab(tab) {
@@ -1378,41 +1488,36 @@
     }
 
     function renderStudy() {
-      const items = filteredStudyItems();
-      if (state.studyIndex >= items.length) state.studyIndex = 0;
-      const item = items[state.studyIndex];
+      const list = filteredItems(state.studyCategory);
+      if (state.studyIndex >= list.length) state.studyIndex = 0;
+      const current = list[state.studyIndex];
 
       $("studyCard").innerHTML = state.studyFlipped
         ? `
           <div>
-            <span class="badge badge-blue">${item.type}</span>
+            <span class="badge badge-blue">${current.type}</span>
             <p class="muted"><strong>Meaning</strong></p>
-            <h2 style="font-size:34px">${item.meaning}</h2>
-            <div class="box"><strong>Example:</strong> ${item.example}</div>
-            <div class="box"><strong>Exam note:</strong> ${item.note}</div>
+            <h2 style="font-size:32px">${current.meaning}</h2>
+            <div class="box"><strong>Example pattern:</strong> ${current.original} → ${current.second.replace("______", `<strong>${primaryAnswer(current)}</strong>`)}</div>
+            <div class="box"><strong>Exam note:</strong> ${current.note || "Remember the exact structure and the 2–5 word limit."}</div>
             <p class="muted">Click the card to return to the expression.</p>
           </div>
         `
         : `
           <div>
-            <span class="badge badge-blue">${item.type}</span>
+            <span class="badge badge-blue">${current.type}</span>
             <p class="muted"><strong>Expression</strong></p>
-            <h2>${item.expression}</h2>
+            <h2>${current.expression}</h2>
             <p class="muted">Click the card to reveal meaning, example and exam note.</p>
           </div>
         `;
 
-      $("studyCounter").textContent = `Card ${state.studyIndex + 1} of ${items.length}`;
-    }
-
-    function makeDistractors(exercise) {
-      return shuffle(cleanDistractors(exercise)).slice(0, 3);
+      $("studyCounter").textContent = `Card ${state.studyIndex + 1} of ${list.length}`;
     }
 
     function newMcQuestion() {
       const exercise = generateExercise(state.mcCategory, "multiple");
-      const distractors = makeDistractors(exercise);
-      const options = shuffle([primaryAnswer(exercise), ...distractors]).slice(0, 4);
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
 
       state.mcCurrent = { ...exercise, options };
       state.mcSelected = null;
@@ -1464,8 +1569,8 @@
           <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
           <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
           <p><strong>Key word used:</strong> ${q.key}</p>
-          <p>${q.hint}</p>
-          <p class="muted"><strong>Target expression:</strong> ${q.target} · <strong>Pattern:</strong> ${q.frame}</p>
+          <p>${q.note || ""}</p>
+          <p class="muted"><strong>Target expression:</strong> ${q.expression}</p>
         `;
       } else {
         $("mcFeedback").classList.add("hidden");
@@ -1529,8 +1634,8 @@
       $("trFeedback").innerHTML = `
         <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
         <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
-        <p>${state.trCurrent.hint}</p>
-        <p class="muted"><strong>Target expression:</strong> ${state.trCurrent.target} · <strong>Pattern:</strong> ${state.trCurrent.frame}</p>
+        <p>${state.trCurrent.note || ""}</p>
+        <p class="muted"><strong>Target expression:</strong> ${state.trCurrent.expression}</p>
         <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
       `;
 
@@ -1540,13 +1645,14 @@
     function showHint() {
       if (!state.trCurrent) return;
       $("trHintBox").classList.remove("hidden");
-      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.hint}`;
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.meaning}`;
     }
 
     function init() {
       populateSelect("studyCategory", state.studyCategory);
       populateSelect("mcCategory", state.mcCategory);
       populateSelect("trCategory", state.trCategory);
+      updateStats();
 
       document.querySelectorAll(".tab").forEach(button => {
         button.addEventListener("click", () => showTab(button.dataset.tab));
@@ -1565,15 +1671,15 @@
       });
 
       $("studyNext").addEventListener("click", () => {
-        const items = filteredStudyItems();
-        state.studyIndex = (state.studyIndex + 1) % items.length;
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = (state.studyIndex + 1) % list.length;
         state.studyFlipped = false;
         renderStudy();
       });
 
       $("studyRandom").addEventListener("click", () => {
-        const items = filteredStudyItems();
-        state.studyIndex = Math.floor(Math.random() * items.length);
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = Math.floor(Math.random() * list.length);
         state.studyFlipped = false;
         renderStudy();
       });
