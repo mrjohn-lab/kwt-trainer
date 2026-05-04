@@ -25,9 +25,7 @@
       --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -122,9 +120,7 @@
       letter-spacing: -1.7px;
     }
 
-    .highlight {
-      color: var(--orange);
-    }
+    .highlight { color: var(--orange); }
 
     .hero p {
       margin: 18px 0 0;
@@ -195,13 +191,8 @@
       color: var(--text);
     }
 
-    select {
-      min-width: 240px;
-    }
-
-    input {
-      width: 100%;
-    }
+    select { min-width: 240px; }
+    input { width: 100%; }
 
     .button-group {
       display: flex;
@@ -209,9 +200,7 @@
       flex-wrap: wrap;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     .badge,
     .pill {
@@ -248,9 +237,7 @@
       border-color: #fecaca;
     }
 
-    .muted {
-      color: var(--muted);
-    }
+    .muted { color: var(--muted); }
 
     .flashcard {
       min-height: 320px;
@@ -337,9 +324,7 @@
       flex-wrap: wrap;
     }
 
-    .footer strong {
-      color: var(--navy);
-    }
+    .footer strong { color: var(--navy); }
 
     @media (max-width: 760px) {
       .topbar {
@@ -347,22 +332,15 @@
         align-items: flex-start;
       }
 
-      .brand img {
-        height: 56px;
-      }
+      .brand img { height: 56px; }
 
-      .tabs {
-        grid-template-columns: 1fr;
-      }
-
+      .tabs,
       .answer-row,
       .option-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding: 26px 20px;
-      }
+      .hero { padding: 26px 20px; }
     }
   </style>
 </head>
@@ -386,8 +364,8 @@
       <h1>Lexical <span class="highlight">Transformation</span> Trainer</h1>
       <p>
         Practise phrasal verbs, fixed expressions and idioms through controlled randomised exercises.
-        Every generated answer is automatically checked so it contains the key word and stays within
-        the official 2–5 word limit.
+        The engine accepts valid alternative answers for separable phrasal verbs and automatically
+        checks that every answer contains the key word and stays within the official 2–5 word limit.
       </p>
     </section>
 
@@ -489,8 +467,15 @@
         type: "Phrasal verbs",
         expression: "turn down",
         meaning: "reject",
-        note: "Can be active or passive: turned down the offer / was turned down.",
-        example: "She rejected the invitation. → She turned down the invitation."
+        note: "Separable phrasal verb with noun objects: turn down the offer / turn the offer down. With pronouns: turn it down.",
+        example: "She rejected the invitation. → She turned down the invitation / She turned the invitation down."
+      },
+      {
+        type: "Phrasal verbs",
+        expression: "work out",
+        meaning: "solve; understand",
+        note: "Separable phrasal verb with noun objects: work out the problem / work the problem out. With pronouns: work it out.",
+        example: "He solved the problem. → He worked out the problem / He worked the problem out."
       },
       {
         type: "Phrasal verbs",
@@ -557,7 +542,8 @@
       person: ["She", "He", "My brother", "The student", "The manager", "Our teacher"],
       people: ["They", "We", "My parents", "The students", "Several families"],
       offer: ["the offer", "the invitation", "the opportunity", "their help", "the proposal", "the job"],
-      problem: ["the noise", "his rude behaviour", "the constant delays", "the pressure", "the situation", "their complaints"],
+      problem: ["the noise", "the pressure", "the situation", "their complaints"],
+      solvableProblem: ["the problem", "the puzzle", "the exercise", "the mystery", "the issue", "the answer"],
       activityVerb: ["seeing", "visiting", "starting", "meeting", "joining", "attending"],
       activityObject: ["you again", "London", "university", "the team", "the project", "the exchange trip"],
       action: ["finish the project", "complete the form", "organise the event", "solve the problem", "change the timetable"],
@@ -580,25 +566,25 @@
             name: "past passive",
             original: v => `The organisers cancelled ${v.event} because of ${v.reason}.`,
             second: v => `${v.Event} ______ because of ${v.reason}.`,
-            answer: v => "was called off"
+            answers: v => ["was called off"]
           },
           {
             name: "present perfect passive",
             original: v => `The school has cancelled ${v.event}.`,
             second: v => `${v.Event} ______.`,
-            answer: v => "has been called off"
+            answers: v => ["has been called off"]
           },
           {
             name: "future passive",
             original: v => `They will cancel ${v.event} if ${v.condition}.`,
             second: v => `${v.Event} ______ if ${v.condition}.`,
-            answer: v => "will be called off"
+            answers: v => ["will be called off"]
           },
           {
             name: "modal passive",
             original: v => `They might cancel ${v.event} because of ${v.reason}.`,
             second: v => `${v.Event} ______ because of ${v.reason}.`,
-            answer: v => "might be called off"
+            answers: v => ["might be called off"]
           }
         ]
       },
@@ -606,31 +592,75 @@
         type: "Phrasal verbs",
         target: "turn down",
         key: "DOWN",
-        hint: "Reject means turn down. Check whether the sentence is active or passive.",
+        hint: "Reject means turn down. With noun objects, both positions are possible: turn down the offer / turn the offer down.",
         frames: [
           {
             name: "past simple active",
             original: v => `${v.person} rejected ${v.offer}.`,
             second: v => `${v.person} ______.`,
-            answer: v => `turned down ${v.offer}`
+            answers: v => [
+              `turned down ${v.offer}`,
+              `turned ${v.offer} down`
+            ]
           },
           {
             name: "present perfect active",
             original: v => `${v.person} has rejected ${v.offer}.`,
             second: v => `${v.person} ______.`,
-            answer: v => `has turned down ${v.offer}`
+            answers: v => [
+              `has turned down ${v.offer}`,
+              `has turned ${v.offer} down`
+            ]
           },
           {
             name: "modal active",
             original: v => `${v.person} should not reject ${v.offer}.`,
-            second: v => `${v.person} ______.`,
-            answer: v => `should not turn down ${v.offer}`
+            second: v => `${v.person} should not turn ______.`,
+            answers: v => [
+              `down ${v.offer}`,
+              `${v.offer} down`
+            ]
           },
           {
             name: "passive",
             original: v => `${cap(v.offer)} was rejected immediately.`,
             second: v => `${cap(v.offer)} ______ immediately.`,
-            answer: v => "was turned down"
+            answers: v => ["was turned down"]
+          }
+        ]
+      },
+      {
+        type: "Phrasal verbs",
+        target: "work out",
+        key: "OUT",
+        hint: "Solve or understand can mean work out. With noun objects, both positions are possible: work out the problem / work the problem out.",
+        frames: [
+          {
+            name: "past simple active",
+            original: v => `${v.person} solved ${v.solvableProblem} in a few minutes.`,
+            second: v => `${v.person} worked ______ in a few minutes.`,
+            answers: v => [
+              `out ${v.solvableProblem}`,
+              `${v.solvableProblem} out`
+            ]
+          },
+          {
+            name: "present perfect active",
+            original: v => `${v.person} has solved ${v.solvableProblem} at last.`,
+            second: v => `${v.person} has worked ______ at last.`,
+            answers: v => [
+              `out ${v.solvableProblem}`,
+              `${v.solvableProblem} out`
+            ]
+          },
+          {
+            name: "modal active",
+            original: v => `${v.person} should solve ${v.solvableProblem} before tomorrow.`,
+            second: v => `${v.person} should work ______ before tomorrow.`,
+            answers: v => [
+              `out ${v.solvableProblem}`,
+              `${v.solvableProblem} out`
+            ]
           }
         ]
       },
@@ -638,19 +668,19 @@
         type: "Phrasal verbs",
         target: "put up with",
         key: "PUT",
-        hint: "Tolerate means put up with. This is a three-part phrasal verb.",
+        hint: "Tolerate means put up with. This is a three-part phrasal verb and it is not separable.",
         frames: [
           {
             name: "negative present",
             original: v => `${v.person} can’t tolerate ${v.problem} any longer.`,
             second: v => `${v.person} can’t ______ any longer.`,
-            answer: v => `put up with ${v.problem}`
+            answers: v => [`put up with ${v.problem}`]
           },
           {
             name: "negative past",
             original: v => `${v.person} couldn’t tolerate ${v.problem} during the trip.`,
             second: v => `${v.person} couldn’t ______ during the trip.`,
-            answer: v => `put up with ${v.problem}`
+            answers: v => [`put up with ${v.problem}`]
           }
         ]
       },
@@ -664,19 +694,19 @@
             name: "present continuous",
             original: v => `${v.person} is excited about ${v.activityVerb} ${v.activityObject}.`,
             second: v => `${v.person} is looking ______ ${v.activityObject}.`,
-            answer: v => `forward to ${v.activityVerb}`
+            answers: v => [`forward to ${v.activityVerb}`]
           },
           {
             name: "past continuous",
             original: v => `${v.person} was excited about ${v.activityVerb} ${v.activityObject}.`,
             second: v => `${v.person} was looking ______ ${v.activityObject}.`,
-            answer: v => `forward to ${v.activityVerb}`
+            answers: v => [`forward to ${v.activityVerb}`]
           },
           {
             name: "present perfect continuous",
             original: v => `${v.people} have been excited about ${v.activityVerb} ${v.activityObject} for weeks.`,
             second: v => `${v.people} have been looking ______ ${v.activityObject} for weeks.`,
-            answer: v => `forward to ${v.activityVerb}`
+            answers: v => [`forward to ${v.activityVerb}`]
           }
         ]
       },
@@ -690,19 +720,19 @@
             name: "present",
             original: v => `It is impossible for us to ${v.action} today.`,
             second: v => `It is ______ for us to ${v.action} today.`,
-            answer: v => "out of the question"
+            answers: v => ["out of the question"]
           },
           {
             name: "past",
             original: v => `It was impossible for them to ${v.action} on time.`,
             second: v => `It was ______ for them to ${v.action} on time.`,
-            answer: v => "out of the question"
+            answers: v => ["out of the question"]
           },
           {
             name: "future",
             original: v => `It will be impossible to ${v.action} without more help.`,
             second: v => `It will be ______ to ${v.action} without more help.`,
-            answer: v => "out of the question"
+            answers: v => ["out of the question"]
           }
         ]
       },
@@ -716,13 +746,13 @@
             name: "past",
             original: v => `${v.person} was about to ${v.actionBase} when the phone rang.`,
             second: v => `${v.person} was on ______ ${v.actionIng} when the phone rang.`,
-            answer: v => "the verge of"
+            answers: v => ["the verge of"]
           },
           {
             name: "present",
             original: v => `${v.person} is about to ${v.actionBase} a major decision.`,
             second: v => `${v.person} is on ______ ${v.actionIng} a major decision.`,
-            answer: v => "the verge of"
+            answers: v => ["the verge of"]
           }
         ]
       },
@@ -736,13 +766,13 @@
             name: "negative present",
             original: v => `${v.people} can’t manage financially on ${v.money}.`,
             second: v => `${v.people} can’t ______ on ${v.money}.`,
-            answer: v => "make ends meet"
+            answers: v => ["make ends meet"]
           },
           {
             name: "past",
             original: v => `${v.people} found it difficult to manage financially on ${v.money}.`,
             second: v => `${v.people} found it difficult to ______ on ${v.money}.`,
-            answer: v => "make ends meet"
+            answers: v => ["make ends meet"]
           }
         ]
       },
@@ -756,13 +786,13 @@
             name: "past",
             original: v => `${cap(v.object)} was extremely expensive.`,
             second: v => `${cap(v.object)} cost ______.`,
-            answer: v => "an arm and a leg"
+            answers: v => ["an arm and a leg"]
           },
           {
             name: "present perfect",
             original: v => `${cap(v.object)} has been extremely expensive this year.`,
             second: v => `${cap(v.object)} has cost ______ this year.`,
-            answer: v => "an arm and a leg"
+            answers: v => ["an arm and a leg"]
           }
         ]
       },
@@ -776,13 +806,13 @@
             name: "past",
             original: v => `I think ${v.person.toLowerCase()} misunderstood what I meant.`,
             second: v => `I think ${v.person.toLowerCase()} got the wrong ______.`,
-            answer: v => "end of the stick"
+            answers: v => ["end of the stick"]
           },
           {
             name: "present perfect",
             original: v => `${v.person} has misunderstood the situation completely.`,
             second: v => `${v.person} has got the wrong ______ completely.`,
-            answer: v => "end of the stick"
+            answers: v => ["end of the stick"]
           }
         ]
       },
@@ -796,13 +826,13 @@
             name: "past",
             original: v => `${v.people} arrived just in time to catch ${v.transport}.`,
             second: v => `${v.people} arrived ______ to catch ${v.transport}.`,
-            answer: v => "in the nick of time"
+            answers: v => ["in the nick of time"]
           },
           {
             name: "past with place",
             original: v => `${v.people} reached ${v.place} just in time.`,
             second: v => `${v.people} reached ${v.place} ______.`,
-            answer: v => "in the nick of time"
+            answers: v => ["in the nick of time"]
           }
         ]
       }
@@ -866,9 +896,34 @@
       return keyWords.every(word => answerWords.includes(word));
     }
 
+    function getAcceptedAnswers(exercise) {
+      if (Array.isArray(exercise.answers) && exercise.answers.length > 0) {
+        return exercise.answers;
+      }
+      return [exercise.answer];
+    }
+
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
+    }
+
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise)
+        .map(normalise)
+        .includes(normalise(input));
+    }
+
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
     function isValidExercise(exercise) {
-      const count = wordCount(exercise.answer);
-      return count >= 2 && count <= 5 && keyIsIncluded(exercise.answer, exercise.key);
+      const answers = getAcceptedAnswers(exercise);
+
+      return answers.length > 0 && answers.every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
+      });
     }
 
     function fillVars() {
@@ -900,6 +955,8 @@
         const frame = pick(generator.frames);
         const vars = fillVars();
 
+        const generatedAnswers = frame.answers(vars);
+
         const exercise = {
           type: generator.type,
           target: generator.target,
@@ -908,7 +965,8 @@
           frame: frame.name,
           original: frame.original(vars),
           second: frame.second(vars),
-          answer: frame.answer(vars)
+          answer: generatedAnswers[0],
+          answers: generatedAnswers
         };
 
         if (isValidExercise(exercise)) {
@@ -924,7 +982,8 @@
         frame: "error",
         original: "No valid exercise could be generated.",
         second: "Please choose another category.",
-        answer: "system error"
+        answer: "system error",
+        answers: ["system error"]
       };
     }
 
@@ -986,21 +1045,26 @@
         "was cancelled off",
         "has turned down",
         "end of stick",
-        "cost an arm"
+        "cost an arm",
+        "the wrong end",
+        "forward for seeing",
+        "was called out"
       ];
+
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
 
       return shuffle(
         wrong.filter(item =>
           wordCount(item) >= 2 &&
           wordCount(item) <= 5 &&
-          normalise(item) !== normalise(exercise.answer)
+          !accepted.includes(normalise(item))
         )
       ).slice(0, 3);
     }
 
     function newMcQuestion() {
       const exercise = generateExercise(state.mcCategory);
-      const options = shuffle([exercise.answer, ...makeDistractors(exercise)]).slice(0, 4);
+      const options = shuffle([primaryAnswer(exercise), ...makeDistractors(exercise)]).slice(0, 4);
 
       state.mcCurrent = {
         ...exercise,
@@ -1039,7 +1103,7 @@
         button.textContent = option;
 
         if (state.mcSelected) {
-          if (normalise(option) === normalise(q.answer)) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
             button.classList.add("good");
           } else if (normalise(option) === normalise(state.mcSelected)) {
             button.classList.add("bad");
@@ -1051,11 +1115,11 @@
       });
 
       if (state.mcSelected) {
-        const correct = normalise(state.mcSelected) === normalise(q.answer);
+        const correct = isCorrectAnswer(state.mcSelected, q);
         $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
         $("mcFeedback").innerHTML = `
           <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
-          <p>Expected answer: <strong>${q.answer}</strong> <span class="pill">${wordCount(q.answer)} words</span></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
           <p>${q.hint}</p>
         `;
       } else {
@@ -1069,7 +1133,7 @@
       state.mcSelected = option;
       state.mcAttempts++;
 
-      if (normalise(option) === normalise(state.mcCurrent.answer)) {
+      if (isCorrectAnswer(option, state.mcCurrent)) {
         state.mcScore++;
       }
 
@@ -1115,8 +1179,7 @@
       if (!state.trCurrent || state.trChecked) return;
 
       const input = $("trInput").value;
-      const expected = state.trCurrent.answer;
-      const correct = !reveal && normalise(input) === normalise(expected);
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
 
       state.trChecked = true;
       state.trAttempts++;
@@ -1128,7 +1191,7 @@
       $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
       $("trFeedback").innerHTML = `
         <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
-        <p>Expected answer: <strong>${expected}</strong> <span class="pill">${wordCount(expected)} words</span></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
         <p>${state.trCurrent.hint}</p>
         <p class="muted">Official rule applied: every generated answer contains the key word and has between two and five words.</p>
       `;
