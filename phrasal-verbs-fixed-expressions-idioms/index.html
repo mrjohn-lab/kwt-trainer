@@ -25,7 +25,9 @@
       --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -120,13 +122,15 @@
       letter-spacing: -1.7px;
     }
 
-    .highlight { color: var(--orange); }
+    .highlight {
+      color: var(--orange);
+    }
 
     .hero p {
       margin: 18px 0 0;
       color: var(--muted);
       font-size: 18px;
-      max-width: 820px;
+      max-width: 860px;
     }
 
     .tabs {
@@ -136,7 +140,8 @@
       margin: 22px 0;
     }
 
-    button, .tab {
+    button,
+    .tab {
       border: 1px solid var(--border);
       background: var(--white);
       color: var(--text);
@@ -148,22 +153,18 @@
       transition: 0.16s ease;
     }
 
-    button:hover, .tab:hover {
+    button:hover,
+    .tab:hover {
       transform: translateY(-1px);
       border-color: var(--blue);
       box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
     }
 
-    .tab.active, .primary {
+    .tab.active,
+    .primary {
       background: linear-gradient(135deg, var(--blue), var(--navy));
       color: white;
       border-color: transparent;
-    }
-
-    .orange {
-      background: var(--orange);
-      color: white;
-      border-color: var(--orange);
     }
 
     .card {
@@ -184,7 +185,8 @@
       margin-bottom: 18px;
     }
 
-    select, input {
+    select,
+    input {
       border: 1px solid var(--border);
       border-radius: 15px;
       padding: 12px 14px;
@@ -193,8 +195,13 @@
       color: var(--text);
     }
 
-    select { min-width: 240px; }
-    input { width: 100%; }
+    select {
+      min-width: 240px;
+    }
+
+    input {
+      width: 100%;
+    }
 
     .button-group {
       display: flex;
@@ -202,9 +209,12 @@
       flex-wrap: wrap;
     }
 
-    .hidden { display: none !important; }
+    .hidden {
+      display: none !important;
+    }
 
-    .badge, .pill {
+    .badge,
+    .pill {
       display: inline-block;
       padding: 7px 11px;
       border-radius: 999px;
@@ -238,7 +248,9 @@
       border-color: #fecaca;
     }
 
-    .muted { color: var(--muted); }
+    .muted {
+      color: var(--muted);
+    }
 
     .flashcard {
       min-height: 320px;
@@ -313,28 +325,6 @@
       color: #7f1d1d;
     }
 
-    .progress {
-      height: 12px;
-      border-radius: 999px;
-      overflow: hidden;
-      background: #e5e7eb;
-      margin-top: 12px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--blue), var(--orange));
-      transition: width 0.25s ease;
-    }
-
-    .small-note {
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
     .footer {
       margin-top: 36px;
       padding-top: 22px;
@@ -347,7 +337,9 @@
       flex-wrap: wrap;
     }
 
-    .footer strong { color: var(--navy); }
+    .footer strong {
+      color: var(--navy);
+    }
 
     @media (max-width: 760px) {
       .topbar {
@@ -363,10 +355,7 @@
         grid-template-columns: 1fr;
       }
 
-      .answer-row {
-        grid-template-columns: 1fr;
-      }
-
+      .answer-row,
       .option-grid {
         grid-template-columns: 1fr;
       }
@@ -397,8 +386,8 @@
       <h1>Lexical <span class="highlight">Transformation</span> Trainer</h1>
       <p>
         Practise phrasal verbs, fixed expressions and idioms through controlled randomised exercises.
-        The sentences are generated from patterns, so students practise the same target structures in
-        different contexts, tenses and grammatical frames.
+        Every generated answer is automatically checked so it contains the key word and stays within
+        the official 2–5 word limit.
       </p>
     </section>
 
@@ -418,7 +407,7 @@
       </div>
 
       <div id="studyCard" class="card flashcard"></div>
-      <p id="studyCounter" class="small-note"></p>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
     </section>
 
     <section id="multiple" class="tab-section hidden">
@@ -435,6 +424,7 @@
           <span id="mcType" class="badge badge-blue"></span>
           <span id="mcScore" class="pill"></span>
         </div>
+
         <div id="mcQuestion" class="question"></div>
         <div id="mcOptions" class="option-grid"></div>
         <div id="mcFeedback" class="box hidden"></div>
@@ -454,7 +444,7 @@
       <div class="card">
         <div class="toolbar">
           <span id="trType" class="badge badge-blue"></span>
-          <span id="trWords" class="pill">Words: 0</span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
           <span id="trScore" class="pill"></span>
         </div>
 
@@ -492,7 +482,7 @@
         type: "Phrasal verbs",
         expression: "call off",
         meaning: "cancel",
-        note: "Often appears in passive transformations: was called off, has been called off, may be called off.",
+        note: "Commonly used in passive transformations: was called off, has been called off, may be called off.",
         example: "The organisers cancelled the event. → The event was called off."
       },
       {
@@ -520,7 +510,7 @@
         type: "Fixed expressions",
         expression: "out of the question",
         meaning: "impossible",
-        note: "Do not omit 'the': out of the question.",
+        note: "Do not omit the article: out of the question.",
         example: "It is impossible for us to finish today. → It is out of the question for us to finish today."
       },
       {
@@ -541,24 +531,43 @@
         type: "Idioms",
         expression: "cost an arm and a leg",
         meaning: "be very expensive",
-        note: "Keep the full expression. Past form: cost, not costed.",
+        note: "The full idiom has six words, so the sentence must include cost outside the gap.",
         example: "The laptop was extremely expensive. → The laptop cost an arm and a leg."
       },
       {
         type: "Idioms",
         expression: "get the wrong end of the stick",
         meaning: "misunderstand something",
-        note: "Long idiom. Word order is essential.",
-        example: "I think you misunderstood me. → I think you got the wrong end of the stick."
+        note: "The full idiom is too long, so part of it must appear outside the gap.",
+        example: "He misunderstood the situation. → He got the wrong end of the stick."
       },
       {
         type: "Idioms",
         expression: "in the nick of time",
         meaning: "just in time",
-        note: "Do not forget the article: in the nick of time.",
+        note: "This full answer has exactly five words.",
         example: "We arrived just in time. → We arrived in the nick of time."
       }
     ];
+
+    const data = {
+      event: ["the school trip", "the meeting", "the concert", "the match", "the interview", "the final rehearsal"],
+      reason: ["the heavy rain", "a transport problem", "a power cut", "the storm", "a lack of participants", "unexpected circumstances"],
+      condition: ["the weather gets worse", "the teachers cannot attend", "the problem continues", "there are not enough students"],
+      person: ["She", "He", "My brother", "The student", "The manager", "Our teacher"],
+      people: ["They", "We", "My parents", "The students", "Several families"],
+      offer: ["the offer", "the invitation", "the opportunity", "their help", "the proposal", "the job"],
+      problem: ["the noise", "his rude behaviour", "the constant delays", "the pressure", "the situation", "their complaints"],
+      activityVerb: ["seeing", "visiting", "starting", "meeting", "joining", "attending"],
+      activityObject: ["you again", "London", "university", "the team", "the project", "the exchange trip"],
+      action: ["finish the project", "complete the form", "organise the event", "solve the problem", "change the timetable"],
+      actionBase: ["sign", "leave", "accept", "announce", "make"],
+      actionIng: ["signing", "leaving", "accepting", "announcing", "making"],
+      money: ["that salary", "their monthly income", "such a small budget", "what they earn"],
+      object: ["that laptop", "the hotel room", "his new bike", "the plane ticket", "the repair", "the course"],
+      transport: ["the train", "the bus", "the flight", "the last coach"],
+      place: ["the station", "the airport", "the classroom", "the theatre", "the meeting room"]
+    };
 
     const generators = [
       {
@@ -569,27 +578,27 @@
         frames: [
           {
             name: "past passive",
-            original: ({event, reason}) => `The organisers cancelled ${event} because of ${reason}.`,
-            second: ({Event, reason}) => `${Event} ______ because of ${reason}.`,
-            answer: () => "was called off"
+            original: v => `The organisers cancelled ${v.event} because of ${v.reason}.`,
+            second: v => `${v.Event} ______ because of ${v.reason}.`,
+            answer: v => "was called off"
           },
           {
             name: "present perfect passive",
-            original: ({event}) => `The school has cancelled ${event}.`,
-            second: ({Event}) => `${Event} ______.`,
-            answer: () => "has been called off"
+            original: v => `The school has cancelled ${v.event}.`,
+            second: v => `${v.Event} ______.`,
+            answer: v => "has been called off"
           },
           {
             name: "future passive",
-            original: ({event, condition}) => `They will cancel ${event} if ${condition}.`,
-            second: ({Event, condition}) => `${Event} ______ if ${condition}.`,
-            answer: () => "will be called off"
+            original: v => `They will cancel ${v.event} if ${v.condition}.`,
+            second: v => `${v.Event} ______ if ${v.condition}.`,
+            answer: v => "will be called off"
           },
           {
             name: "modal passive",
-            original: ({event, reason}) => `They might cancel ${event} because of ${reason}.`,
-            second: ({Event, reason}) => `${Event} ______ because of ${reason}.`,
-            answer: () => "might be called off"
+            original: v => `They might cancel ${v.event} because of ${v.reason}.`,
+            second: v => `${v.Event} ______ because of ${v.reason}.`,
+            answer: v => "might be called off"
           }
         ]
       },
@@ -601,27 +610,27 @@
         frames: [
           {
             name: "past simple active",
-            original: ({person, offer}) => `${person} rejected ${offer}.`,
-            second: ({person, offer}) => `${person} ______.`,
-            answer: ({offer}) => `turned down ${offer}`
+            original: v => `${v.person} rejected ${v.offer}.`,
+            second: v => `${v.person} ______.`,
+            answer: v => `turned down ${v.offer}`
           },
           {
             name: "present perfect active",
-            original: ({person, offer}) => `${person} has rejected ${offer}.`,
-            second: ({person, offer}) => `${person} ______.`,
-            answer: ({offer}) => `has turned down ${offer}`
+            original: v => `${v.person} has rejected ${v.offer}.`,
+            second: v => `${v.person} ______.`,
+            answer: v => `has turned down ${v.offer}`
           },
           {
             name: "modal active",
-            original: ({person, offer}) => `${person} should not reject ${offer}.`,
-            second: ({person, offer}) => `${person} ______.`,
-            answer: ({offer}) => `should not turn down ${offer}`
+            original: v => `${v.person} should not reject ${v.offer}.`,
+            second: v => `${v.person} ______.`,
+            answer: v => `should not turn down ${v.offer}`
           },
           {
             name: "passive",
-            original: ({offer}) => `${cap(offer)} was rejected immediately.`,
-            second: ({Offer}) => `${Offer} ______ immediately.`,
-            answer: () => "was turned down"
+            original: v => `${cap(v.offer)} was rejected immediately.`,
+            second: v => `${cap(v.offer)} ______ immediately.`,
+            answer: v => "was turned down"
           }
         ]
       },
@@ -633,21 +642,15 @@
         frames: [
           {
             name: "negative present",
-            original: ({person, problem}) => `${person} can’t tolerate ${problem} any longer.`,
-            second: ({person}) => `${person} can’t ______ any longer.`,
-            answer: ({problem}) => `put up with ${problem}`
+            original: v => `${v.person} can’t tolerate ${v.problem} any longer.`,
+            second: v => `${v.person} can’t ______ any longer.`,
+            answer: v => `put up with ${v.problem}`
           },
           {
             name: "negative past",
-            original: ({person, problem}) => `${person} couldn’t tolerate ${problem} during the trip.`,
-            second: ({person}) => `${person} couldn’t ______ during the trip.`,
-            answer: ({problem}) => `put up with ${problem}`
-          },
-          {
-            name: "modal question",
-            original: ({person, problem}) => `How can ${person.toLowerCase()} tolerate ${problem}?`,
-            second: ({person}) => `How can ${person.toLowerCase()} ______?`,
-            answer: ({problem}) => `put up with ${problem}`
+            original: v => `${v.person} couldn’t tolerate ${v.problem} during the trip.`,
+            second: v => `${v.person} couldn’t ______ during the trip.`,
+            answer: v => `put up with ${v.problem}`
           }
         ]
       },
@@ -655,25 +658,25 @@
         type: "Phrasal verbs",
         target: "look forward to",
         key: "FORWARD",
-        hint: "Look forward to is followed by -ing.",
+        hint: "Look forward to is followed by -ing. The object appears outside the gap to respect the 2–5 word limit.",
         frames: [
           {
             name: "present continuous",
-            original: ({person, activity}) => `${person} is excited about ${activity}.`,
-            second: ({person}) => `${person} is ______.`,
-            answer: ({activity}) => `looking forward to ${activity}`
+            original: v => `${v.person} is excited about ${v.activityVerb} ${v.activityObject}.`,
+            second: v => `${v.person} is looking ______ ${v.activityObject}.`,
+            answer: v => `forward to ${v.activityVerb}`
           },
           {
             name: "past continuous",
-            original: ({person, activity}) => `${person} was excited about ${activity}.`,
-            second: ({person}) => `${person} was ______.`,
-            answer: ({activity}) => `looking forward to ${activity}`
+            original: v => `${v.person} was excited about ${v.activityVerb} ${v.activityObject}.`,
+            second: v => `${v.person} was looking ______ ${v.activityObject}.`,
+            answer: v => `forward to ${v.activityVerb}`
           },
           {
             name: "present perfect continuous",
-            original: ({people, activity}) => `${people} have been excited about ${activity} for weeks.`,
-            second: ({people}) => `${people} have been ______ for weeks.`,
-            answer: ({activity}) => `looking forward to ${activity}`
+            original: v => `${v.people} have been excited about ${v.activityVerb} ${v.activityObject} for weeks.`,
+            second: v => `${v.people} have been looking ______ ${v.activityObject} for weeks.`,
+            answer: v => `forward to ${v.activityVerb}`
           }
         ]
       },
@@ -685,21 +688,21 @@
         frames: [
           {
             name: "present",
-            original: ({action}) => `It is impossible for us to ${action} today.`,
-            second: ({action}) => `It is ______ for us to ${action} today.`,
-            answer: () => "out of the question"
+            original: v => `It is impossible for us to ${v.action} today.`,
+            second: v => `It is ______ for us to ${v.action} today.`,
+            answer: v => "out of the question"
           },
           {
             name: "past",
-            original: ({action}) => `It was impossible for them to ${action} on time.`,
-            second: ({action}) => `It was ______ for them to ${action} on time.`,
-            answer: () => "out of the question"
+            original: v => `It was impossible for them to ${v.action} on time.`,
+            second: v => `It was ______ for them to ${v.action} on time.`,
+            answer: v => "out of the question"
           },
           {
             name: "future",
-            original: ({action}) => `It will be impossible to ${action} without more help.`,
-            second: ({action}) => `It will be ______ to ${action} without more help.`,
-            answer: () => "out of the question"
+            original: v => `It will be impossible to ${v.action} without more help.`,
+            second: v => `It will be ______ to ${v.action} without more help.`,
+            answer: v => "out of the question"
           }
         ]
       },
@@ -711,15 +714,15 @@
         frames: [
           {
             name: "past",
-            original: ({person, actionBase}) => `${person} was about to ${actionBase} when the phone rang.`,
-            second: ({person, actionIng}) => `${person} was ______ ${actionIng} when the phone rang.`,
-            answer: () => "on the verge of"
+            original: v => `${v.person} was about to ${v.actionBase} when the phone rang.`,
+            second: v => `${v.person} was on ______ ${v.actionIng} when the phone rang.`,
+            answer: v => "the verge of"
           },
           {
             name: "present",
-            original: ({person, actionBase}) => `${person} is about to ${actionBase} a major decision.`,
-            second: ({person, actionIng}) => `${person} is ______ ${actionIng} a major decision.`,
-            answer: () => "on the verge of"
+            original: v => `${v.person} is about to ${v.actionBase} a major decision.`,
+            second: v => `${v.person} is on ______ ${v.actionIng} a major decision.`,
+            answer: v => "the verge of"
           }
         ]
       },
@@ -731,15 +734,15 @@
         frames: [
           {
             name: "negative present",
-            original: ({people, money}) => `${people} can’t manage financially on ${money}.`,
-            second: ({people, money}) => `${people} can’t ______ on ${money}.`,
-            answer: () => "make ends meet"
+            original: v => `${v.people} can’t manage financially on ${v.money}.`,
+            second: v => `${v.people} can’t ______ on ${v.money}.`,
+            answer: v => "make ends meet"
           },
           {
             name: "past",
-            original: ({people, money}) => `${people} found it difficult to manage financially on ${money}.`,
-            second: ({people, money}) => `${people} found it difficult to ______ on ${money}.`,
-            answer: () => "make ends meet"
+            original: v => `${v.people} found it difficult to manage financially on ${v.money}.`,
+            second: v => `${v.people} found it difficult to ______ on ${v.money}.`,
+            answer: v => "make ends meet"
           }
         ]
       },
@@ -747,19 +750,19 @@
         type: "Idioms",
         target: "cost an arm and a leg",
         key: "ARM",
-        hint: "Very expensive means cost an arm and a leg. The past form is cost.",
+        hint: "Very expensive means cost an arm and a leg. The sentence includes cost outside the gap to respect the five-word limit.",
         frames: [
           {
             name: "past",
-            original: ({object}) => `${cap(object)} was extremely expensive.`,
-            second: ({Object}) => `${Object} ______.`,
-            answer: () => "cost an arm and a leg"
+            original: v => `${cap(v.object)} was extremely expensive.`,
+            second: v => `${cap(v.object)} cost ______.`,
+            answer: v => "an arm and a leg"
           },
           {
             name: "present perfect",
-            original: ({object}) => `${cap(object)} has been extremely expensive this year.`,
-            second: ({Object}) => `${Object} ______ this year.`,
-            answer: () => "has cost an arm and a leg"
+            original: v => `${cap(v.object)} has been extremely expensive this year.`,
+            second: v => `${cap(v.object)} has cost ______ this year.`,
+            answer: v => "an arm and a leg"
           }
         ]
       },
@@ -767,19 +770,19 @@
         type: "Idioms",
         target: "get the wrong end of the stick",
         key: "END",
-        hint: "Misunderstand means get the wrong end of the stick.",
+        hint: "Misunderstand means get the wrong end of the stick. The answer is split to respect the five-word limit.",
         frames: [
           {
             name: "past",
-            original: ({person}) => `I think ${person.toLowerCase()} misunderstood what I meant.`,
-            second: ({person}) => `I think ${person.toLowerCase()} ______.`,
-            answer: () => "got the wrong end of the stick"
+            original: v => `I think ${v.person.toLowerCase()} misunderstood what I meant.`,
+            second: v => `I think ${v.person.toLowerCase()} got the wrong ______.`,
+            answer: v => "end of the stick"
           },
           {
             name: "present perfect",
-            original: ({person}) => `${person} has misunderstood the situation completely.`,
-            second: ({person}) => `${person} ______ completely.`,
-            answer: () => "has got the wrong end of the stick"
+            original: v => `${v.person} has misunderstood the situation completely.`,
+            second: v => `${v.person} has got the wrong ______ completely.`,
+            answer: v => "end of the stick"
           }
         ]
       },
@@ -791,40 +794,21 @@
         frames: [
           {
             name: "past",
-            original: ({people, transport}) => `${people} arrived just in time to catch ${transport}.`,
-            second: ({people, transport}) => `${people} arrived ______ to catch ${transport}.`,
-            answer: () => "in the nick of time"
+            original: v => `${v.people} arrived just in time to catch ${v.transport}.`,
+            second: v => `${v.people} arrived ______ to catch ${v.transport}.`,
+            answer: v => "in the nick of time"
           },
           {
             name: "past with place",
-            original: ({people, place}) => `${people} reached ${place} just in time.`,
-            second: ({people, place}) => `${people} reached ${place} ______.`,
-            answer: () => "in the nick of time"
+            original: v => `${v.people} reached ${v.place} just in time.`,
+            second: v => `${v.people} reached ${v.place} ______.`,
+            answer: v => "in the nick of time"
           }
         ]
       }
     ];
 
-    const data = {
-      event: ["the school trip", "the meeting", "the concert", "the training session", "the interview", "the final rehearsal"],
-      reason: ["the heavy rain", "a transport problem", "a power cut", "the storm", "a lack of participants", "unexpected circumstances"],
-      condition: ["the weather gets worse", "the teachers cannot attend", "the problem continues", "there are not enough students"],
-      person: ["She", "He", "My brother", "The student", "The manager", "Our teacher"],
-      people: ["They", "We", "My parents", "The students", "Several families"],
-      offer: ["the offer", "the invitation", "the opportunity", "their help", "the proposal", "the job"],
-      problem: ["the noise", "his rude behaviour", "the constant delays", "the pressure", "the situation", "their complaints"],
-      activity: ["seeing you again", "visiting London", "starting university", "meeting the team", "taking part in the project", "going on the exchange trip"],
-      action: ["finish the project", "complete the form", "organise the event", "solve the problem", "change the timetable"],
-      actionBase: ["sign", "leave", "accept", "announce", "make"],
-      actionIng: ["signing", "leaving", "accepting", "announcing", "making"],
-      money: ["that salary", "their monthly income", "such a small budget", "what they earn"],
-      object: ["that laptop", "the hotel room", "his new bike", "the plane ticket", "the repair", "the course"],
-      transport: ["the train", "the bus", "the flight", "the last coach"],
-      place: ["the station", "the airport", "the classroom", "the theatre", "the meeting room"]
-    };
-
     let state = {
-      tab: "study",
       studyCategory: "All categories",
       studyIndex: 0,
       studyFlipped: false,
@@ -848,8 +832,17 @@
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
 
-    function pick(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
     }
 
     function normalise(text) {
@@ -861,9 +854,28 @@
         .trim();
     }
 
+    function wordCount(text) {
+      const clean = normalise(text);
+      if (!clean) return 0;
+      return clean.split(" ").filter(Boolean).length;
+    }
+
+    function keyIsIncluded(answer, key) {
+      const answerWords = normalise(answer).split(" ");
+      const keyWords = normalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function isValidExercise(exercise) {
+      const count = wordCount(exercise.answer);
+      return count >= 2 && count <= 5 && keyIsIncluded(exercise.answer, exercise.key);
+    }
+
     function fillVars() {
       const vars = {};
-      Object.keys(data).forEach(key => vars[key] = pick(data[key]));
+      Object.keys(data).forEach(key => {
+        vars[key] = pick(data[key]);
+      });
       vars.Event = cap(vars.event);
       vars.Offer = cap(vars.offer);
       vars.Object = cap(vars.object);
@@ -877,45 +889,62 @@
 
     function filteredGenerators(category) {
       if (category === "All categories") return generators;
-      return generators.filter(item => item.type === category);
+      return generators.filter(generator => generator.type === category);
     }
 
     function generateExercise(category = "All categories") {
       const possible = filteredGenerators(category);
-      const generator = pick(possible);
-      const frame = pick(generator.frames);
-      const vars = fillVars();
+
+      for (let attempt = 0; attempt < 100; attempt++) {
+        const generator = pick(possible);
+        const frame = pick(generator.frames);
+        const vars = fillVars();
+
+        const exercise = {
+          type: generator.type,
+          target: generator.target,
+          key: generator.key,
+          hint: generator.hint,
+          frame: frame.name,
+          original: frame.original(vars),
+          second: frame.second(vars),
+          answer: frame.answer(vars)
+        };
+
+        if (isValidExercise(exercise)) {
+          return exercise;
+        }
+      }
 
       return {
-        type: generator.type,
-        target: generator.target,
-        key: generator.key,
-        hint: generator.hint,
-        frame: frame.name,
-        original: frame.original(vars),
-        second: frame.second(vars),
-        answer: frame.answer(vars)
+        type: "System",
+        target: "No valid exercise",
+        key: "ERROR",
+        hint: "The generator could not create a valid item.",
+        frame: "error",
+        original: "No valid exercise could be generated.",
+        second: "Please choose another category.",
+        answer: "system error"
       };
     }
 
     function populateSelect(id, value) {
       $(id).innerHTML = categories
-        .map(cat => `<option value="${cat}" ${cat === value ? "selected" : ""}>${cat}</option>`)
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
         .join("");
     }
 
     function showTab(tab) {
       document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
       document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
-
       $(tab).classList.remove("hidden");
       document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
-      state.tab = tab;
     }
 
     function renderStudy() {
       const items = filteredStudyItems();
       if (state.studyIndex >= items.length) state.studyIndex = 0;
+
       const item = items[state.studyIndex];
 
       $("studyCard").innerHTML = state.studyFlipped
@@ -923,7 +952,7 @@
           <div>
             <span class="badge badge-blue">${item.type}</span>
             <p class="muted"><strong>Meaning</strong></p>
-            <h2 style="font-size: 34px;">${item.meaning}</h2>
+            <h2 style="font-size:34px">${item.meaning}</h2>
             <div class="box"><strong>Example:</strong> ${item.example}</div>
             <div class="box"><strong>Exam note:</strong> ${item.note}</div>
             <p class="muted">Click the card to return to the expression.</p>
@@ -941,51 +970,60 @@
       $("studyCounter").textContent = `Card ${state.studyIndex + 1} of ${items.length}`;
     }
 
+    function makeDistractors(exercise) {
+      const wrong = [
+        "was put off",
+        "turned up",
+        "turned into",
+        "looked forward",
+        "put out with",
+        "on the point of",
+        "out of question",
+        "made ends up",
+        "an arm and leg",
+        "in nick of time",
+        "side of the stick",
+        "was cancelled off",
+        "has turned down",
+        "end of stick",
+        "cost an arm"
+      ];
+
+      return shuffle(
+        wrong.filter(item =>
+          wordCount(item) >= 2 &&
+          wordCount(item) <= 5 &&
+          normalise(item) !== normalise(exercise.answer)
+        )
+      ).slice(0, 3);
+    }
+
     function newMcQuestion() {
       const exercise = generateExercise(state.mcCategory);
-      const distractors = makeDistractors(exercise);
-      const options = shuffle([exercise.answer, ...distractors]).slice(0, 4);
+      const options = shuffle([exercise.answer, ...makeDistractors(exercise)]).slice(0, 4);
 
       state.mcCurrent = {
         ...exercise,
         options
       };
+
       state.mcSelected = null;
       renderMc();
     }
 
-    function makeDistractors(exercise) {
-      const wrong = [
-        "was put off",
-        "has been put off",
-        "turned up",
-        "turned into",
-        "looked forward to",
-        "put out with",
-        "on the point of",
-        "out of question",
-        "made ends up",
-        "cost a leg and an arm",
-        "in nick of time",
-        "got the wrong side of the stick",
-        "was cancelled off",
-        "has turned it down"
-      ];
-
-      return shuffle(wrong.filter(item => normalise(item) !== normalise(exercise.answer))).slice(0, 3);
-    }
-
     function renderMc() {
       const q = state.mcCurrent;
-      $("mcType").textContent = q ? `${q.type} · ${q.target}` : "";
       $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
 
       if (!q) {
+        $("mcType").textContent = "";
         $("mcQuestion").textContent = "Click 'New question' to start.";
         $("mcOptions").innerHTML = "";
         $("mcFeedback").classList.add("hidden");
         return;
       }
+
+      $("mcType").textContent = `${q.type} · ${q.target} · ${q.frame}`;
 
       $("mcQuestion").innerHTML = `
         <p>${q.original}</p>
@@ -996,17 +1034,20 @@
       $("mcOptions").innerHTML = "";
 
       q.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.className = "option";
-        btn.textContent = option;
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
 
         if (state.mcSelected) {
-          if (normalise(option) === normalise(q.answer)) btn.classList.add("good");
-          else if (normalise(option) === normalise(state.mcSelected)) btn.classList.add("bad");
+          if (normalise(option) === normalise(q.answer)) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
         }
 
-        btn.addEventListener("click", () => chooseMc(option));
-        $("mcOptions").appendChild(btn);
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
       });
 
       if (state.mcSelected) {
@@ -1014,7 +1055,7 @@
         $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
         $("mcFeedback").innerHTML = `
           <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
-          <p>Expected answer: <strong>${q.answer}</strong></p>
+          <p>Expected answer: <strong>${q.answer}</strong> <span class="pill">${wordCount(q.answer)} words</span></p>
           <p>${q.hint}</p>
         `;
       } else {
@@ -1027,7 +1068,10 @@
 
       state.mcSelected = option;
       state.mcAttempts++;
-      if (normalise(option) === normalise(state.mcCurrent.answer)) state.mcScore++;
+
+      if (normalise(option) === normalise(state.mcCurrent.answer)) {
+        state.mcScore++;
+      }
 
       renderMc();
     }
@@ -1043,7 +1087,6 @@
 
     function renderTransformation() {
       const q = state.trCurrent;
-
       $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
 
       if (!q) {
@@ -1058,7 +1101,11 @@
       const words = input ? input.split(/\s+/).length : 0;
 
       $("trType").textContent = `${q.type} · ${q.target} · ${q.frame}`;
-      $("trWords").textContent = `Words: ${words}`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
       $("trFirst").textContent = q.original;
       $("trSecond").textContent = q.second;
       $("trKey").textContent = `Key word: ${q.key}`;
@@ -1073,14 +1120,17 @@
 
       state.trChecked = true;
       state.trAttempts++;
-      if (correct) state.trScore++;
+
+      if (correct) {
+        state.trScore++;
+      }
 
       $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
       $("trFeedback").innerHTML = `
         <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
-        <p>Expected answer: <strong>${expected}</strong></p>
+        <p>Expected answer: <strong>${expected}</strong> <span class="pill">${wordCount(expected)} words</span></p>
         <p>${state.trCurrent.hint}</p>
-        <p class="muted">Remember: in FCE Part 4, the answer normally contains between two and five words, including the key word.</p>
+        <p class="muted">Official rule applied: every generated answer contains the key word and has between two and five words.</p>
       `;
 
       renderTransformation();
@@ -1093,15 +1143,6 @@
       $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.hint}`;
     }
 
-    function shuffle(array) {
-      const copy = array.slice();
-      for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy;
-    }
-
     function init() {
       populateSelect("studyCategory", state.studyCategory);
       populateSelect("mcCategory", state.mcCategory);
@@ -1111,8 +1152,8 @@
         button.addEventListener("click", () => showTab(button.dataset.tab));
       });
 
-      $("studyCategory").addEventListener("change", e => {
-        state.studyCategory = e.target.value;
+      $("studyCategory").addEventListener("change", event => {
+        state.studyCategory = event.target.value;
         state.studyIndex = 0;
         state.studyFlipped = false;
         renderStudy();
@@ -1137,8 +1178,8 @@
         renderStudy();
       });
 
-      $("mcCategory").addEventListener("change", e => {
-        state.mcCategory = e.target.value;
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
         state.mcScore = 0;
         state.mcAttempts = 0;
         newMcQuestion();
@@ -1152,8 +1193,8 @@
         renderMc();
       });
 
-      $("trCategory").addEventListener("change", e => {
-        state.trCategory = e.target.value;
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
         state.trScore = 0;
         state.trAttempts = 0;
         newTransformation();
@@ -1171,8 +1212,11 @@
       });
 
       $("trInput").addEventListener("input", renderTransformation);
-      $("trInput").addEventListener("keydown", e => {
-        if (e.key === "Enter") checkTransformation(false);
+
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          checkTransformation(false);
+        }
       });
 
       renderStudy();
