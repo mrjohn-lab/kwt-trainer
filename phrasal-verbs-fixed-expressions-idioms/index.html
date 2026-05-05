@@ -1730,5 +1730,453 @@
 
     init();
   </script>
+ <style>
+  .tabs {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  .progress-wrap {
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 12px 0 18px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--orange), var(--blue));
+    border-radius: 999px;
+    transition: width 0.2s ease;
+  }
+
+  .result-number {
+    color: var(--navy);
+    font-size: clamp(42px, 8vw, 76px);
+    line-height: 1;
+    margin: 8px 0;
+    font-weight: 900;
+    letter-spacing: -2px;
+  }
+
+  .exam-review-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .exam-review-table th,
+  .exam-review-table td {
+    padding: 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  @media (max-width: 760px) {
+    .tabs {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+<script>
+  (function addExamMode() {
+    const examState = {
+      category: "All categories",
+      questions: [],
+      index: 0,
+      score: 0,
+      checked: false,
+      answers: []
+    };
+
+    function examNormalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/[.,!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function examWordCount(text) {
+      const clean = examNormalise(text);
+      if (!clean) return 0;
+      return clean.split(" ").filter(Boolean).length;
+    }
+
+    function examKeyIsIncluded(answer, key) {
+      const answerWords = examNormalise(answer).split(" ");
+      const keyWords = examNormalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function examShuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function examPick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function examAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) ? exercise.answers : [exercise.answer];
+    }
+
+    function examAcceptedText(exercise) {
+      return examAcceptedAnswers(exercise).join(" / ");
+    }
+
+    function examIsCorrect(input, exercise) {
+      return examAcceptedAnswers(exercise).map(examNormalise).includes(examNormalise(input));
+    }
+
+    function examValidExercise(exercise) {
+      return examAcceptedAnswers(exercise).every(answer => {
+        const count = examWordCount(answer);
+        return count >= 2 && count <= 5 && examKeyIsIncluded(answer, exercise.key);
+      });
+    }
+
+    function examFilteredItems() {
+      if (examState.category === "All categories") return items;
+      return items.filter(item => item.type === examState.category);
+    }
+
+    function examMakeExercise(raw) {
+      const validKeys = examShuffle(raw.keyOptions).filter(key =>
+        raw.answers.every(answer => examKeyIsIncluded(answer, key))
+      );
+
+      if (!validKeys.length) return null;
+
+      const exercise = {
+        ...raw,
+        key: examPick(validKeys),
+        answer: raw.answers[0]
+      };
+
+      return examValidExercise(exercise) ? exercise : null;
+    }
+
+    function buildExamQuestions() {
+      const pool = examShuffle(examFilteredItems());
+      const selected = [];
+
+      for (const raw of pool) {
+        const exercise = examMakeExercise(raw);
+        if (!exercise) continue;
+
+        const repeated = selected.some(item =>
+          item.expression === exercise.expression && item.original === exercise.original
+        );
+
+        if (!repeated) selected.push(exercise);
+        if (selected.length === 10) break;
+      }
+
+      return selected;
+    }
+
+    function createExamTabAndSection() {
+      const tabs = document.querySelector(".tabs");
+
+      const examTab = document.createElement("button");
+      examTab.className = "tab";
+      examTab.dataset.tab = "exam";
+      examTab.textContent = "🏆 Exam Mode";
+      tabs.appendChild(examTab);
+
+      const examSection = document.createElement("section");
+      examSection.id = "exam";
+      examSection.className = "tab-section hidden";
+
+      examSection.innerHTML = `
+        <div class="toolbar">
+          <select id="examCategory"></select>
+          <div class="button-group">
+            <button id="examStart" class="primary">Start 10-question challenge</button>
+            <button id="examRestart">Restart challenge</button>
+          </div>
+        </div>
+
+        <div class="card" id="examIntro">
+          <span class="badge badge-orange">Exam Mode</span>
+          <h2 style="color:var(--navy); margin-bottom:8px;">10-question challenge</h2>
+          <p class="muted">
+            This mode works like a mini FCE Part 4 sprint. You will complete 10 written transformations.
+            Each answer must include the key word and contain between 2 and 5 words.
+          </p>
+          <div class="box">
+            <strong>Recommended classroom use:</strong> revise first in Study Mode, warm up with Multiple Choice,
+            and then complete Exam Mode individually.
+          </div>
+        </div>
+
+        <div class="card hidden" id="examCard">
+          <div class="toolbar">
+            <span id="examType" class="badge badge-blue"></span>
+            <span id="examScore" class="pill"></span>
+            <span id="examWords" class="pill">Words: 0/2–5</span>
+          </div>
+
+          <div class="progress-wrap">
+            <div id="examProgress" class="progress-bar"></div>
+          </div>
+
+          <p class="muted"><strong>First sentence</strong></p>
+          <div id="examFirst" class="question"></div>
+
+          <p class="muted"><strong>Complete the second sentence</strong></p>
+          <div id="examSecond" class="box"></div>
+
+          <p><span id="examKey" class="badge badge-orange"></span></p>
+
+          <div class="answer-row">
+            <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+            <button id="examCheck" class="primary">Check</button>
+            <button id="examNext" disabled>Next</button>
+          </div>
+
+          <div id="examFeedback" class="box hidden"></div>
+        </div>
+
+        <div class="card hidden" id="examResult"></div>
+      `;
+
+      document.querySelector("main.page").insertBefore(
+        examSection,
+        document.querySelector("footer.footer")
+      );
+
+      examTab.addEventListener("click", () => {
+        document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+        document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+        document.getElementById("exam").classList.remove("hidden");
+        examTab.classList.add("active");
+      });
+    }
+
+    function populateExamCategory() {
+      const select = document.getElementById("examCategory");
+      select.innerHTML = categories
+        .map(category => `<option value="${category}">${category}</option>`)
+        .join("");
+
+      select.addEventListener("change", event => {
+        examState.category = event.target.value;
+        resetExam();
+      });
+    }
+
+    function startExam() {
+      examState.questions = buildExamQuestions();
+      examState.index = 0;
+      examState.score = 0;
+      examState.checked = false;
+      examState.answers = [];
+
+      document.getElementById("examIntro").classList.add("hidden");
+      document.getElementById("examResult").classList.add("hidden");
+      document.getElementById("examCard").classList.remove("hidden");
+
+      document.getElementById("examInput").value = "";
+      document.getElementById("examInput").disabled = false;
+      document.getElementById("examFeedback").classList.add("hidden");
+      document.getElementById("examNext").disabled = true;
+      document.getElementById("examCheck").disabled = false;
+
+      renderExam();
+
+      setTimeout(() => document.getElementById("examInput").focus(), 100);
+    }
+
+    function resetExam() {
+      examState.questions = [];
+      examState.index = 0;
+      examState.score = 0;
+      examState.checked = false;
+      examState.answers = [];
+
+      document.getElementById("examIntro").classList.remove("hidden");
+      document.getElementById("examCard").classList.add("hidden");
+      document.getElementById("examResult").classList.add("hidden");
+      document.getElementById("examFeedback").classList.add("hidden");
+      document.getElementById("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = examState.questions.length;
+      const q = examState.questions[examState.index];
+
+      if (!q || total === 0) {
+        document.getElementById("examIntro").classList.remove("hidden");
+        document.getElementById("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = document.getElementById("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (examState.index / total) * 100;
+
+      document.getElementById("examProgress").style.width = `${progress}%`;
+      document.getElementById("examType").textContent = `${q.type} · Question ${examState.index + 1}/${total}`;
+      document.getElementById("examScore").textContent = `Score: ${examState.score}/${examState.index}`;
+      document.getElementById("examWords").textContent = `Words: ${words}/2–5`;
+      document.getElementById("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      document.getElementById("examFirst").textContent = q.original;
+      document.getElementById("examSecond").textContent = q.second;
+      document.getElementById("examKey").textContent = `Key word: ${q.key}`;
+
+      document.getElementById("examCheck").disabled = examState.checked;
+      document.getElementById("examInput").disabled = examState.checked;
+      document.getElementById("examNext").disabled = !examState.checked;
+      document.getElementById("examNext").textContent =
+        examState.index === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (examState.checked) return;
+
+      const q = examState.questions[examState.index];
+      const input = document.getElementById("examInput").value;
+      const correct = examIsCorrect(input, q);
+
+      examState.checked = true;
+
+      if (correct) examState.score++;
+
+      examState.answers.push({
+        number: examState.index + 1,
+        expression: q.expression,
+        correct,
+        userAnswer: input,
+        accepted: examAcceptedText(q)
+      });
+
+      const feedback = document.getElementById("examFeedback");
+      feedback.className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      feedback.innerHTML = `
+        <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${examAcceptedText(q)}</strong></p>
+        <p>${q.note || ""}</p>
+        <p class="muted"><strong>Target expression:</strong> ${q.expression}</p>
+      `;
+      feedback.classList.remove("hidden");
+
+      renderExam();
+    }
+
+    function nextExamQuestion() {
+      if (!examState.checked) return;
+
+      if (examState.index >= examState.questions.length - 1) {
+        finishExam();
+        return;
+      }
+
+      examState.index++;
+      examState.checked = false;
+
+      document.getElementById("examInput").value = "";
+      document.getElementById("examInput").disabled = false;
+      document.getElementById("examFeedback").classList.add("hidden");
+      document.getElementById("examNext").disabled = true;
+      document.getElementById("examCheck").disabled = false;
+
+      renderExam();
+
+      setTimeout(() => document.getElementById("examInput").focus(), 100);
+    }
+
+    function finishExam() {
+      const total = examState.questions.length;
+      const score = examState.score;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
+
+      let message = "";
+
+      if (score >= 9) {
+        message = "Excellent exam control. You are using the structures with strong accuracy.";
+      } else if (score >= 7) {
+        message = "Good result. Keep practising accuracy and exact wording.";
+      } else if (score >= 5) {
+        message = "You understand several patterns, but you need more controlled practice.";
+      } else {
+        message = "Revise Study Mode and Multiple Choice before trying Exam Mode again.";
+      }
+
+      const review = examState.answers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.expression}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("examCard").classList.add("hidden");
+      document.getElementById("examResult").classList.remove("hidden");
+
+      document.getElementById("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="exam-review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Target</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart challenge</button>
+        </div>
+      `;
+
+      document.getElementById("examAgain").addEventListener("click", startExam);
+    }
+
+    createExamTabAndSection();
+    populateExamCategory();
+
+    document.getElementById("examStart").addEventListener("click", startExam);
+    document.getElementById("examRestart").addEventListener("click", startExam);
+    document.getElementById("examCheck").addEventListener("click", checkExamAnswer);
+    document.getElementById("examNext").addEventListener("click", nextExamQuestion);
+
+    document.getElementById("examInput").addEventListener("input", renderExam);
+
+    document.getElementById("examInput").addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        if (!examState.checked) checkExamAnswer();
+        else nextExamQuestion();
+      }
+    });
+  })();
+</script> 
 </body>
 </html>
