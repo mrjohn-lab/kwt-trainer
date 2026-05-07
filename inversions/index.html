@@ -1,1 +1,2062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block 5 · Mr John’s KWT Lab</title>
+  <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
 
+  <style>
+    :root {
+      --navy: #062b63;
+      --blue: #005eb8;
+      --light-blue: #eaf3ff;
+      --orange: #f28c00;
+      --orange-soft: #fff3df;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d9e2ef;
+      --white: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 94, 184, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 0, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 46px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 0 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand img {
+      height: auto;
+      width: 260px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .home-link {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(6, 43, 99, 0.06);
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--orange-soft);
+      color: #9a5700;
+      border: 1px solid rgba(242, 140, 0, 0.25);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -1.4px;
+    }
+
+    .highlight { color: var(--orange); }
+
+    .hero p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 900px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    button,
+    .tab {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
+
+    button:hover,
+    .tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab.active,
+    .primary {
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      border-color: transparent;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    select,
+    input {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+    }
+
+    select { min-width: 260px; }
+    input { width: 100%; }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hidden { display: none !important; }
+
+    .badge,
+    .pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .badge-blue {
+      background: var(--light-blue);
+      color: var(--blue);
+      border-color: rgba(0, 94, 184, 0.18);
+    }
+
+    .badge-orange {
+      background: var(--orange-soft);
+      color: #9a5700;
+      border-color: rgba(242, 140, 0, 0.25);
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bbf7d0;
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: #fecaca;
+    }
+
+    .muted { color: var(--muted); }
+
+    .study-card {
+      min-height: 460px;
+    }
+
+    .study-card h2 {
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+      margin: 12px 0 12px;
+    }
+
+    .study-card h3 {
+      color: var(--navy);
+      margin: 18px 0 8px;
+      font-size: 21px;
+    }
+
+    .study-card p,
+    .study-card li {
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .study-mini {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .study-mini strong {
+      color: var(--navy);
+    }
+
+    .formula {
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--navy);
+      border: 1px solid rgba(0, 94, 184, 0.18);
+      border-radius: 10px;
+      padding: 3px 7px;
+      font-weight: 900;
+      margin: 2px 0;
+    }
+
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      border-color: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      text-align: left;
+      min-height: 58px;
+    }
+
+    .option.good {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: #14532d;
+    }
+
+    .option.bad {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: #7f1d1d;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+
+    .result-number {
+      color: var(--navy);
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin: 8px 0;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 760px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brand img {
+        width: 220px;
+        height: auto;
+      }
+
+      .tabs,
+      .answer-row,
+      .option-grid,
+      .study-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding: 26px 20px; }
+      select { width: 100%; min-width: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
+        <div>
+          <span class="brand-title">Mr John’s KWT Lab</span>
+          <span class="brand-subtitle">Block 5 · Inversions</span>
+        </div>
+      </div>
+
+      <a class="home-link" href="../index.html">← Back to Lab Home</a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
+      <h1>Inversions <span class="highlight">Transformation</span> Trainer</h1>
+      <p>
+        Practise B2 First Part 4 transformations with inversion structures: negative adverbials,
+        No sooner / Hardly / Scarcely, conditional inversions, Not only... but also,
+        and common exam traps with auxiliary verb order.
+      </p>
+      <div class="stats">
+        <span class="pill">Core patterns</span>
+        <span class="pill">NEVER / RARELY / SELDOM</span>
+        <span class="pill">NO SOONER / HARDLY</span>
+        <span class="pill">SHOULD / WERE / HAD</span>
+        <span class="pill">NOT ONLY</span>
+        <span class="pill">AUXILIARY + SUBJECT</span>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="study">🧠 Study Mode</button>
+      <button class="tab" data-tab="multiple">✓ Multiple Choice</button>
+      <button class="tab" data-tab="transform">✎ Transformations</button>
+      <button class="tab" data-tab="exam">🏆 Exam Mode</button>
+    </nav>
+
+    <section id="study" class="tab-section">
+      <div class="toolbar">
+        <select id="studySection"></select>
+        <div class="button-group">
+          <button id="studyPrev">Previous</button>
+          <button id="studyNext" class="primary">Next</button>
+        </div>
+      </div>
+
+      <div id="studyCard" class="card study-card"></div>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
+    </section>
+
+    <section id="multiple" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="mcCategory"></select>
+        <div class="button-group">
+          <button id="mcNew">New question</button>
+          <button id="mcReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="mcType" class="badge badge-blue"></span>
+          <span id="mcScore" class="pill"></span>
+        </div>
+
+        <div id="mcQuestion" class="question"></div>
+        <div id="mcOptions" class="option-grid"></div>
+        <div id="mcFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="transform" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="trCategory"></select>
+        <div class="button-group">
+          <button id="trHint">Hint</button>
+          <button id="trNew">New exercise</button>
+          <button id="trReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="trType" class="badge badge-blue"></span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
+          <span id="trScore" class="pill"></span>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="trFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="trSecond" class="box"></div>
+
+        <p><span id="trKey" class="badge badge-orange"></span></p>
+
+        <div id="trHintBox" class="box hidden"></div>
+
+        <div class="answer-row">
+          <input id="trInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="trCheck" class="primary">Check</button>
+          <button id="trReveal">Reveal</button>
+        </div>
+
+        <div id="trFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="exam" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="examCategory"></select>
+        <div class="button-group">
+          <button id="examStart" class="primary">Start 10-question challenge</button>
+          <button id="examRestart">Restart challenge</button>
+        </div>
+      </div>
+
+      <div class="card" id="examIntro">
+        <span class="badge badge-orange">Exam Mode</span>
+        <h2 style="color:var(--navy); margin-bottom:8px;">10-question challenge</h2>
+        <p class="muted">
+          Complete 10 written Key Word Transformations. Each answer must contain between
+          two and five words and include the key word exactly as given.
+        </p>
+        <div class="box">
+          <strong>Recommended classroom use:</strong> revise the Study Mode theory first, then
+          practise each category separately before attempting Mixed Exam Decisions.
+        </div>
+      </div>
+
+      <div class="card hidden" id="examCard">
+        <div class="toolbar">
+          <span id="examType" class="badge badge-blue"></span>
+          <span id="examScore" class="pill"></span>
+          <span id="examWords" class="pill">Words: 0/2–5</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="examProgress" class="progress-bar"></div>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="examFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="examSecond" class="box"></div>
+
+        <p><span id="examKey" class="badge badge-orange"></span></p>
+
+        <div class="answer-row">
+          <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="examCheck" class="primary">Check</button>
+          <button id="examNext" disabled>Next</button>
+        </div>
+
+        <div id="examFeedback" class="box hidden"></div>
+      </div>
+
+      <div class="card hidden" id="examResult"></div>
+    </section>
+
+    <footer class="footer">
+      <span><strong>Mr John’s KWT Lab</strong> · Block 5 · v1.0</span>
+      <span>Inversions · FCE Part 4 focused practice</span>
+    </footer>
+  </main>
+
+  <script>
+    const categories = [
+      "All categories",
+      "Negative adverbials",
+      "Only / Not until / Not since",
+      "No sooner / Hardly / Scarcely",
+      "Conditional inversions",
+      "Not only... but also",
+      "So / Such inversion",
+      "Mixed exam decisions",
+      "Cambridge traps"
+    ];
+
+    const studySections = [
+      {
+        title: "1. What is an inversion?",
+        badge: "Inversions · Foundation",
+        html: `
+          <p>In normal English word order, we usually place the subject before the verb.</p>
+
+          <div class="box">
+            <strong>Normal order:</strong><br>
+            She rarely goes out.<br><br>
+            <strong>Inversion:</strong><br>
+            Rarely does she go out.
+          </div>
+
+          <p>In formal English and in exam transformations, some expressions force the auxiliary verb to move before the subject.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Normal order</strong>
+              <p><span class="formula">Subject + verb</span></p>
+              <p>She rarely goes out.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Inverted order</strong>
+              <p><span class="formula">Auxiliary + subject + main verb</span></p>
+              <p>Rarely <strong>does she go</strong> out.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 rule:</strong><br>
+            Inversion is not just decoration. It is a fixed grammar pattern after certain negative or restrictive expressions.
+          </div>
+        `
+      },
+      {
+        title: "2. Negative adverbials",
+        badge: "Inversions · Negative Adverbials",
+        html: `
+          <p>When negative or restrictive adverbials begin the sentence, inversion is normally required.</p>
+
+          <h3>Common expressions</h3>
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Frequency / experience</strong>
+              <p>Never<br>Rarely<br>Seldom<br>Hardly ever</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Limitation / restriction</strong>
+              <p>Little<br>At no time<br>In no way<br>Under no circumstances</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Examples:</strong><br>
+            I have never seen such talent.<br>
+            → <strong>Never have I seen</strong> such talent.<br><br>
+            They rarely eat out on weekdays.<br>
+            → <strong>Rarely do they eat</strong> out on weekdays.
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            If there is no auxiliary verb, use <strong>do / does / did</strong>.<br><br>
+            She rarely makes mistakes.<br>
+            → Rarely <strong>does she make</strong> mistakes.
+          </div>
+        `
+      },
+      {
+        title: "3. Only / Not until / Not since",
+        badge: "Inversions · Restrictive Openings",
+        html: `
+          <p>Expressions with <strong>Only</strong>, <strong>Not until</strong> and <strong>Not since</strong> often trigger inversion, but the inversion usually appears in the main clause.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Only when</strong>
+              <p>Only when she arrived <strong>did we start</strong>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Only after</strong>
+              <p>Only after the film ended <strong>did I understand</strong> the title.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Not until</strong>
+              <p>Not until I got home <strong>did I realise</strong> my mistake.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Not since</strong>
+              <p>Not since I was ten <strong>have I enjoyed</strong> a holiday so much.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Important:</strong><br>
+            Do not invert the time clause after <em>only when</em> or <em>not until</em>.<br><br>
+            ✅ Not until I arrived <strong>did I realise</strong> the problem.<br>
+            ❌ Not until did I arrive I realised the problem.
+          </div>
+        `
+      },
+      {
+        title: "4. No sooner / Hardly / Scarcely",
+        badge: "Inversions · Immediate Succession",
+        html: `
+          <p>These structures describe two events happening immediately one after another.</p>
+
+          <div class="box">
+            <strong>Normal meaning:</strong><br>
+            As soon as she left, the phone rang.<br><br>
+            <strong>Inversion:</strong><br>
+            No sooner <strong>had she left</strong> than the phone rang.
+          </div>
+
+          <h3>Main patterns</h3>
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>No sooner... than</strong>
+              <p><span class="formula">No sooner had + subject + past participle + than + past simple</span></p>
+              <p>No sooner had we arrived than it started raining.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Hardly / Scarcely... when</strong>
+              <p><span class="formula">Hardly had + subject + past participle + when + past simple</span></p>
+              <p>Hardly had I sat down when the bell rang.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            ✅ No sooner <strong>had he sat</strong> down <strong>than</strong> the phone rang.<br>
+            ❌ No sooner he had sat down when the phone rang.
+          </div>
+        `
+      },
+      {
+        title: "5. Conditional inversions",
+        badge: "Inversions · Conditionals",
+        html: `
+          <p>In formal English, <strong>if</strong> can be removed and replaced by inversion.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Type 1 / future possibility</strong>
+              <p>If you need help, call me.</p>
+              <p><strong>Should you need</strong> help, call me.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Type 2 / hypothetical present</strong>
+              <p>If I were you, I would apologise.</p>
+              <p><strong>Were I you</strong>, I would apologise.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Type 3 / hypothetical past</strong>
+              <p>If they had checked the map, they wouldn’t have got lost.</p>
+              <p><strong>Had they checked</strong> the map, they wouldn’t have got lost.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Formal structure</strong>
+              <p>Drop <strong>if</strong>.</p>
+              <p>Move <strong>should / were / had</strong> before the subject.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 tip:</strong><br>
+            If the key word is <strong>SHOULD</strong>, <strong>WERE</strong> or <strong>HAD</strong>, check whether an inverted conditional is expected.
+          </div>
+        `
+      },
+      {
+        title: "6. Not only... but also",
+        badge: "Inversions · Not Only",
+        html: `
+          <p>When <strong>Not only</strong> starts the sentence, the first clause is inverted. The second clause is not normally inverted.</p>
+
+          <div class="box">
+            <strong>Normal:</strong><br>
+            She sings beautifully and plays the violin.<br><br>
+            <strong>Inversion:</strong><br>
+            Not only <strong>does she sing</strong> beautifully, but she also plays the violin.
+          </div>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>With be</strong>
+              <p>He is helpful and kind.</p>
+              <p>Not only <strong>is he</strong> helpful, but he is also kind.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>With lexical verbs</strong>
+              <p>She sings and dances.</p>
+              <p>Not only <strong>does she sing</strong>, but she also dances.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Past simple</strong>
+              <p>They arrived late and complained.</p>
+              <p>Not only <strong>did they arrive</strong> late, but they also complained.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Auxiliary already present</strong>
+              <p>They have helped and donated money.</p>
+              <p>Not only <strong>have they helped</strong>, but they have also donated money.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            ✅ Not only <strong>does she sing</strong> well, but she also dances beautifully.<br>
+            ❌ Not only she sings well, but she also dances beautifully.
+          </div>
+        `
+      },
+      {
+        title: "7. So / Such inversion",
+        badge: "Inversions · So / Such",
+        html: `
+          <p>Some emphatic result structures also use inversion, especially with <strong>So + adjective</strong> and <strong>Such + be + noun</strong>.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>So + adjective</strong>
+              <p>The demand was so high that...</p>
+              <p><strong>So high was the demand</strong> that...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>So + adjective + auxiliary</strong>
+              <p>The demand has been so high that...</p>
+              <p><strong>So high has the demand been</strong> that...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Such + be + noun</strong>
+              <p>The demands of the job are such that...</p>
+              <p><strong>Such are the demands</strong> of the job that...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Exam use</strong>
+              <p>This pattern is less frequent than negative adverbials, but it appears in advanced KWT practice.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            ✅ So high <strong>was the price</strong> that nobody bought it.<br>
+            ✅ So high <strong>has demand been</strong> that extra dates were added.
+          </div>
+        `
+      },
+      {
+        title: "8. Common FCE traps",
+        badge: "Exam Accuracy · Traps",
+        html: `
+          <p>Most mistakes in inversion tasks come from word order, missing auxiliaries or wrong connectors.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>No auxiliary</strong>
+              <p>❌ Rarely she goes out.</p>
+              <p>✅ Rarely <strong>does she go</strong> out.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>No sooner</strong>
+              <p>❌ No sooner he had left when...</p>
+              <p>✅ No sooner <strong>had he left than</strong>...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Hardly / Scarcely</strong>
+              <p>❌ Hardly had we arrived than...</p>
+              <p>✅ Hardly <strong>had we arrived when</strong>...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Not only</strong>
+              <p>❌ Not only she sings...</p>
+              <p>✅ Not only <strong>does she sing</strong>...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Conditional inversion</strong>
+              <p>❌ Had I would known...</p>
+              <p>✅ Had I known...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Not until</strong>
+              <p>❌ Not until did I arrive I realised...</p>
+              <p>✅ Not until I arrived <strong>did I realise</strong>...</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Final FCE reminder:</strong><br>
+            After the opening expression, ask yourself: <strong>Do I need auxiliary + subject?</strong><br>
+            Never forget the 2–5 word limit and the exact key word.
+          </div>
+        `
+      }
+    ];
+
+    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "") {
+      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note };
+    }
+
+    const pools = {
+      negativeAdverbials: [
+        {
+          opening: "Never",
+          key: "NEVER",
+          original: "I have never heard such a strange excuse.",
+          second: "______ such a strange excuse.",
+          answer: "never have I heard",
+          trap: "Never I have heard",
+          note: "With an existing auxiliary, place the auxiliary before the subject."
+        },
+        {
+          opening: "Never",
+          key: "NEVER",
+          original: "She has never felt so embarrassed.",
+          second: "______ so embarrassed.",
+          answer: "never has she felt",
+          trap: "Never she has felt",
+          note: "Present perfect: never has she felt."
+        },
+        {
+          opening: "Rarely",
+          key: "RARELY",
+          original: "They rarely go out during the week.",
+          second: "______ during the week.",
+          answer: "rarely do they go out",
+          trap: "Rarely they go out",
+          note: "No auxiliary in the original, so use do."
+        },
+        {
+          opening: "Rarely",
+          key: "RARELY",
+          original: "He rarely makes mistakes in exams.",
+          second: "______ in exams.",
+          answer: "rarely does he make mistakes",
+          trap: "Rarely he makes mistakes",
+          note: "Third person singular: does he make, not does he makes."
+        },
+        {
+          opening: "Seldom",
+          key: "SELDOM",
+          original: "We had seldom seen such beautiful scenery.",
+          second: "______ such beautiful scenery.",
+          answer: "seldom had we seen",
+          trap: "Seldom we had seen",
+          note: "Past perfect: had we seen."
+        },
+        {
+          opening: "Little",
+          key: "LITTLE",
+          original: "He little expected that his plan would fail.",
+          second: "______ that his plan would fail.",
+          answer: "little did he expect",
+          trap: "Little he expected",
+          note: "Little at the beginning requires inversion with did."
+        },
+        {
+          opening: "At no time",
+          key: "TIME",
+          original: "The witness did not mention the suspect's name at any time.",
+          second: "At no ______ the suspect's name.",
+          answer: "time did the witness mention",
+          trap: "time the witness mentioned",
+          note: "At no time + auxiliary + subject + verb."
+        },
+        {
+          opening: "Under no circumstances",
+          key: "NO",
+          original: "You must not open this door under any circumstances.",
+          second: "Under ______ open this door.",
+          answer: "no circumstances must you",
+          trap: "no circumstances you must",
+          note: "Under no circumstances + modal + subject."
+        },
+        {
+          opening: "In no way",
+          key: "WAY",
+          original: "I never intended to question your honesty in any way.",
+          second: "In no ______ to question your honesty.",
+          answer: "way did I intend",
+          trap: "way I intended",
+          note: "In no way + did + subject + base verb."
+        }
+      ],
+
+      onlyNotUntil: [
+        {
+          type: "Only / Not until / Not since",
+          expression: "Not until + time clause + auxiliary + subject",
+          original: "I didn't realise my mistake until I got home.",
+          second: "Not until I got home ______ my mistake.",
+          answer: "did I realise",
+          key: "DID",
+          note: "The time clause is not inverted. The main clause is inverted."
+        },
+        {
+          type: "Only / Not until / Not since",
+          expression: "Only when + clause + auxiliary + subject",
+          original: "We started eating only when Laura arrived.",
+          second: "Only when Laura arrived ______ eating.",
+          answer: "did we start",
+          key: "DID",
+          note: "Only when triggers inversion in the main clause."
+        },
+        {
+          type: "Only / Not until / Not since",
+          expression: "Only after + clause + auxiliary + subject",
+          original: "He understood the instructions only after I explained them twice.",
+          second: "Only after I explained them twice ______ the instructions.",
+          answer: "did he understand",
+          key: "DID",
+          note: "Past simple needs did + subject + base verb."
+        },
+        {
+          type: "Only / Not until / Not since",
+          expression: "Not since + time + auxiliary + subject",
+          original: "I haven't enjoyed a concert so much since I was a child.",
+          second: "Not since I was a child ______ a concert so much.",
+          answer: "have I enjoyed",
+          key: "SINCE",
+          note: "Not since often works with present perfect inversion."
+        },
+        {
+          type: "Only / Not until / Not since",
+          expression: "Not until + perfect clause + did + subject",
+          original: "I didn't realise I had forgotten my passport until I arrived at the airport.",
+          second: "Not until I had arrived at the airport ______ I had forgotten my passport.",
+          answer: "did I realise",
+          key: "DID",
+          note: "The inversion appears in the main clause: did I realise."
+        }
+      ],
+
+      succession: [
+        {
+          type: "No sooner / Hardly / Scarcely",
+          expression: "No sooner had + subject + past participle + than",
+          original: "As soon as I got home, the phone rang.",
+          second: "No sooner ______ the phone rang.",
+          answer: "had I got home than",
+          key: "SOONER",
+          note: "No sooner uses had + subject + past participle + than."
+        },
+        {
+          type: "No sooner / Hardly / Scarcely",
+          expression: "No sooner had + subject + past participle + than",
+          original: "They left the house and it immediately started raining.",
+          second: "No sooner ______ it started raining.",
+          answer: "had they left than",
+          key: "SOONER",
+          note: "Use than after No sooner."
+        },
+        {
+          type: "No sooner / Hardly / Scarcely",
+          expression: "Hardly had + subject + past participle + when",
+          original: "We had just sat down when the bell rang.",
+          second: "Hardly ______ the bell rang.",
+          answer: "had we sat down when",
+          key: "HARDLY",
+          note: "Use when after Hardly."
+        },
+        {
+          type: "No sooner / Hardly / Scarcely",
+          expression: "Scarcely had + subject + past participle + when",
+          original: "He had just finished the test when the alarm went off.",
+          second: "Scarcely ______ the alarm went off.",
+          answer: "had he finished when",
+          key: "SCARCELY",
+          note: "Scarcely works like Hardly: scarcely had... when."
+        },
+        {
+          type: "No sooner / Hardly / Scarcely",
+          expression: "Barely had + subject + past participle + when",
+          original: "I had only just closed my eyes when the baby woke up.",
+          second: "Barely ______ the baby woke up.",
+          answer: "had I closed my eyes when",
+          key: "BARELY",
+          note: "Barely can also introduce this immediate succession pattern."
+        },
+        {
+          type: "No sooner / Hardly / Scarcely",
+          expression: "No sooner had + subject + past participle + than",
+          original: "I had just made a complaint when the timetable was changed.",
+          second: "No sooner ______ the timetable was changed.",
+          answer: "had I made a complaint than",
+          key: "SOONER",
+          note: "No sooner pairs with than."
+        }
+      ],
+
+      conditionals: [
+        {
+          type: "Conditional inversions",
+          expression: "If + subject + should → Should + subject + verb",
+          original: "If you need further information, contact reception.",
+          second: "______ further information, contact reception.",
+          answer: "should you need",
+          key: "SHOULD",
+          note: "Type 1 formal inversion: Should you need..."
+        },
+        {
+          type: "Conditional inversions",
+          expression: "If + subject + should → Should + subject + verb",
+          original: "If an emergency arises, press the red button.",
+          second: "______ , press the red button.",
+          answer: "should an emergency arise",
+          key: "SHOULD",
+          note: "Should + subject + base verb."
+        },
+        {
+          type: "Conditional inversions",
+          expression: "If I were you → Were I you",
+          original: "If I were you, I would apologise immediately.",
+          second: "______ , I would apologise immediately.",
+          answer: "were I you",
+          key: "WERE",
+          note: "Fixed formal pattern: Were I you..."
+        },
+        {
+          type: "Conditional inversions",
+          expression: "If + subject + were → Were + subject",
+          original: "If she were my teacher, I would feel lucky.",
+          second: "______ , I would feel lucky.",
+          answer: "were she my teacher",
+          key: "WERE",
+          note: "Type 2 formal inversion."
+        },
+        {
+          type: "Conditional inversions",
+          expression: "If + subject + had + past participle → Had + subject + past participle",
+          original: "If he had trained harder, he could have won.",
+          second: "______ , he could have won.",
+          answer: "had he trained harder",
+          key: "HAD",
+          note: "Type 3 inversion: Had + subject + past participle."
+        },
+        {
+          type: "Conditional inversions",
+          expression: "If + subject + had + past participle → Had + subject + past participle",
+          original: "If they had checked the documents, the mistake would not have happened.",
+          second: "______ , the mistake would not have happened.",
+          answer: "had they checked the documents",
+          key: "HAD",
+          note: "Do not use if in the inverted version."
+        }
+      ],
+
+      notOnly: [
+        {
+          type: "Not only... but also",
+          expression: "Not only + be + subject",
+          original: "He is helpful and he is kind too.",
+          second: "Not only ______ , but he is also kind.",
+          answer: "is he helpful",
+          key: "ONLY",
+          note: "With be, invert be and subject."
+        },
+        {
+          type: "Not only... but also",
+          expression: "Not only + do/does + subject + verb",
+          original: "She sings beautifully and plays the violin.",
+          second: "Not only ______ beautifully, but she also plays the violin.",
+          answer: "does she sing",
+          key: "ONLY",
+          note: "No auxiliary in original, so use does."
+        },
+        {
+          type: "Not only... but also",
+          expression: "Not only + does + subject + verb",
+          original: "The hotel has a pool and a full gym.",
+          second: "Not only ______ a pool, but it also has a full gym.",
+          answer: "does the hotel have",
+          key: "ONLY",
+          note: "Main verb have needs do-support here."
+        },
+        {
+          type: "Not only... but also",
+          expression: "Not only + did + subject + verb",
+          original: "They arrived late and did not apologise.",
+          second: "Not only ______ late, but they also did not apologise.",
+          answer: "did they arrive",
+          key: "ONLY",
+          note: "Past simple needs did + subject + base verb."
+        },
+        {
+          type: "Not only... but also",
+          expression: "Not only + was/were + subject",
+          original: "The film was boring and far too long.",
+          second: "Not only ______ boring, but it was also far too long.",
+          answer: "was the film",
+          key: "ONLY",
+          note: "Only the first clause is inverted."
+        },
+        {
+          type: "Not only... but also",
+          expression: "Not only + have/has + subject + past participle",
+          original: "They have improved the website and reduced the price.",
+          second: "Not only ______ the website, but they have also reduced the price.",
+          answer: "have they improved",
+          key: "ONLY",
+          note: "Existing auxiliary have moves before the subject."
+        }
+      ],
+
+      soSuch: [
+        {
+          type: "So / Such inversion",
+          expression: "So + adjective + be + subject + that",
+          original: "The price was so high that nobody bought the tickets.",
+          second: "So ______ that nobody bought the tickets.",
+          answer: "high was the price",
+          key: "SO",
+          note: "So + adjective + be + subject."
+        },
+        {
+          type: "So / Such inversion",
+          expression: "So + adjective + auxiliary + subject + been + that",
+          original: "The demand has been so high that extra dates were added.",
+          second: "So ______ that extra dates were added.",
+          answer: "high has the demand been",
+          key: "HAS",
+          note: "With present perfect, the auxiliary has moves before the subject."
+        },
+        {
+          type: "So / Such inversion",
+          expression: "Such + be + noun phrase + that",
+          original: "The demands of her job are such that she rarely takes a holiday.",
+          second: "Such ______ that she rarely takes a holiday.",
+          answer: "are the demands of",
+          key: "SUCH",
+          note: "Such are the demands of her job that..."
+        },
+        {
+          type: "So / Such inversion",
+          expression: "So + adjective + was + subject + that",
+          original: "The explanation was so confusing that nobody understood it.",
+          second: "So ______ that nobody understood it.",
+          answer: "confusing was the explanation",
+          key: "SO",
+          note: "So confusing was the explanation that..."
+        }
+      ]
+    };
+
+    function makeVariants(answer) {
+      return [...new Set([answer])];
+    }
+
+    function itemFromPool(row) {
+      return item(
+        row.type || "Negative adverbials",
+        row.expression || "Inversion after negative or restrictive expression",
+        row.meaning || "Move the auxiliary before the subject after the opening expression.",
+        row.original,
+        row.second,
+        makeVariants(row.answer),
+        [row.key],
+        makeDistractors(row.answer, row.trap),
+        row.note || "Inversion usually means auxiliary + subject + main verb."
+      );
+    }
+
+    function makeDistractors(answer, trap = "") {
+      const a = answer;
+      const list = [
+        trap,
+        a.replace(/^(never|rarely|seldom|little)\s/i, ""),
+        a.replace(/\bdid\b/i, "").replace(/\bdoes\b/i, "").replace(/\bdo\b/i, ""),
+        a.replace(/\bhad\b/i, ""),
+        a.replace(/\bthan\b/i, "when"),
+        a.replace(/\bwhen\b/i, "than"),
+        a.replace(/\bdoes she\b/i, "she does"),
+        a.replace(/\bdid they\b/i, "they did"),
+        a.replace(/\bdid I\b/i, "I did"),
+        a.replace(/\bhave I\b/i, "I have"),
+        a.replace(/\bhas she\b/i, "she has"),
+        a.replace(/\bhad we\b/i, "we had"),
+        a.replace(/\bis he\b/i, "he is"),
+        a.replace(/\bwas the\b/i, "the was")
+      ];
+
+      return [...new Set(list)]
+        .map(x => String(x || "").trim())
+        .filter(x => x && wordCount(x) >= 2 && wordCount(x) <= 5 && normalise(x) !== normalise(answer))
+        .slice(0, 6);
+    }
+
+    function fromNegativeAdverbials() {
+      return itemFromPool(pick(pools.negativeAdverbials));
+    }
+
+    function fromOnlyNotUntil() {
+      return itemFromPool(pick(pools.onlyNotUntil));
+    }
+
+    function fromSuccession() {
+      return itemFromPool(pick(pools.succession));
+    }
+
+    function fromConditionals() {
+      return itemFromPool(pick(pools.conditionals));
+    }
+
+    function fromNotOnly() {
+      return itemFromPool(pick(pools.notOnly));
+    }
+
+    function fromSoSuch() {
+      return itemFromPool(pick(pools.soSuch));
+    }
+
+    function trapNoAuxiliary() {
+      return item(
+        "Cambridge traps",
+        "Missing do-support after negative adverbial",
+        "If there is no auxiliary in the original sentence, use do / does / did.",
+        "She rarely makes mistakes in tests.",
+        "Rarely ______ in tests.",
+        ["does she make mistakes"],
+        ["RARELY"],
+        ["she makes mistakes", "she does make mistakes", "does she makes mistakes", "make she mistakes"],
+        "After rarely at the start, use does + subject + base verb."
+      );
+    }
+
+    function trapNoSoonerConnector() {
+      return item(
+        "Cambridge traps",
+        "No sooner pairs with than",
+        "No sooner uses had + subject + past participle + than.",
+        "He sat down and the telephone rang immediately.",
+        "No sooner ______ the telephone rang.",
+        ["had he sat down than"],
+        ["SOONER"],
+        ["he had sat down than", "had he sat down when", "had sat he down than", "he sat down when"],
+        "No sooner... than. Hardly/Scarcely... when."
+      );
+    }
+
+    function trapHardlyConnector() {
+      return item(
+        "Cambridge traps",
+        "Hardly pairs with when",
+        "Hardly uses had + subject + past participle + when.",
+        "We had just finished breakfast when they called us.",
+        "Hardly ______ they called us.",
+        ["had we finished breakfast when"],
+        ["HARDLY"],
+        ["we had finished breakfast when", "had we finished breakfast than", "had finished we breakfast when", "we finished breakfast when"],
+        "Hardly... when, not hardly... than."
+      );
+    }
+
+    function trapNotOnlyOrder() {
+      return item(
+        "Cambridge traps",
+        "Not only requires inversion in the first clause",
+        "After Not only at the beginning, invert the first clause only.",
+        "She sings well and dances beautifully.",
+        "Not only ______ well, but she also dances beautifully.",
+        ["does she sing"],
+        ["ONLY"],
+        ["she sings", "she does sing", "does she sings", "sings she"],
+        "Not only does she sing..., but she also..."
+      );
+    }
+
+    function trapConditionalHad() {
+      return item(
+        "Cambridge traps",
+        "Had + subject + past participle",
+        "In third conditional inversion, remove if and use Had + subject + past participle.",
+        "If I had known about the delay, I would have left later.",
+        "______ about the delay, I would have left later.",
+        ["had I known"],
+        ["HAD"],
+        ["had I would known", "I had known", "had known I", "if I had known"],
+        "Do not use if in the inverted conditional."
+      );
+    }
+
+    function trapNotUntil() {
+      return item(
+        "Cambridge traps",
+        "Not until: inversion in the main clause",
+        "The clause after Not until is not inverted; the main clause is inverted.",
+        "I didn't notice the error until I read the email again.",
+        "Not until I read the email again ______ the error.",
+        ["did I notice"],
+        ["DID"],
+        ["I noticed", "did notice I", "I did notice", "noticed I"],
+        "Not until + normal clause + did + subject + base verb."
+      );
+    }
+
+    const generators = {
+      "Negative adverbials": [fromNegativeAdverbials],
+      "Only / Not until / Not since": [fromOnlyNotUntil],
+      "No sooner / Hardly / Scarcely": [fromSuccession],
+      "Conditional inversions": [fromConditionals],
+      "Not only... but also": [fromNotOnly],
+      "So / Such inversion": [fromSoSuch],
+      "Cambridge traps": [trapNoAuxiliary, trapNoSoonerConnector, trapHardlyConnector, trapNotOnlyOrder, trapConditionalHad, trapNotUntil]
+    };
+
+    generators["Mixed exam decisions"] = [
+      fromNegativeAdverbials,
+      fromOnlyNotUntil,
+      fromSuccession,
+      fromConditionals,
+      fromNotOnly,
+      fromSoSuch,
+      trapNoAuxiliary,
+      trapNoSoonerConnector,
+      trapNotOnlyOrder,
+      trapConditionalHad
+    ];
+
+    const allPracticeGenerators = Object.entries(generators)
+      .filter(([category]) => category !== "Mixed exam decisions")
+      .flatMap(([, list]) => list);
+
+    const state = {
+      studyIndex: 0,
+      mcCategory: "All categories",
+      mcCurrent: null,
+      mcSelected: null,
+      mcScore: 0,
+      mcAttempts: 0,
+      mcRecent: [],
+      trCategory: "All categories",
+      trCurrent: null,
+      trChecked: false,
+      trScore: 0,
+      trAttempts: 0,
+      trRecent: [],
+      examCategory: "All categories",
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+      examChecked: false,
+      examAnswers: []
+    };
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function normalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/[.,!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function wordCount(text) {
+      const clean = normalise(text);
+      if (!clean) return 0;
+      return clean.split(" ").filter(Boolean).length;
+    }
+
+    function keyIsIncluded(answer, key) {
+      const answerWords = normalise(answer).split(" ");
+      const keyWords = normalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function getAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
+    }
+
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
+    }
+
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
+    }
+
+    function isValidExercise(exercise) {
+      const answers = getAcceptedAnswers(exercise);
+      return answers.length > 0 && answers.every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
+      });
+    }
+
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+      return (exercise.distractors || []).filter(option =>
+        wordCount(option) >= 2 &&
+        wordCount(option) <= 5 &&
+        !accepted.includes(normalise(option))
+      );
+    }
+
+    function signature(exercise) {
+      return normalise(`${exercise.original} ${exercise.second} ${primaryAnswer(exercise)}`);
+    }
+
+    function getGeneratorList(category) {
+      if (category === "All categories") return allPracticeGenerators;
+      if (category === "Mixed exam decisions") return generators["Mixed exam decisions"];
+      return generators[category] || allPracticeGenerators;
+    }
+
+    function generateExercise(category = "All categories", mode = "transform", recent = []) {
+      const generatorList = getGeneratorList(category);
+
+      for (let attempt = 0; attempt < 80; attempt++) {
+        const generator = pick(generatorList);
+        const exercise = generator();
+
+        const validKeys = shuffle(exercise.keyOptions || []).filter(key =>
+          getAcceptedAnswers(exercise).some(answer => keyIsIncluded(answer, key))
+        );
+
+        if (!validKeys.length) continue;
+
+        const selectedKey = pick(validKeys);
+        const accepted = getAcceptedAnswers(exercise).filter(answer => keyIsIncluded(answer, selectedKey));
+
+        const finalExercise = {
+          ...exercise,
+          key: selectedKey,
+          answers: accepted,
+          answer: accepted[0]
+        };
+
+        if (!isValidExercise(finalExercise)) continue;
+        if (mode === "multiple" && cleanDistractors(finalExercise).length < 3) continue;
+
+        const sig = signature(finalExercise);
+        if (recent.includes(sig) && attempt < 60) continue;
+
+        return finalExercise;
+      }
+
+      return fromNegativeAdverbials();
+    }
+
+    function remember(recentList, exercise) {
+      recentList.push(signature(exercise));
+      while (recentList.length > 18) recentList.shift();
+    }
+
+    function populatePracticeSelect(id, value) {
+      $(id).innerHTML = categories
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function populateStudySelect() {
+      $("studySection").innerHTML = studySections
+        .map((section, index) => `<option value="${index}" ${index === state.studyIndex ? "selected" : ""}>${section.title}</option>`)
+        .join("");
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+      document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+      $(tab).classList.remove("hidden");
+      document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
+    }
+
+    function renderStudy() {
+      const section = studySections[state.studyIndex];
+
+      $("studyCard").innerHTML = `
+        <span class="badge badge-blue">${section.badge}</span>
+        <h2>${section.title}</h2>
+        ${section.html}
+      `;
+
+      $("studyCounter").textContent = `Study section ${state.studyIndex + 1} of ${studySections.length}`;
+      $("studySection").value = String(state.studyIndex);
+    }
+
+    function newMcQuestion() {
+      const exercise = generateExercise(state.mcCategory, "multiple", state.mcRecent);
+      remember(state.mcRecent, exercise);
+
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
+
+      state.mcCurrent = { ...exercise, options };
+      state.mcSelected = null;
+      renderMc();
+    }
+
+    function renderMc() {
+      const q = state.mcCurrent;
+      $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
+
+      if (!q) {
+        $("mcType").textContent = "";
+        $("mcQuestion").textContent = "Click 'New question' to start.";
+        $("mcOptions").innerHTML = "";
+        $("mcFeedback").classList.add("hidden");
+        return;
+      }
+
+      $("mcType").textContent = `${q.type} · Generated transformation`;
+
+      $("mcQuestion").innerHTML = `
+        <p>${q.original}</p>
+        <div class="box">${q.second}</div>
+      `;
+
+      $("mcOptions").innerHTML = "";
+
+      q.options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+
+        if (state.mcSelected) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
+        }
+
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
+      });
+
+      if (state.mcSelected) {
+        const correct = isCorrectAnswer(state.mcSelected, q);
+        $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+        $("mcFeedback").innerHTML = `
+          <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
+          <p>${q.note || ""}</p>
+          <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+        `;
+      } else {
+        $("mcFeedback").classList.add("hidden");
+      }
+    }
+
+    function chooseMc(option) {
+      if (state.mcSelected) return;
+      state.mcSelected = option;
+      state.mcAttempts++;
+      if (isCorrectAnswer(option, state.mcCurrent)) state.mcScore++;
+      renderMc();
+    }
+
+    function newTransformation() {
+      state.trCurrent = generateExercise(state.trCategory, "transform", state.trRecent);
+      remember(state.trRecent, state.trCurrent);
+
+      state.trChecked = false;
+      $("trInput").value = "";
+      $("trFeedback").classList.add("hidden");
+      $("trHintBox").classList.add("hidden");
+      renderTransformation();
+    }
+
+    function renderTransformation() {
+      const q = state.trCurrent;
+      $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
+
+      if (!q) {
+        $("trType").textContent = "";
+        $("trFirst").textContent = "Click 'New exercise' to start.";
+        $("trSecond").textContent = "";
+        $("trKey").textContent = "";
+        return;
+      }
+
+      const input = $("trInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+
+      $("trType").textContent = `${q.type} · Generated transformation`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("trFirst").textContent = q.original;
+      $("trSecond").textContent = q.second;
+      $("trKey").textContent = `Key word: ${q.key}`;
+    }
+
+    function checkTransformation(reveal = false) {
+      if (!state.trCurrent || state.trChecked) return;
+
+      const input = $("trInput").value;
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
+
+      state.trChecked = true;
+      state.trAttempts++;
+      if (correct) state.trScore++;
+
+      $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("trFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
+        <p>${state.trCurrent.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${state.trCurrent.expression}</p>
+        <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
+      `;
+
+      renderTransformation();
+    }
+
+    function showHint() {
+      if (!state.trCurrent) return;
+      $("trHintBox").classList.remove("hidden");
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.meaning}`;
+    }
+
+    function buildExamQuestions() {
+      const selected = [];
+      const used = [];
+
+      for (let attempt = 0; attempt < 120; attempt++) {
+        const exercise = generateExercise(state.examCategory, "transform", used);
+        const sig = signature(exercise);
+
+        if (!used.includes(sig)) {
+          selected.push(exercise);
+          used.push(sig);
+        }
+
+        if (selected.length === 10) break;
+      }
+
+      return selected;
+    }
+
+    function startExam() {
+      state.examQuestions = buildExamQuestions();
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examCard").classList.remove("hidden");
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function resetExam() {
+      state.examQuestions = [];
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.remove("hidden");
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examFeedback").classList.add("hidden");
+      $("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = state.examQuestions.length;
+      const q = state.examQuestions[state.examIndex];
+
+      if (!q || total === 0) {
+        $("examIntro").classList.remove("hidden");
+        $("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = $("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (state.examIndex / total) * 100;
+
+      $("examProgress").style.width = `${progress}%`;
+      $("examType").textContent = `${q.type} · Question ${state.examIndex + 1}/${total}`;
+      $("examScore").textContent = `Score: ${state.examScore}/${state.examIndex}`;
+      $("examWords").textContent = `Words: ${words}/2–5`;
+      $("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("examFirst").textContent = q.original;
+      $("examSecond").textContent = q.second;
+      $("examKey").textContent = `Key word: ${q.key}`;
+      $("examCheck").disabled = state.examChecked;
+      $("examInput").disabled = state.examChecked;
+      $("examNext").disabled = !state.examChecked;
+      $("examNext").textContent = state.examIndex === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (state.examChecked) return;
+
+      const q = state.examQuestions[state.examIndex];
+      const input = $("examInput").value;
+      const correct = isCorrectAnswer(input, q);
+
+      state.examChecked = true;
+
+      if (correct) state.examScore++;
+
+      state.examAnswers.push({
+        number: state.examIndex + 1,
+        pattern: q.expression,
+        correct,
+        userAnswer: input,
+        accepted: acceptedAnswersText(q)
+      });
+
+      $("examFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("examFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+        <p>${q.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+      `;
+      $("examFeedback").classList.remove("hidden");
+
+      renderExam();
+    }
+
+    function nextExamQuestion() {
+      if (!state.examChecked) return;
+
+      if (state.examIndex >= state.examQuestions.length - 1) {
+        finishExam();
+        return;
+      }
+
+      state.examIndex++;
+      state.examChecked = false;
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function finishExam() {
+      const total = state.examQuestions.length;
+      const score = state.examScore;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
+
+      let message = "";
+      if (score >= 9) {
+        message = "Excellent exam control. You are using inversion structures with strong accuracy.";
+      } else if (score >= 7) {
+        message = "Good result. Keep practising auxiliary position and connector choice.";
+      } else if (score >= 5) {
+        message = "You understand several patterns, but you need more controlled practice with inversion word order.";
+      } else {
+        message = "Revise Study Mode carefully, especially negative adverbials, No sooner/Hardly and Not only.";
+      }
+
+      const review = state.examAnswers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.pattern}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+        </tr>
+      `).join("");
+
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.remove("hidden");
+
+      $("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Pattern</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart challenge</button>
+        </div>
+      `;
+
+      $("examAgain").addEventListener("click", startExam);
+    }
+
+    function init() {
+      populateStudySelect();
+      populatePracticeSelect("mcCategory", state.mcCategory);
+      populatePracticeSelect("trCategory", state.trCategory);
+      populatePracticeSelect("examCategory", state.examCategory);
+
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => showTab(button.dataset.tab));
+      });
+
+      $("studySection").addEventListener("change", event => {
+        state.studyIndex = Number(event.target.value);
+        renderStudy();
+      });
+
+      $("studyNext").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex + 1) % studySections.length;
+        renderStudy();
+      });
+
+      $("studyPrev").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex - 1 + studySections.length) % studySections.length;
+        renderStudy();
+      });
+
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        newMcQuestion();
+      });
+
+      $("mcNew").addEventListener("click", newMcQuestion);
+      $("mcReset").addEventListener("click", () => {
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        renderMc();
+      });
+
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        newTransformation();
+      });
+
+      $("trNew").addEventListener("click", newTransformation);
+      $("trHint").addEventListener("click", showHint);
+      $("trCheck").addEventListener("click", () => checkTransformation(false));
+      $("trReveal").addEventListener("click", () => checkTransformation(true));
+      $("trReset").addEventListener("click", () => {
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        renderTransformation();
+      });
+
+      $("trInput").addEventListener("input", renderTransformation);
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") checkTransformation(false);
+      });
+
+      $("examCategory").addEventListener("change", event => {
+        state.examCategory = event.target.value;
+        resetExam();
+      });
+
+      $("examStart").addEventListener("click", startExam);
+      $("examRestart").addEventListener("click", startExam);
+      $("examCheck").addEventListener("click", checkExamAnswer);
+      $("examNext").addEventListener("click", nextExamQuestion);
+      $("examInput").addEventListener("input", renderExam);
+      $("examInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          if (!state.examChecked) checkExamAnswer();
+          else nextExamQuestion();
+        }
+      });
+
+      renderStudy();
+      newMcQuestion();
+      newTransformation();
+    }
+
+    init();
+  </script>
+</body>
+</html>
