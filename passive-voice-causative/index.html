@@ -205,7 +205,7 @@
       color: var(--text);
     }
 
-    select { min-width: 260px; }
+    select { min-width: 280px; }
     input { width: 100%; }
 
     .button-group {
@@ -487,16 +487,16 @@
       <h1>Passive & Causative <span class="highlight">Transformation</span> Trainer</h1>
       <p>
         Practise B2 First Part 4 transformations with passive voice and causative structures.
-        This version uses an expanded generator with stronger B2 vocabulary, wider tense variety,
-        modal and perfect passive forms, reporting passive, causative structures and common exam traps.
+        This version uses a large-scale controlled generator with B2 vocabulary, wide tense coverage,
+        two-object passive patterns, reporting passive, causatives and Cambridge-style distractors.
       </p>
       <div class="stats">
-        <span class="pill">Core patterns</span>
-        <span class="pill">BE + PAST PARTICIPLE</span>
-        <span class="pill">BEING / BEEN</span>
-        <span class="pill">MODAL PASSIVE</span>
-        <span class="pill">REPORTING PASSIVE</span>
-        <span class="pill">HAVE / GET SOMETHING DONE</span>
+        <span class="pill">Large-scale generator</span>
+        <span class="pill">B2 vocabulary</span>
+        <span class="pill">Tense rotation</span>
+        <span class="pill">Modal & perfect passive</span>
+        <span class="pill">Reporting passive</span>
+        <span class="pill">Causative structures</span>
       </div>
     </section>
 
@@ -632,8 +632,8 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 4 · v3.0</span>
-      <span>Passive Voice & Causative Structures · Expanded B2 generator · FCE Part 4 focused practice</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 4 · v4.0</span>
+      <span>Passive Voice & Causative · Large-scale B2 generator · FCE Part 4 focused practice</span>
     </footer>
   </main>
 
@@ -659,7 +659,7 @@
         title: "1. Active → Passive: basic transformation",
         badge: "Passive Voice · Foundation",
         html: `
-          <p>The passive voice is used when the action, result or affected object is more important than the person who does the action.</p>
+          <p>The passive voice is used when the action, result or affected object is more important than the person or organisation doing the action.</p>
 
           <div class="study-grid">
             <div class="study-mini">
@@ -691,7 +691,7 @@
             <strong>FCE Part 4 thinking:</strong><br>
             Active: <em>The authorities postponed the event.</em><br>
             Passive: <em>The event was postponed.</em><br><br>
-            In KWT, avoid unnecessary words such as <em>by someone</em> unless the sentence clearly requires them.
+            Avoid unnecessary words such as <em>by someone</em> unless the sentence clearly requires them.
           </div>
         `
       },
@@ -829,33 +829,33 @@
 
           <div class="box">
             <strong>Active:</strong><br>
-            The organisation offered the students a scholarship.<br><br>
+            The organisation offered the students additional support.<br><br>
             <strong>Most natural passive:</strong><br>
-            The students were offered a scholarship.<br><br>
+            The students were offered additional support.<br><br>
             <strong>Also possible:</strong><br>
-            A scholarship was offered to the students.
+            Additional support was offered to the students.
           </div>
 
-          <h3>Common two-object verbs in FCE</h3>
+          <h3>Common two-object verb families</h3>
           <div class="study-grid">
             <div class="study-mini">
-              <strong>give</strong>
-              <p>They gave the applicants clear instructions.<br><strong>The applicants were given clear instructions.</strong></p>
+              <strong>Communication</strong>
+              <p>send, email, forward, show, tell, teach</p>
             </div>
 
             <div class="study-mini">
-              <strong>offer</strong>
-              <p>They offered Clara a position.<br><strong>Clara was offered a position.</strong></p>
+              <strong>Support / access</strong>
+              <p>offer, provide, grant, allocate, assign</p>
             </div>
 
             <div class="study-mini">
-              <strong>award</strong>
-              <p>They awarded the researcher a prize.<br><strong>The researcher was awarded a prize.</strong></p>
+              <strong>Rewards / opportunities</strong>
+              <p>award, give, present, promise</p>
             </div>
 
             <div class="study-mini">
-              <strong>send</strong>
-              <p>They sent the families detailed information.<br><strong>The families were sent detailed information.</strong></p>
+              <strong>Warnings / restrictions</strong>
+              <p>issue, refuse, deny, charge, lend</p>
             </div>
           </div>
         `
@@ -864,11 +864,11 @@
         title: "5. Reporting passive I: It + passive",
         badge: "Reporting Passive · It Pattern",
         html: `
-          <p>Reporting passive is used with verbs such as <strong>say, think, believe, report, expect, claim, know</strong>.</p>
+          <p>Reporting passive is used with verbs such as <strong>say, think, believe, report, expect, claim, know, consider</strong>.</p>
 
           <div class="box">
             <strong>Active:</strong><br>
-            People believe that the proposal is realistic.<br><br>
+            Experts believe that the proposal is realistic.<br><br>
             <strong>Impersonal passive:</strong><br>
             It is believed that the proposal is realistic.
           </div>
@@ -1114,402 +1114,524 @@
       }
     ];
 
+    const banks = {
+      agents: [
+        { text: "the committee", plural: false },
+        { text: "the school", plural: false },
+        { text: "the department", plural: false },
+        { text: "the company", plural: false },
+        { text: "the council", plural: false },
+        { text: "the organisation", plural: false },
+        { text: "the platform", plural: false },
+        { text: "the board", plural: false },
+        { text: "the research team", plural: false },
+        { text: "the technical team", plural: false },
+        { text: "the authorities", plural: true },
+        { text: "the organisers", plural: true },
+        { text: "the teachers", plural: true },
+        { text: "the researchers", plural: true },
+        { text: "the technicians", plural: true },
+        { text: "the developers", plural: true },
+        { text: "the editors", plural: true },
+        { text: "the interviewers", plural: true },
+        { text: "the sponsors", plural: true },
+        { text: "the examiners", plural: true }
+      ],
+
+      passiveActions: [
+        { base: "approve", third: "approves", past: "approved", ing: "approving", part: "approved", object: "the proposal", passiveSubject: "The proposal", plural: false, family: "approval" },
+        { base: "revise", third: "revises", past: "revised", ing: "revising", part: "revised", object: "the assessment criteria", passiveSubject: "The assessment criteria", plural: true, family: "revision" },
+        { base: "publish", third: "publishes", past: "published", ing: "publishing", part: "published", object: "the final timetable", passiveSubject: "The final timetable", plural: false, family: "publication" },
+        { base: "confirm", third: "confirms", past: "confirmed", ing: "confirming", part: "confirmed", object: "the booking", passiveSubject: "The booking", plural: false, family: "confirmation" },
+        { base: "postpone", third: "postpones", past: "postponed", ing: "postponing", part: "postponed", object: "the conference", passiveSubject: "The conference", plural: false, family: "scheduling" },
+        { base: "cancel", third: "cancels", past: "cancelled", ing: "cancelling", part: "cancelled", object: "the final session", passiveSubject: "The final session", plural: false, family: "scheduling" },
+        { base: "process", third: "processes", past: "processed", ing: "processing", part: "processed", object: "the applications", passiveSubject: "The applications", plural: true, family: "applications" },
+        { base: "review", third: "reviews", past: "reviewed", ing: "reviewing", part: "reviewed", object: "the evidence", passiveSubject: "The evidence", plural: false, family: "review" },
+        { base: "assess", third: "assesses", past: "assessed", ing: "assessing", part: "assessed", object: "the damage", passiveSubject: "The damage", plural: false, family: "assessment" },
+        { base: "analyse", third: "analyses", past: "analysed", ing: "analysing", part: "analysed", object: "the results", passiveSubject: "The results", plural: true, family: "analysis" },
+        { base: "investigate", third: "investigates", past: "investigated", ing: "investigating", part: "investigated", object: "the complaint", passiveSubject: "The complaint", plural: false, family: "investigation" },
+        { base: "restore", third: "restores", past: "restored", ing: "restoring", part: "restored", object: "the old theatre", passiveSubject: "The old theatre", plural: false, family: "restoration" },
+        { base: "upgrade", third: "upgrades", past: "upgraded", ing: "upgrading", part: "upgraded", object: "the security system", passiveSubject: "The security system", plural: false, family: "technology" },
+        { base: "replace", third: "replaces", past: "replaced", ing: "replacing", part: "replaced", object: "the faulty equipment", passiveSubject: "The faulty equipment", plural: false, family: "equipment" },
+        { base: "submit", third: "submits", past: "submitted", ing: "submitting", part: "submitted", object: "the application form", passiveSubject: "The application form", plural: false, family: "applications" },
+        { base: "translate", third: "translates", past: "translated", ing: "translating", part: "translated", object: "the documents", passiveSubject: "The documents", plural: true, family: "documents" },
+        { base: "redesign", third: "redesigns", past: "redesigned", ing: "redesigning", part: "redesigned", object: "the school website", passiveSubject: "The school website", plural: false, family: "design" },
+        { base: "prepare", third: "prepares", past: "prepared", ing: "preparing", part: "prepared", object: "the final programme", passiveSubject: "The final programme", plural: false, family: "preparation" },
+        { base: "check", third: "checks", past: "checked", ing: "checking", part: "checked", object: "all the details", passiveSubject: "All the details", plural: true, family: "checking" },
+        { base: "deliver", third: "delivers", past: "delivered", ing: "delivering", part: "delivered", object: "the presentation", passiveSubject: "The presentation", plural: false, family: "delivery" },
+        { base: "mark", third: "marks", past: "marked", ing: "marking", part: "marked", object: "the essays", passiveSubject: "The essays", plural: true, family: "assessment" },
+        { base: "update", third: "updates", past: "updated", ing: "updating", part: "updated", object: "the guidelines", passiveSubject: "The guidelines", plural: true, family: "revision" },
+        { base: "announce", third: "announces", past: "announced", ing: "announcing", part: "announced", object: "the decision", passiveSubject: "The decision", plural: false, family: "announcement" },
+        { base: "contact", third: "contacts", past: "contacted", ing: "contacting", part: "contacted", object: "the selected candidates", passiveSubject: "The selected candidates", plural: true, family: "communication" },
+        { base: "install", third: "installs", past: "installed", ing: "installing", part: "installed", object: "the new software", passiveSubject: "The new software", plural: false, family: "technology" },
+        { base: "inspect", third: "inspects", past: "inspected", ing: "inspecting", part: "inspected", object: "the building", passiveSubject: "The building", plural: false, family: "inspection" },
+        { base: "organise", third: "organises", past: "organised", ing: "organising", part: "organised", object: "the exchange programme", passiveSubject: "The exchange programme", plural: false, family: "organisation" },
+        { base: "monitor", third: "monitors", past: "monitored", ing: "monitoring", part: "monitored", object: "student progress", passiveSubject: "Student progress", plural: false, family: "monitoring" },
+        { base: "record", third: "records", past: "recorded", ing: "recording", part: "recorded", object: "the interview", passiveSubject: "The interview", plural: false, family: "recording" },
+        { base: "protect", third: "protects", past: "protected", ing: "protecting", part: "protected", object: "personal data", passiveSubject: "Personal data", plural: false, family: "security" },
+        { base: "store", third: "stores", past: "stored", ing: "storing", part: "stored", object: "confidential records", passiveSubject: "Confidential records", plural: true, family: "security" },
+        { base: "evaluate", third: "evaluates", past: "evaluated", ing: "evaluating", part: "evaluated", object: "the training programme", passiveSubject: "The training programme", plural: false, family: "evaluation" },
+        { base: "adapt", third: "adapts", past: "adapted", ing: "adapting", part: "adapted", object: "the materials", passiveSubject: "The materials", plural: true, family: "adaptation" },
+        { base: "improve", third: "improves", past: "improved", ing: "improving", part: "improved", object: "the registration process", passiveSubject: "The registration process", plural: false, family: "improvement" },
+        { base: "discuss", third: "discusses", past: "discussed", ing: "discussing", part: "discussed", object: "the new policy", passiveSubject: "The new policy", plural: false, family: "discussion" },
+        { base: "test", third: "tests", past: "tested", ing: "testing", part: "tested", object: "the online platform", passiveSubject: "The online platform", plural: false, family: "technology" },
+        { base: "interview", third: "interviews", past: "interviewed", ing: "interviewing", part: "interviewed", object: "the applicants", passiveSubject: "The applicants", plural: true, family: "interview" },
+        { base: "register", third: "registers", past: "registered", ing: "registering", part: "registered", object: "the participants", passiveSubject: "The participants", plural: true, family: "registration" },
+        { base: "select", third: "selects", past: "selected", ing: "selecting", part: "selected", object: "the finalists", passiveSubject: "The finalists", plural: true, family: "selection" },
+        { base: "verify", third: "verifies", past: "verified", ing: "verifying", part: "verified", object: "the information", passiveSubject: "The information", plural: false, family: "verification" }
+      ],
+
+      contexts: [
+        "carefully",
+        "regularly",
+        "online",
+        "in advance",
+        "before the deadline",
+        "after the meeting",
+        "during the inspection",
+        "at short notice",
+        "by email",
+        "before publication",
+        "this week",
+        "next term",
+        "for safety reasons",
+        "after several complaints",
+        "before the interview",
+        "during the registration process",
+        "at the end of the course",
+        "once the application had been reviewed",
+        "before the final decision was made",
+        "as part of the new procedure",
+        "without unnecessary delay",
+        "in accordance with the guidelines",
+        "after the assessment",
+        "before the system went live",
+        "during the final stage of the project",
+        "as soon as the problem was detected",
+        "before the students arrived",
+        "following the official announcement",
+        "after the technical review",
+        "by the end of the week"
+      ],
+
+      recipients: [
+        "the applicants",
+        "the candidates",
+        "the students",
+        "the participants",
+        "the volunteers",
+        "the families",
+        "the parents",
+        "the employees",
+        "the visitors",
+        "the members",
+        "the users",
+        "the customers",
+        "the residents",
+        "the winners",
+        "the finalists",
+        "the researchers",
+        "the delegates",
+        "the exchange students",
+        "the scholarship holders",
+        "the committee members",
+        "the new students",
+        "the selected candidates",
+        "the course participants",
+        "the team leaders",
+        "the project coordinators",
+        "the parents of new students",
+        "the international students",
+        "the competition finalists",
+        "the student representatives",
+        "the successful applicants"
+      ],
+
+      twoObjectFamilies: [
+        {
+          family: "communication",
+          verbs: [
+            { base: "send", third: "sends", past: "sent", part: "sent", ing: "sending" },
+            { base: "email", third: "emails", past: "emailed", part: "emailed", ing: "emailing" },
+            { base: "forward", third: "forwards", past: "forwarded", part: "forwarded", ing: "forwarding" },
+            { base: "show", third: "shows", past: "showed", part: "shown", ing: "showing" },
+            { base: "tell", third: "tells", past: "told", part: "told", ing: "telling" }
+          ],
+          things: [
+            "the final timetable",
+            "updated instructions",
+            "the registration details",
+            "a confirmation email",
+            "the assessment results",
+            "a revised schedule",
+            "clear guidelines",
+            "safety information",
+            "a detailed explanation",
+            "the access codes",
+            "the official announcement",
+            "the interview arrangements"
+          ]
+        },
+        {
+          family: "support",
+          verbs: [
+            { base: "offer", third: "offers", past: "offered", part: "offered", ing: "offering" },
+            { base: "provide", third: "provides", past: "provided", part: "provided", ing: "providing" },
+            { base: "give", third: "gives", past: "gave", part: "given", ing: "giving" },
+            { base: "grant", third: "grants", past: "granted", part: "granted", ing: "granting" },
+            { base: "allocate", third: "allocates", past: "allocated", part: "allocated", ing: "allocating" }
+          ],
+          things: [
+            "additional support",
+            "individual guidance",
+            "access to the platform",
+            "extra time",
+            "a second opportunity",
+            "practical advice",
+            "technical assistance",
+            "further training",
+            "a temporary password",
+            "financial support",
+            "useful feedback",
+            "priority access"
+          ]
+        },
+        {
+          family: "rewards",
+          verbs: [
+            { base: "award", third: "awards", past: "awarded", part: "awarded", ing: "awarding" },
+            { base: "give", third: "gives", past: "gave", part: "given", ing: "giving" },
+            { base: "present", third: "presents", past: "presented", part: "presented", ing: "presenting" },
+            { base: "promise", third: "promises", past: "promised", part: "promised", ing: "promising" }
+          ],
+          things: [
+            "a certificate",
+            "a scholarship",
+            "a special prize",
+            "official recognition",
+            "a participation award",
+            "a refund",
+            "a place on the course",
+            "a letter of recommendation",
+            "a medal",
+            "a grant",
+            "a travel allowance",
+            "an official invitation"
+          ]
+        },
+        {
+          family: "tasks",
+          verbs: [
+            { base: "assign", third: "assigns", past: "assigned", part: "assigned", ing: "assigning" },
+            { base: "allocate", third: "allocates", past: "allocated", part: "allocated", ing: "allocating" },
+            { base: "give", third: "gives", past: "gave", part: "given", ing: "giving" },
+            { base: "set", third: "sets", past: "set", part: "set", ing: "setting" }
+          ],
+          things: [
+            "a specific role",
+            "a research task",
+            "a group project",
+            "a written assignment",
+            "a leadership position",
+            "a practical challenge",
+            "a presentation topic",
+            "a list of responsibilities",
+            "a mentoring role",
+            "an individual target",
+            "a preparation task",
+            "a speaking assignment"
+          ]
+        },
+        {
+          family: "restrictions",
+          verbs: [
+            { base: "deny", third: "denies", past: "denied", part: "denied", ing: "denying" },
+            { base: "refuse", third: "refuses", past: "refused", part: "refused", ing: "refusing" },
+            { base: "charge", third: "charges", past: "charged", part: "charged", ing: "charging" },
+            { base: "issue", third: "issues", past: "issued", part: "issued", ing: "issuing" }
+          ],
+          things: [
+            "access to the building",
+            "permission to enter",
+            "a replacement card",
+            "a final warning",
+            "an additional fee",
+            "a formal notice",
+            "a written warning",
+            "a security pass",
+            "a cancellation fee",
+            "an official reminder",
+            "a temporary restriction",
+            "a penalty notice"
+          ]
+        },
+        {
+          family: "learning",
+          verbs: [
+            { base: "teach", third: "teaches", past: "taught", part: "taught", ing: "teaching" },
+            { base: "show", third: "shows", past: "showed", part: "shown", ing: "showing" },
+            { base: "give", third: "gives", past: "gave", part: "given", ing: "giving" },
+            { base: "explain", third: "explains", past: "explained", part: "explained", ing: "explaining" }
+          ],
+          things: [
+            "the basic procedure",
+            "the correct method",
+            "a useful strategy",
+            "the safest route",
+            "the main differences",
+            "a practical example",
+            "the exam requirements",
+            "the assessment criteria",
+            "the new routine",
+            "a more efficient technique",
+            "the essential rules",
+            "the key instructions"
+          ]
+        }
+      ],
+
+      reportingVerbs: [
+        { active: "believe", passive: "believed", agents: "Experts" },
+        { active: "think", passive: "thought", agents: "Researchers" },
+        { active: "say", passive: "said", agents: "People" },
+        { active: "report", passive: "reported", agents: "Journalists" },
+        { active: "claim", passive: "claimed", agents: "Several sources" },
+        { active: "expect", passive: "expected", agents: "Analysts" },
+        { active: "consider", passive: "considered", agents: "Specialists" },
+        { active: "know", passive: "known", agents: "Experts" },
+        { active: "announce", passive: "announced", agents: "The authorities" }
+      ],
+
+      reportingContents: [
+        "the proposal is realistic",
+        "the method is highly reliable",
+        "the new platform will be successful",
+        "the results are accurate",
+        "the decision was unnecessary",
+        "the system has several weaknesses",
+        "the project will create new opportunities",
+        "the problem can be solved quickly",
+        "the evidence is convincing",
+        "the course has improved student confidence",
+        "the new policy will affect many families",
+        "the organisation is under pressure",
+        "the campaign has reached its target",
+        "the arrangement was made too quickly",
+        "the new timetable is more flexible",
+        "the report has influenced the final decision"
+      ],
+
+      reportingSubjectCases: [
+        { subject: "The method", complement: "reliable", answer: "is believed to be", key: "BELIEVED", original: "Experts believe that the method is reliable." },
+        { subject: "The proposal", complement: "realistic", answer: "is considered to be", key: "CONSIDERED", original: "Experts consider that the proposal is realistic." },
+        { subject: "The director", complement: "last week", answer: "is thought to have resigned", key: "THOUGHT", original: "People think that the director resigned last week." },
+        { subject: "The company", complement: "a new platform", answer: "is said to be developing", key: "SAID", original: "People say that the company is developing a new platform." },
+        { subject: "The museum", complement: "soon", answer: "is expected to be reopened", key: "EXPECTED", original: "People expect that the museum will be reopened soon." },
+        { subject: "The missing documents", complement: "destroyed", answer: "are believed to have been", key: "BELIEVED", original: "Experts believe that the missing documents were destroyed." },
+        { subject: "The negotiations", complement: "an agreement", answer: "are reported to have reached", key: "REPORTED", original: "Journalists report that the negotiations have reached an agreement." },
+        { subject: "The artist", complement: "a whole generation", answer: "is known to have influenced", key: "KNOWN", original: "Experts know that the artist influenced a whole generation." },
+        { subject: "The economy", complement: "gradually", answer: "is expected to recover", key: "EXPECTED", original: "Analysts expect that the economy will recover gradually." },
+        { subject: "The new system", complement: "time", answer: "is claimed to save", key: "CLAIMED", original: "Several sources claim that the new system saves time." },
+        { subject: "The candidate", complement: "the interview", answer: "is reported to have passed", key: "REPORTED", original: "Journalists report that the candidate passed the interview." },
+        { subject: "The building", complement: "unsafe", answer: "is considered to be", key: "CONSIDERED", original: "Specialists consider that the building is unsafe." },
+        { subject: "The application", complement: "late", answer: "is said to have arrived", key: "SAID", original: "People say that the application arrived late." },
+        { subject: "The students", complement: "excellent progress", answer: "are believed to have made", key: "BELIEVED", original: "Experts believe that the students made excellent progress." },
+        { subject: "The online platform", complement: "tomorrow", answer: "is expected to be launched", key: "EXPECTED", original: "Analysts expect that the online platform will be launched tomorrow." }
+      ],
+
+      serviceObjects: [
+        { object: "the contract", part: "reviewed", specialist: "a legal specialist", family: "legal" },
+        { object: "the documents", part: "translated", specialist: "a professional translator", family: "language" },
+        { object: "the school website", part: "redesigned", specialist: "a web designer", family: "design" },
+        { object: "the application", part: "checked", specialist: "an admissions adviser", family: "application" },
+        { object: "the equipment", part: "serviced", specialist: "a technician", family: "technical" },
+        { object: "the report", part: "proofread", specialist: "an editor", family: "writing" },
+        { object: "the photographs", part: "edited", specialist: "a photographer", family: "media" },
+        { object: "the security system", part: "installed", specialist: "an engineer", family: "security" },
+        { object: "the engine", part: "inspected", specialist: "a mechanic", family: "vehicle" },
+        { object: "the meeting room", part: "redecorated", specialist: "a decorator", family: "facilities" },
+        { object: "the connection", part: "checked", specialist: "a technician", family: "technical" },
+        { object: "the logo", part: "redesigned", specialist: "a graphic designer", family: "design" },
+        { object: "the passport", part: "renewed", specialist: "the authorities", family: "documents" },
+        { object: "the heating system", part: "repaired", specialist: "an engineer", family: "facilities" },
+        { object: "the presentation", part: "improved", specialist: "a communication coach", family: "presentation" },
+        { object: "the data", part: "recovered", specialist: "an IT expert", family: "technology" },
+        { object: "the classroom", part: "repainted", specialist: "a maintenance team", family: "facilities" },
+        { object: "the timetable", part: "revised", specialist: "the academic coordinator", family: "scheduling" },
+        { object: "the certificate", part: "issued", specialist: "the examination centre", family: "documents" },
+        { object: "the payment", part: "processed", specialist: "the finance department", family: "finance" },
+        { object: "the recording", part: "edited", specialist: "a media technician", family: "media" },
+        { object: "the device", part: "replaced", specialist: "the technical service", family: "technology" },
+        { object: "the account", part: "verified", specialist: "the support team", family: "security" },
+        { object: "the room", part: "cleaned", specialist: "the cleaning staff", family: "facilities" },
+        { object: "the form", part: "signed", specialist: "the director", family: "documents" }
+      ],
+
+      misfortunes: [
+        { subject: "He", possessive: "his", object: "account", part: "hacked", context: "during the weekend", family: "digital" },
+        { subject: "They", possessive: "their", object: "luggage", part: "damaged", context: "during the transfer", family: "travel" },
+        { subject: "She", possessive: "her", object: "bike", part: "stolen", context: "outside the station", family: "theft" },
+        { subject: "We", possessive: "our", object: "reservation", part: "cancelled", context: "by mistake", family: "booking" },
+        { subject: "They", possessive: "their", object: "documents", part: "misplaced", context: "at the airport", family: "documents" },
+        { subject: "He", possessive: "his", object: "car", part: "scratched", context: "in the car park", family: "damage" },
+        { subject: "They", possessive: "their", object: "flight", part: "delayed", context: "for technical reasons", family: "travel" },
+        { subject: "She", possessive: "her", object: "personal details", part: "leaked", context: "online", family: "digital" },
+        { subject: "We", possessive: "our", object: "tickets", part: "cancelled", context: "without warning", family: "booking" },
+        { subject: "He", possessive: "his", object: "phone screen", part: "cracked", context: "during the trip", family: "damage" },
+        { subject: "They", possessive: "their", object: "bags", part: "searched", context: "at customs", family: "travel" },
+        { subject: "She", possessive: "her", object: "email account", part: "blocked", context: "after several failed attempts", family: "digital" },
+        { subject: "We", possessive: "our", object: "application", part: "rejected", context: "because of a missing document", family: "application" },
+        { subject: "He", possessive: "his", object: "wallet", part: "stolen", context: "on the underground", family: "theft" },
+        { subject: "They", possessive: "their", object: "room", part: "changed", context: "at the last minute", family: "booking" },
+        { subject: "She", possessive: "her", object: "photographs", part: "deleted", context: "by accident", family: "digital" },
+        { subject: "We", possessive: "our", object: "plans", part: "changed", context: "without consultation", family: "planning" },
+        { subject: "He", possessive: "his", object: "identity", part: "checked", context: "at the entrance", family: "security" },
+        { subject: "They", possessive: "their", object: "details", part: "shared", context: "without permission", family: "privacy" },
+        { subject: "She", possessive: "her", object: "suitcase", part: "lost", context: "during the flight", family: "travel" }
+      ],
+
+      peopleCausatives: [
+        { meaning: "force", verb: "made", object: "the students", action: "rewrite the introduction", key: "MADE", family: "education" },
+        { meaning: "permission", verb: "let", object: "the applicants", action: "submit the form later", key: "LET", family: "application" },
+        { meaning: "persuasion", verb: "got", object: "the manager", action: "approve the request", key: "GOT", family: "work" },
+        { meaning: "arrangement", verb: "had", object: "the assistant", action: "prepare the documents", key: "HAD", family: "administration" },
+        { meaning: "force", verb: "made", object: "the team", action: "reconsider their strategy", key: "MADE", family: "strategy" },
+        { meaning: "permission", verb: "let", object: "the volunteers", action: "choose their roles", key: "LET", family: "event" },
+        { meaning: "persuasion", verb: "got", object: "the technician", action: "check the connection", key: "GOT", family: "technical" },
+        { meaning: "arrangement", verb: "had", object: "the secretary", action: "arrange the meeting", key: "HAD", family: "administration" },
+        { meaning: "force", verb: "made", object: "us", action: "correct our mistakes", key: "MADE", family: "education" },
+        { meaning: "permission", verb: "let", object: "the students", action: "use dictionaries", key: "LET", family: "education" },
+        { meaning: "persuasion", verb: "got", object: "the coordinator", action: "change the deadline", key: "GOT", family: "planning" },
+        { meaning: "arrangement", verb: "had", object: "the receptionist", action: "confirm the booking", key: "HAD", family: "booking" },
+        { meaning: "force", verb: "made", object: "the players", action: "repeat the exercise", key: "MADE", family: "sports" },
+        { meaning: "permission", verb: "let", object: "the participants", action: "leave early", key: "LET", family: "event" },
+        { meaning: "persuasion", verb: "got", object: "the editor", action: "revise the article", key: "GOT", family: "writing" },
+        { meaning: "arrangement", verb: "had", object: "the technician", action: "install the software", key: "HAD", family: "technology" },
+        { meaning: "force", verb: "made", object: "the candidates", action: "wait outside", key: "MADE", family: "exam" },
+        { meaning: "permission", verb: "let", object: "the families", action: "visit the facilities", key: "LET", family: "school" },
+        { meaning: "persuasion", verb: "got", object: "the sponsor", action: "support the project", key: "GOT", family: "project" },
+        { meaning: "arrangement", verb: "had", object: "the guide", action: "show us around", key: "HAD", family: "travel" }
+      ]
+    };
+
+    const tensePatterns = [
+      { id: "present-simple", category: "Active → Passive basic", expression: "Present simple passive", key: "IS", weight: 1 },
+      { id: "present-continuous", category: "Passive tense control", expression: "Present continuous passive", key: "BEING", weight: 1 },
+      { id: "past-simple", category: "Active → Passive basic", expression: "Past simple passive", key: "WAS", weight: 0.45 },
+      { id: "past-continuous", category: "Passive tense control", expression: "Past continuous passive", key: "BEING", weight: 1 },
+      { id: "present-perfect", category: "Perfect passive forms", expression: "Present perfect passive", key: "BEEN", weight: 1.2 },
+      { id: "past-perfect", category: "Perfect passive forms", expression: "Past perfect passive", key: "BEEN", weight: 1 },
+      { id: "future", category: "Passive tense control", expression: "Future passive", key: "BE", weight: 1 },
+      { id: "going-to", category: "Passive tense control", expression: "Going to passive", key: "BE", weight: 1 },
+      { id: "future-perfect", category: "Perfect passive forms", expression: "Future perfect passive", key: "BEEN", weight: 1 },
+      { id: "modal", category: "Modal passive", expression: "Modal passive", key: "BE", weight: 1.2 },
+      { id: "modal-perfect", category: "Perfect passive forms", expression: "Perfect modal passive", key: "BEEN", weight: 1.1 }
+    ];
+
+    const twoObjectTenses = [
+      { id: "present-simple", key: "ARE", label: "Present simple two-object passive", weight: 1 },
+      { id: "past-simple", key: "WERE", label: "Past simple two-object passive", weight: 0.45 },
+      { id: "present-perfect", key: "BEEN", label: "Present perfect two-object passive", weight: 1.2 },
+      { id: "past-perfect", key: "BEEN", label: "Past perfect two-object passive", weight: 1 },
+      { id: "future", key: "BE", label: "Future two-object passive", weight: 1 },
+      { id: "modal", key: "BE", label: "Modal two-object passive", weight: 1.2 },
+      { id: "modal-perfect", key: "BEEN", label: "Perfect modal two-object passive", weight: 1.1 }
+    ];
+
+    const modalOptions = ["should", "must", "can", "could", "may", "might"];
+    const modalPerfectOptions = ["should have", "could have", "might have", "must have"];
+    const causativeSubjects = [
+      { subject: "we", cap: "We", possessive: "our" },
+      { subject: "they", cap: "They", possessive: "their" },
+      { subject: "he", cap: "He", possessive: "his" },
+      { subject: "she", cap: "She", possessive: "her" },
+      { subject: "I", cap: "I", possessive: "my" },
+      { subject: "the school", cap: "The school", possessive: "its" },
+      { subject: "the company", cap: "The company", possessive: "its" },
+      { subject: "the organisers", cap: "The organisers", possessive: "their" }
+    ];
+
+    const causativeTenses = [
+      { id: "past-have", aux: "had", key: "HAD", originalVerb: "past" },
+      { id: "past-get", aux: "got", key: "GOT", originalVerb: "past" },
+      { id: "future-have", aux: "will have", key: "HAVE", originalVerb: "will" },
+      { id: "future-get", aux: "will get", key: "GET", originalVerb: "will" },
+      { id: "continuous-have", aux: "are having", key: "HAVING", originalVerb: "is" },
+      { id: "continuous-get", aux: "are getting", key: "GETTING", originalVerb: "is" },
+      { id: "going-to-have", aux: "are going to have", key: "HAVE", originalVerb: "going" },
+      { id: "going-to-get", aux: "are going to get", key: "GET", originalVerb: "going" }
+    ];
+
     function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "", family = "") {
       return { type, expression, meaning, original, second, answers, keyOptions, distractors, note, family };
     }
 
-    const banks = {
-      presentSimplePassive: [
-        ["The committee", "reviews", "each proposal", "Each proposal", "is reviewed", "carefully"],
-        ["The platform", "updates", "user profiles", "User profiles", "are updated", "automatically"],
-        ["The organisation", "publishes", "annual results", "Annual results", "are published", "online"],
-        ["The school", "assesses", "oral performance", "Oral performance", "is assessed", "regularly"],
-        ["The company", "processes", "applications", "Applications", "are processed", "within two weeks"],
-        ["The department", "stores", "confidential records", "Confidential records", "are stored", "securely"],
-        ["The council", "maintains", "public facilities", "Public facilities", "are maintained", "throughout the year"],
-        ["The team", "monitors", "student progress", "Student progress", "is monitored", "closely"]
-      ],
+    function generatePassiveByTense(allowedTenses, displayType = "Passive tense control") {
+      const pattern = pickWeighted(tensePatterns.filter(t => allowedTenses.includes(t.id)));
+      const action = pick(banks.passiveActions);
+      const agent = pick(banks.agents);
+      const context = pick(banks.contexts);
+      const answer = passiveAnswer(pattern.id, action);
+      const original = activeSentence(agent, action, pattern.id, context);
+      const second = `${action.passiveSubject} ______ ${context}.`;
+      const key = passiveKey(pattern, answer, action);
 
-      pastSimplePassive: [
-        ["The authorities", "postponed", "the conference", "The conference", "was postponed", "after the warning"],
-        ["The board", "approved", "the renovation project", "The renovation project", "was approved", "last month"],
-        ["The organisers", "cancelled", "the final session", "The final session", "was cancelled", "at short notice"],
-        ["The technician", "replaced", "the faulty equipment", "The faulty equipment", "was replaced", "before the inspection"],
-        ["The committee", "rejected", "several applications", "Several applications", "were rejected", "after the interview"],
-        ["The company", "released", "the figures", "The figures", "were released", "yesterday afternoon"],
-        ["The editor", "revised", "the article", "The article", "was revised", "before publication"],
-        ["The police", "investigated", "the complaint", "The complaint", "was investigated", "immediately"]
-      ],
-
-      presentContinuousPassive: [
-        ["Experts", "are assessing", "the damage", "The damage", "is being assessed", "at the moment"],
-        ["The school", "is redesigning", "the website", "The website", "is being redesigned", "this term"],
-        ["Researchers", "are analysing", "the results", "The results", "are being analysed", "carefully"],
-        ["The council", "is restoring", "the old theatre", "The old theatre", "is being restored", "this year"],
-        ["The company", "is upgrading", "the security system", "The security system", "is being upgraded", "now"],
-        ["The teachers", "are reviewing", "the assessment criteria", "The assessment criteria", "are being reviewed", "this week"],
-        ["Technicians", "are testing", "the new equipment", "The new equipment", "is being tested", "before the launch"],
-        ["The organisers", "are preparing", "the final programme", "The final programme", "is being prepared", "today"]
-      ],
-
-      pastContinuousPassive: [
-        ["The board", "was reviewing", "the proposal", "The proposal", "was being reviewed", "when the announcement was made"],
-        ["The technicians", "were checking", "the sound system", "The sound system", "was being checked", "when we arrived"],
-        ["The committee", "was discussing", "the complaint", "The complaint", "was being discussed", "during the meeting"],
-        ["The staff", "were preparing", "the conference room", "The conference room", "was being prepared", "at lunchtime"],
-        ["The journalists", "were interviewing", "the candidates", "The candidates", "were being interviewed", "outside the building"],
-        ["The developers", "were testing", "the platform", "The platform", "was being tested", "when the error appeared"]
-      ],
-
-      presentPerfectPassive: [
-        ["The company", "has confirmed", "the booking", "The booking", "has been confirmed", "by email"],
-        ["The school", "has published", "the timetable", "The timetable", "has been published", "online"],
-        ["The committee", "has approved", "the proposal", "The proposal", "has been approved", "unanimously"],
-        ["The organisers", "have revised", "the programme", "The programme", "has been revised", "several times"],
-        ["The authorities", "have closed", "the road", "The road", "has been closed", "for safety reasons"],
-        ["The teachers", "have marked", "the essays", "The essays", "have been marked", "this morning"],
-        ["The department", "has updated", "the guidelines", "The guidelines", "have been updated", "recently"],
-        ["The researchers", "have analysed", "the evidence", "The evidence", "has been analysed", "in detail"]
-      ],
-
-      pastPerfectPassive: [
-        ["The team", "had completed", "the report", "The report", "had been completed", "before the deadline"],
-        ["The assistant", "had submitted", "the application", "The application", "had been submitted", "before noon"],
-        ["The organisers", "had checked", "all the details", "All the details", "had been checked", "before the event"],
-        ["The company", "had signed", "the agreement", "The agreement", "had been signed", "before the meeting"],
-        ["The school", "had informed", "the families", "The families", "had been informed", "in advance"],
-        ["The technicians", "had restored", "the connection", "The connection", "had been restored", "before the class began"]
-      ],
-
-      futurePassive: [
-        ["The results", "will be announced", "tomorrow morning"],
-        ["The decision", "will be confirmed", "by the end of the week"],
-        ["The new policy", "will be introduced", "next term"],
-        ["The final schedule", "will be published", "on Friday"],
-        ["The selected candidates", "will be contacted", "individually"],
-        ["The missing documents", "will be sent", "as soon as possible"],
-        ["The security system", "will be upgraded", "during the holidays"],
-        ["The application form", "will be available", "online"]
-      ],
-
-      goingToPassive: [
-        ["The results", "is going to be announced", "tonight"],
-        ["The new rules", "are going to be introduced", "next month"],
-        ["The building", "is going to be renovated", "next year"],
-        ["The documents", "are going to be translated", "before the meeting"],
-        ["The online platform", "is going to be updated", "this weekend"],
-        ["The candidates", "are going to be interviewed", "next week"]
-      ],
-
-      futurePerfectPassive: [
-        ["The extension", "will have been completed", "by June"],
-        ["The final report", "will have been submitted", "by Friday"],
-        ["The new system", "will have been installed", "before September"],
-        ["All applications", "will have been processed", "by the end of the month"],
-        ["The documents", "will have been reviewed", "before the interview"],
-        ["The results", "will have been published", "by the time we arrive"]
-      ],
-
-      modalPassive: [
-        ["The policy", "should be reviewed", "before it is published"],
-        ["Confidential details", "must not be revealed", "without permission"],
-        ["The form", "can be submitted", "online"],
-        ["The equipment", "must be replaced", "before the inspection"],
-        ["The proposal", "might be rejected", "if it is incomplete"],
-        ["The decision", "should be reconsidered", "after the new evidence"],
-        ["The problem", "could be solved", "with better planning"],
-        ["The documents", "may be requested", "during the interview"]
-      ],
-
-      modalPerfectPassive: [
-        ["Residents", "should have been informed", "earlier"],
-        ["The mistake", "could have been avoided", "with more care"],
-        ["The documents", "must have been misplaced", "during the move"],
-        ["The application", "should have been submitted", "before the deadline"],
-        ["The error", "might have been detected", "during the final check"],
-        ["The meeting", "could have been postponed", "until next week"],
-        ["The candidates", "should have been contacted", "individually"],
-        ["The equipment", "must have been damaged", "during transport"]
-      ],
-
-      twoObjectPassive: [
-        ["The organisation offered the students a scholarship.", "The students ______ a scholarship.", "were offered", "OFFERED"],
-        ["The committee awarded the researcher a prize.", "The researcher ______ a prize.", "was awarded", "AWARDED"],
-        ["The school sent the families detailed information.", "The families ______ detailed information.", "were sent", "SENT"],
-        ["The guide showed the visitors the exhibition room.", "The visitors ______ the exhibition room.", "were shown", "SHOWN"],
-        ["The manager gave the applicants clear instructions.", "The applicants ______ clear instructions.", "were given", "GIVEN"],
-        ["The company paid the employees a bonus.", "The employees ______ a bonus.", "were paid", "PAID"],
-        ["The university offered Clara a place on the course.", "Clara ______ a place on the course.", "was offered", "WAS"],
-        ["The organisers gave the volunteers official badges.", "The volunteers ______ official badges.", "were given", "GIVEN"],
-        ["Someone taught the new students basic safety rules.", "The new students ______ basic safety rules.", "were taught", "TAUGHT"],
-        ["The sponsors awarded the team a special certificate.", "The team ______ a special certificate.", "was awarded", "AWARDED"]
-      ],
-
-      reportingIt: [
-        ["People believe that the proposal is realistic.", "______ that the proposal is realistic.", "it is believed", "BELIEVED"],
-        ["Experts think that the method is highly reliable.", "______ that the method is highly reliable.", "it is thought", "THOUGHT"],
-        ["Journalists reported that the director had resigned.", "______ that the director had resigned.", "it was reported", "REPORTED"],
-        ["People say that the school has achieved excellent results.", "______ that the school has achieved excellent results.", "it is said", "SAID"],
-        ["Researchers claim that the treatment is effective.", "______ that the treatment is effective.", "it is claimed", "CLAIMED"],
-        ["The authorities announced that the road would be closed.", "______ that the road would be closed.", "it was announced", "ANNOUNCED"],
-        ["People expect that the new platform will be successful.", "______ that the new platform will be successful.", "it is expected", "EXPECTED"],
-        ["Experts know that the system has several weaknesses.", "______ that the system has several weaknesses.", "it is known", "KNOWN"]
-      ],
-
-      reportingSubject: [
-        ["People believe that the method is reliable.", "The method ______ reliable.", "is believed to be", "BELIEVED"],
-        ["Experts think that the director resigned last week.", "The director ______ last week.", "is thought to have resigned", "THOUGHT"],
-        ["People say that the company is developing a new platform.", "The company ______ a new platform.", "is said to be developing", "SAID"],
-        ["They expect that the museum will be reopened soon.", "The museum ______ soon.", "is expected to be reopened", "EXPECTED"],
-        ["People believe that the missing documents were destroyed.", "The missing documents ______ destroyed.", "are believed to have been", "BELIEVED"],
-        ["Experts consider that the evidence is convincing.", "The evidence ______ convincing.", "is considered to be", "CONSIDERED"],
-        ["They report that the negotiations have reached an agreement.", "The negotiations ______ an agreement.", "are reported to have reached", "REPORTED"],
-        ["People know that the artist influenced a whole generation.", "The artist ______ a whole generation.", "is known to have influenced", "KNOWN"],
-        ["Experts expect that the economy will recover gradually.", "The economy ______ gradually.", "is expected to recover", "EXPECTED"],
-        ["People claim that the new system saves time.", "The new system ______ time.", "is claimed to save", "CLAIMED"]
-      ],
-
-      causativeHaveGet: [
-        ["A specialist reviewed the contract.", "We ______ before signing it.", "had the contract reviewed", "HAD"],
-        ["A technician checked the connection.", "They ______ before the online meeting.", "got the connection checked", "GOT"],
-        ["A designer redesigned the school website.", "The school ______ last term.", "had the website redesigned", "HAD"],
-        ["A translator translated the documents.", "We ______ before the interview.", "got the documents translated", "GOT"],
-        ["A mechanic inspected the engine.", "He ______ before the journey.", "had the engine inspected", "HAD"],
-        ["A professional proofread the report.", "She ______ before submitting it.", "had the report proofread", "HAD"],
-        ["A specialist installed the security system.", "They ______ last month.", "got the security system installed", "GOT"],
-        ["A technician serviced the equipment.", "We ______ before the event.", "had the equipment serviced", "HAD"],
-        ["A photographer edited the pictures.", "They ______ for the school magazine.", "got the pictures edited", "GOT"],
-        ["A consultant checked the application.", "She ______ before sending it.", "had the application checked", "HAD"]
-      ],
-
-      causativeFutureContinuous: [
-        ["An expert will review the contract tomorrow.", "We will ______ tomorrow.", "have the contract reviewed", "HAVE"],
-        ["A technician is upgrading the system today.", "They are ______ today.", "having the system upgraded", "HAVING"],
-        ["A specialist will translate the report next week.", "He will ______ next week.", "get the report translated", "GET"],
-        ["A professional is proofreading her application.", "She is ______ at the moment.", "having her application proofread", "HAVING"],
-        ["An engineer will inspect the equipment on Friday.", "We will ______ on Friday.", "have the equipment inspected", "HAVE"],
-        ["A designer is redesigning our logo.", "We are ______ this month.", "getting our logo redesigned", "GETTING"]
-      ],
-
-      misfortunes: [
-        ["Someone hacked his account during the weekend.", "He ______ during the weekend.", "had his account hacked", "HAD"],
-        ["Someone damaged their luggage during the transfer.", "They ______ during the transfer.", "had their luggage damaged", "HAD"],
-        ["Someone stole her bike outside the station.", "She ______ outside the station.", "had her bike stolen", "HAD"],
-        ["Someone cancelled our reservation by mistake.", "We ______ by mistake.", "had our reservation cancelled", "HAD"],
-        ["Someone misplaced their documents at the airport.", "They ______ at the airport.", "had their documents misplaced", "HAD"],
-        ["Someone scratched his car in the car park.", "He ______ in the car park.", "had his car scratched", "HAD"],
-        ["Someone delayed their flight for technical reasons.", "They ______ for technical reasons.", "had their flight delayed", "HAD"],
-        ["Someone leaked her personal details online.", "She ______ online.", "had her details leaked", "HAD"]
-      ],
-
-      makeLetGet: [
-        ["The teacher forced the students to rewrite the introduction.", "The teacher ______ the introduction.", "made the students rewrite", "MADE"],
-        ["The organisers allowed the volunteers to choose their roles.", "The organisers ______ their roles.", "let the volunteers choose", "LET"],
-        ["We persuaded the manager to approve the request.", "We ______ the request.", "got the manager to approve", "GOT"],
-        ["The director asked the assistant to prepare the documents.", "The director ______ the documents.", "had the assistant prepare", "HAD"],
-        ["The coach forced the team to reconsider their strategy.", "The coach ______ their strategy.", "made the team reconsider", "MADE"],
-        ["They allowed the applicants to submit the form later.", "They ______ the form later.", "let the applicants submit", "LET"],
-        ["She persuaded the technician to check the connection.", "She ______ the connection.", "got the technician to check", "GOT"],
-        ["The manager asked the secretary to arrange the meeting.", "The manager ______ the meeting.", "had the secretary arrange", "HAD"],
-        ["The tutor forced us to correct our mistakes.", "The tutor ______ our mistakes.", "made us correct", "MADE"],
-        ["The school allowed the students to use dictionaries.", "The school ______ dictionaries.", "let the students use", "LET"]
-      ]
-    };
-
-    function itemPresentSimplePassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.presentSimplePassive);
       return item(
-        "Active → Passive basic",
-        "Present simple active → present simple passive",
-        "Use present simple passive for facts, routines, systems and regular procedures.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        answer.startsWith("is") ? ["IS"] : ["ARE"],
-        makePassiveDistractors(answer, "simple"),
-        "Present simple passive: am/is/are + past participle.",
-        "present-simple-passive"
-      );
-    }
-
-    function itemPastSimplePassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.pastSimplePassive);
-      return item(
-        "Active → Passive basic",
-        "Past simple active → past simple passive",
-        "The object becomes the subject and the verb becomes was/were + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        answer.startsWith("was") ? ["WAS"] : ["WERE"],
-        makePassiveDistractors(answer, "simple"),
-        "Past simple passive: was/were + past participle.",
-        "past-simple-passive"
-      );
-    }
-
-    function itemPresentContinuousPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.presentContinuousPassive);
-      return item(
-        "Passive tense control",
-        "Present continuous passive",
-        "Present continuous active becomes am/is/are being + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BEING"],
-        makePassiveDistractors(answer, "continuous"),
-        "Continuous passive forms need being.",
-        "present-continuous-passive"
-      );
-    }
-
-    function itemPastContinuousPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.pastContinuousPassive);
-      return item(
-        "Passive tense control",
-        "Past continuous passive",
-        "Past continuous active becomes was/were being + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BEING"],
-        makePassiveDistractors(answer, "continuous"),
-        "Past continuous passive needs was/were being + past participle.",
-        "past-continuous-passive"
-      );
-    }
-
-    function itemPresentPerfectPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.presentPerfectPassive);
-      return item(
-        "Perfect passive forms",
-        "Present perfect passive",
-        "Present perfect active becomes has/have been + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "perfect"),
-        "Do not forget been in perfect passive forms.",
-        "present-perfect-passive"
-      );
-    }
-
-    function itemPastPerfectPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.pastPerfectPassive);
-      return item(
-        "Perfect passive forms",
-        "Past perfect passive",
-        "Past perfect active becomes had been + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "perfect"),
-        "Past perfect passive: had been + past participle.",
-        "past-perfect-passive"
-      );
-    }
-
-    function itemFuturePassive() {
-      const [subject, answer, context] = pick(banks.futurePassive);
-      return item(
-        "Passive tense control",
-        "Future passive",
-        "Will + active verb becomes will be + past participle.",
-        `They will complete the action related to ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BE"],
-        makePassiveDistractors(answer, "future"),
-        "Future passive: will be + past participle.",
-        "future-passive"
-      );
-    }
-
-    function itemGoingToPassive() {
-      const [subject, answer, context] = pick(banks.goingToPassive);
-      return item(
-        "Passive tense control",
-        "Going to passive",
-        "Going to + verb becomes going to be + past participle.",
-        `They are going to complete the action related to ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BE"],
-        makePassiveDistractors(answer, "goingto"),
-        "Going to passive: am/is/are going to be + past participle.",
-        "going-to-passive"
-      );
-    }
-
-    function itemFuturePerfectPassive() {
-      const [subject, answer, context] = pick(banks.futurePerfectPassive);
-      return item(
-        "Perfect passive forms",
-        "Future perfect passive",
-        "Future perfect active becomes will have been + past participle.",
-        `They will have completed the action related to ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "futureperfect"),
-        "Future perfect passive: will have been + past participle.",
-        "future-perfect-passive"
-      );
-    }
-
-    function itemModalPassive() {
-      const [subject, answer, context] = pick(banks.modalPassive);
-      return item(
-        "Modal passive",
-        "Modal passive",
-        "Modal verbs in the passive use modal + be + past participle.",
-        `They ${modalActiveFromPassive(answer)} ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        answer.includes("be") ? ["BE"] : [answer.split(" ")[0].toUpperCase()],
-        makePassiveDistractors(answer, "modal"),
-        "Modal passive: modal + be + past participle.",
-        "modal-passive"
-      );
-    }
-
-    function itemModalPerfectPassive() {
-      const [subject, answer, context] = pick(banks.modalPerfectPassive);
-      return item(
-        "Perfect passive forms",
-        "Perfect modal passive",
-        "Perfect modal passive uses modal + have been + past participle.",
-        `They ${modalPerfectActiveFromPassive(answer)} ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
-        [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "modalperfect"),
-        "Perfect modal passive: modal + have been + past participle.",
-        "modal-perfect-passive"
-      );
-    }
-
-    function itemTwoObjectPassive() {
-      const [original, second, answer, key] = pick(banks.twoObjectPassive);
-      return item(
-        "Two-object passive",
-        "Two-object passive: person as subject",
-        "With verbs like give, send, offer, show, award and teach, the person often becomes the passive subject.",
+        displayType || pattern.category,
+        pattern.expression,
+        passiveMeaning(pattern.id),
         original,
         second,
         [answer],
         [key],
-        makeTwoObjectDistractors(answer),
-        "The person receiving something is often the most natural passive subject.",
-        "two-object-passive"
+        passiveDistractors(answer, pattern.id, action),
+        passiveNote(pattern.id),
+        `${pattern.id}-${action.family}`
       );
     }
 
-    function itemReportingIt() {
-      const [original, second, answer, key] = pick(banks.reportingIt);
+    function generateTwoObjectPassive() {
+      const family = pick(banks.twoObjectFamilies);
+      const verb = pick(family.verbs);
+      const recipient = pick(banks.recipients);
+      const thing = pick(family.things);
+      const context = pick(banks.contexts);
+      const tense = pickWeighted(twoObjectTenses);
+      const agent = pick(banks.agents);
+      const orientation = Math.random() < 0.78 ? "person" : "thing";
+
+      const active = activeTwoObjectSentence(agent, verb, recipient, thing, tense.id, context);
+      const answer = twoObjectPassiveAnswer(verb, tense.id, orientation);
+      const second = orientation === "person"
+        ? `${capitalise(recipient)} ______ ${thing} ${context}.`
+        : `${capitalise(thing)} ______ to ${recipient} ${context}.`;
+
+      return item(
+        "Two-object passive",
+        tense.label,
+        "Use a passive structure with verbs that take a person and a thing as objects.",
+        active,
+        second,
+        [answer],
+        [twoObjectKey(tense, answer)],
+        twoObjectDistractors(answer, tense.id, verb),
+        orientation === "person"
+          ? "The person receiving something is often the most natural passive subject."
+          : "The thing can also become the passive subject when followed by to + person.",
+        `two-object-${family.family}-${tense.id}-${orientation}`
+      );
+    }
+
+    function generateReportingIt() {
+      const reporting = pick(banks.reportingVerbs);
+      const content = pick(banks.reportingContents);
+      const tense = Math.random() < 0.78 ? "present" : "past";
+      const activeVerb = activeReportingVerb(reporting.active, reporting.agents, tense);
+      const passiveAux = tense === "present" ? "is" : "was";
+      const answer = `it ${passiveAux} ${reporting.passive}`;
+      const original = `${reporting.agents} ${activeVerb} that ${content}.`;
+      const second = `______ that ${content}.`;
+
       return item(
         "Reporting passive: It + passive",
         "It + passive reporting verb + that-clause",
@@ -1517,31 +1639,54 @@
         original,
         second,
         [answer],
-        [key],
-        makeReportingDistractors(answer),
+        [reporting.passive.toUpperCase()],
+        reportingDistractors(answer),
         "Do not forget the passive auxiliary be.",
-        "reporting-it"
+        `reporting-it-${reporting.passive}-${tense}`
       );
     }
 
-    function itemReportingSubject() {
-      const [original, second, answer, key] = pick(banks.reportingSubject);
+    function generateReportingSubject() {
+      const row = pick(banks.reportingSubjectCases);
+
       return item(
         "Reporting passive: subject + infinitive",
         "Subject + passive reporting verb + infinitive",
         "Choose to be / to do for same time reference, and to have done / to have been for earlier time reference.",
-        original,
-        second,
-        [answer],
-        [key],
-        makeReportingDistractors(answer),
-        "Check whether the reported action is simultaneous or earlier.",
-        "reporting-subject"
+        row.original,
+        `${row.subject} ______ ${row.complement}.`,
+        [row.answer],
+        [row.key],
+        reportingSubjectDistractors(row.answer),
+        "Check whether the reported action is simultaneous, earlier, continuous or passive.",
+        `reporting-subject-${row.key}-${row.answer.split(" ").slice(0, 4).join("-")}`
       );
     }
 
-    function itemCausativeHaveGet() {
-      const [original, second, answer, key] = pick(banks.causativeHaveGet);
+    function generateCausativeService() {
+      const service = pick(banks.serviceObjects);
+      const who = pick(causativeSubjects);
+      const tense = pick(causativeTenses);
+      const time = pick([
+        "before the meeting",
+        "before signing it",
+        "last week",
+        "this month",
+        "before the deadline",
+        "after the inspection",
+        "as soon as possible",
+        "before the event",
+        "during the holidays",
+        "before submitting it",
+        "after several technical problems",
+        "before the course started"
+      ]);
+
+      const aux = adaptCausativeAux(tense.aux, who);
+      const answer = `${aux} ${service.object} ${service.part}`;
+      const original = causativeOriginal(service, who, tense, time);
+      const second = `${who.cap} ______ ${time}.`;
+
       return item(
         "Causative: have/get something done",
         "Have/Get + object + past participle",
@@ -1549,31 +1694,26 @@
         original,
         second,
         [answer],
-        [key],
-        makeCausativeDistractors(answer),
+        [tense.key],
+        causativeDistractors(answer, service),
         "Correct order: have/get + object + past participle.",
-        "causative-have-get"
+        `causative-service-${service.family}-${tense.id}`
       );
     }
 
-    function itemCausativeFutureContinuous() {
-      const [original, second, answer, key] = pick(banks.causativeFutureContinuous);
-      return item(
-        "Causative: have/get something done",
-        "Future / continuous causative",
-        "Causatives can also appear in future and continuous forms.",
-        original,
-        second,
-        [answer],
-        [key],
-        makeCausativeDistractors(answer),
-        "The subject arranges the action; someone else does it.",
-        "causative-future-continuous"
-      );
-    }
+    function generateMisfortune() {
+      const row = pick(banks.misfortunes);
+      const tense = pick([
+        { id: "past", aux: "had", key: "HAD" },
+        { id: "present-perfect", aux: "has had", key: "HAD" },
+        { id: "modal-perfect", aux: "must have had", key: "HAD" }
+      ]);
 
-    function itemMisfortune() {
-      const [original, second, answer, key] = pick(banks.misfortunes);
+      const aux = row.subject === "They" || row.subject === "We" ? tense.aux.replace("has had", "have had") : tense.aux;
+      const answer = `${aux} ${row.possessive} ${row.object} ${row.part}`;
+      const original = misfortuneOriginal(row, tense.id);
+      const second = `${row.subject} ______ ${row.context}.`;
+
       return item(
         "Causative: accidents and misfortunes",
         "Misfortune causative",
@@ -1581,15 +1721,28 @@
         original,
         second,
         [answer],
-        [key],
-        makeCausativeDistractors(answer),
+        [tense.key],
+        causativeDistractors(answer, { object: `${row.possessive} ${row.object}`, part: row.part }),
         "This structure focuses on the person affected by the negative event.",
-        "causative-misfortune"
+        `misfortune-${row.family}-${tense.id}`
       );
     }
 
-    function itemMakeLetGet() {
-      const [original, second, answer, key] = pick(banks.makeLetGet);
+    function generatePeopleCausative() {
+      const row = pick(banks.peopleCausatives);
+      let answer = "";
+
+      if (row.verb === "got") {
+        answer = `got ${row.object} to ${row.action}`;
+      } else {
+        answer = `${row.verb} ${row.object} ${row.action}`;
+      }
+
+      answer = trimToFiveWords(answer);
+
+      const original = peopleCausativeOriginal(row);
+      const second = peopleCausativeSecond(row);
+
       return item(
         "Make / Let / Get someone to do",
         "Make / Let / Get / Have someone do something",
@@ -1597,11 +1750,25 @@
         original,
         second,
         [answer],
-        [key],
-        makePeopleCausativeDistractors(answer),
+        [row.key],
+        peopleCausativeDistractors(answer, row),
         "MAKE and LET take bare infinitive. GET takes to-infinitive. HAVE can take object + bare infinitive.",
-        "make-let-get"
+        `people-causative-${row.meaning}-${row.family}`
       );
+    }
+
+    function generateTrap() {
+      const trapGenerators = [
+        trapBeing,
+        trapBeen,
+        trapModalBe,
+        trapModalPerfect,
+        trapCausativeOrder,
+        trapReportingPast,
+        trapMakeLetGet,
+        trapTwoObject
+      ];
+      return pick(trapGenerators)();
     }
 
     function trapBeing() {
@@ -1646,6 +1813,21 @@
         ["should updated", "should been updated", "should be updating", "should update"],
         "Modal passive: should be updated.",
         "trap-modal-be"
+      );
+    }
+
+    function trapModalPerfect() {
+      return item(
+        "Cambridge traps",
+        "Perfect modal passive needs HAVE BEEN",
+        "Perfect modal passive uses modal + have been + past participle.",
+        "The authorities should have informed residents earlier.",
+        "Residents ______ earlier.",
+        ["should have been informed"],
+        ["BEEN"],
+        ["should have informed", "should be informed", "should have being informed", "should have been informing"],
+        "Perfect modal passive: should have been informed.",
+        "trap-modal-perfect"
       );
     }
 
@@ -1694,85 +1876,66 @@
       );
     }
 
+    function trapTwoObject() {
+      return item(
+        "Cambridge traps",
+        "Two-object passive word order",
+        "The person receiving something can become the passive subject.",
+        "The organisers sent the candidates updated instructions.",
+        "The candidates ______ updated instructions.",
+        ["were sent"],
+        ["SENT"],
+        ["sent were", "were send", "were being sent", "had sent"],
+        "Past simple two-object passive: were sent.",
+        "trap-two-object"
+      );
+    }
+
     const generators = {
       "Active → Passive basic": [
-        itemPresentSimplePassive,
-        itemPastSimplePassive,
-        itemFuturePassive,
-        itemGoingToPassive
+        () => generatePassiveByTense(["present-simple", "past-simple", "future", "going-to"], "Active → Passive basic")
       ],
       "Passive tense control": [
-        itemPresentSimplePassive,
-        itemPresentContinuousPassive,
-        itemPastContinuousPassive,
-        itemFuturePassive,
-        itemGoingToPassive,
-        itemModalPassive
+        () => generatePassiveByTense(["present-simple", "present-continuous", "past-continuous", "present-perfect", "past-perfect", "future", "going-to", "future-perfect", "modal", "modal-perfect"], "Passive tense control")
       ],
       "Modal passive": [
-        itemModalPassive,
-        itemModalPerfectPassive
+        () => generatePassiveByTense(["modal", "modal-perfect"], "Modal passive")
       ],
       "Perfect passive forms": [
-        itemPresentPerfectPassive,
-        itemPastPerfectPassive,
-        itemFuturePerfectPassive,
-        itemModalPerfectPassive
+        () => generatePassiveByTense(["present-perfect", "past-perfect", "future-perfect", "modal-perfect"], "Perfect passive forms")
       ],
       "Two-object passive": [
-        itemTwoObjectPassive
+        generateTwoObjectPassive
       ],
       "Reporting passive: It + passive": [
-        itemReportingIt
+        generateReportingIt
       ],
       "Reporting passive: subject + infinitive": [
-        itemReportingSubject
+        generateReportingSubject
       ],
       "Causative: have/get something done": [
-        itemCausativeHaveGet,
-        itemCausativeFutureContinuous
+        generateCausativeService
       ],
       "Causative: accidents and misfortunes": [
-        itemMisfortune
+        generateMisfortune
       ],
       "Make / Let / Get someone to do": [
-        itemMakeLetGet
+        generatePeopleCausative
       ],
       "Cambridge traps": [
-        trapBeing,
-        trapBeen,
-        trapModalBe,
-        trapCausativeOrder,
-        trapReportingPast,
-        trapMakeLetGet
+        generateTrap
       ]
     };
 
     generators["Mixed exam decisions"] = [
-      itemPresentSimplePassive,
-      itemPastSimplePassive,
-      itemPresentContinuousPassive,
-      itemPastContinuousPassive,
-      itemPresentPerfectPassive,
-      itemPastPerfectPassive,
-      itemFuturePassive,
-      itemGoingToPassive,
-      itemFuturePerfectPassive,
-      itemModalPassive,
-      itemModalPerfectPassive,
-      itemTwoObjectPassive,
-      itemReportingIt,
-      itemReportingSubject,
-      itemCausativeHaveGet,
-      itemCausativeFutureContinuous,
-      itemMisfortune,
-      itemMakeLetGet,
-      trapBeing,
-      trapBeen,
-      trapModalBe,
-      trapCausativeOrder,
-      trapReportingPast,
-      trapMakeLetGet
+      () => generatePassiveByTense(["present-simple", "present-continuous", "past-simple", "past-continuous", "present-perfect", "past-perfect", "future", "going-to", "future-perfect", "modal", "modal-perfect"], "Mixed exam decisions"),
+      generateTwoObjectPassive,
+      generateReportingIt,
+      generateReportingSubject,
+      generateCausativeService,
+      generateMisfortune,
+      generatePeopleCausative,
+      generateTrap
     ];
 
     const allPracticeGenerators = Object.entries(generators)
@@ -1799,11 +1962,15 @@
       examScore: 0,
       examChecked: false,
       examAnswers: [],
-      patternHistory: {}
+      usage: {}
     };
 
     function $(id) {
       return document.getElementById(id);
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
     }
 
     function shuffle(array) {
@@ -1815,8 +1982,486 @@
       return copy;
     }
 
-    function pick(array) {
-      return array[Math.floor(Math.random() * array.length)];
+    function pickWeighted(array) {
+      const total = array.reduce((sum, item) => sum + (item.weight || 1), 0);
+      let point = Math.random() * total;
+
+      for (const item of array) {
+        point -= item.weight || 1;
+        if (point <= 0) return item;
+      }
+
+      return array[array.length - 1];
+    }
+
+    function capitalise(text) {
+      return String(text).charAt(0).toUpperCase() + String(text).slice(1);
+    }
+
+    function bePresent(plural) {
+      return plural ? "are" : "is";
+    }
+
+    function bePast(plural) {
+      return plural ? "were" : "was";
+    }
+
+    function havePresent(plural) {
+      return plural ? "have" : "has";
+    }
+
+    function activeBe(agent, past = false) {
+      return past ? (agent.plural ? "were" : "was") : (agent.plural ? "are" : "is");
+    }
+
+    function activeHave(agent) {
+      return agent.plural ? "have" : "has";
+    }
+
+    function activeVerbPresent(agent, action) {
+      return agent.plural ? action.base : action.third;
+    }
+
+    function activeSentence(agent, action, tenseId, context) {
+      const s = capitalise(agent.text);
+
+      if (tenseId === "present-simple") {
+        return `${s} ${activeVerbPresent(agent, action)} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "present-continuous") {
+        return `${s} ${activeBe(agent)} ${action.ing} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "past-simple") {
+        return `${s} ${action.past} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "past-continuous") {
+        return `${s} ${activeBe(agent, true)} ${action.ing} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "present-perfect") {
+        return `${s} ${activeHave(agent)} ${action.part} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "past-perfect") {
+        return `${s} had ${action.part} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "future") {
+        return `${s} will ${action.base} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "going-to") {
+        return `${s} ${activeBe(agent)} going to ${action.base} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "future-perfect") {
+        return `${s} will have ${action.part} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "modal") {
+        const modal = pick(modalOptions);
+        return `${s} ${modal} ${action.base} ${action.object} ${context}.`;
+      }
+
+      if (tenseId === "modal-perfect") {
+        const modalPerfect = pick(modalPerfectOptions);
+        return `${s} ${modalPerfect} ${action.part} ${action.object} ${context}.`;
+      }
+
+      return `${s} ${action.past} ${action.object} ${context}.`;
+    }
+
+    function passiveAnswer(tenseId, action) {
+      if (tenseId === "present-simple") return `${bePresent(action.plural)} ${action.part}`;
+      if (tenseId === "present-continuous") return `${bePresent(action.plural)} being ${action.part}`;
+      if (tenseId === "past-simple") return `${bePast(action.plural)} ${action.part}`;
+      if (tenseId === "past-continuous") return `${bePast(action.plural)} being ${action.part}`;
+      if (tenseId === "present-perfect") return `${havePresent(action.plural)} been ${action.part}`;
+      if (tenseId === "past-perfect") return `had been ${action.part}`;
+      if (tenseId === "future") return `will be ${action.part}`;
+      if (tenseId === "going-to") return `${bePresent(action.plural)} going to be ${action.part}`;
+      if (tenseId === "future-perfect") return `will have been ${action.part}`;
+      if (tenseId === "modal") return `${pick(modalOptions)} be ${action.part}`;
+      if (tenseId === "modal-perfect") return `${pick(modalPerfectOptions)} been ${action.part}`;
+      return `${bePast(action.plural)} ${action.part}`;
+    }
+
+    function passiveKey(pattern, answer, action) {
+      if (answer.includes("being")) return "BEING";
+      if (answer.includes("been")) return "BEEN";
+      if (answer.includes(" be ")) return "BE";
+      if (answer.startsWith("is")) return "IS";
+      if (answer.startsWith("are")) return "ARE";
+      if (answer.startsWith("was")) return "WAS";
+      if (answer.startsWith("were")) return "WERE";
+      return pattern.key;
+    }
+
+    function passiveMeaning(tenseId) {
+      const meanings = {
+        "present-simple": "Use present simple passive for facts, routines, systems and regular procedures.",
+        "present-continuous": "Use being for actions in progress now or around now.",
+        "past-simple": "Use was/were + past participle for completed past actions.",
+        "past-continuous": "Use was/were being + past participle for actions in progress in the past.",
+        "present-perfect": "Use has/have been + past participle for present perfect passive.",
+        "past-perfect": "Use had been + past participle for actions completed before another past point.",
+        "future": "Use will be + past participle for future passive.",
+        "going-to": "Use going to be + past participle for planned future passive.",
+        "future-perfect": "Use will have been + past participle for future perfect passive.",
+        "modal": "Use modal + be + past participle.",
+        "modal-perfect": "Use modal + have been + past participle."
+      };
+      return meanings[tenseId] || "Transform the sentence into the passive while keeping the same meaning.";
+    }
+
+    function passiveNote(tenseId) {
+      const notes = {
+        "present-simple": "Present simple passive: am/is/are + past participle.",
+        "present-continuous": "Continuous passive forms need being.",
+        "past-simple": "Past simple passive: was/were + past participle.",
+        "past-continuous": "Past continuous passive: was/were being + past participle.",
+        "present-perfect": "Perfect passive forms need been.",
+        "past-perfect": "Past perfect passive: had been + past participle.",
+        "future": "Future passive: will be + past participle.",
+        "going-to": "Going to passive: am/is/are going to be + past participle.",
+        "future-perfect": "Future perfect passive: will have been + past participle.",
+        "modal": "Modal passive: modal + be + past participle.",
+        "modal-perfect": "Perfect modal passive: modal + have been + past participle."
+      };
+      return notes[tenseId] || "Check the passive verb form carefully.";
+    }
+
+    function activeTwoObjectSentence(agent, verb, recipient, thing, tenseId, context) {
+      const s = capitalise(agent.text);
+
+      if (tenseId === "present-simple") return `${s} ${agent.plural ? verb.base : verb.third} ${recipient} ${thing} ${context}.`;
+      if (tenseId === "past-simple") return `${s} ${verb.past} ${recipient} ${thing} ${context}.`;
+      if (tenseId === "present-perfect") return `${s} ${activeHave(agent)} ${verb.part} ${recipient} ${thing} ${context}.`;
+      if (tenseId === "past-perfect") return `${s} had ${verb.part} ${recipient} ${thing} ${context}.`;
+      if (tenseId === "future") return `${s} will ${verb.base} ${recipient} ${thing} ${context}.`;
+      if (tenseId === "modal") return `${s} ${pick(modalOptions)} ${verb.base} ${recipient} ${thing} ${context}.`;
+      if (tenseId === "modal-perfect") return `${s} ${pick(modalPerfectOptions)} ${verb.part} ${recipient} ${thing} ${context}.`;
+
+      return `${s} ${verb.past} ${recipient} ${thing} ${context}.`;
+    }
+
+    function twoObjectPassiveAnswer(verb, tenseId, orientation) {
+      const plural = true;
+
+      if (tenseId === "present-simple") return `${bePresent(plural)} ${verb.part}`;
+      if (tenseId === "past-simple") return `${bePast(plural)} ${verb.part}`;
+      if (tenseId === "present-perfect") return `${havePresent(plural)} been ${verb.part}`;
+      if (tenseId === "past-perfect") return `had been ${verb.part}`;
+      if (tenseId === "future") return `will be ${verb.part}`;
+      if (tenseId === "modal") return `${pick(modalOptions)} be ${verb.part}`;
+      if (tenseId === "modal-perfect") return `${pick(modalPerfectOptions)} been ${verb.part}`;
+
+      return `${bePast(plural)} ${verb.part}`;
+    }
+
+    function twoObjectKey(tense, answer) {
+      if (answer.includes("been")) return "BEEN";
+      if (answer.includes("be ")) return "BE";
+      if (answer.startsWith("are")) return "ARE";
+      if (answer.startsWith("were")) return "WERE";
+      return tense.key;
+    }
+
+    function activeReportingVerb(base, agentText, tense) {
+      const plural = !["People", "Experts", "Researchers", "Journalists", "Analysts", "Specialists", "Several sources", "The authorities"].includes(agentText) ? false : true;
+      if (tense === "past") return regularPast(base);
+      if (plural) return base;
+      return thirdPerson(base);
+    }
+
+    function regularPast(base) {
+      const irregular = { say: "said", think: "thought", know: "knew" };
+      if (irregular[base]) return irregular[base];
+      if (base.endsWith("e")) return base + "d";
+      return base + "ed";
+    }
+
+    function thirdPerson(base) {
+      if (base === "say") return "says";
+      if (base.endsWith("y")) return base.slice(0, -1) + "ies";
+      if (base.endsWith("s") || base.endsWith("sh") || base.endsWith("ch")) return base + "es";
+      return base + "s";
+    }
+
+    function adaptCausativeAux(aux, who) {
+      if (aux === "are having") return ["he", "she", "I", "the school", "the company"].includes(who.subject) ? (who.subject === "I" ? "am having" : "is having") : "are having";
+      if (aux === "are getting") return ["he", "she", "I", "the school", "the company"].includes(who.subject) ? (who.subject === "I" ? "am getting" : "is getting") : "are getting";
+      if (aux === "are going to have") return ["he", "she", "I", "the school", "the company"].includes(who.subject) ? (who.subject === "I" ? "am going to have" : "is going to have") : "are going to have";
+      if (aux === "are going to get") return ["he", "she", "I", "the school", "the company"].includes(who.subject) ? (who.subject === "I" ? "am going to get" : "is going to get") : "are going to get";
+      return aux;
+    }
+
+    function causativeOriginal(service, who, tense, time) {
+      if (tense.originalVerb === "past") {
+        return `${capitalise(service.specialist)} ${service.part} ${service.object} ${time}.`;
+      }
+
+      if (tense.originalVerb === "will") {
+        return `${capitalise(service.specialist)} will ${baseFromParticiple(service.part)} ${service.object} ${time}.`;
+      }
+
+      if (tense.originalVerb === "is") {
+        return `${capitalise(service.specialist)} is ${ingFromParticiple(service.part)} ${service.object} ${time}.`;
+      }
+
+      if (tense.originalVerb === "going") {
+        return `${capitalise(service.specialist)} is going to ${baseFromParticiple(service.part)} ${service.object} ${time}.`;
+      }
+
+      return `${capitalise(service.specialist)} ${service.part} ${service.object} ${time}.`;
+    }
+
+    function baseFromParticiple(part) {
+      const map = {
+        reviewed: "review",
+        translated: "translate",
+        redesigned: "redesign",
+        checked: "check",
+        serviced: "service",
+        proofread: "proofread",
+        edited: "edit",
+        installed: "install",
+        inspected: "inspect",
+        redecorated: "redecorate",
+        renewed: "renew",
+        repaired: "repair",
+        improved: "improve",
+        recovered: "recover",
+        repainted: "repaint",
+        revised: "revise",
+        issued: "issue",
+        processed: "process",
+        replaced: "replace",
+        verified: "verify",
+        cleaned: "clean",
+        signed: "sign"
+      };
+      return map[part] || part.replace(/ed$/, "");
+    }
+
+    function ingFromParticiple(part) {
+      const base = baseFromParticiple(part);
+      if (base.endsWith("e") && base !== "be") return base.slice(0, -1) + "ing";
+      return base + "ing";
+    }
+
+    function misfortuneOriginal(row, tenseId) {
+      if (tenseId === "present-perfect") {
+        return `Someone has ${row.part} ${row.possessive} ${row.object} ${row.context}.`;
+      }
+
+      if (tenseId === "modal-perfect") {
+        return `Someone must have ${row.part} ${row.possessive} ${row.object} ${row.context}.`;
+      }
+
+      return `Someone ${row.part} ${row.possessive} ${row.object} ${row.context}.`;
+    }
+
+    function peopleCausativeOriginal(row) {
+      if (row.meaning === "force") return `The situation forced ${row.object} to ${row.action}.`;
+      if (row.meaning === "permission") return `The organisers allowed ${row.object} to ${row.action}.`;
+      if (row.meaning === "persuasion") return `We persuaded ${row.object} to ${row.action}.`;
+      return `The director asked ${row.object} to ${row.action}.`;
+    }
+
+    function peopleCausativeSecond(row) {
+      const words = row.action.split(" ");
+      const visible = words.slice(1).join(" ");
+      if (row.verb === "got") return `We ______ ${visible}.`;
+      if (row.verb === "had") return `The director ______ ${visible}.`;
+      if (row.verb === "let") return `The organisers ______ ${visible}.`;
+      return `The situation ______ ${visible}.`;
+    }
+
+    function trimToFiveWords(answer) {
+      const words = answer.split(" ");
+      if (words.length <= 5) return answer;
+
+      if (answer.startsWith("made the students rewrite")) return "made the students rewrite";
+      if (answer.startsWith("let the applicants submit")) return "let the applicants submit";
+      if (answer.startsWith("got the manager to")) return "got the manager to approve";
+      if (answer.startsWith("had the assistant prepare")) return "had the assistant prepare";
+      if (answer.startsWith("made the team reconsider")) return "made the team reconsider";
+      if (answer.startsWith("let the volunteers choose")) return "let the volunteers choose";
+      if (answer.startsWith("got the technician to")) return "got the technician to check";
+      if (answer.startsWith("had the secretary arrange")) return "had the secretary arrange";
+      if (answer.startsWith("made us correct")) return "made us correct";
+      if (answer.startsWith("let the students use")) return "let the students use";
+      if (answer.startsWith("got the coordinator to")) return "got the coordinator to change";
+      if (answer.startsWith("had the receptionist confirm")) return "had the receptionist confirm";
+      if (answer.startsWith("made the players repeat")) return "made the players repeat";
+      if (answer.startsWith("let the participants leave")) return "let the participants leave";
+      if (answer.startsWith("got the editor to")) return "got the editor to revise";
+      if (answer.startsWith("had the technician install")) return "had the technician install";
+
+      return words.slice(0, 5).join(" ");
+    }
+
+    function passiveDistractors(answer, tenseId, action) {
+      const part = action.part;
+      const base = action.base;
+      const ing = action.ing;
+      const first = answer.split(" ")[0];
+
+      if (tenseId.includes("continuous")) {
+        return [
+          answer.replace("being ", ""),
+          answer.replace("being ", "been "),
+          answer.replace(part, ing),
+          answer.replace(first + " ", "")
+        ];
+      }
+
+      if (tenseId.includes("perfect")) {
+        return [
+          answer.replace("been ", ""),
+          answer.replace("been ", "being "),
+          answer.replace(part, ing),
+          answer.replace("had been", "was been").replace("has been", "was been").replace("have been", "were been")
+        ];
+      }
+
+      if (tenseId === "modal") {
+        return [
+          answer.replace("be ", ""),
+          answer.replace("be ", "been "),
+          answer.replace("be ", "being "),
+          answer.replace(part, base)
+        ];
+      }
+
+      if (tenseId === "modal-perfect") {
+        return [
+          answer.replace("been ", ""),
+          answer.replace("have been", "be"),
+          answer.replace("been ", "being "),
+          answer.replace(part, ing)
+        ];
+      }
+
+      if (tenseId === "future") {
+        return [
+          answer.replace("will be ", "will "),
+          answer.replace("will be ", "will been "),
+          answer.replace("will be ", "will being "),
+          answer.replace(part, ing)
+        ];
+      }
+
+      if (tenseId === "going-to") {
+        return [
+          answer.replace("to be ", "to "),
+          answer.replace("to be ", "to been "),
+          answer.replace("to be ", "to being "),
+          answer.replace(part, base)
+        ];
+      }
+
+      return [
+        answer.replace(first + " ", ""),
+        answer.replace(part, ing),
+        answer.replace("is ", "was ").replace("are ", "were ").replace("was ", "is ").replace("were ", "are "),
+        answer.replace(part, base)
+      ];
+    }
+
+    function twoObjectDistractors(answer, tenseId, verb) {
+      if (answer.includes("been")) {
+        return [
+          answer.replace("been ", ""),
+          answer.replace("been ", "being "),
+          answer.replace(verb.part, verb.base),
+          answer.replace(verb.part, verb.ing)
+        ];
+      }
+
+      if (answer.includes(" be ")) {
+        return [
+          answer.replace("be ", ""),
+          answer.replace("be ", "been "),
+          answer.replace(verb.part, verb.base),
+          answer.replace(verb.part, verb.ing)
+        ];
+      }
+
+      return [
+        answer.replace("are ", "were ").replace("were ", "are "),
+        answer.replace(verb.part, verb.base),
+        answer.replace(verb.part, verb.ing),
+        answer.split(" ").reverse().join(" ")
+      ];
+    }
+
+    function reportingDistractors(answer) {
+      return [
+        answer.replace("is ", ""),
+        answer.replace("was ", ""),
+        answer.replace("believed", "believing").replace("thought", "thinking").replace("reported", "reporting").replace("expected", "expecting").replace("claimed", "claiming").replace("considered", "considering").replace("known", "knowing"),
+        answer.replace("it is", "there is").replace("it was", "there was")
+      ];
+    }
+
+    function reportingSubjectDistractors(answer) {
+      return [
+        answer.replace("to have ", "to "),
+        answer.replace("to be ", "being "),
+        answer.replace("is ", ""),
+        answer.replace("are ", ""),
+        answer.replace("believed", "believing").replace("thought", "thinking").replace("reported", "reporting").replace("expected", "expecting").replace("claimed", "claiming").replace("considered", "considering")
+      ];
+    }
+
+    function causativeDistractors(answer, service) {
+      return [
+        answer.replace(`${service.object} ${service.part}`, `${service.part} ${service.object}`),
+        answer.replace(service.part, baseFromParticiple(service.part)),
+        answer.replace(service.part, ingFromParticiple(service.part)),
+        answer.replace(/^had /, "was ").replace(/^got /, "was ").replace(/^will have /, "will ").replace(/^will get /, "will ")
+      ];
+    }
+
+    function peopleCausativeDistractors(answer, row) {
+      if (row.verb === "got") {
+        return [
+          answer.replace(" to ", " "),
+          answer.replace("got ", "made "),
+          answer.replace("got ", "let "),
+          answer.replace("got ", "had ")
+        ];
+      }
+
+      if (row.verb === "made") {
+        return [
+          answer.replace("made ", "made to "),
+          answer.replace("made ", "let "),
+          answer.replace("made ", "got "),
+          answer.replace("made ", "had ")
+        ];
+      }
+
+      if (row.verb === "let") {
+        return [
+          answer.replace("let ", "let to "),
+          answer.replace("let ", "made "),
+          answer.replace("let ", "got "),
+          answer.replace("let ", "had ")
+        ];
+      }
+
+      return [
+        answer.replace("had ", "had to "),
+        answer.replace("had ", "got "),
+        answer.replace("had ", "let "),
+        answer.replace("had ", "made ")
+      ];
     }
 
     function normalise(text) {
@@ -1835,9 +2480,8 @@
     }
 
     function keyIsIncluded(answer, key) {
-      const answerWords = normalise(answer).split(" ");
-      const keyWords = normalise(key).split(" ");
-      return keyWords.every(word => answerWords.includes(word));
+      const words = normalise(answer).split(" ");
+      return normalise(key).split(" ").every(keyWord => words.includes(keyWord));
     }
 
     function getAcceptedAnswers(exercise) {
@@ -1872,9 +2516,10 @@
         .filter(option =>
           wordCount(option) >= 2 &&
           wordCount(option) <= 5 &&
-          !accepted.includes(normalise(option))
+          !accepted.includes(normalise(option)) &&
+          option !== primaryAnswer(exercise)
         )
-        .slice(0, 6);
+        .slice(0, 8);
     }
 
     function signature(exercise) {
@@ -1883,6 +2528,10 @@
 
     function patternSignature(exercise) {
       return `${exercise.type}::${exercise.family || exercise.expression}`;
+    }
+
+    function lexicalSignature(exercise) {
+      return normalise(`${exercise.family || ""} ${primaryAnswer(exercise)} ${exercise.second}`);
     }
 
     function getGeneratorList(category) {
@@ -1901,23 +2550,16 @@
 
     function generateExercise(category = "All categories", mode = "transform", recent = []) {
       const generatorList = getGeneratorList(category);
-      const localPatternCount = state.patternHistory[category] || {};
+      const usageKey = `${mode}::${category}`;
+      state.usage[usageKey] = state.usage[usageKey] || { pattern: {}, lexical: {} };
 
-      for (let attempt = 0; attempt < 180; attempt++) {
-        const candidates = shuffle(generatorList)
-          .map(generator => {
-            const exercise = safeGenerate(generator);
-            if (!exercise) return null;
-            const count = localPatternCount[patternSignature(exercise)] || 0;
-            return { generator, exercise, count };
-          })
-          .filter(Boolean)
-          .sort((a, b) => a.count - b.count);
+      const usage = state.usage[usageKey];
+      const candidates = [];
 
-        const selected = candidates[0];
-        if (!selected) continue;
-
-        const exercise = selected.exercise;
+      for (let i = 0; i < 160; i++) {
+        const generator = pick(generatorList);
+        const exercise = safeGenerate(generator);
+        if (!exercise) continue;
 
         const validKeys = shuffle(exercise.keyOptions || []).filter(key =>
           getAcceptedAnswers(exercise).some(answer => keyIsIncluded(answer, key))
@@ -1940,159 +2582,34 @@
 
         const sig = signature(finalExercise);
         const psig = patternSignature(finalExercise);
+        const lsig = lexicalSignature(finalExercise);
 
-        if (recent.includes(sig) && attempt < 120) continue;
-        if ((localPatternCount[psig] || 0) > 3 && attempt < 100) continue;
+        let score = 0;
+        score += (usage.pattern[psig] || 0) * 12;
+        score += (usage.lexical[lsig] || 0) * 20;
+        if (recent.includes(sig)) score += 1000;
+        if (recent.slice(-12).some(item => item.includes(normalise(primaryAnswer(finalExercise)).slice(0, 12)))) score += 25;
 
-        state.patternHistory[category] = state.patternHistory[category] || {};
-        state.patternHistory[category][psig] = (state.patternHistory[category][psig] || 0) + 1;
-
-        return finalExercise;
+        candidates.push({ exercise: finalExercise, score, psig, lsig, sig });
       }
 
-      const fallback = itemPresentPerfectPassive();
-      return {
-        ...fallback,
-        key: fallback.keyOptions[0]
-      };
+      if (!candidates.length) {
+        const fallback = generatePassiveByTense(["present-perfect"], "Passive tense control");
+        return { ...fallback, key: fallback.keyOptions[0] };
+      }
+
+      candidates.sort((a, b) => a.score - b.score);
+      const selected = candidates[0];
+
+      usage.pattern[selected.psig] = (usage.pattern[selected.psig] || 0) + 1;
+      usage.lexical[selected.lsig] = (usage.lexical[selected.lsig] || 0) + 1;
+
+      return selected.exercise;
     }
 
     function remember(recentList, exercise) {
       recentList.push(signature(exercise));
-      while (recentList.length > 40) recentList.shift();
-    }
-
-    function makePassiveDistractors(answer, type) {
-      const a = answer;
-
-      if (type === "continuous") {
-        return [
-          a.replace("being ", ""),
-          a.replace("being ", "been "),
-          a.replace(/is |are |was |were /, ""),
-          a.replace("assessed", "assessing").replace("redesigned", "redesigning").replace("analysed", "analysing").replace("restored", "restoring").replace("upgraded", "upgrading").replace("reviewed", "reviewing").replace("tested", "testing").replace("prepared", "preparing")
-        ];
-      }
-
-      if (type === "perfect") {
-        return [
-          a.replace("been ", ""),
-          a.replace("been ", "being "),
-          a.replace("has ", "was ").replace("have ", "were ").replace("had ", "was "),
-          a.replace("approved", "approving").replace("confirmed", "confirming").replace("published", "publishing").replace("completed", "completing").replace("submitted", "submitting")
-        ];
-      }
-
-      if (type === "futureperfect") {
-        return [
-          a.replace("been ", ""),
-          a.replace("will have been", "will be"),
-          a.replace("will have been", "will have"),
-          a.replace("been ", "being ")
-        ];
-      }
-
-      if (type === "modalperfect") {
-        return [
-          a.replace("been ", ""),
-          a.replace("have been", "be"),
-          a.replace("been ", "being "),
-          a.replace("should have", "should").replace("could have", "could").replace("must have", "must").replace("might have", "might")
-        ];
-      }
-
-      if (type === "modal") {
-        return [
-          a.replace("be ", ""),
-          a.replace("be ", "been "),
-          a.replace("be ", "being "),
-          a.replace("reviewed", "review").replace("revealed", "reveal").replace("submitted", "submit").replace("replaced", "replace").replace("rejected", "reject").replace("reconsidered", "reconsidered")
-        ];
-      }
-
-      if (type === "future") {
-        return [
-          a.replace("will be ", "will "),
-          a.replace("will be ", "will been "),
-          a.replace("will be ", "will being "),
-          a.replace("announced", "announcing").replace("confirmed", "confirming").replace("introduced", "introducing").replace("published", "publishing")
-        ];
-      }
-
-      if (type === "goingto") {
-        return [
-          a.replace("to be ", "to "),
-          a.replace("to be ", "to been "),
-          a.replace("to be ", "to being "),
-          a.replace("announced", "announce").replace("introduced", "introduce").replace("renovated", "renovate").replace("translated", "translate")
-        ];
-      }
-
-      return [
-        a.replace("is ", ""),
-        a.replace("are ", ""),
-        a.replace("was ", "is "),
-        a.replace("were ", "are "),
-        a.replace("reviewed", "reviewing").replace("approved", "approving").replace("published", "publishing").replace("processed", "processing")
-      ];
-    }
-
-    function makeTwoObjectDistractors(answer) {
-      return [
-        answer.replace("was", "were").replace("were", "was"),
-        answer.replace("offered", "offer").replace("awarded", "award").replace("sent", "send").replace("shown", "show").replace("given", "gave").replace("paid", "pay").replace("taught", "teach"),
-        answer.replace("were ", "").replace("was ", ""),
-        answer.replace("offered", "offering").replace("awarded", "awarding").replace("sent", "sending").replace("shown", "showing").replace("given", "giving")
-      ];
-    }
-
-    function makeReportingDistractors(answer) {
-      return [
-        answer.replace("is ", ""),
-        answer.replace("are ", ""),
-        answer.replace("was ", ""),
-        answer.replace("to have ", "to "),
-        answer.replace("to be ", "being "),
-        answer.replace("believed", "believing").replace("thought", "thinking").replace("reported", "reporting").replace("expected", "expecting").replace("claimed", "claiming").replace("considered", "considering")
-      ];
-    }
-
-    function makeCausativeDistractors(answer) {
-      return [
-        answer.replace(/had |got |will have |will get |having |getting /, "had "),
-        answer.replace(/ reviewed| checked| redesigned| translated| inspected| proofread| installed| serviced| edited| upgraded| renewed| damaged| stolen| hacked| cancelled| misplaced| scratched| delayed| leaked/g, " review"),
-        answer.replace(/had |got |having |getting /, "was "),
-        answer.replace(/ reviewed| checked| redesigned| translated| inspected| proofread| installed| serviced| edited| upgraded| renewed| damaged| stolen| hacked| cancelled| misplaced| scratched| delayed| leaked/g, " reviewing")
-      ];
-    }
-
-    function makePeopleCausativeDistractors(answer) {
-      return [
-        answer.replace(" to ", " "),
-        answer.replace("made ", "made to "),
-        answer.replace("let ", "let to "),
-        answer.replace("got ", "got to "),
-        answer.replace("had ", "had to ")
-      ];
-    }
-
-    function modalActiveFromPassive(answer) {
-      return answer
-        .replace("should be", "should")
-        .replace("must not be", "must not")
-        .replace("must be", "must")
-        .replace("can be", "can")
-        .replace("might be", "might")
-        .replace("could be", "could")
-        .replace("may be", "may");
-    }
-
-    function modalPerfectActiveFromPassive(answer) {
-      return answer
-        .replace("should have been", "should have")
-        .replace("could have been", "could have")
-        .replace("must have been", "must have")
-        .replace("might have been", "might have");
+      while (recentList.length > 90) recentList.shift();
     }
 
     function populatePracticeSelect(id, value) {
@@ -2268,7 +2785,7 @@
       const selected = [];
       const used = [];
 
-      for (let attempt = 0; attempt < 180; attempt++) {
+      for (let attempt = 0; attempt < 220; attempt++) {
         const exercise = generateExercise(state.examCategory, "transform", used);
         const sig = signature(exercise);
 
@@ -2485,7 +3002,6 @@
         state.mcScore = 0;
         state.mcAttempts = 0;
         state.mcRecent = [];
-        state.patternHistory[state.mcCategory] = {};
         newMcQuestion();
       });
 
@@ -2494,7 +3010,7 @@
         state.mcScore = 0;
         state.mcAttempts = 0;
         state.mcRecent = [];
-        state.patternHistory[state.mcCategory] = {};
+        state.usage[`multiple::${state.mcCategory}`] = { pattern: {}, lexical: {} };
         renderMc();
       });
 
@@ -2503,7 +3019,6 @@
         state.trScore = 0;
         state.trAttempts = 0;
         state.trRecent = [];
-        state.patternHistory[state.trCategory] = {};
         newTransformation();
       });
 
@@ -2515,7 +3030,7 @@
         state.trScore = 0;
         state.trAttempts = 0;
         state.trRecent = [];
-        state.patternHistory[state.trCategory] = {};
+        state.usage[`transform::${state.trCategory}`] = { pattern: {}, lexical: {} };
         renderTransformation();
       });
 
