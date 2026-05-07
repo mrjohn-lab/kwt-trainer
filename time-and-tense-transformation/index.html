@@ -425,10 +425,11 @@
         present perfect and time expressions, following the official 2–5-word answer limit.
       </p>
       <div class="stats">
-        <span id="totalCount" class="pill"></span>
-        <span id="agoCount" class="pill"></span>
-        <span id="sinceCount" class="pill"></span>
-        <span id="lastCount" class="pill"></span>
+        <span class="pill">Core patterns</span>
+        <span class="pill">AGO ⇄ SINCE</span>
+        <span class="pill">SINCE ⇄ FOR</span>
+        <span class="pill">LAST ⇄ PRESENT PERFECT</span>
+        <span class="pill">STARTED ⇄ BEEN</span>
       </div>
     </section>
 
@@ -1060,13 +1061,6 @@
         .join("");
     }
 
-    function updateStats() {
-      $("totalCount").textContent = `${items.length} total items`;
-      $("agoCount").textContent = `${items.filter(i => i.type === "AGO / FOR / SINCE").length} AGO / FOR / SINCE`;
-      $("sinceCount").textContent = `${items.filter(i => i.type === "STARTED / BEEN").length} STARTED / BEEN`;
-      $("lastCount").textContent = `${items.filter(i => i.type === "LAST / TIME").length} LAST / TIME`;
-    }
-
     function showTab(tab) {
       document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
       document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
@@ -1431,7 +1425,6 @@
       populateSelect("mcCategory", state.mcCategory);
       populateSelect("trCategory", state.trCategory);
       populateSelect("examCategory", state.examCategory);
-      updateStats();
 
       document.querySelectorAll(".tab").forEach(button => {
         button.addEventListener("click", () => showTab(button.dataset.tab));
