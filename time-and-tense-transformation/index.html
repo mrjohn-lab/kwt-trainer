@@ -1,10 +1,1527 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Time and Tense Transformation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block 1 · Mr John’s KWT Lab</title>
+  <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
+
+  <style>
+    :root {
+      --navy: #062b63;
+      --blue: #005eb8;
+      --light-blue: #eaf3ff;
+      --orange: #f28c00;
+      --orange-soft: #fff3df;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d9e2ef;
+      --white: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 94, 184, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 0, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 46px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 0 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand img {
+      height: auto;
+      width: 260px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .home-link {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(6, 43, 99, 0.06);
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--orange-soft);
+      color: #9a5700;
+      border: 1px solid rgba(242, 140, 0, 0.25);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -1.4px;
+    }
+
+    .highlight { color: var(--orange); }
+
+    .hero p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 900px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    button,
+    .tab {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
+
+    button:hover,
+    .tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab.active,
+    .primary {
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      border-color: transparent;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    select,
+    input {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+    }
+
+    select { min-width: 240px; }
+    input { width: 100%; }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hidden { display: none !important; }
+
+    .badge,
+    .pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .badge-blue {
+      background: var(--light-blue);
+      color: var(--blue);
+      border-color: rgba(0, 94, 184, 0.18);
+    }
+
+    .badge-orange {
+      background: var(--orange-soft);
+      color: #9a5700;
+      border-color: rgba(242, 140, 0, 0.25);
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bbf7d0;
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: #fecaca;
+    }
+
+    .muted { color: var(--muted); }
+
+    .flashcard {
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .flashcard h2 {
+      font-size: clamp(32px, 5vw, 50px);
+      color: var(--navy);
+      margin: 14px 0;
+    }
+
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      border-color: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      text-align: left;
+      min-height: 58px;
+    }
+
+    .option.good {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: #14532d;
+    }
+
+    .option.bad {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: #7f1d1d;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+
+    .result-number {
+      color: var(--navy);
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin: 8px 0;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 760px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brand img {
+        width: 220px;
+        height: auto;
+      }
+
+      .tabs,
+      .answer-row,
+      .option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding: 26px 20px; }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Block 1 is working</h1>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
+        <div>
+          <span class="brand-title">Mr John’s KWT Lab</span>
+          <span class="brand-subtitle">Block 1 · Time and Tense Transformation</span>
+        </div>
+      </div>
+
+      <a class="home-link" href="../index.html">← Back to Lab Home</a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
+      <h1>Time & Tense <span class="highlight">Transformation</span> Trainer</h1>
+      <p>
+        Practise B2 First Part 4 transformations with AGO, FOR, SINCE, LAST, STARTED,
+        BEEN and TIME. This block trains controlled paraphrasing between past simple,
+        present perfect and time expressions, following the official 2–5-word answer limit.
+      </p>
+      <div class="stats">
+        <span id="totalCount" class="pill"></span>
+        <span id="agoCount" class="pill"></span>
+        <span id="sinceCount" class="pill"></span>
+        <span id="lastCount" class="pill"></span>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="study">🧠 Study Mode</button>
+      <button class="tab" data-tab="multiple">✓ Multiple Choice</button>
+      <button class="tab" data-tab="transform">✎ Transformations</button>
+      <button class="tab" data-tab="exam">🏆 Exam Mode</button>
+    </nav>
+
+    <section id="study" class="tab-section">
+      <div class="toolbar">
+        <select id="studyCategory"></select>
+        <div class="button-group">
+          <button id="studyRandom">Random</button>
+          <button id="studyNext" class="primary">Next</button>
+        </div>
+      </div>
+
+      <div id="studyCard" class="card flashcard"></div>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
+    </section>
+
+    <section id="multiple" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="mcCategory"></select>
+        <div class="button-group">
+          <button id="mcNew">New question</button>
+          <button id="mcReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="mcType" class="badge badge-blue"></span>
+          <span id="mcScore" class="pill"></span>
+        </div>
+
+        <div id="mcQuestion" class="question"></div>
+        <div id="mcOptions" class="option-grid"></div>
+        <div id="mcFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="transform" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="trCategory"></select>
+        <div class="button-group">
+          <button id="trHint">Hint</button>
+          <button id="trNew">New exercise</button>
+          <button id="trReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="trType" class="badge badge-blue"></span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
+          <span id="trScore" class="pill"></span>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="trFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="trSecond" class="box"></div>
+
+        <p><span id="trKey" class="badge badge-orange"></span></p>
+
+        <div id="trHintBox" class="box hidden"></div>
+
+        <div class="answer-row">
+          <input id="trInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="trCheck" class="primary">Check</button>
+          <button id="trReveal">Reveal</button>
+        </div>
+
+        <div id="trFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="exam" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="examCategory"></select>
+        <div class="button-group">
+          <button id="examStart" class="primary">Start 10-question challenge</button>
+          <button id="examRestart">Restart challenge</button>
+        </div>
+      </div>
+
+      <div class="card" id="examIntro">
+        <span class="badge badge-orange">Exam Mode</span>
+        <h2 style="color:var(--navy); margin-bottom:8px;">10-question challenge</h2>
+        <p class="muted">
+          Complete 10 written Key Word Transformations. Each answer must contain between
+          two and five words and include the key word exactly as given.
+        </p>
+        <div class="box">
+          <strong>Recommended classroom use:</strong> revise first in Study Mode, warm up with
+          Multiple Choice, and then complete Exam Mode individually.
+        </div>
+      </div>
+
+      <div class="card hidden" id="examCard">
+        <div class="toolbar">
+          <span id="examType" class="badge badge-blue"></span>
+          <span id="examScore" class="pill"></span>
+          <span id="examWords" class="pill">Words: 0/2–5</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="examProgress" class="progress-bar"></div>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="examFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="examSecond" class="box"></div>
+
+        <p><span id="examKey" class="badge badge-orange"></span></p>
+
+        <div class="answer-row">
+          <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="examCheck" class="primary">Check</button>
+          <button id="examNext" disabled>Next</button>
+        </div>
+
+        <div id="examFeedback" class="box hidden"></div>
+      </div>
+
+      <div class="card hidden" id="examResult"></div>
+    </section>
+
+    <footer class="footer">
+      <span><strong>Mr John’s KWT Lab</strong> · Block 1 · v1.0</span>
+      <span>Time and Tense Transformation · Parallel generated practice</span>
+    </footer>
+  </main>
+
+  <script>
+    const categories = ["All categories", "AGO / FOR / SINCE", "LAST / TIME", "STARTED / BEEN"];
+
+    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "") {
+      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note };
+    }
+
+    const items = [
+      item("AGO / FOR / SINCE", "AGO → SINCE", "Rewrite a past action using It has been + duration + since.",
+        "They moved into this neighbourhood six years ago.",
+        "It ______ they moved into this neighbourhood.",
+        ["has been six years since", "is six years since"], ["SINCE"],
+        ["has six years since", "was six years since", "has been since six years"],
+        "Use Present Perfect structure with since: It has been + time + since + past simple."),
+
+      item("AGO / FOR / SINCE", "AGO → SINCE", "Rewrite a past action using It has been + duration + since.",
+        "She joined the drama club four months ago.",
+        "It ______ she joined the drama club.",
+        ["has been four months since", "is four months since"], ["SINCE"],
+        ["has four months since", "was four months since", "has been since four months"],
+        "The action after since stays in Past Simple."),
+
+      item("AGO / FOR / SINCE", "AGO → SINCE", "Rewrite a past event using It has been + time + since.",
+        "I bought this laptop two years ago.",
+        "It ______ I bought this laptop.",
+        ["has been two years since", "is two years since"], ["SINCE"],
+        ["has two years since", "was two years since", "has been since two years"],
+        "This pattern focuses on elapsed time."),
+
+      item("AGO / FOR / SINCE", "SINCE → FOR", "Replace the starting point with a duration using for.",
+        "We have known our neighbours since 2020.",
+        "We have known our neighbours ______.",
+        ["for four years"], ["FOR"],
+        ["since four years", "during four years", "four years ago"],
+        "FOR expresses duration; SINCE expresses the starting point."),
+
+      item("AGO / FOR / SINCE", "SINCE → FOR", "Use present perfect with for + duration.",
+        "He has played for the school team since 2021.",
+        "He has played for the school team ______.",
+        ["for three years"], ["FOR"],
+        ["since three years", "during three years", "three years ago"],
+        "The tense remains Present Perfect."),
+
+      item("AGO / FOR / SINCE", "SINCE → FOR", "Change a starting point into a period of time.",
+        "They have studied German since last September.",
+        "They have studied German ______.",
+        ["for a year"], ["FOR"],
+        ["since a year", "during a year", "ago a year"],
+        "Use FOR when answering how long."),
+
+      item("AGO / FOR / SINCE", "SINCE → AGO", "Change a present perfect structure into past simple with ago.",
+        "She has been learning chess since she was ten.",
+        "She ______ chess four years ago.",
+        ["started learning", "began learning"], ["STARTED"],
+        ["has started learning", "started to learn since", "has begun learning"],
+        "AGO requires a Past Simple structure."),
+
+      item("AGO / FOR / SINCE", "SINCE → AGO", "Mark the beginning of an activity with started/began + -ing.",
+        "He has been collecting old coins since he was twelve.",
+        "He ______ old coins three years ago.",
+        ["started collecting", "began collecting"], ["STARTED"],
+        ["has started collecting", "started to collect since", "has begun collecting"],
+        "Started/began + -ing is a safe B2 pattern."),
+
+      item("AGO / FOR / SINCE", "SINCE → AGO", "Use past simple to show when an activity began.",
+        "I have been using this tablet since 2022.",
+        "I ______ this tablet two years ago.",
+        ["started using", "began using"], ["STARTED"],
+        ["have started using", "started used", "started to using"],
+        "The action began in the past, so use Past Simple."),
+
+      item("AGO / FOR / SINCE", "FOR → AGO", "Rewrite duration with started/began + ago.",
+        "They have been preparing for the exam for three months.",
+        "They ______ for the exam three months ago.",
+        ["started preparing", "began preparing"], ["STARTED"],
+        ["have started preparing", "started to preparing", "started prepared"],
+        "Present perfect continuous can become Past Simple + ago."),
+
+      item("AGO / FOR / SINCE", "FOR → AGO", "Rewrite how long something has continued as when it began.",
+        "She has been volunteering at the library for two years.",
+        "She ______ at the library two years ago.",
+        ["started volunteering", "began volunteering"], ["STARTED"],
+        ["has started volunteering", "started volunteered", "started to volunteering"],
+        "Use STARTED/BEGAN + -ing + time ago."),
+
+      item("AGO / FOR / SINCE", "FOR → AGO", "Use ago with the point when the action started.",
+        "We have been saving for the trip for six months.",
+        "We ______ for the trip six months ago.",
+        ["started saving", "began saving"], ["STARTED"],
+        ["have started saving", "started saved", "started to saving"],
+        "AGO goes with Past Simple, not Present Perfect."),
+
+      item("AGO / FOR / SINCE", "AGO → FOR", "Rewrite a started action using have/has been + -ing + for.",
+        "I started learning Japanese two years ago.",
+        "I ______ Japanese for two years.",
+        ["have been learning"], ["BEEN"],
+        ["have learning", "am been learning", "was learning"],
+        "Started + ago can become Present Perfect Continuous + for."),
+
+      item("AGO / FOR / SINCE", "AGO → FOR", "Use Present Perfect Continuous for an activity that continues now.",
+        "She started training with the team six months ago.",
+        "She ______ with the team for six months.",
+        ["has been training"], ["BEEN"],
+        ["has training", "is been training", "has trained since"],
+        "The activity started in the past and continues now."),
+
+      item("AGO / FOR / SINCE", "AGO → FOR", "Use have/has been + -ing for continuing actions.",
+        "They started working on the design in April.",
+        "They ______ on the design for months.",
+        ["have been working"], ["BEEN"],
+        ["have working", "are been working", "have worked since"],
+        "For months gives duration."),
+
+      item("LAST / TIME", "FOR/SINCE → LAST", "Rewrite a negative present perfect sentence with last + past simple.",
+        "I haven’t visited the old library for two years.",
+        "I ______ the old library two years ago.",
+        ["last visited"], ["LAST"],
+        ["have last visited", "visited last", "last have visited"],
+        "LAST is followed by Past Simple in this pattern."),
+
+      item("LAST / TIME", "FOR/SINCE → LAST", "Use last + past simple to say when something happened most recently.",
+        "She hasn’t worn that jacket since December.",
+        "She ______ that jacket in December.",
+        ["last wore"], ["LAST"],
+        ["has last worn", "last has worn", "wore last"],
+        "Do not use Present Perfect after LAST here."),
+
+      item("LAST / TIME", "FOR/SINCE → LAST", "Change not ... for into last + past simple + ago.",
+        "We haven’t ordered takeaway for weeks.",
+        "We ______ takeaway weeks ago.",
+        ["last ordered"], ["LAST"],
+        ["have last ordered", "ordered last", "last have ordered"],
+        "This structure uses Past Simple."),
+
+      item("LAST / TIME", "LAST → PRESENT PERFECT", "Rewrite the last occasion as a negative present perfect sentence.",
+        "The last time I met Clara was five months ago.",
+        "I ______ Clara for five months.",
+        ["have not met", "haven't met"], ["MET"],
+        ["did not meet", "have not meet", "had not met"],
+        "The key word MET can be included inside the present perfect form."),
+
+      item("LAST / TIME", "LAST → PRESENT PERFECT", "Use have not + past participle + for.",
+        "The last time they played basketball was in June.",
+        "They ______ basketball since June.",
+        ["have not played", "haven't played"], ["PLAYED"],
+        ["did not played", "have not play", "had not played"],
+        "Since introduces the starting point of the period."),
+
+      item("LAST / TIME", "LAST → PRESENT PERFECT", "Use negative present perfect to describe the period since the last time.",
+        "The last time we used this classroom was last term.",
+        "We ______ this classroom since last term.",
+        ["have not used", "haven't used"], ["USED"],
+        ["did not used", "have not use", "had not used"],
+        "The action has not happened again since that time."),
+
+      item("LAST / TIME", "TIME → LAST", "Use The last time + subject + past simple.",
+        "I haven’t spoken to Mario for ages.",
+        "The ______ to Mario was ages ago.",
+        ["last time I spoke"], ["TIME"],
+        ["last time I spoken", "time I last speak", "last time I speak"],
+        "The full phrase The last time I spoke fits the gap."),
+
+      item("LAST / TIME", "TIME → LAST", "Transform a negative present perfect sentence into The last time...",
+        "She hasn’t eaten at that restaurant for months.",
+        "The ______ at that restaurant was months ago.",
+        ["last time she ate"], ["TIME"],
+        ["last time she eaten", "time she last eat", "last time she eats"],
+        "Use Past Simple after The last time."),
+
+      item("LAST / TIME", "TIME → LAST", "Use The last time to describe the most recent occasion.",
+        "They haven’t held a rehearsal for weeks.",
+        "The ______ a rehearsal was weeks ago.",
+        ["last time they held"], ["TIME"],
+        ["last time they hold", "time they last held", "last time they had"],
+        "The key word TIME appears inside the phrase."),
+
+      item("LAST / TIME", "IT'S BEEN → LAST", "Rewrite It has been + time + since as last + past simple.",
+        "It’s been three months since I visited my cousins.",
+        "I ______ three months ago.",
+        ["last visited my cousins"], ["LAST"],
+        ["have last visited my cousins", "visited last my cousins", "last have visited them"],
+        "Use LAST + Past Simple + time ago."),
+
+      item("LAST / TIME", "IT'S BEEN → LAST", "Use last + past simple with ago.",
+        "It has been a year since she watched a live concert.",
+        "She ______ a year ago.",
+        ["last watched a concert"], ["LAST"],
+        ["has last watched a concert", "watched last a concert", "last has watched one"],
+        "The event happened a year ago."),
+
+      item("LAST / TIME", "IT'S BEEN → LAST", "Transform elapsed time into the last occasion.",
+        "It’s been six weeks since we had a class debate.",
+        "We ______ six weeks ago.",
+        ["last had a debate"], ["LAST"],
+        ["have last had a debate", "had last a debate", "last have had one"],
+        "Do not use Present Perfect after LAST in this structure."),
+
+      item("STARTED / BEEN", "STARTED → BEEN", "Use have/has been + -ing to show continuity.",
+        "He started designing websites last winter.",
+        "He ______ websites since last winter.",
+        ["has been designing"], ["BEEN"],
+        ["has designing", "is been designing", "has designed for"],
+        "SINCE requires a starting point."),
+
+      item("STARTED / BEEN", "STARTED → BEEN", "Transform started + ago into have/has been + -ing + for.",
+        "They started practising the song two weeks ago.",
+        "They ______ the song for two weeks.",
+        ["have been practising", "have been practicing"], ["BEEN"],
+        ["have practising", "are been practising", "have practiced since"],
+        "Both British and American spelling are accepted."),
+
+      item("STARTED / BEEN", "STARTED → BEEN", "Use present perfect continuous for an unfinished activity.",
+        "I started reading this novel last month.",
+        "I ______ this novel for a month.",
+        ["have been reading"], ["BEEN"],
+        ["have reading", "am been reading", "have read since"],
+        "The activity began in the past and continues now."),
+
+      item("STARTED / BEEN", "BEEN → STARTED", "Rewrite present perfect continuous using started + -ing.",
+        "We have been studying economics for a year.",
+        "We ______ economics a year ago.",
+        ["started studying", "began studying"], ["STARTED"],
+        ["have started studying", "started to studying", "started studied"],
+        "AGO requires Past Simple."),
+
+      item("STARTED / BEEN", "BEEN → STARTED", "Change have/has been + -ing + for into started + -ing + ago.",
+        "She has been taking piano lessons for three years.",
+        "She ______ piano lessons three years ago.",
+        ["started taking", "began taking"], ["STARTED"],
+        ["has started taking", "started to taking", "started took"],
+        "This transformation tests tense control."),
+
+      item("STARTED / BEEN", "BEEN → STARTED", "Use started/began + -ing to mark the beginning.",
+        "They have been organising the festival since January.",
+        "They ______ the festival in January.",
+        ["started organising", "began organising", "started organizing", "began organizing"], ["STARTED"],
+        ["have started organising", "started organised", "started to organising"],
+        "The key word STARTED is allowed; the answer may include British or American spelling."),
+
+      item("STARTED / BEEN", "MOVED / LIVING", "Rewrite moved + ago as have/has been living + for.",
+        "My cousins moved to Lisbon five years ago.",
+        "My cousins ______ in Lisbon for five years.",
+        ["have been living"], ["BEEN"],
+        ["have living", "are been living", "have lived since"],
+        "Use have been living for a continuing residence."),
+
+      item("STARTED / BEEN", "MOVED / LIVING", "Use living with present perfect continuous.",
+        "She moved to the city in 2020.",
+        "She ______ in the city since 2020.",
+        ["has been living"], ["BEEN"],
+        ["has living", "is been living", "has lived for"],
+        "Since 2020 is a starting point."),
+
+      item("STARTED / BEEN", "MOVED / LIVING", "Transform living for into moved + ago.",
+        "We have been living near the coast for eight years.",
+        "We ______ the coast eight years ago.",
+        ["moved near"], ["MOVED"],
+        ["have moved near", "moved to live", "were moving near"],
+        "AGO requires Past Simple."),
+
+      item("AGO / FOR / SINCE", "KNOWN / MET", "Differentiate know and meet in time transformations.",
+        "I met Laura three years ago.",
+        "I ______ Laura for three years.",
+        ["have known"], ["KNOWN"],
+        ["have met", "know", "knew"],
+        "In English, you meet someone once, but you know them for a period."),
+
+      item("AGO / FOR / SINCE", "KNOWN / MET", "Use have known for relationships that continue.",
+        "They first met their neighbours in 2019.",
+        "They ______ their neighbours since 2019.",
+        ["have known"], ["KNOWN"],
+        ["have met", "knew", "know"],
+        "This is a common B2 trap."),
+
+      item("LAST / TIME", "LAST → AGO", "Use last + past simple + ago.",
+        "I haven’t downloaded a new app for months.",
+        "I ______ a new app months ago.",
+        ["last downloaded"], ["LAST"],
+        ["have last downloaded", "downloaded last", "last have downloaded"],
+        "LAST directly precedes the Past Simple verb."),
+
+      item("LAST / TIME", "LAST → AGO", "Rewrite not ... since as last + past simple.",
+        "She hasn’t sent a postcard since last summer.",
+        "She ______ last summer.",
+        ["last sent a postcard"], ["LAST"],
+        ["has last sent a postcard", "sent last a postcard", "last has sent one"],
+        "The second sentence uses Past Simple."),
+
+      item("STARTED / BEEN", "BEEN → FOR", "Use present perfect continuous with for + duration.",
+        "They began training for the race in May.",
+        "They ______ for the race for months.",
+        ["have been training"], ["BEEN"],
+        ["have training", "are been training", "have trained since"],
+        "For months expresses duration."),
+
+      item("STARTED / BEEN", "BEEN → SINCE", "Use present perfect continuous with since + starting point.",
+        "He began working at the café in March.",
+        "He ______ at the café since March.",
+        ["has been working"], ["BEEN"],
+        ["has working", "is been working", "has worked for"],
+        "Since March is a starting point."),
+
+      item("LAST / TIME", "TIME → SINCE", "Use It has been + time + since.",
+        "I last went hiking two years ago.",
+        "It ______ I went hiking.",
+        ["has been two years since", "is two years since"], ["SINCE"],
+        ["has two years since", "was two years since", "has been since two years"],
+        "The second sentence expresses elapsed time."),
+
+      item("LAST / TIME", "TIME → SINCE", "Transform last + ago into It has been + time + since.",
+        "She last visited Paris a decade ago.",
+        "It ______ she visited Paris.",
+        ["has been a decade since", "is a decade since"], ["SINCE"],
+        ["has decade since", "was a decade since", "has been since a decade"],
+        "The event after since is in Past Simple."),
+
+      item("AGO / FOR / SINCE", "PRESENT PERFECT → AGO", "Rewrite present perfect with for as past simple with ago.",
+        "They have owned that house for ten years.",
+        "They ______ that house ten years ago.",
+        ["bought"], ["BOUGHT"],
+        ["have bought", "buyed", "have owned"],
+        "Sometimes the natural past action is bought, not owned."),
+
+      item("AGO / FOR / SINCE", "PRESENT PERFECT → SINCE", "Use since with a starting point.",
+        "We have had this car for five years.",
+        "We have had this car ______.",
+        ["since 2019"], ["SINCE"],
+        ["for 2019", "ago 2019", "during 2019"],
+        "SINCE introduces a point in time."),
+
+      item("LAST / TIME", "SINCE → LAST", "Use last + past simple for the most recent occasion.",
+        "I haven’t been to the theatre since February.",
+        "I ______ the theatre in February.",
+        ["last went to"], ["LAST"],
+        ["have last gone to", "last have been to", "went last to"],
+        "Use went to, not been to, after LAST."),
+
+      item("LAST / TIME", "FOR → TIME", "Use The last time + subject + past simple.",
+        "We haven’t cooked together for ages.",
+        "The ______ together was ages ago.",
+        ["last time we cooked"], ["TIME"],
+        ["last time we cook", "time we last cooking", "last time we have cooked"],
+        "The last time + Past Simple is the safest pattern.")
+    ];
+
+    const state = {
+      studyCategory: "All categories",
+      studyIndex: 0,
+      studyFlipped: false,
+      mcCategory: "All categories",
+      mcCurrent: null,
+      mcSelected: null,
+      mcScore: 0,
+      mcAttempts: 0,
+      trCategory: "All categories",
+      trCurrent: null,
+      trChecked: false,
+      trScore: 0,
+      trAttempts: 0,
+      examCategory: "All categories",
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+      examChecked: false,
+      examAnswers: []
+    };
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function normalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/[.,!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function wordCount(text) {
+      const clean = normalise(text);
+      if (!clean) return 0;
+      return clean.split(" ").filter(Boolean).length;
+    }
+
+    function keyIsIncluded(answer, key) {
+      const answerWords = normalise(answer).split(" ");
+      const keyWords = normalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function getAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
+    }
+
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
+    }
+
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
+    }
+
+    function isValidExercise(exercise) {
+      const answers = getAcceptedAnswers(exercise);
+      return answers.length > 0 && answers.every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
+      });
+    }
+
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+      return (exercise.distractors || []).filter(item =>
+        wordCount(item) >= 2 &&
+        wordCount(item) <= 5 &&
+        !accepted.includes(normalise(item))
+      );
+    }
+
+    function filteredItems(category) {
+      if (category === "All categories") return items;
+      return items.filter(item => item.type === category);
+    }
+
+    function makeExercise(raw, mode = "transform") {
+      const validKeys = shuffle(raw.keyOptions).filter(key =>
+        raw.answers.every(answer => keyIsIncluded(answer, key))
+      );
+
+      if (!validKeys.length) return null;
+
+      const exercise = {
+        ...raw,
+        key: pick(validKeys),
+        answer: raw.answers[0]
+      };
+
+      if (!isValidExercise(exercise)) return null;
+      if (mode === "multiple" && cleanDistractors(exercise).length < 3) return null;
+
+      return exercise;
+    }
+
+    function generateExercise(category = "All categories", mode = "transform") {
+      const possible = shuffle(filteredItems(category));
+
+      for (const raw of possible) {
+        const exercise = makeExercise(raw, mode);
+        if (exercise) return exercise;
+      }
+
+      return {
+        type: "System",
+        expression: "No valid item",
+        meaning: "No valid item could be generated.",
+        original: "No valid exercise could be generated.",
+        second: "Please choose another category.",
+        answers: ["try again"],
+        answer: "try again",
+        key: "TRY",
+        keyOptions: ["TRY"],
+        distractors: ["try later", "new question", "other category"],
+        note: "The generator could not create a valid item."
+      };
+    }
+
+    function populateSelect(id, value) {
+      $(id).innerHTML = categories
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function updateStats() {
+      $("totalCount").textContent = `${items.length} total items`;
+      $("agoCount").textContent = `${items.filter(i => i.type === "AGO / FOR / SINCE").length} AGO / FOR / SINCE`;
+      $("sinceCount").textContent = `${items.filter(i => i.type === "STARTED / BEEN").length} STARTED / BEEN`;
+      $("lastCount").textContent = `${items.filter(i => i.type === "LAST / TIME").length} LAST / TIME`;
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+      document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+      $(tab).classList.remove("hidden");
+      document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
+    }
+
+    function renderStudy() {
+      const list = filteredItems(state.studyCategory);
+      if (state.studyIndex >= list.length) state.studyIndex = 0;
+      const current = list[state.studyIndex];
+
+      $("studyCard").innerHTML = state.studyFlipped
+        ? `
+          <div>
+            <span class="badge badge-blue">${current.type}</span>
+            <p class="muted"><strong>Meaning</strong></p>
+            <h2 style="font-size:30px">${current.meaning}</h2>
+            <div class="box"><strong>Example pattern:</strong> ${current.original} → ${current.second.replace("______", `<strong>${primaryAnswer(current)}</strong>`)}</div>
+            <div class="box"><strong>Exam note:</strong> ${current.note || "Remember the exact structure and the 2–5 word limit."}</div>
+            <p class="muted">Click the card to return to the expression.</p>
+          </div>
+        `
+        : `
+          <div>
+            <span class="badge badge-blue">${current.type}</span>
+            <p class="muted"><strong>Transformation pattern</strong></p>
+            <h2>${current.expression}</h2>
+            <p class="muted">Click the card to reveal meaning, example and exam note.</p>
+          </div>
+        `;
+
+      $("studyCounter").textContent = `Card ${state.studyIndex + 1} of ${list.length}`;
+    }
+
+    function newMcQuestion() {
+      const exercise = generateExercise(state.mcCategory, "multiple");
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
+
+      state.mcCurrent = { ...exercise, options };
+      state.mcSelected = null;
+      renderMc();
+    }
+
+    function renderMc() {
+      const q = state.mcCurrent;
+      $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
+
+      if (!q) {
+        $("mcType").textContent = "";
+        $("mcQuestion").textContent = "Click 'New question' to start.";
+        $("mcOptions").innerHTML = "";
+        $("mcFeedback").classList.add("hidden");
+        return;
+      }
+
+      $("mcType").textContent = `${q.type} · Generated transformation`;
+
+      $("mcQuestion").innerHTML = `
+        <p>${q.original}</p>
+        <div class="box">${q.second}</div>
+      `;
+
+      $("mcOptions").innerHTML = "";
+
+      q.options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+
+        if (state.mcSelected) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
+        }
+
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
+      });
+
+      if (state.mcSelected) {
+        const correct = isCorrectAnswer(state.mcSelected, q);
+        $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+        $("mcFeedback").innerHTML = `
+          <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
+          <p>${q.note || ""}</p>
+          <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+        `;
+      } else {
+        $("mcFeedback").classList.add("hidden");
+      }
+    }
+
+    function chooseMc(option) {
+      if (state.mcSelected) return;
+      state.mcSelected = option;
+      state.mcAttempts++;
+      if (isCorrectAnswer(option, state.mcCurrent)) state.mcScore++;
+      renderMc();
+    }
+
+    function newTransformation() {
+      state.trCurrent = generateExercise(state.trCategory, "transform");
+      state.trChecked = false;
+      $("trInput").value = "";
+      $("trFeedback").classList.add("hidden");
+      $("trHintBox").classList.add("hidden");
+      renderTransformation();
+    }
+
+    function renderTransformation() {
+      const q = state.trCurrent;
+      $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
+
+      if (!q) {
+        $("trType").textContent = "";
+        $("trFirst").textContent = "Click 'New exercise' to start.";
+        $("trSecond").textContent = "";
+        $("trKey").textContent = "";
+        return;
+      }
+
+      const input = $("trInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+
+      $("trType").textContent = `${q.type} · Generated transformation`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("trFirst").textContent = q.original;
+      $("trSecond").textContent = q.second;
+      $("trKey").textContent = `Key word: ${q.key}`;
+    }
+
+    function checkTransformation(reveal = false) {
+      if (!state.trCurrent || state.trChecked) return;
+
+      const input = $("trInput").value;
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
+
+      state.trChecked = true;
+      state.trAttempts++;
+      if (correct) state.trScore++;
+
+      $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("trFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
+        <p>${state.trCurrent.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${state.trCurrent.expression}</p>
+        <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
+      `;
+
+      renderTransformation();
+    }
+
+    function showHint() {
+      if (!state.trCurrent) return;
+      $("trHintBox").classList.remove("hidden");
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.meaning}`;
+    }
+
+    function buildExamQuestions() {
+      const pool = shuffle(filteredItems(state.examCategory));
+      const selected = [];
+
+      for (const raw of pool) {
+        const exercise = makeExercise(raw, "transform");
+        if (!exercise) continue;
+
+        const repeated = selected.some(item =>
+          item.expression === exercise.expression && item.original === exercise.original
+        );
+
+        if (!repeated) selected.push(exercise);
+        if (selected.length === 10) break;
+      }
+
+      return selected;
+    }
+
+    function startExam() {
+      state.examQuestions = buildExamQuestions();
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examCard").classList.remove("hidden");
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function resetExam() {
+      state.examQuestions = [];
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.remove("hidden");
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examFeedback").classList.add("hidden");
+      $("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = state.examQuestions.length;
+      const q = state.examQuestions[state.examIndex];
+
+      if (!q || total === 0) {
+        $("examIntro").classList.remove("hidden");
+        $("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = $("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (state.examIndex / total) * 100;
+
+      $("examProgress").style.width = `${progress}%`;
+      $("examType").textContent = `${q.type} · Question ${state.examIndex + 1}/${total}`;
+      $("examScore").textContent = `Score: ${state.examScore}/${state.examIndex}`;
+      $("examWords").textContent = `Words: ${words}/2–5`;
+      $("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("examFirst").textContent = q.original;
+      $("examSecond").textContent = q.second;
+      $("examKey").textContent = `Key word: ${q.key}`;
+      $("examCheck").disabled = state.examChecked;
+      $("examInput").disabled = state.examChecked;
+      $("examNext").disabled = !state.examChecked;
+      $("examNext").textContent = state.examIndex === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (state.examChecked) return;
+
+      const q = state.examQuestions[state.examIndex];
+      const input = $("examInput").value;
+      const correct = isCorrectAnswer(input, q);
+
+      state.examChecked = true;
+
+      if (correct) state.examScore++;
+
+      state.examAnswers.push({
+        number: state.examIndex + 1,
+        pattern: q.expression,
+        correct,
+        userAnswer: input,
+        accepted: acceptedAnswersText(q)
+      });
+
+      $("examFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("examFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+        <p>${q.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+      `;
+      $("examFeedback").classList.remove("hidden");
+
+      renderExam();
+    }
+
+    function nextExamQuestion() {
+      if (!state.examChecked) return;
+
+      if (state.examIndex >= state.examQuestions.length - 1) {
+        finishExam();
+        return;
+      }
+
+      state.examIndex++;
+      state.examChecked = false;
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function finishExam() {
+      const total = state.examQuestions.length;
+      const score = state.examScore;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
+
+      let message = "";
+      if (score >= 9) {
+        message = "Excellent exam control. You are using time and tense transformations with strong accuracy.";
+      } else if (score >= 7) {
+        message = "Good result. Keep practising exact tense choice and time expressions.";
+      } else if (score >= 5) {
+        message = "You understand several patterns, but you need more controlled practice.";
+      } else {
+        message = "Revise Study Mode and Multiple Choice before trying Exam Mode again.";
+      }
+
+      const review = state.examAnswers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.pattern}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+        </tr>
+      `).join("");
+
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.remove("hidden");
+
+      $("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Pattern</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart challenge</button>
+        </div>
+      `;
+
+      $("examAgain").addEventListener("click", startExam);
+    }
+
+    function init() {
+      populateSelect("studyCategory", state.studyCategory);
+      populateSelect("mcCategory", state.mcCategory);
+      populateSelect("trCategory", state.trCategory);
+      populateSelect("examCategory", state.examCategory);
+      updateStats();
+
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => showTab(button.dataset.tab));
+      });
+
+      $("studyCategory").addEventListener("change", event => {
+        state.studyCategory = event.target.value;
+        state.studyIndex = 0;
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("studyCard").addEventListener("click", () => {
+        state.studyFlipped = !state.studyFlipped;
+        renderStudy();
+      });
+
+      $("studyNext").addEventListener("click", () => {
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = (state.studyIndex + 1) % list.length;
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("studyRandom").addEventListener("click", () => {
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = Math.floor(Math.random() * list.length);
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        newMcQuestion();
+      });
+
+      $("mcNew").addEventListener("click", newMcQuestion);
+      $("mcReset").addEventListener("click", () => {
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        renderMc();
+      });
+
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
+        state.trScore = 0;
+        state.trAttempts = 0;
+        newTransformation();
+      });
+
+      $("trNew").addEventListener("click", newTransformation);
+      $("trHint").addEventListener("click", showHint);
+      $("trCheck").addEventListener("click", () => checkTransformation(false));
+      $("trReveal").addEventListener("click", () => checkTransformation(true));
+      $("trReset").addEventListener("click", () => {
+        state.trScore = 0;
+        state.trAttempts = 0;
+        renderTransformation();
+      });
+
+      $("trInput").addEventListener("input", renderTransformation);
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") checkTransformation(false);
+      });
+
+      $("examCategory").addEventListener("change", event => {
+        state.examCategory = event.target.value;
+        resetExam();
+      });
+
+      $("examStart").addEventListener("click", startExam);
+      $("examRestart").addEventListener("click", startExam);
+      $("examCheck").addEventListener("click", checkExamAnswer);
+      $("examNext").addEventListener("click", nextExamQuestion);
+      $("examInput").addEventListener("input", renderExam);
+      $("examInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          if (!state.examChecked) checkExamAnswer();
+          else nextExamQuestion();
+        }
+      });
+
+      renderStudy();
+      newMcQuestion();
+      newTransformation();
+    }
+
+    init();
+  </script>
 </body>
 </html>
