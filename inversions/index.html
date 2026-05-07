@@ -605,7 +605,7 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 5 · v1.0</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 5 · v1.1</span>
       <span>Inversions · FCE Part 4 focused practice</span>
     </footer>
   </main>
@@ -799,7 +799,7 @@
 
           <div class="box">
             <strong>FCE Part 4 tip:</strong><br>
-            If the key word is <strong>SHOULD</strong>, <strong>WERE</strong> or <strong>HAD</strong>, check whether an inverted conditional is expected.
+            In normal English, the version with <em>if</em> may also be grammatical. However, in this block and in these transformations, the target answer is the <strong>inverted conditional</strong>.
           </div>
         `
       },
@@ -947,84 +947,93 @@
     const pools = {
       negativeAdverbials: [
         {
-          opening: "Never",
-          key: "NEVER",
+          type: "Negative adverbials",
+          expression: "Never + auxiliary + subject + main verb",
           original: "I have never heard such a strange excuse.",
           second: "______ such a strange excuse.",
           answer: "never have I heard",
-          trap: "Never I have heard",
-          note: "With an existing auxiliary, place the auxiliary before the subject."
+          key: "NEVER",
+          distractors: ["never I have heard", "never have heard I", "never I heard", "never did I heard"],
+          note: "With present perfect, move the auxiliary before the subject: never have I heard."
         },
         {
-          opening: "Never",
-          key: "NEVER",
+          type: "Negative adverbials",
+          expression: "Never + auxiliary + subject + main verb",
           original: "She has never felt so embarrassed.",
           second: "______ so embarrassed.",
           answer: "never has she felt",
-          trap: "Never she has felt",
-          note: "Present perfect: never has she felt."
+          key: "NEVER",
+          distractors: ["never she has felt", "never has felt she", "never did she felt", "never she felt"],
+          note: "Present perfect inversion: never has she felt."
         },
         {
-          opening: "Rarely",
-          key: "RARELY",
+          type: "Negative adverbials",
+          expression: "Rarely + do + subject + base verb",
           original: "They rarely go out during the week.",
           second: "______ during the week.",
           answer: "rarely do they go out",
-          trap: "Rarely they go out",
+          key: "RARELY",
+          distractors: ["rarely they go out", "rarely they do go", "rarely do they goes", "rarely go they out"],
           note: "No auxiliary in the original, so use do."
         },
         {
-          opening: "Rarely",
-          key: "RARELY",
+          type: "Negative adverbials",
+          expression: "Rarely + does + subject + base verb",
           original: "He rarely makes mistakes in exams.",
           second: "______ in exams.",
           answer: "rarely does he make mistakes",
-          trap: "Rarely he makes mistakes",
+          key: "RARELY",
+          distractors: ["rarely he makes mistakes", "rarely does he makes mistakes", "rarely he does make mistakes", "rarely make he mistakes"],
           note: "Third person singular: does he make, not does he makes."
         },
         {
-          opening: "Seldom",
-          key: "SELDOM",
+          type: "Negative adverbials",
+          expression: "Seldom + had + subject + past participle",
           original: "We had seldom seen such beautiful scenery.",
           second: "______ such beautiful scenery.",
           answer: "seldom had we seen",
-          trap: "Seldom we had seen",
-          note: "Past perfect: had we seen."
+          key: "SELDOM",
+          distractors: ["seldom we had seen", "seldom had seen we", "seldom did we seen", "seldom we saw"],
+          note: "Past perfect inversion: seldom had we seen."
         },
         {
-          opening: "Little",
-          key: "LITTLE",
+          type: "Negative adverbials",
+          expression: "Little + did + subject + base verb",
           original: "He little expected that his plan would fail.",
           second: "______ that his plan would fail.",
           answer: "little did he expect",
-          trap: "Little he expected",
+          key: "LITTLE",
+          distractors: ["little he expected", "little did he expected", "little he did expect", "little expected he"],
           note: "Little at the beginning requires inversion with did."
         },
         {
-          opening: "At no time",
-          key: "TIME",
+          type: "Negative adverbials",
+          expression: "At no time + auxiliary + subject + verb",
           original: "The witness did not mention the suspect's name at any time.",
           second: "At no ______ the suspect's name.",
           answer: "time did the witness mention",
-          trap: "time the witness mentioned",
-          note: "At no time + auxiliary + subject + verb."
+          key: "TIME",
+          distractors: ["time the witness mentioned", "time did witness mention", "time the witness did mention", "time mentioned the witness"],
+          note: "At no time + did + subject + base verb."
         },
         {
-          opening: "Under no circumstances",
-          key: "NO",
+          type: "Negative adverbials",
+          expression: "Under no circumstances + modal + subject",
           original: "You must not open this door under any circumstances.",
           second: "Under ______ open this door.",
           answer: "no circumstances must you",
-          trap: "no circumstances you must",
+          key: "NO",
+          distractors: ["no circumstances you must", "no circumstances must", "no circumstances do you", "no circumstances you can"],
           note: "Under no circumstances + modal + subject."
         },
         {
-          opening: "In no way",
-          key: "WAY",
+          type: "Negative adverbials",
+          expression: "In no way + did + subject + base verb",
           original: "I never intended to question your honesty in any way.",
           second: "In no ______ to question your honesty.",
           answer: "way did I intend",
-          trap: "way I intended",
+          key: "WAY",
+          distractors: ["way I intended", "way did I intended", "way I did intend", "way intended I"],
           note: "In no way + did + subject + base verb."
         }
       ],
@@ -1037,6 +1046,7 @@
           second: "Not until I got home ______ my mistake.",
           answer: "did I realise",
           key: "DID",
+          distractors: ["I realised", "did I realised", "I did realise", "realised I"],
           note: "The time clause is not inverted. The main clause is inverted."
         },
         {
@@ -1046,6 +1056,7 @@
           second: "Only when Laura arrived ______ eating.",
           answer: "did we start",
           key: "DID",
+          distractors: ["we started", "did we started", "we did start", "started we"],
           note: "Only when triggers inversion in the main clause."
         },
         {
@@ -1055,6 +1066,7 @@
           second: "Only after I explained them twice ______ the instructions.",
           answer: "did he understand",
           key: "DID",
+          distractors: ["he understood", "did he understood", "he did understand", "understood he"],
           note: "Past simple needs did + subject + base verb."
         },
         {
@@ -1064,6 +1076,7 @@
           second: "Not since I was a child ______ a concert so much.",
           answer: "have I enjoyed",
           key: "SINCE",
+          distractors: ["I have enjoyed", "have I enjoy", "I enjoyed", "did I enjoyed"],
           note: "Not since often works with present perfect inversion."
         },
         {
@@ -1073,6 +1086,7 @@
           second: "Not until I had arrived at the airport ______ I had forgotten my passport.",
           answer: "did I realise",
           key: "DID",
+          distractors: ["I realised", "did I realised", "I did realise", "realised I"],
           note: "The inversion appears in the main clause: did I realise."
         }
       ],
@@ -1085,6 +1099,7 @@
           second: "No sooner ______ the phone rang.",
           answer: "had I got home than",
           key: "SOONER",
+          distractors: ["I had got home than", "had I got home when", "had got I home than", "did I get home than"],
           note: "No sooner uses had + subject + past participle + than."
         },
         {
@@ -1094,6 +1109,7 @@
           second: "No sooner ______ it started raining.",
           answer: "had they left than",
           key: "SOONER",
+          distractors: ["they had left than", "had they left when", "had left they than", "did they leave than"],
           note: "Use than after No sooner."
         },
         {
@@ -1103,6 +1119,7 @@
           second: "Hardly ______ the bell rang.",
           answer: "had we sat down when",
           key: "HARDLY",
+          distractors: ["we had sat down when", "had we sat down than", "had sat we down when", "did we sit down when"],
           note: "Use when after Hardly."
         },
         {
@@ -1112,6 +1129,7 @@
           second: "Scarcely ______ the alarm went off.",
           answer: "had he finished when",
           key: "SCARCELY",
+          distractors: ["he had finished when", "had he finished than", "had finished he when", "did he finish when"],
           note: "Scarcely works like Hardly: scarcely had... when."
         },
         {
@@ -1121,6 +1139,7 @@
           second: "Barely ______ the baby woke up.",
           answer: "had I closed my eyes when",
           key: "BARELY",
+          distractors: ["I had closed my eyes when", "had I closed my eyes than", "had closed I my eyes when", "did I close my eyes when"],
           note: "Barely can also introduce this immediate succession pattern."
         },
         {
@@ -1130,6 +1149,7 @@
           second: "No sooner ______ the timetable was changed.",
           answer: "had I made a complaint than",
           key: "SOONER",
+          distractors: ["I had made a complaint than", "had I made a complaint when", "had made I a complaint than", "did I make a complaint than"],
           note: "No sooner pairs with than."
         }
       ],
@@ -1137,57 +1157,73 @@
       conditionals: [
         {
           type: "Conditional inversions",
-          expression: "If + subject + should → Should + subject + verb",
+          expression: "Should + subject + base verb",
           original: "If you need further information, contact reception.",
           second: "______ further information, contact reception.",
           answer: "should you need",
           key: "SHOULD",
-          note: "Type 1 formal inversion: Should you need..."
+          distractors: ["should you needed", "you should need", "should need you", "should you needing"],
+          note: "Target inversion: Should + subject + base verb. Do not use IF in the answer."
         },
         {
           type: "Conditional inversions",
-          expression: "If + subject + should → Should + subject + verb",
+          expression: "Should + subject + base verb",
           original: "If an emergency arises, press the red button.",
           second: "______ , press the red button.",
           answer: "should an emergency arise",
           key: "SHOULD",
+          distractors: ["should an emergency arises", "an emergency should arise", "should arise an emergency", "should an emergency arising"],
           note: "Should + subject + base verb."
         },
         {
           type: "Conditional inversions",
-          expression: "If I were you → Were I you",
+          expression: "Were + subject + complement",
           original: "If I were you, I would apologise immediately.",
           second: "______ , I would apologise immediately.",
           answer: "were I you",
           key: "WERE",
-          note: "Fixed formal pattern: Were I you..."
+          distractors: ["were I was you", "I were you", "were you I", "was I you"],
+          note: "Fixed formal pattern: Were I you. Do not use IF in the answer."
         },
         {
           type: "Conditional inversions",
-          expression: "If + subject + were → Were + subject",
+          expression: "Were + subject + complement",
           original: "If she were my teacher, I would feel lucky.",
           second: "______ , I would feel lucky.",
           answer: "were she my teacher",
           key: "WERE",
-          note: "Type 2 formal inversion."
+          distractors: ["were she was my teacher", "she were my teacher", "were my teacher she", "was she my teacher"],
+          note: "Type 2 formal inversion: Were + subject + complement."
         },
         {
           type: "Conditional inversions",
-          expression: "If + subject + had + past participle → Had + subject + past participle",
+          expression: "Had + subject + past participle",
           original: "If he had trained harder, he could have won.",
           second: "______ , he could have won.",
           answer: "had he trained harder",
           key: "HAD",
-          note: "Type 3 inversion: Had + subject + past participle."
+          distractors: ["had he would trained", "he had trained harder", "had trained he harder", "had he train harder"],
+          note: "Target inversion: Had + subject + past participle. Do not use IF in the answer."
         },
         {
           type: "Conditional inversions",
-          expression: "If + subject + had + past participle → Had + subject + past participle",
+          expression: "Had + subject + past participle",
           original: "If they had checked the documents, the mistake would not have happened.",
           second: "______ , the mistake would not have happened.",
           answer: "had they checked the documents",
           key: "HAD",
-          note: "Do not use if in the inverted version."
+          distractors: ["had they would checked", "they had checked documents", "had checked they the documents", "had they check the documents"],
+          note: "Remove IF and invert: Had + subject + past participle."
+        },
+        {
+          type: "Conditional inversions",
+          expression: "Had + subject + past participle",
+          original: "If I had known about the delay, I would have left later.",
+          second: "______ about the delay, I would have left later.",
+          answer: "had I known",
+          key: "HAD",
+          distractors: ["had I would known", "I had known", "had known I", "had I knew"],
+          note: "Target inversion: Had + subject + past participle. The normal IF conditional is possible in English, but it is not the target answer here and is not offered as an option."
         }
       ],
 
@@ -1199,6 +1235,7 @@
           second: "Not only ______ , but he is also kind.",
           answer: "is he helpful",
           key: "ONLY",
+          distractors: ["he is helpful", "is helpful he", "does he helpful", "he helpful is"],
           note: "With be, invert be and subject."
         },
         {
@@ -1208,6 +1245,7 @@
           second: "Not only ______ beautifully, but she also plays the violin.",
           answer: "does she sing",
           key: "ONLY",
+          distractors: ["she sings", "does she sings", "she does sing", "sing does she"],
           note: "No auxiliary in original, so use does."
         },
         {
@@ -1217,6 +1255,7 @@
           second: "Not only ______ a pool, but it also has a full gym.",
           answer: "does the hotel have",
           key: "ONLY",
+          distractors: ["the hotel has", "does the hotel has", "the hotel does have", "have the hotel does"],
           note: "Main verb have needs do-support here."
         },
         {
@@ -1226,6 +1265,7 @@
           second: "Not only ______ late, but they also did not apologise.",
           answer: "did they arrive",
           key: "ONLY",
+          distractors: ["they arrived", "did they arrived", "they did arrive", "arrived did they"],
           note: "Past simple needs did + subject + base verb."
         },
         {
@@ -1235,6 +1275,7 @@
           second: "Not only ______ boring, but it was also far too long.",
           answer: "was the film",
           key: "ONLY",
+          distractors: ["the film was", "was film the", "did the film be", "the film did was"],
           note: "Only the first clause is inverted."
         },
         {
@@ -1244,6 +1285,7 @@
           second: "Not only ______ the website, but they have also reduced the price.",
           answer: "have they improved",
           key: "ONLY",
+          distractors: ["they have improved", "have improved they", "did they improved", "they improved have"],
           note: "Existing auxiliary have moves before the subject."
         }
       ],
@@ -1256,6 +1298,7 @@
           second: "So ______ that nobody bought the tickets.",
           answer: "high was the price",
           key: "SO",
+          distractors: ["high the price was", "was high the price", "high did the price", "the price was high"],
           note: "So + adjective + be + subject."
         },
         {
@@ -1265,6 +1308,7 @@
           second: "So ______ that extra dates were added.",
           answer: "high has the demand been",
           key: "HAS",
+          distractors: ["high the demand has been", "high has been the demand", "high did the demand been", "the demand has been high"],
           note: "With present perfect, the auxiliary has moves before the subject."
         },
         {
@@ -1274,6 +1318,7 @@
           second: "Such ______ that she rarely takes a holiday.",
           answer: "are the demands of",
           key: "SUCH",
+          distractors: ["the demands are of", "are demands the of", "the demands of are", "do the demands of"],
           note: "Such are the demands of her job that..."
         },
         {
@@ -1283,52 +1328,24 @@
           second: "So ______ that nobody understood it.",
           answer: "confusing was the explanation",
           key: "SO",
+          distractors: ["confusing the explanation was", "was confusing the explanation", "confusing did the explanation", "the explanation was confusing"],
           note: "So confusing was the explanation that..."
         }
       ]
     };
 
-    function makeVariants(answer) {
-      return [...new Set([answer])];
-    }
-
     function itemFromPool(row) {
       return item(
-        row.type || "Negative adverbials",
-        row.expression || "Inversion after negative or restrictive expression",
-        row.meaning || "Move the auxiliary before the subject after the opening expression.",
+        row.type,
+        row.expression,
+        "Move the auxiliary before the subject after the opening expression.",
         row.original,
         row.second,
-        makeVariants(row.answer),
+        [row.answer],
         [row.key],
-        makeDistractors(row.answer, row.trap),
-        row.note || "Inversion usually means auxiliary + subject + main verb."
+        row.distractors,
+        row.note
       );
-    }
-
-    function makeDistractors(answer, trap = "") {
-      const a = answer;
-      const list = [
-        trap,
-        a.replace(/^(never|rarely|seldom|little)\s/i, ""),
-        a.replace(/\bdid\b/i, "").replace(/\bdoes\b/i, "").replace(/\bdo\b/i, ""),
-        a.replace(/\bhad\b/i, ""),
-        a.replace(/\bthan\b/i, "when"),
-        a.replace(/\bwhen\b/i, "than"),
-        a.replace(/\bdoes she\b/i, "she does"),
-        a.replace(/\bdid they\b/i, "they did"),
-        a.replace(/\bdid I\b/i, "I did"),
-        a.replace(/\bhave I\b/i, "I have"),
-        a.replace(/\bhas she\b/i, "she has"),
-        a.replace(/\bhad we\b/i, "we had"),
-        a.replace(/\bis he\b/i, "he is"),
-        a.replace(/\bwas the\b/i, "the was")
-      ];
-
-      return [...new Set(list)]
-        .map(x => String(x || "").trim())
-        .filter(x => x && wordCount(x) >= 2 && wordCount(x) <= 5 && normalise(x) !== normalise(answer))
-        .slice(0, 6);
     }
 
     function fromNegativeAdverbials() {
@@ -1378,7 +1395,7 @@
         "No sooner ______ the telephone rang.",
         ["had he sat down than"],
         ["SOONER"],
-        ["he had sat down than", "had he sat down when", "had sat he down than", "he sat down when"],
+        ["he had sat down than", "had he sat down when", "had sat he down than", "did he sit down than"],
         "No sooner... than. Hardly/Scarcely... when."
       );
     }
@@ -1392,7 +1409,7 @@
         "Hardly ______ they called us.",
         ["had we finished breakfast when"],
         ["HARDLY"],
-        ["we had finished breakfast when", "had we finished breakfast than", "had finished we breakfast when", "we finished breakfast when"],
+        ["we had finished breakfast when", "had we finished breakfast than", "had finished we breakfast when", "did we finish breakfast when"],
         "Hardly... when, not hardly... than."
       );
     }
@@ -1415,13 +1432,41 @@
       return item(
         "Cambridge traps",
         "Had + subject + past participle",
-        "In third conditional inversion, remove if and use Had + subject + past participle.",
+        "In third conditional inversion, remove IF and use Had + subject + past participle.",
         "If I had known about the delay, I would have left later.",
         "______ about the delay, I would have left later.",
         ["had I known"],
         ["HAD"],
-        ["had I would known", "I had known", "had known I", "if I had known"],
-        "Do not use if in the inverted conditional."
+        ["had I would known", "I had known", "had known I", "had I knew"],
+        "Target inversion: Had + subject + past participle. The normal IF conditional is grammatical English, but it is not the target transformation and is not used as an option."
+      );
+    }
+
+    function trapConditionalShould() {
+      return item(
+        "Cambridge traps",
+        "Should + subject + base verb",
+        "In first conditional inversion, remove IF and use Should + subject + base verb.",
+        "If you require assistance, press the help button.",
+        "______ assistance, press the help button.",
+        ["should you require"],
+        ["SHOULD"],
+        ["should you required", "you should require", "should require you", "should you requiring"],
+        "Target inversion: Should + subject + base verb."
+      );
+    }
+
+    function trapConditionalWere() {
+      return item(
+        "Cambridge traps",
+        "Were + subject + complement",
+        "In second conditional inversion, remove IF and use Were + subject.",
+        "If I were in your position, I would complain.",
+        "______ , I would complain.",
+        ["were I in your position"],
+        ["WERE"],
+        ["were I was in your position", "I were in your position", "were in I your position", "was I in your position"],
+        "Target inversion: Were + subject + complement."
       );
     }
 
@@ -1434,7 +1479,7 @@
         "Not until I read the email again ______ the error.",
         ["did I notice"],
         ["DID"],
-        ["I noticed", "did notice I", "I did notice", "noticed I"],
+        ["I noticed", "did I noticed", "I did notice", "noticed I"],
         "Not until + normal clause + did + subject + base verb."
       );
     }
@@ -1446,7 +1491,16 @@
       "Conditional inversions": [fromConditionals],
       "Not only... but also": [fromNotOnly],
       "So / Such inversion": [fromSoSuch],
-      "Cambridge traps": [trapNoAuxiliary, trapNoSoonerConnector, trapHardlyConnector, trapNotOnlyOrder, trapConditionalHad, trapNotUntil]
+      "Cambridge traps": [
+        trapNoAuxiliary,
+        trapNoSoonerConnector,
+        trapHardlyConnector,
+        trapNotOnlyOrder,
+        trapConditionalHad,
+        trapConditionalShould,
+        trapConditionalWere,
+        trapNotUntil
+      ]
     };
 
     generators["Mixed exam decisions"] = [
@@ -1458,8 +1512,12 @@
       fromSoSuch,
       trapNoAuxiliary,
       trapNoSoonerConnector,
+      trapHardlyConnector,
       trapNotOnlyOrder,
-      trapConditionalHad
+      trapConditionalHad,
+      trapConditionalShould,
+      trapConditionalWere,
+      trapNotUntil
     ];
 
     const allPracticeGenerators = Object.entries(generators)
