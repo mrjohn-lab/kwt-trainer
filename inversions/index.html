@@ -461,7 +461,7 @@
       <p>
         Practise B2 First Part 4 transformations with inversion structures: negative adverbials,
         No sooner / Hardly / Scarcely, conditional inversions, Not only... but also,
-        and common exam traps with auxiliary verb order.
+        So / Such inversion, and common exam traps with auxiliary verb order.
       </p>
       <div class="stats">
         <span class="pill">Core patterns</span>
@@ -605,8 +605,8 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 5 · v1.1</span>
-      <span>Inversions · FCE Part 4 focused practice</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 5 · v2.0</span>
+      <span>Inversions · Expanded generator · FCE Part 4 focused practice</span>
     </footer>
   </main>
 
@@ -628,7 +628,7 @@
         title: "1. What is an inversion?",
         badge: "Inversions · Foundation",
         html: `
-          <p>In normal English word order, we usually place the subject before the verb.</p>
+          <p>In normal English word order, the subject usually comes before the verb.</p>
 
           <div class="box">
             <strong>Normal order:</strong><br>
@@ -637,7 +637,7 @@
             Rarely does she go out.
           </div>
 
-          <p>In formal English and in exam transformations, some expressions force the auxiliary verb to move before the subject.</p>
+          <p>In formal English and in B2 First Key Word Transformations, certain negative or restrictive expressions force the auxiliary verb to move before the subject.</p>
 
           <div class="study-grid">
             <div class="study-mini">
@@ -655,7 +655,7 @@
 
           <div class="box">
             <strong>FCE Part 4 rule:</strong><br>
-            Inversion is not just decoration. It is a fixed grammar pattern after certain negative or restrictive expressions.
+            Inversion is not just stylistic. In these transformations, it is a fixed grammatical response to certain opening expressions.
           </div>
         `
       },
@@ -761,7 +761,7 @@
           <div class="box">
             <strong>FCE trap:</strong><br>
             ✅ No sooner <strong>had he sat</strong> down <strong>than</strong> the phone rang.<br>
-            ❌ No sooner he had sat down when the phone rang.
+            ✅ Hardly <strong>had he sat</strong> down <strong>when</strong> the phone rang.
           </div>
         `
       },
@@ -940,449 +940,816 @@
       }
     ];
 
-    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "") {
-      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note };
+    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "", family = "") {
+      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note, family };
     }
 
-    const pools = {
-      negativeAdverbials: [
-        {
-          type: "Negative adverbials",
-          expression: "Never + auxiliary + subject + main verb",
-          original: "I have never heard such a strange excuse.",
-          second: "______ such a strange excuse.",
-          answer: "never have I heard",
-          key: "NEVER",
-          distractors: ["never I have heard", "never have heard I", "never I heard", "never did I heard"],
-          note: "With present perfect, move the auxiliary before the subject: never have I heard."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "Never + auxiliary + subject + main verb",
-          original: "She has never felt so embarrassed.",
-          second: "______ so embarrassed.",
-          answer: "never has she felt",
-          key: "NEVER",
-          distractors: ["never she has felt", "never has felt she", "never did she felt", "never she felt"],
-          note: "Present perfect inversion: never has she felt."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "Rarely + do + subject + base verb",
-          original: "They rarely go out during the week.",
-          second: "______ during the week.",
-          answer: "rarely do they go out",
-          key: "RARELY",
-          distractors: ["rarely they go out", "rarely they do go", "rarely do they goes", "rarely go they out"],
-          note: "No auxiliary in the original, so use do."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "Rarely + does + subject + base verb",
-          original: "He rarely makes mistakes in exams.",
-          second: "______ in exams.",
-          answer: "rarely does he make mistakes",
-          key: "RARELY",
-          distractors: ["rarely he makes mistakes", "rarely does he makes mistakes", "rarely he does make mistakes", "rarely make he mistakes"],
-          note: "Third person singular: does he make, not does he makes."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "Seldom + had + subject + past participle",
-          original: "We had seldom seen such beautiful scenery.",
-          second: "______ such beautiful scenery.",
-          answer: "seldom had we seen",
-          key: "SELDOM",
-          distractors: ["seldom we had seen", "seldom had seen we", "seldom did we seen", "seldom we saw"],
-          note: "Past perfect inversion: seldom had we seen."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "Little + did + subject + base verb",
-          original: "He little expected that his plan would fail.",
-          second: "______ that his plan would fail.",
-          answer: "little did he expect",
-          key: "LITTLE",
-          distractors: ["little he expected", "little did he expected", "little he did expect", "little expected he"],
-          note: "Little at the beginning requires inversion with did."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "At no time + auxiliary + subject + verb",
-          original: "The witness did not mention the suspect's name at any time.",
-          second: "At no ______ the suspect's name.",
-          answer: "time did the witness mention",
-          key: "TIME",
-          distractors: ["time the witness mentioned", "time did witness mention", "time the witness did mention", "time mentioned the witness"],
-          note: "At no time + did + subject + base verb."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "Under no circumstances + modal + subject",
-          original: "You must not open this door under any circumstances.",
-          second: "Under ______ open this door.",
-          answer: "no circumstances must you",
-          key: "NO",
-          distractors: ["no circumstances you must", "no circumstances must", "no circumstances do you", "no circumstances you can"],
-          note: "Under no circumstances + modal + subject."
-        },
-        {
-          type: "Negative adverbials",
-          expression: "In no way + did + subject + base verb",
-          original: "I never intended to question your honesty in any way.",
-          second: "In no ______ to question your honesty.",
-          answer: "way did I intend",
-          key: "WAY",
-          distractors: ["way I intended", "way did I intended", "way I did intend", "way intended I"],
-          note: "In no way + did + subject + base verb."
-        }
+    const banks = {
+      rarelyPresentSimple: [
+        ["he", "does", "make", "mistakes", "in exams"],
+        ["she", "does", "forget", "deadlines", "at work"],
+        ["my brother", "does", "arrive", "late", "for training"],
+        ["the manager", "does", "change", "his mind", "during meetings"],
+        ["our teacher", "does", "give", "easy tests", "at the end of term"],
+        ["that student", "does", "ask", "for help", "during lessons"],
+        ["they", "do", "complain", "about homework", "in class"],
+        ["we", "do", "eat", "out", "during the week"],
+        ["the students", "do", "miss", "deadlines", "in this course"],
+        ["my parents", "do", "watch", "television", "during dinner"]
       ],
 
-      onlyNotUntil: [
-        {
-          type: "Only / Not until / Not since",
-          expression: "Not until + time clause + auxiliary + subject",
-          original: "I didn't realise my mistake until I got home.",
-          second: "Not until I got home ______ my mistake.",
-          answer: "did I realise",
-          key: "DID",
-          distractors: ["I realised", "did I realised", "I did realise", "realised I"],
-          note: "The time clause is not inverted. The main clause is inverted."
-        },
-        {
-          type: "Only / Not until / Not since",
-          expression: "Only when + clause + auxiliary + subject",
-          original: "We started eating only when Laura arrived.",
-          second: "Only when Laura arrived ______ eating.",
-          answer: "did we start",
-          key: "DID",
-          distractors: ["we started", "did we started", "we did start", "started we"],
-          note: "Only when triggers inversion in the main clause."
-        },
-        {
-          type: "Only / Not until / Not since",
-          expression: "Only after + clause + auxiliary + subject",
-          original: "He understood the instructions only after I explained them twice.",
-          second: "Only after I explained them twice ______ the instructions.",
-          answer: "did he understand",
-          key: "DID",
-          distractors: ["he understood", "did he understood", "he did understand", "understood he"],
-          note: "Past simple needs did + subject + base verb."
-        },
-        {
-          type: "Only / Not until / Not since",
-          expression: "Not since + time + auxiliary + subject",
-          original: "I haven't enjoyed a concert so much since I was a child.",
-          second: "Not since I was a child ______ a concert so much.",
-          answer: "have I enjoyed",
-          key: "SINCE",
-          distractors: ["I have enjoyed", "have I enjoy", "I enjoyed", "did I enjoyed"],
-          note: "Not since often works with present perfect inversion."
-        },
-        {
-          type: "Only / Not until / Not since",
-          expression: "Not until + perfect clause + did + subject",
-          original: "I didn't realise I had forgotten my passport until I arrived at the airport.",
-          second: "Not until I had arrived at the airport ______ I had forgotten my passport.",
-          answer: "did I realise",
-          key: "DID",
-          distractors: ["I realised", "did I realised", "I did realise", "realised I"],
-          note: "The inversion appears in the main clause: did I realise."
-        }
+      seldomPastSimple: [
+        ["they", "did", "visited", "visit", "the city centre", "after dark"],
+        ["we", "did", "saw", "see", "such behaviour", "at school"],
+        ["the children", "did", "complained", "complain", "about the trip", "last year"],
+        ["my cousins", "did", "travelled", "travel", "abroad", "when they were young"],
+        ["the team", "did", "played", "play", "so badly", "during the tournament"],
+        ["I", "did", "felt", "feel", "so nervous", "before an exam"],
+        ["students", "did", "asked", "ask", "so many questions", "in one lesson"]
       ],
 
-      succession: [
-        {
-          type: "No sooner / Hardly / Scarcely",
-          expression: "No sooner had + subject + past participle + than",
-          original: "As soon as I got home, the phone rang.",
-          second: "No sooner ______ the phone rang.",
-          answer: "had I got home than",
-          key: "SOONER",
-          distractors: ["I had got home than", "had I got home when", "had got I home than", "did I get home than"],
-          note: "No sooner uses had + subject + past participle + than."
-        },
-        {
-          type: "No sooner / Hardly / Scarcely",
-          expression: "No sooner had + subject + past participle + than",
-          original: "They left the house and it immediately started raining.",
-          second: "No sooner ______ it started raining.",
-          answer: "had they left than",
-          key: "SOONER",
-          distractors: ["they had left than", "had they left when", "had left they than", "did they leave than"],
-          note: "Use than after No sooner."
-        },
-        {
-          type: "No sooner / Hardly / Scarcely",
-          expression: "Hardly had + subject + past participle + when",
-          original: "We had just sat down when the bell rang.",
-          second: "Hardly ______ the bell rang.",
-          answer: "had we sat down when",
-          key: "HARDLY",
-          distractors: ["we had sat down when", "had we sat down than", "had sat we down when", "did we sit down when"],
-          note: "Use when after Hardly."
-        },
-        {
-          type: "No sooner / Hardly / Scarcely",
-          expression: "Scarcely had + subject + past participle + when",
-          original: "He had just finished the test when the alarm went off.",
-          second: "Scarcely ______ the alarm went off.",
-          answer: "had he finished when",
-          key: "SCARCELY",
-          distractors: ["he had finished when", "had he finished than", "had finished he when", "did he finish when"],
-          note: "Scarcely works like Hardly: scarcely had... when."
-        },
-        {
-          type: "No sooner / Hardly / Scarcely",
-          expression: "Barely had + subject + past participle + when",
-          original: "I had only just closed my eyes when the baby woke up.",
-          second: "Barely ______ the baby woke up.",
-          answer: "had I closed my eyes when",
-          key: "BARELY",
-          distractors: ["I had closed my eyes when", "had I closed my eyes than", "had closed I my eyes when", "did I close my eyes when"],
-          note: "Barely can also introduce this immediate succession pattern."
-        },
-        {
-          type: "No sooner / Hardly / Scarcely",
-          expression: "No sooner had + subject + past participle + than",
-          original: "I had just made a complaint when the timetable was changed.",
-          second: "No sooner ______ the timetable was changed.",
-          answer: "had I made a complaint than",
-          key: "SOONER",
-          distractors: ["I had made a complaint than", "had I made a complaint when", "had made I a complaint than", "did I make a complaint than"],
-          note: "No sooner pairs with than."
-        }
+      neverPerfect: [
+        ["I", "have", "seen", "such a confusing timetable"],
+        ["we", "have", "received", "so many complaints"],
+        ["they", "have", "experienced", "such difficult conditions"],
+        ["I", "have", "heard", "such a strange excuse"],
+        ["we", "have", "visited", "such a peaceful village"],
+        ["I", "have", "felt", "so disappointed"],
+        ["they", "have", "been", "so close to winning"]
       ],
 
-      conditionals: [
-        {
-          type: "Conditional inversions",
-          expression: "Should + subject + base verb",
-          original: "If you need further information, contact reception.",
-          second: "______ further information, contact reception.",
-          answer: "should you need",
-          key: "SHOULD",
-          distractors: ["should you needed", "you should need", "should need you", "should you needing"],
-          note: "Target inversion: Should + subject + base verb. Do not use IF in the answer."
-        },
-        {
-          type: "Conditional inversions",
-          expression: "Should + subject + base verb",
-          original: "If an emergency arises, press the red button.",
-          second: "______ , press the red button.",
-          answer: "should an emergency arise",
-          key: "SHOULD",
-          distractors: ["should an emergency arises", "an emergency should arise", "should arise an emergency", "should an emergency arising"],
-          note: "Should + subject + base verb."
-        },
-        {
-          type: "Conditional inversions",
-          expression: "Were + subject + complement",
-          original: "If I were you, I would apologise immediately.",
-          second: "______ , I would apologise immediately.",
-          answer: "were I you",
-          key: "WERE",
-          distractors: ["were I was you", "I were you", "were you I", "was I you"],
-          note: "Fixed formal pattern: Were I you. Do not use IF in the answer."
-        },
-        {
-          type: "Conditional inversions",
-          expression: "Were + subject + complement",
-          original: "If she were my teacher, I would feel lucky.",
-          second: "______ , I would feel lucky.",
-          answer: "were she my teacher",
-          key: "WERE",
-          distractors: ["were she was my teacher", "she were my teacher", "were my teacher she", "was she my teacher"],
-          note: "Type 2 formal inversion: Were + subject + complement."
-        },
-        {
-          type: "Conditional inversions",
-          expression: "Had + subject + past participle",
-          original: "If he had trained harder, he could have won.",
-          second: "______ , he could have won.",
-          answer: "had he trained harder",
-          key: "HAD",
-          distractors: ["had he would trained", "he had trained harder", "had trained he harder", "had he train harder"],
-          note: "Target inversion: Had + subject + past participle. Do not use IF in the answer."
-        },
-        {
-          type: "Conditional inversions",
-          expression: "Had + subject + past participle",
-          original: "If they had checked the documents, the mistake would not have happened.",
-          second: "______ , the mistake would not have happened.",
-          answer: "had they checked the documents",
-          key: "HAD",
-          distractors: ["had they would checked", "they had checked documents", "had checked they the documents", "had they check the documents"],
-          note: "Remove IF and invert: Had + subject + past participle."
-        },
-        {
-          type: "Conditional inversions",
-          expression: "Had + subject + past participle",
-          original: "If I had known about the delay, I would have left later.",
-          second: "______ about the delay, I would have left later.",
-          answer: "had I known",
-          key: "HAD",
-          distractors: ["had I would known", "I had known", "had known I", "had I knew"],
-          note: "Target inversion: Had + subject + past participle. The normal IF conditional is possible in English, but it is not the target answer here and is not offered as an option."
-        }
+      neverHasPerfect: [
+        ["she", "has", "felt", "so embarrassed"],
+        ["he", "has", "made", "such a serious mistake"],
+        ["the school", "has", "received", "so many applications"],
+        ["the company", "has", "faced", "such strong criticism"],
+        ["my sister", "has", "won", "such an important prize"],
+        ["the team", "has", "played", "so confidently"]
       ],
 
-      notOnly: [
-        {
-          type: "Not only... but also",
-          expression: "Not only + be + subject",
-          original: "He is helpful and he is kind too.",
-          second: "Not only ______ , but he is also kind.",
-          answer: "is he helpful",
-          key: "ONLY",
-          distractors: ["he is helpful", "is helpful he", "does he helpful", "he helpful is"],
-          note: "With be, invert be and subject."
-        },
-        {
-          type: "Not only... but also",
-          expression: "Not only + do/does + subject + verb",
-          original: "She sings beautifully and plays the violin.",
-          second: "Not only ______ beautifully, but she also plays the violin.",
-          answer: "does she sing",
-          key: "ONLY",
-          distractors: ["she sings", "does she sings", "she does sing", "sing does she"],
-          note: "No auxiliary in original, so use does."
-        },
-        {
-          type: "Not only... but also",
-          expression: "Not only + does + subject + verb",
-          original: "The hotel has a pool and a full gym.",
-          second: "Not only ______ a pool, but it also has a full gym.",
-          answer: "does the hotel have",
-          key: "ONLY",
-          distractors: ["the hotel has", "does the hotel has", "the hotel does have", "have the hotel does"],
-          note: "Main verb have needs do-support here."
-        },
-        {
-          type: "Not only... but also",
-          expression: "Not only + did + subject + verb",
-          original: "They arrived late and did not apologise.",
-          second: "Not only ______ late, but they also did not apologise.",
-          answer: "did they arrive",
-          key: "ONLY",
-          distractors: ["they arrived", "did they arrived", "they did arrive", "arrived did they"],
-          note: "Past simple needs did + subject + base verb."
-        },
-        {
-          type: "Not only... but also",
-          expression: "Not only + was/were + subject",
-          original: "The film was boring and far too long.",
-          second: "Not only ______ boring, but it was also far too long.",
-          answer: "was the film",
-          key: "ONLY",
-          distractors: ["the film was", "was film the", "did the film be", "the film did was"],
-          note: "Only the first clause is inverted."
-        },
-        {
-          type: "Not only... but also",
-          expression: "Not only + have/has + subject + past participle",
-          original: "They have improved the website and reduced the price.",
-          second: "Not only ______ the website, but they have also reduced the price.",
-          answer: "have they improved",
-          key: "ONLY",
-          distractors: ["they have improved", "have improved they", "did they improved", "they improved have"],
-          note: "Existing auxiliary have moves before the subject."
-        }
+      seldomPastPerfect: [
+        ["we", "had", "seen", "such beautiful scenery"],
+        ["they", "had", "experienced", "such pressure"],
+        ["I", "had", "felt", "so relieved"],
+        ["the players", "had", "played", "so well"],
+        ["the audience", "had", "heard", "such a powerful speech"],
+        ["we", "had", "been", "so close to success"]
       ],
 
-      soSuch: [
-        {
-          type: "So / Such inversion",
-          expression: "So + adjective + be + subject + that",
-          original: "The price was so high that nobody bought the tickets.",
-          second: "So ______ that nobody bought the tickets.",
-          answer: "high was the price",
-          key: "SO",
-          distractors: ["high the price was", "was high the price", "high did the price", "the price was high"],
-          note: "So + adjective + be + subject."
-        },
-        {
-          type: "So / Such inversion",
-          expression: "So + adjective + auxiliary + subject + been + that",
-          original: "The demand has been so high that extra dates were added.",
-          second: "So ______ that extra dates were added.",
-          answer: "high has the demand been",
-          key: "HAS",
-          distractors: ["high the demand has been", "high has been the demand", "high did the demand been", "the demand has been high"],
-          note: "With present perfect, the auxiliary has moves before the subject."
-        },
-        {
-          type: "So / Such inversion",
-          expression: "Such + be + noun phrase + that",
-          original: "The demands of her job are such that she rarely takes a holiday.",
-          second: "Such ______ that she rarely takes a holiday.",
-          answer: "are the demands of",
-          key: "SUCH",
-          distractors: ["the demands are of", "are demands the of", "the demands of are", "do the demands of"],
-          note: "Such are the demands of her job that..."
-        },
-        {
-          type: "So / Such inversion",
-          expression: "So + adjective + was + subject + that",
-          original: "The explanation was so confusing that nobody understood it.",
-          second: "So ______ that nobody understood it.",
-          answer: "confusing was the explanation",
-          key: "SO",
-          distractors: ["confusing the explanation was", "was confusing the explanation", "confusing did the explanation", "the explanation was confusing"],
-          note: "So confusing was the explanation that..."
-        }
+      littleDid: [
+        ["he", "expect", "that his plan would fail"],
+        ["she", "know", "how difficult the exam would be"],
+        ["they", "realise", "how much the project would cost"],
+        ["I", "imagine", "that the journey would take so long"],
+        ["we", "suspect", "that the decision had already been made"],
+        ["the students", "understand", "how important the deadline was"]
+      ],
+
+      atNoTime: [
+        ["I", "was", "told", "about the change"],
+        ["we", "were", "informed", "about the delay"],
+        ["the students", "were", "allowed", "to leave early"],
+        ["she", "was", "asked", "to pay extra"],
+        ["they", "were", "given", "a clear explanation"],
+        ["he", "was", "offered", "a refund"]
+      ],
+
+      modalRestrictions: [
+        ["you", "should", "share", "your password"],
+        ["students", "must", "use", "mobile phones"],
+        ["visitors", "can", "enter", "this area"],
+        ["candidates", "should", "open", "the exam paper early"],
+        ["members", "must", "remove", "equipment from the gym"],
+        ["drivers", "can", "park", "outside the emergency exit"]
+      ],
+
+      inNoWayModal: [
+        ["this decision", "can", "be justified"],
+        ["his behaviour", "can", "be accepted"],
+        ["the results", "can", "be considered reliable"],
+        ["the mistake", "can", "be ignored"],
+        ["such behaviour", "should", "be tolerated"],
+        ["the rules", "can", "be changed now"]
+      ],
+
+      onlyPastSimple: [
+        ["I got home", "I", "realise", "my mistake"],
+        ["Laura arrived", "we", "start", "eating"],
+        ["I read the email again", "I", "notice", "the error"],
+        ["the teacher explained it twice", "he", "understand", "the instructions"],
+        ["we reached the hotel", "we", "discover", "the booking problem"],
+        ["the meeting had finished", "they", "tell", "us the truth"]
+      ],
+
+      onlyModal: [
+        ["we checked the map", "we", "could", "find the village"],
+        ["she apologised", "they", "would", "speak to her again"],
+        ["the teacher explained the rule", "the students", "could", "complete the task"],
+        ["I saw the final paragraph", "I", "could", "understand the joke"],
+        ["the lights came back on", "we", "could", "continue working"]
+      ],
+
+      notSincePerfect: [
+        ["I was a child", "I", "have", "enjoyed", "a holiday so much"],
+        ["we moved house", "we", "have", "felt", "so settled"],
+        ["she started university", "she", "has", "worked", "so hard"],
+        ["they won the final", "they", "have", "played", "with such confidence"],
+        ["I left school", "I", "have", "met", "so many new people"]
+      ],
+
+      successionPairs: [
+        ["I", "arrived", "the phone rang"],
+        ["we", "sat down", "the bell rang"],
+        ["she", "opened the door", "the dog ran out"],
+        ["they", "left the house", "it started raining"],
+        ["he", "finished the test", "the alarm went off"],
+        ["I", "closed my eyes", "the baby woke up"],
+        ["we", "started the meeting", "the fire alarm sounded"],
+        ["the train", "left the station", "I realised my bag was missing"],
+        ["I", "made a complaint", "the timetable was changed"],
+        ["they", "announced the winner", "the crowd started cheering"]
+      ],
+
+      shouldConditionals: [
+        ["you", "need", "further information", "contact reception"],
+        ["you", "require", "assistance", "press the help button"],
+        ["an emergency", "arise", "", "leave the building immediately"],
+        ["the weather", "change", "", "the trip will be cancelled"],
+        ["you", "have", "any questions", "ask your teacher"],
+        ["the problem", "continue", "", "call the technician"],
+        ["you", "wish", "to complain", "complete this form"],
+        ["the system", "fail", "", "restart the computer"]
+      ],
+
+      wereConditionals: [
+        ["I", "you", "I would apologise"],
+        ["she", "available", "we would invite her"],
+        ["he", "more careful", "he would make fewer mistakes"],
+        ["the exam", "easier", "more students would pass"],
+        ["I", "in your position", "I would speak to the manager"],
+        ["they", "interested", "they would have contacted us"]
+      ],
+
+      hadConditionals: [
+        ["I", "known about the delay", "I would have left later"],
+        ["he", "trained harder", "he could have won"],
+        ["they", "checked the documents", "the mistake would not have happened"],
+        ["we", "booked earlier", "we would have got cheaper tickets"],
+        ["she", "been told the truth", "she would have acted differently"],
+        ["the driver", "seen the sign", "the accident might have been avoided"],
+        ["I", "taken your advice", "I would not have failed"],
+        ["they", "arrived on time", "they would have heard the announcement"]
+      ],
+
+      notOnlyBe: [
+        ["he", "is", "helpful", "he is also kind"],
+        ["the course", "is", "useful", "it is also enjoyable"],
+        ["the hotel", "was", "expensive", "it was also uncomfortable"],
+        ["the instructions", "were", "unclear", "they were also incomplete"],
+        ["the journey", "was", "long", "it was also exhausting"],
+        ["the students", "were", "tired", "they were also hungry"]
+      ],
+
+      notOnlyPresentSimple: [
+        ["she", "does", "speak", "French fluently", "she also writes it accurately"],
+        ["he", "does", "play", "the piano beautifully", "he also composes music"],
+        ["the app", "does", "save", "time", "it also reduces errors"],
+        ["the school", "does", "offer", "excellent facilities", "it also provides strong support"],
+        ["this method", "does", "improve", "accuracy", "it also builds confidence"]
+      ],
+
+      notOnlyPastSimple: [
+        ["they", "did", "arrive", "late", "they also forgot the tickets"],
+        ["she", "did", "win", "the race", "she also broke the record"],
+        ["he", "did", "refuse", "to apologise", "he also blamed everyone else"],
+        ["we", "did", "lose", "the map", "we also missed the last bus"],
+        ["the team", "did", "play", "badly", "they also argued afterwards"]
+      ],
+
+      notOnlyPerfectModal: [
+        ["we", "have", "improved", "the design", "we have also reduced the cost"],
+        ["they", "have", "solved", "the main problem", "they have also saved time"],
+        ["he", "can", "speak", "German", "he can also translate technical texts"],
+        ["she", "can", "sing", "beautifully", "she can also play the violin"],
+        ["the system", "will", "store", "your data", "it will also protect your privacy"]
+      ],
+
+      soBe: [
+        ["the price", "was", "high", "nobody bought the tickets"],
+        ["the explanation", "was", "confusing", "nobody understood it"],
+        ["the noise", "was", "loud", "we could not sleep"],
+        ["the exam", "was", "difficult", "few students finished it"],
+        ["the weather", "was", "bad", "the match was cancelled"],
+        ["the queue", "was", "long", "we decided to leave"]
+      ],
+
+      soPerfect: [
+        ["the demand", "has", "been", "high", "extra dates were added"],
+        ["the response", "has", "been", "positive", "the course is now full"],
+        ["the pressure", "had", "been", "intense", "several players made mistakes"],
+        ["the criticism", "has", "been", "strong", "the company has apologised"],
+        ["the support", "has", "been", "generous", "the target has already been reached"]
+      ],
+
+      suchBe: [
+        ["the risks", "are", "that the event may be cancelled"],
+        ["the demands of the job", "are", "that she rarely takes a holiday"],
+        ["the pressure on students", "is", "that many feel exhausted"],
+        ["the consequences", "were", "that the project had to be abandoned"],
+        ["the importance of accuracy", "is", "that every detail matters"]
       ]
     };
 
-    function itemFromPool(row) {
+    function itemNegativeRarelyPresent() {
+      const [subject, aux, base, object, context] = pick(banks.rarelyPresentSimple);
+      const answer = `rarely ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} rarely ${presentForm(base, subject)} ${object} ${context}.`;
+      const second = `______ ${object} ${context}.`;
+
       return item(
-        row.type,
-        row.expression,
-        "Move the auxiliary before the subject after the opening expression.",
-        row.original,
-        row.second,
-        [row.answer],
-        [row.key],
-        row.distractors,
-        row.note
+        "Negative adverbials",
+        "Rarely + do/does + subject + base verb",
+        "Use do/does when the original sentence has no auxiliary.",
+        original,
+        second,
+        [answer],
+        ["RARELY"],
+        [
+          `rarely ${subject} ${presentForm(base, subject)}`,
+          `rarely ${aux} ${subject} ${presentForm(base, subject)}`,
+          `rarely ${subject} ${aux} ${base}`,
+          `rarely ${base} ${subject}`
+        ],
+        "No auxiliary in the original, so use do/does + subject + base verb.",
+        "rarely-present"
       );
     }
 
-    function fromNegativeAdverbials() {
-      return itemFromPool(pick(pools.negativeAdverbials));
+    function itemNegativeSeldomPast() {
+      const [subject, aux, wrongPast, base, object, context] = pick(banks.seldomPastSimple);
+      const answer = `seldom ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} seldom ${wrongPast} ${object} ${context}.`;
+      const second = `______ ${object} ${context}.`;
+
+      return item(
+        "Negative adverbials",
+        "Seldom + did + subject + base verb",
+        "Use did + subject + base verb for past simple inversion.",
+        original,
+        second,
+        [answer],
+        ["SELDOM"],
+        [
+          `seldom ${subject} ${wrongPast}`,
+          `seldom ${aux} ${subject} ${wrongPast}`,
+          `seldom ${subject} ${aux} ${base}`,
+          `seldom ${base} ${subject}`
+        ],
+        "Past simple inversion uses did + subject + base verb.",
+        "seldom-past"
+      );
     }
 
-    function fromOnlyNotUntil() {
-      return itemFromPool(pick(pools.onlyNotUntil));
+    function itemNeverPerfect() {
+      const [subject, aux, participle, object] = pick(Math.random() < 0.55 ? banks.neverPerfect : banks.neverHasPerfect);
+      const answer = `never ${aux} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${aux} never ${participle} ${object}.`;
+      const second = `______ ${object}.`;
+
+      return item(
+        "Negative adverbials",
+        "Never + have/has + subject + past participle",
+        "If there is already an auxiliary, move it before the subject.",
+        original,
+        second,
+        [answer],
+        ["NEVER"],
+        [
+          `never ${subject} ${aux} ${participle}`,
+          `never ${aux} ${participle} ${subject}`,
+          `never did ${subject} ${participle}`,
+          `never ${subject} ${participle}`
+        ],
+        "Present perfect inversion: never + have/has + subject + past participle.",
+        "never-perfect"
+      );
     }
 
-    function fromSuccession() {
-      return itemFromPool(pick(pools.succession));
+    function itemSeldomPastPerfect() {
+      const [subject, aux, participle, object] = pick(banks.seldomPastPerfect);
+      const answer = `seldom ${aux} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${aux} seldom ${participle} ${object}.`;
+      const second = `______ ${object}.`;
+
+      return item(
+        "Negative adverbials",
+        "Seldom + had + subject + past participle",
+        "Past perfect inversion moves had before the subject.",
+        original,
+        second,
+        [answer],
+        ["SELDOM"],
+        [
+          `seldom ${subject} ${aux} ${participle}`,
+          `seldom ${aux} ${participle} ${subject}`,
+          `seldom did ${subject} ${participle}`,
+          `seldom ${subject} ${pastSimpleFromParticiple(participle)}`
+        ],
+        "Past perfect inversion: seldom had we seen / seldom had they experienced.",
+        "seldom-past-perfect"
+      );
     }
 
-    function fromConditionals() {
-      return itemFromPool(pick(pools.conditionals));
+    function itemLittleDid() {
+      const [subject, base, clause] = pick(banks.littleDid);
+      const answer = `little did ${subject} ${base}`;
+      const original = `${capitalise(subject)} little ${pastSimpleFromBase(base)} ${clause}.`;
+      const second = `______ ${clause}.`;
+
+      return item(
+        "Negative adverbials",
+        "Little + did + subject + base verb",
+        "Little at the beginning requires inversion with did.",
+        original,
+        second,
+        [answer],
+        ["LITTLE"],
+        [
+          `little ${subject} ${pastSimpleFromBase(base)}`,
+          `little did ${subject} ${pastSimpleFromBase(base)}`,
+          `little ${subject} did ${base}`,
+          `little ${base} ${subject}`
+        ],
+        "Little + did + subject + base verb.",
+        "little-did"
+      );
     }
 
-    function fromNotOnly() {
-      return itemFromPool(pick(pools.notOnly));
+    function itemAtNoTimePassive() {
+      const [subject, be, participle, complement] = pick(banks.atNoTime);
+      const answer = `time ${be} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${be} not ${participle} ${complement} at any time.`;
+      const second = `At no ______ ${complement}.`;
+
+      return item(
+        "Negative adverbials",
+        "At no time + auxiliary + subject + verb",
+        "At no time is followed by inversion.",
+        original,
+        second,
+        [answer],
+        ["TIME"],
+        [
+          `time ${subject} ${be} ${participle}`,
+          `time ${be} ${participle} ${subject}`,
+          `time did ${subject} ${participle}`,
+          `time ${subject} did ${participle}`
+        ],
+        "At no time + auxiliary + subject + verb.",
+        "at-no-time"
+      );
     }
 
-    function fromSoSuch() {
-      return itemFromPool(pick(pools.soSuch));
+    function itemUnderNoCircumstances() {
+      const [subject, modal, base, object] = pick(banks.modalRestrictions);
+      const answer = `no circumstances ${modal} ${subject}`;
+      const original = `${capitalise(subject)} ${modal} not ${base} ${object} under any circumstances.`;
+      const second = `Under ______ ${base} ${object}.`;
+
+      return item(
+        "Negative adverbials",
+        "Under no circumstances + modal + subject",
+        "This opening expression requires inversion with the modal verb.",
+        original,
+        second,
+        [answer],
+        ["NO"],
+        [
+          `no circumstances ${subject} ${modal}`,
+          `no circumstances ${modal}`,
+          `no circumstances do ${subject}`,
+          `no circumstances ${subject} can`
+        ],
+        "Under no circumstances + modal + subject.",
+        "under-no-circumstances"
+      );
+    }
+
+    function itemInNoWayModal() {
+      const [subject, modal, be, complement] = pick(banks.inNoWayModal);
+      const answer = `way ${modal} ${subject} ${be}`;
+      const original = `${capitalise(subject)} ${modal} in no way ${be} ${complement}.`;
+      const second = `In no ______ ${complement}.`;
+
+      return item(
+        "Negative adverbials",
+        "In no way + modal + subject + verb",
+        "In no way is followed by auxiliary or modal inversion.",
+        original,
+        second,
+        [answer],
+        ["WAY"],
+        [
+          `way ${subject} ${modal} ${be}`,
+          `way ${modal} ${be} ${subject}`,
+          `way ${subject} ${be}`,
+          `way did ${subject} ${be}`
+        ],
+        "In no way + modal + subject + verb.",
+        "in-no-way"
+      );
+    }
+
+    function itemOnlyPastSimple() {
+      const [timeClause, subject, base, object] = pick(banks.onlyPastSimple);
+      const answer = `did ${subject} ${base}`;
+      const original = `${capitalise(subject)} did not ${base} ${object} until ${timeClause}.`;
+      const second = `Not until ${timeClause} ______ ${object}.`;
+
+      return item(
+        "Only / Not until / Not since",
+        "Not until + time clause + did + subject + base verb",
+        "The time clause is not inverted. The main clause is inverted.",
+        original,
+        second,
+        [answer],
+        ["DID"],
+        [
+          `${subject} ${pastSimpleFromBase(base)}`,
+          `did ${subject} ${pastSimpleFromBase(base)}`,
+          `${subject} did ${base}`,
+          `${pastSimpleFromBase(base)} ${subject}`
+        ],
+        "Not until + normal time clause + did + subject + base verb.",
+        "not-until-past"
+      );
+    }
+
+    function itemOnlyModal() {
+      const [timeClause, subject, modal, action] = pick(banks.onlyModal);
+      const answer = `${modal} ${subject}`;
+      const original = `${capitalise(subject)} ${modal} ${action} only after ${timeClause}.`;
+      const second = `Only after ${timeClause} ______ ${action}.`;
+
+      return item(
+        "Only / Not until / Not since",
+        "Only after + clause + modal + subject",
+        "Only after can trigger inversion in the main clause.",
+        original,
+        second,
+        [answer],
+        [modal.toUpperCase()],
+        [
+          `${subject} ${modal}`,
+          `${modal}`,
+          `did ${subject}`,
+          `${subject} did`
+        ],
+        "Only after + clause + modal + subject.",
+        "only-modal"
+      );
+    }
+
+    function itemNotSincePerfect() {
+      const [timeClause, subject, aux, participle, object] = pick(banks.notSincePerfect);
+      const answer = `${aux} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${aux} not ${participle} ${object} since ${timeClause}.`;
+      const second = `Not since ${timeClause} ______ ${object}.`;
+
+      return item(
+        "Only / Not until / Not since",
+        "Not since + time clause + have/has + subject + past participle",
+        "Not since often works with present perfect inversion.",
+        original,
+        second,
+        [answer],
+        [aux.toUpperCase()],
+        [
+          `${subject} ${aux} ${participle}`,
+          `${aux} ${subject} ${baseFromParticiple(participle)}`,
+          `did ${subject} ${participle}`,
+          `${subject} ${pastSimpleFromParticiple(participle)}`
+        ],
+        "Not since + time clause + have/has + subject + past participle.",
+        "not-since-perfect"
+      );
+    }
+
+    function itemSuccessionNoSooner() {
+      const [subject, event1, event2] = pick(banks.successionPairs);
+      const answer = `sooner had ${subject} ${event1}`;
+      const original = `As soon as ${subject} ${pastSimplePhrase(event1)}, ${event2}.`;
+      const second = `No ______ than ${event2}.`;
+
+      return item(
+        "No sooner / Hardly / Scarcely",
+        "No sooner had + subject + past participle + than",
+        "Use No sooner... than for two immediate events.",
+        original,
+        second,
+        [answer],
+        ["SOONER"],
+        [
+          `sooner ${subject} had ${event1}`,
+          `sooner had ${subject} ${pastSimplePhrase(event1)}`,
+          `sooner had ${subject} ${event1} when`,
+          `sooner did ${subject} ${basePhrase(event1)}`
+        ],
+        "No sooner had + subject + past participle + than.",
+        "no-sooner"
+      );
+    }
+
+    function itemSuccessionHardly() {
+      const [subject, event1, event2] = pick(banks.successionPairs);
+      const opening = Math.random() < 0.5 ? "Hardly" : "Scarcely";
+      const key = opening.toUpperCase();
+      const answer = `${opening.toLowerCase()} had ${subject} ${event1}`;
+      const original = `${capitalise(subject)} had just ${event1} when ${event2}.`;
+      const second = `______ when ${event2}.`;
+
+      return item(
+        "No sooner / Hardly / Scarcely",
+        `${opening} had + subject + past participle + when`,
+        `${opening}... when expresses two immediate events.`,
+        original,
+        second,
+        [answer],
+        [key],
+        [
+          `${opening.toLowerCase()} ${subject} had ${event1}`,
+          `${opening.toLowerCase()} had ${subject} ${event1} than`,
+          `${opening.toLowerCase()} did ${subject} ${basePhrase(event1)}`,
+          `${opening.toLowerCase()} had ${event1} ${subject}`
+        ],
+        `${opening} had + subject + past participle + when.`,
+        opening.toLowerCase()
+      );
+    }
+
+    function itemConditionalShould() {
+      const [subject, base, object, result] = pick(banks.shouldConditionals);
+      const gapObject = object ? ` ${object}` : "";
+      const answer = `should ${subject} ${base}`;
+      const original = `If ${subject} ${presentForm(base, subject)}${gapObject}, ${result}.`;
+      const second = `______${gapObject}, ${result}.`;
+
+      return item(
+        "Conditional inversions",
+        "Should + subject + base verb",
+        "In formal first conditional inversion, remove if and use should + subject + base verb.",
+        original,
+        second,
+        [answer],
+        ["SHOULD"],
+        [
+          `should ${subject} ${presentForm(base, subject)}`,
+          `${subject} should ${base}`,
+          `should ${base} ${subject}`,
+          `should ${subject} ${base}ing`
+        ],
+        "Target inversion: Should + subject + base verb. Do not use IF in the answer.",
+        "conditional-should"
+      );
+    }
+
+    function itemConditionalWere() {
+      const [subject, complement, result] = pick(banks.wereConditionals);
+      const answer = `were ${subject} ${complement}`;
+      const original = `If ${subject} were ${complement}, ${result}.`;
+      const second = `______ , ${result}.`;
+
+      return item(
+        "Conditional inversions",
+        "Were + subject + complement",
+        "In formal second conditional inversion, remove if and move were before the subject.",
+        original,
+        second,
+        [answer],
+        ["WERE"],
+        [
+          `were ${subject} was ${complement}`,
+          `${subject} were ${complement}`,
+          `were ${complement} ${subject}`,
+          `was ${subject} ${complement}`
+        ],
+        "Target inversion: Were + subject + complement. Do not use IF in the answer.",
+        "conditional-were"
+      );
+    }
+
+    function itemConditionalHad() {
+      const [subject, pastParticiplePhrase, result] = pick(banks.hadConditionals);
+      const answer = `had ${subject} ${pastParticiplePhrase}`;
+      const original = `If ${subject} had ${pastParticiplePhrase}, ${result}.`;
+      const second = `______ , ${result}.`;
+
+      return item(
+        "Conditional inversions",
+        "Had + subject + past participle",
+        "In formal third conditional inversion, remove if and move had before the subject.",
+        original,
+        second,
+        [answer],
+        ["HAD"],
+        [
+          `had ${subject} would ${pastParticiplePhrase}`,
+          `${subject} had ${pastParticiplePhrase}`,
+          `had ${pastParticiplePhrase} ${subject}`,
+          `had ${subject} ${pastParticipleToBasePhrase(pastParticiplePhrase)}`
+        ],
+        "Target inversion: Had + subject + past participle. Do not use IF in the answer.",
+        "conditional-had"
+      );
+    }
+
+    function itemNotOnlyBe() {
+      const [subject, be, adjective, resultClause] = pick(banks.notOnlyBe);
+      const answer = `not only ${be} ${subject}`;
+      const original = `${capitalise(subject)} ${be} ${adjective}, and ${resultClause}.`;
+      const second = `______ ${adjective}, but ${resultClause}.`;
+
+      return item(
+        "Not only... but also",
+        "Not only + be + subject",
+        "When Not only begins the sentence, invert the first clause.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${be}`,
+          `not only ${be} ${adjective}`,
+          `only ${be} ${subject}`,
+          `not only did ${subject}`
+        ],
+        "With be, invert be and subject.",
+        "not-only-be"
+      );
+    }
+
+    function itemNotOnlyPresent() {
+      const [subject, aux, base, object, resultClause] = pick(banks.notOnlyPresentSimple);
+      const answer = `not only ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} ${presentForm(base, subject)} ${object}, and ${resultClause}.`;
+      const second = `______ ${object}, but ${resultClause}.`;
+
+      return item(
+        "Not only... but also",
+        "Not only + does + subject + base verb",
+        "Use do/does support when there is no auxiliary.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${presentForm(base, subject)}`,
+          `not only ${aux} ${subject} ${presentForm(base, subject)}`,
+          `only ${aux} ${subject} ${base}`,
+          `not only ${base} ${subject}`
+        ],
+        "Not only + does/do + subject + base verb.",
+        "not-only-present"
+      );
+    }
+
+    function itemNotOnlyPast() {
+      const [subject, aux, base, object, resultClause] = pick(banks.notOnlyPastSimple);
+      const answer = `not only ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} ${pastSimpleFromBase(base)} ${object}, and ${resultClause}.`;
+      const second = `______ ${object}, but ${resultClause}.`;
+
+      return item(
+        "Not only... but also",
+        "Not only + did + subject + base verb",
+        "Past simple inversion uses did + subject + base verb.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${pastSimpleFromBase(base)}`,
+          `not only ${aux} ${subject} ${pastSimpleFromBase(base)}`,
+          `only ${aux} ${subject} ${base}`,
+          `not only ${base} ${subject}`
+        ],
+        "Not only + did + subject + base verb.",
+        "not-only-past"
+      );
+    }
+
+    function itemNotOnlyPerfectModal() {
+      const [subject, aux, base, object, resultClause] = pick(banks.notOnlyPerfectModal);
+      const answer = `not only ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} ${aux} ${base} ${object}, and ${resultClause}.`;
+      const second = `______ ${object}, but ${resultClause}.`;
+
+      return item(
+        "Not only... but also",
+        "Not only + auxiliary/modal + subject + verb",
+        "If there is already an auxiliary or modal, move it before the subject.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${aux} ${base}`,
+          `not only ${aux} ${base} ${subject}`,
+          `only ${aux} ${subject} ${base}`,
+          `not only did ${subject} ${base}`
+        ],
+        "Move the existing auxiliary or modal before the subject.",
+        "not-only-perfect-modal"
+      );
+    }
+
+    function itemSoBe() {
+      const [subject, be, adjective, result] = pick(banks.soBe);
+      const answer = `so ${adjective} ${be} ${subject}`;
+      const original = `${capitalise(subject)} ${be} so ${adjective} that ${result}.`;
+      const second = `______ that ${result}.`;
+
+      return item(
+        "So / Such inversion",
+        "So + adjective + be + subject + that",
+        "In emphatic result clauses, so + adjective can trigger inversion.",
+        original,
+        second,
+        [answer],
+        ["SO"],
+        [
+          `so ${adjective} ${subject} ${be}`,
+          `so ${be} ${adjective} ${subject}`,
+          `${subject} ${be} so ${adjective}`,
+          `so ${adjective} did ${subject}`
+        ],
+        "So + adjective + be + subject + that.",
+        "so-be"
+      );
+    }
+
+    function itemSoPerfect() {
+      const [subject, aux, been, adjective, result] = pick(banks.soPerfect);
+      const answer = `so ${adjective} ${aux} ${subject}`;
+      const original = `${capitalise(subject)} ${aux} ${been} so ${adjective} that ${result}.`;
+      const second = `______ been that ${result}.`;
+
+      return item(
+        "So / Such inversion",
+        "So + adjective + auxiliary + subject + been + that",
+        "With perfect forms, the auxiliary moves before the subject.",
+        original,
+        second,
+        [answer],
+        ["SO"],
+        [
+          `so ${adjective} ${subject} ${aux}`,
+          `so ${aux} ${adjective} ${subject}`,
+          `${subject} ${aux} so ${adjective}`,
+          `so ${adjective} did ${subject}`
+        ],
+        "So + adjective + has/had + subject + been.",
+        "so-perfect"
+      );
+    }
+
+    function itemSuchBe() {
+      const [subject, be, result] = pick(banks.suchBe);
+      const answer = `such ${be} ${subject}`;
+      const original = `${capitalise(subject)} ${be} such that ${result}.`;
+      const second = `______ that ${result}.`;
+
+      return item(
+        "So / Such inversion",
+        "Such + be + noun phrase + that",
+        "Such can introduce an emphatic result structure with inversion.",
+        original,
+        second,
+        [answer],
+        ["SUCH"],
+        [
+          `such ${subject} ${be}`,
+          `such ${be}`,
+          `${subject} ${be} such`,
+          `such did ${subject}`
+        ],
+        "Such + be + noun phrase + that.",
+        "such-be"
+      );
     }
 
     function trapNoAuxiliary() {
       return item(
         "Cambridge traps",
-        "Missing do-support after negative adverbial",
+        "Missing do-support after a negative adverbial",
         "If there is no auxiliary in the original sentence, use do / does / did.",
         "She rarely makes mistakes in tests.",
         "Rarely ______ in tests.",
         ["does she make mistakes"],
         ["RARELY"],
         ["she makes mistakes", "she does make mistakes", "does she makes mistakes", "make she mistakes"],
-        "After rarely at the start, use does + subject + base verb."
+        "After rarely at the start, use does + subject + base verb.",
+        "trap-no-auxiliary"
       );
     }
 
@@ -1396,7 +1763,8 @@
         ["had he sat down than"],
         ["SOONER"],
         ["he had sat down than", "had he sat down when", "had sat he down than", "did he sit down than"],
-        "No sooner... than. Hardly/Scarcely... when."
+        "No sooner... than. Hardly/Scarcely... when.",
+        "trap-no-sooner"
       );
     }
 
@@ -1410,21 +1778,8 @@
         ["had we finished breakfast when"],
         ["HARDLY"],
         ["we had finished breakfast when", "had we finished breakfast than", "had finished we breakfast when", "did we finish breakfast when"],
-        "Hardly... when, not hardly... than."
-      );
-    }
-
-    function trapNotOnlyOrder() {
-      return item(
-        "Cambridge traps",
-        "Not only requires inversion in the first clause",
-        "After Not only at the beginning, invert the first clause only.",
-        "She sings well and dances beautifully.",
-        "Not only ______ well, but she also dances beautifully.",
-        ["does she sing"],
-        ["ONLY"],
-        ["she sings", "she does sing", "does she sings", "sings she"],
-        "Not only does she sing..., but she also..."
+        "Hardly... when, not hardly... than.",
+        "trap-hardly"
       );
     }
 
@@ -1438,35 +1793,23 @@
         ["had I known"],
         ["HAD"],
         ["had I would known", "I had known", "had known I", "had I knew"],
-        "Target inversion: Had + subject + past participle. The normal IF conditional is grammatical English, but it is not the target transformation and is not used as an option."
+        "Target inversion: Had + subject + past participle. The normal IF conditional is grammatical English, but it is not the target transformation and is not used as an option.",
+        "trap-had"
       );
     }
 
-    function trapConditionalShould() {
+    function trapNotOnly() {
       return item(
         "Cambridge traps",
-        "Should + subject + base verb",
-        "In first conditional inversion, remove IF and use Should + subject + base verb.",
-        "If you require assistance, press the help button.",
-        "______ assistance, press the help button.",
-        ["should you require"],
-        ["SHOULD"],
-        ["should you required", "you should require", "should require you", "should you requiring"],
-        "Target inversion: Should + subject + base verb."
-      );
-    }
-
-    function trapConditionalWere() {
-      return item(
-        "Cambridge traps",
-        "Were + subject + complement",
-        "In second conditional inversion, remove IF and use Were + subject.",
-        "If I were in your position, I would complain.",
-        "______ , I would complain.",
-        ["were I in your position"],
-        ["WERE"],
-        ["were I was in your position", "I were in your position", "were in I your position", "was I in your position"],
-        "Target inversion: Were + subject + complement."
+        "Not only requires inversion",
+        "After Not only at the beginning, invert the first clause.",
+        "She sings well and dances beautifully.",
+        "______ well, but she also dances beautifully.",
+        ["not only does she sing"],
+        ["ONLY"],
+        ["not only she sings", "not only does she sings", "only does she sing", "not only sing she"],
+        "Not only + does + subject + base verb.",
+        "trap-not-only"
       );
     }
 
@@ -1480,44 +1823,117 @@
         ["did I notice"],
         ["DID"],
         ["I noticed", "did I noticed", "I did notice", "noticed I"],
-        "Not until + normal clause + did + subject + base verb."
+        "Not until + normal clause + did + subject + base verb.",
+        "trap-not-until"
       );
     }
 
+    function trapShouldWere() {
+      return Math.random() < 0.5
+        ? item(
+            "Cambridge traps",
+            "Should + subject + base verb",
+            "First conditional inversion uses should + subject + base verb.",
+            "If you require assistance, press the help button.",
+            "______ assistance, press the help button.",
+            ["should you require"],
+            ["SHOULD"],
+            ["should you required", "you should require", "should require you", "should you requiring"],
+            "Should + subject + base verb.",
+            "trap-should"
+          )
+        : item(
+            "Cambridge traps",
+            "Were + subject + complement",
+            "Second conditional inversion uses were + subject.",
+            "If I were in your position, I would complain.",
+            "______ , I would complain.",
+            ["were I in your position"],
+            ["WERE"],
+            ["were I was in your position", "I were in your position", "were in I your position", "was I in your position"],
+            "Were + subject + complement.",
+            "trap-were"
+          );
+    }
+
     const generators = {
-      "Negative adverbials": [fromNegativeAdverbials],
-      "Only / Not until / Not since": [fromOnlyNotUntil],
-      "No sooner / Hardly / Scarcely": [fromSuccession],
-      "Conditional inversions": [fromConditionals],
-      "Not only... but also": [fromNotOnly],
-      "So / Such inversion": [fromSoSuch],
+      "Negative adverbials": [
+        itemNegativeRarelyPresent,
+        itemNegativeSeldomPast,
+        itemNeverPerfect,
+        itemSeldomPastPerfect,
+        itemLittleDid,
+        itemAtNoTimePassive,
+        itemUnderNoCircumstances,
+        itemInNoWayModal
+      ],
+      "Only / Not until / Not since": [
+        itemOnlyPastSimple,
+        itemOnlyModal,
+        itemNotSincePerfect
+      ],
+      "No sooner / Hardly / Scarcely": [
+        itemSuccessionNoSooner,
+        itemSuccessionHardly
+      ],
+      "Conditional inversions": [
+        itemConditionalShould,
+        itemConditionalWere,
+        itemConditionalHad
+      ],
+      "Not only... but also": [
+        itemNotOnlyBe,
+        itemNotOnlyPresent,
+        itemNotOnlyPast,
+        itemNotOnlyPerfectModal
+      ],
+      "So / Such inversion": [
+        itemSoBe,
+        itemSoPerfect,
+        itemSuchBe
+      ],
       "Cambridge traps": [
         trapNoAuxiliary,
         trapNoSoonerConnector,
         trapHardlyConnector,
-        trapNotOnlyOrder,
         trapConditionalHad,
-        trapConditionalShould,
-        trapConditionalWere,
-        trapNotUntil
+        trapNotOnly,
+        trapNotUntil,
+        trapShouldWere
       ]
     };
 
     generators["Mixed exam decisions"] = [
-      fromNegativeAdverbials,
-      fromOnlyNotUntil,
-      fromSuccession,
-      fromConditionals,
-      fromNotOnly,
-      fromSoSuch,
+      itemNegativeRarelyPresent,
+      itemNegativeSeldomPast,
+      itemNeverPerfect,
+      itemSeldomPastPerfect,
+      itemLittleDid,
+      itemAtNoTimePassive,
+      itemUnderNoCircumstances,
+      itemInNoWayModal,
+      itemOnlyPastSimple,
+      itemOnlyModal,
+      itemNotSincePerfect,
+      itemSuccessionNoSooner,
+      itemSuccessionHardly,
+      itemConditionalShould,
+      itemConditionalWere,
+      itemConditionalHad,
+      itemNotOnlyBe,
+      itemNotOnlyPresent,
+      itemNotOnlyPast,
+      itemNotOnlyPerfectModal,
+      itemSoBe,
+      itemSoPerfect,
+      itemSuchBe,
       trapNoAuxiliary,
       trapNoSoonerConnector,
       trapHardlyConnector,
-      trapNotOnlyOrder,
       trapConditionalHad,
-      trapConditionalShould,
-      trapConditionalWere,
-      trapNotUntil
+      trapNotOnly,
+      trapNotUntil,
+      trapShouldWere
     ];
 
     const allPracticeGenerators = Object.entries(generators)
@@ -1543,7 +1959,8 @@
       examIndex: 0,
       examScore: 0,
       examChecked: false,
-      examAnswers: []
+      examAnswers: [],
+      patternHistory: {}
     };
 
     function $(id) {
@@ -1561,6 +1978,135 @@
 
     function pick(array) {
       return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function capitalise(text) {
+      return String(text).charAt(0).toUpperCase() + String(text).slice(1);
+    }
+
+    function presentForm(base, subject) {
+      const singularSubjects = ["he", "she", "it", "my brother", "the manager", "our teacher", "that student", "the school", "the company", "the app", "this method"];
+      if (!singularSubjects.includes(subject.toLowerCase())) return base;
+      if (base.endsWith("ch") || base.endsWith("sh") || base.endsWith("x") || base.endsWith("ss")) return base + "es";
+      if (base.endsWith("y")) return base.slice(0, -1) + "ies";
+      return base + "s";
+    }
+
+    function pastSimpleFromBase(base) {
+      const irregular = {
+        go: "went",
+        see: "saw",
+        feel: "felt",
+        know: "knew",
+        make: "made",
+        hear: "heard",
+        eat: "ate",
+        give: "gave",
+        take: "took",
+        speak: "spoke",
+        win: "won",
+        lose: "lost",
+        arrive: "arrived",
+        visit: "visited",
+        complain: "complained",
+        travel: "travelled",
+        play: "played",
+        ask: "asked",
+        expect: "expected",
+        realise: "realised",
+        imagine: "imagined",
+        suspect: "suspected",
+        understand: "understood",
+        notice: "noticed",
+        start: "started",
+        discover: "discovered",
+        tell: "told",
+        require: "required",
+        need: "needed",
+        arise: "arose",
+        change: "changed",
+        have: "had",
+        continue: "continued",
+        wish: "wished",
+        fail: "failed",
+        speak: "spoke",
+        save: "saved",
+        offer: "offered",
+        improve: "improved",
+        refuse: "refused"
+      };
+      return irregular[base] || base + "ed";
+    }
+
+    function pastSimpleFromParticiple(participle) {
+      const map = {
+        seen: "saw",
+        been: "was",
+        felt: "felt",
+        heard: "heard",
+        received: "received",
+        experienced: "experienced",
+        visited: "visited",
+        made: "made",
+        won: "won",
+        played: "played"
+      };
+      return map[participle] || participle;
+    }
+
+    function baseFromParticiple(participle) {
+      const map = {
+        seen: "see",
+        been: "be",
+        felt: "feel",
+        heard: "hear",
+        received: "receive",
+        experienced: "experience",
+        visited: "visit",
+        made: "make",
+        won: "win",
+        played: "play",
+        enjoyed: "enjoy",
+        worked: "work",
+        met: "meet"
+      };
+      return map[participle] || participle.replace(/ed$/, "");
+    }
+
+    function pastParticipleToBasePhrase(phrase) {
+      return phrase
+        .replace("known", "know")
+        .replace("trained", "train")
+        .replace("checked", "check")
+        .replace("booked", "book")
+        .replace("been told", "be told")
+        .replace("seen", "see")
+        .replace("taken", "take")
+        .replace("arrived", "arrive");
+    }
+
+    function pastSimplePhrase(phrase) {
+      return phrase
+        .replace("arrived", "arrived")
+        .replace("sat down", "sat down")
+        .replace("opened", "opened")
+        .replace("left", "left")
+        .replace("finished", "finished")
+        .replace("closed", "closed")
+        .replace("started", "started")
+        .replace("made", "made");
+    }
+
+    function basePhrase(phrase) {
+      return phrase
+        .replace("arrived", "arrive")
+        .replace("sat down", "sit down")
+        .replace("opened", "open")
+        .replace("left", "leave")
+        .replace("finished", "finish")
+        .replace("closed", "close")
+        .replace("started", "start")
+        .replace("made", "make");
     }
 
     function normalise(text) {
@@ -1602,6 +2148,7 @@
 
     function isValidExercise(exercise) {
       const answers = getAcceptedAnswers(exercise);
+
       return answers.length > 0 && answers.every(answer => {
         const count = wordCount(answer);
         return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
@@ -1610,15 +2157,23 @@
 
     function cleanDistractors(exercise) {
       const accepted = getAcceptedAnswers(exercise).map(normalise);
-      return (exercise.distractors || []).filter(option =>
-        wordCount(option) >= 2 &&
-        wordCount(option) <= 5 &&
-        !accepted.includes(normalise(option))
-      );
+
+      return [...new Set(exercise.distractors || [])]
+        .map(option => String(option || "").trim())
+        .filter(option =>
+          wordCount(option) >= 2 &&
+          wordCount(option) <= 5 &&
+          !accepted.includes(normalise(option))
+        )
+        .slice(0, 6);
     }
 
     function signature(exercise) {
       return normalise(`${exercise.original} ${exercise.second} ${primaryAnswer(exercise)}`);
+    }
+
+    function patternSignature(exercise) {
+      return `${exercise.type}::${exercise.family || exercise.expression}`;
     }
 
     function getGeneratorList(category) {
@@ -1629,9 +2184,18 @@
 
     function generateExercise(category = "All categories", mode = "transform", recent = []) {
       const generatorList = getGeneratorList(category);
+      const localPatternCount = state.patternHistory[category] || {};
 
-      for (let attempt = 0; attempt < 80; attempt++) {
-        const generator = pick(generatorList);
+      for (let attempt = 0; attempt < 160; attempt++) {
+        const sortedGenerators = shuffle(generatorList).sort((a, b) => {
+          const ea = safeGenerate(a);
+          const eb = safeGenerate(b);
+          const pa = ea ? (localPatternCount[patternSignature(ea)] || 0) : 999;
+          const pb = eb ? (localPatternCount[patternSignature(eb)] || 0) : 999;
+          return pa - pb;
+        });
+
+        const generator = sortedGenerators[0] || pick(generatorList);
         const exercise = generator();
 
         const validKeys = shuffle(exercise.keyOptions || []).filter(key =>
@@ -1654,17 +2218,35 @@
         if (mode === "multiple" && cleanDistractors(finalExercise).length < 3) continue;
 
         const sig = signature(finalExercise);
-        if (recent.includes(sig) && attempt < 60) continue;
+        const psig = patternSignature(finalExercise);
+
+        if (recent.includes(sig) && attempt < 120) continue;
+        if ((localPatternCount[psig] || 0) > 2 && attempt < 100) continue;
+
+        state.patternHistory[category] = state.patternHistory[category] || {};
+        state.patternHistory[category][psig] = (state.patternHistory[category][psig] || 0) + 1;
 
         return finalExercise;
       }
 
-      return fromNegativeAdverbials();
+      const fallback = itemNegativeRarelyPresent();
+      return {
+        ...fallback,
+        key: fallback.keyOptions[0]
+      };
+    }
+
+    function safeGenerate(generator) {
+      try {
+        return generator();
+      } catch {
+        return null;
+      }
     }
 
     function remember(recentList, exercise) {
       recentList.push(signature(exercise));
-      while (recentList.length > 18) recentList.shift();
+      while (recentList.length > 35) recentList.shift();
     }
 
     function populatePracticeSelect(id, value) {
@@ -1840,7 +2422,7 @@
       const selected = [];
       const used = [];
 
-      for (let attempt = 0; attempt < 120; attempt++) {
+      for (let attempt = 0; attempt < 180; attempt++) {
         const exercise = generateExercise(state.examCategory, "transform", used);
         const sig = signature(exercise);
 
@@ -1977,11 +2559,11 @@
       if (score >= 9) {
         message = "Excellent exam control. You are using inversion structures with strong accuracy.";
       } else if (score >= 7) {
-        message = "Good result. Keep practising auxiliary position and connector choice.";
+        message = "Good result. Keep practising auxiliary position, tense variety and connector choice.";
       } else if (score >= 5) {
         message = "You understand several patterns, but you need more controlled practice with inversion word order.";
       } else {
-        message = "Revise Study Mode carefully, especially negative adverbials, No sooner/Hardly and Not only.";
+        message = "Revise Study Mode carefully, especially negative adverbials, No sooner/Hardly and conditional inversions.";
       }
 
       const review = state.examAnswers.map(item => `
@@ -2057,6 +2639,7 @@
         state.mcScore = 0;
         state.mcAttempts = 0;
         state.mcRecent = [];
+        state.patternHistory[state.mcCategory] = {};
         newMcQuestion();
       });
 
@@ -2065,6 +2648,7 @@
         state.mcScore = 0;
         state.mcAttempts = 0;
         state.mcRecent = [];
+        state.patternHistory[state.mcCategory] = {};
         renderMc();
       });
 
@@ -2073,6 +2657,7 @@
         state.trScore = 0;
         state.trAttempts = 0;
         state.trRecent = [];
+        state.patternHistory[state.trCategory] = {};
         newTransformation();
       });
 
@@ -2084,6 +2669,7 @@
         state.trScore = 0;
         state.trAttempts = 0;
         state.trRecent = [];
+        state.patternHistory[state.trCategory] = {};
         renderTransformation();
       });
 
