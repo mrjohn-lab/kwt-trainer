@@ -205,7 +205,7 @@
       color: var(--text);
     }
 
-    select { min-width: 240px; }
+    select { min-width: 260px; }
     input { width: 100%; }
 
     .button-group {
@@ -253,20 +253,84 @@
 
     .muted { color: var(--muted); }
 
-    .flashcard {
-      min-height: 320px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
+    .study-card {
+      min-height: 460px;
     }
 
-    .flashcard h2 {
-      font-size: clamp(32px, 5vw, 50px);
+    .study-card h2 {
       color: var(--navy);
-      margin: 14px 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+      margin: 12px 0 12px;
+    }
+
+    .study-card h3 {
+      color: var(--navy);
+      margin: 18px 0 8px;
+      font-size: 21px;
+    }
+
+    .study-card p,
+    .study-card li {
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .study-mini {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .study-mini strong {
+      color: var(--navy);
+    }
+
+    .formula {
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--navy);
+      border: 1px solid rgba(0, 94, 184, 0.18);
+      border-radius: 10px;
+      padding: 3px 7px;
+      font-weight: 900;
+      margin: 2px 0;
+    }
+
+    .tense-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 15px;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .tense-table th,
+    .tense-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .tense-table th {
+      background: var(--light-blue);
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .tense-table tr:nth-child(even) td {
+      background: #f8fafc;
     }
 
     .box {
@@ -393,11 +457,13 @@
 
       .tabs,
       .answer-row,
-      .option-grid {
+      .option-grid,
+      .study-grid {
         grid-template-columns: 1fr;
       }
 
       .hero { padding: 26px 20px; }
+      select { width: 100%; min-width: 0; }
     }
   </style>
 </head>
@@ -443,14 +509,14 @@
 
     <section id="study" class="tab-section">
       <div class="toolbar">
-        <select id="studyCategory"></select>
+        <select id="studySection"></select>
         <div class="button-group">
-          <button id="studyRandom">Random</button>
+          <button id="studyPrev">Previous</button>
           <button id="studyNext" class="primary">Next</button>
         </div>
       </div>
 
-      <div id="studyCard" class="card flashcard"></div>
+      <div id="studyCard" class="card study-card"></div>
       <p id="studyCounter" class="muted" style="text-align:center"></p>
     </section>
 
@@ -566,7 +632,7 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 4 · v1.0</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 4 · v2.0</span>
       <span>Passive Voice & Causative Structures · FCE Part 4 focused practice</span>
     </footer>
   </main>
@@ -586,562 +652,1304 @@
       "Cambridge traps"
     ];
 
+    const studySections = [
+      {
+        title: "1. Active → Passive: basic transformation",
+        badge: "Passive Voice · Foundation",
+        html: `
+          <p>The passive voice is used when the action is more important than the person who does it, or when the doer is unknown, obvious or unnecessary.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Step 1 · Find the active object</strong>
+              <p>The object of the active sentence becomes the subject of the passive sentence.</p>
+              <p><span class="formula">They built the bridge.</span><br>Object: <strong>the bridge</strong></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 2 · Change the verb</strong>
+              <p>The active verb becomes <span class="formula">be + past participle</span>.</p>
+              <p><span class="formula">built → was built</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 3 · Keep the tense</strong>
+              <p>The tense of <strong>be</strong> must match the tense of the active verb.</p>
+              <p><span class="formula">builds → is built</span><br><span class="formula">built → was built</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 4 · Agent with by</strong>
+              <p>Use <strong>by</strong> only when the agent is important.</p>
+              <p><span class="formula">The bridge was built in 2020.</span></p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 thinking:</strong><br>
+            Active: <em>The technicians repaired the system.</em><br>
+            Passive: <em>The system was repaired.</em><br><br>
+            In KWT, do not add unnecessary words like <em>by someone</em> unless the sentence clearly requires them.
+          </div>
+        `
+      },
+      {
+        title: "2. Passive verb changes: tense table",
+        badge: "Passive Voice · Tense Control",
+        html: `
+          <p>This is the most important study section in this block. In FCE Part 4, many passive transformations are tense-control exercises.</p>
+
+          <table class="tense-table">
+            <thead>
+              <tr>
+                <th>Tense / Form</th>
+                <th>Active</th>
+                <th>Passive</th>
+                <th>FCE trap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Present Simple</td>
+                <td>builds</td>
+                <td><strong>is built</strong></td>
+                <td>Do not write <em>is build</em>.</td>
+              </tr>
+              <tr>
+                <td>Present Continuous</td>
+                <td>is building</td>
+                <td><strong>is being built</strong></td>
+                <td>Do not forget <em>being</em>.</td>
+              </tr>
+              <tr>
+                <td>Past Simple</td>
+                <td>built</td>
+                <td><strong>was built</strong></td>
+                <td>Use <em>was/were</em> correctly.</td>
+              </tr>
+              <tr>
+                <td>Past Continuous</td>
+                <td>was building</td>
+                <td><strong>was being built</strong></td>
+                <td>Continuous passive needs <em>being</em>.</td>
+              </tr>
+              <tr>
+                <td>Present Perfect</td>
+                <td>has built</td>
+                <td><strong>has been built</strong></td>
+                <td>Perfect passive needs <em>been</em>.</td>
+              </tr>
+              <tr>
+                <td>Past Perfect</td>
+                <td>had built</td>
+                <td><strong>had been built</strong></td>
+                <td>Do not write <em>had built</em>; that is active.</td>
+              </tr>
+              <tr>
+                <td>Future</td>
+                <td>will build</td>
+                <td><strong>will be built</strong></td>
+                <td>Use <em>will be + past participle</em>.</td>
+              </tr>
+              <tr>
+                <td>Future Perfect</td>
+                <td>will have built</td>
+                <td><strong>will have been built</strong></td>
+                <td>Long but very testable.</td>
+              </tr>
+              <tr>
+                <td>Conditional</td>
+                <td>would build</td>
+                <td><strong>would be built</strong></td>
+                <td>Modal pattern: would be done.</td>
+              </tr>
+              <tr>
+                <td>Conditional Perfect</td>
+                <td>would have built</td>
+                <td><strong>would have been built</strong></td>
+                <td>Perfect modal passive.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>Very useful rule:</strong><br>
+            In a positive passive answer, the passive verb form usually has <strong>one more word</strong> than the active verb form.<br><br>
+            <em>has repaired</em> → <strong>has been repaired</strong><br>
+            <em>is repairing</em> → <strong>is being repaired</strong>
+          </div>
+        `
+      },
+      {
+        title: "3. Passive with modal verbs",
+        badge: "Passive Voice · Modal Passive",
+        html: `
+          <p>Modal passives are extremely common in Key Word Transformations because they are short, mechanical and easy to test.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Basic formula</strong>
+              <p><span class="formula">modal + be + past participle</span></p>
+              <p>must be repaired<br>should be updated<br>can be seen</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Active → Passive</strong>
+              <p>They must repair the bridge.</p>
+              <p><strong>The bridge must be repaired.</strong></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Negative modal passive</strong>
+              <p>They mustn't use phones.</p>
+              <p><strong>Phones mustn't be used.</strong></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Perfect modal passive</strong>
+              <p>They should have checked it.</p>
+              <p><strong>It should have been checked.</strong></p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            <em>The bridge must repaired</em> ❌<br>
+            <em>The bridge must be repaired</em> ✅<br><br>
+            After a modal, always use <strong>be + past participle</strong> for the passive.
+          </div>
+        `
+      },
+      {
+        title: "4. Passive with two objects",
+        badge: "Passive Voice · Two Objects",
+        html: `
+          <p>Some verbs can take two objects: a person and a thing. In English, the person often becomes the passive subject.</p>
+
+          <div class="box">
+            <strong>Active:</strong><br>
+            The manager gave the workers precise instructions.<br><br>
+            <strong>Most natural passive:</strong><br>
+            The workers were given precise instructions.<br><br>
+            <strong>Also possible:</strong><br>
+            Precise instructions were given to the workers.
+          </div>
+
+          <h3>Common two-object verbs in FCE</h3>
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>give</strong>
+              <p>They gave Mia a prize.<br><strong>Mia was given a prize.</strong></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>send</strong>
+              <p>They sent us the tickets.<br><strong>We were sent the tickets.</strong></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>offer</strong>
+              <p>They offered him a job.<br><strong>He was offered a job.</strong></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>show</strong>
+              <p>They showed the tourists the castle.<br><strong>The tourists were shown the castle.</strong></p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 tip:</strong><br>
+            If the second sentence begins with a person, use:<br>
+            <span class="formula">person + be + past participle + thing</span><br>
+            <em>Tom was lent a camera.</em>
+          </div>
+        `
+      },
+      {
+        title: "5. Reporting passive I: It + passive",
+        badge: "Reporting Passive · It Pattern",
+        html: `
+          <p>Reporting passive is used with verbs such as <strong>say, think, believe, report, expect, claim, know</strong>.</p>
+
+          <div class="box">
+            <strong>Active:</strong><br>
+            People believe that the painting is genuine.<br><br>
+            <strong>Impersonal passive:</strong><br>
+            It is believed that the painting is genuine.
+          </div>
+
+          <h3>Main patterns</h3>
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>People say that...</strong>
+              <p><span class="formula">It is said that...</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>People believe that...</strong>
+              <p><span class="formula">It is believed that...</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>People think that...</strong>
+              <p><span class="formula">It is thought that...</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Journalists reported that...</strong>
+              <p><span class="formula">It was reported that...</span></p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            <em>It believed that...</em> ❌<br>
+            <em>It is believed that...</em> ✅<br><br>
+            Do not forget the passive auxiliary <strong>be</strong>.
+          </div>
+        `
+      },
+      {
+        title: "6. Reporting passive II: subject + infinitive",
+        badge: "Reporting Passive · Infinitive Pattern",
+        html: `
+          <p>This is one of the most important advanced passive patterns in B2 First.</p>
+
+          <div class="box">
+            <strong>Active:</strong><br>
+            People believe that he is innocent.<br><br>
+            <strong>Passive with infinitive:</strong><br>
+            He is believed to be innocent.
+          </div>
+
+          <h3>The key decision: same time or earlier time?</h3>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Same time reference</strong>
+              <p>People believe that he <strong>is</strong> honest.</p>
+              <p><strong>He is believed to be honest.</strong></p>
+              <p><span class="formula">to be / to do</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Earlier past action</strong>
+              <p>People believe that he <strong>left</strong> early.</p>
+              <p><strong>He is believed to have left early.</strong></p>
+              <p><span class="formula">to have + past participle</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Continuous action</strong>
+              <p>People think she is writing a book.</p>
+              <p><strong>She is thought to be writing a book.</strong></p>
+              <p><span class="formula">to be + -ing</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Passive infinitive</strong>
+              <p>People expect the museum will be reopened.</p>
+              <p><strong>The museum is expected to be reopened.</strong></p>
+              <p><span class="formula">to be + past participle</span></p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 rule:</strong><br>
+            Same time: <strong>to be / to do</strong><br>
+            Earlier action: <strong>to have been / to have done</strong><br><br>
+            <em>He is thought to be rich.</em><br>
+            <em>He is thought to have stolen the money.</em>
+          </div>
+        `
+      },
+      {
+        title: "7. Causative I: have/get something done",
+        badge: "Causative · Services and Arrangements",
+        html: `
+          <p>Use causative structures when the subject does not do the action personally. Someone else does it for them.</p>
+
+          <div class="box">
+            <strong>Active idea:</strong><br>
+            A mechanic checked my car.<br><br>
+            <strong>Causative:</strong><br>
+            I had my car checked.
+          </div>
+
+          <h3>Main patterns</h3>
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>HAVE + object + past participle</strong>
+              <p>I had my hair cut.</p>
+              <p>She had her jacket shortened.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>GET + object + past participle</strong>
+              <p>They got the roof repaired.</p>
+              <p>He finally got the seats booked.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Future causative</strong>
+              <p>I will have my eyes tested.</p>
+              <p>She is going to get her laptop fixed.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Continuous causative</strong>
+              <p>We are having our kitchen painted.</p>
+              <p>He is getting his car serviced.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            <em>I had checked my car</em> = I checked it myself or had already checked it. ❌ for causative meaning<br>
+            <em>I had my car checked</em> = Someone checked it for me. ✅
+          </div>
+        `
+      },
+      {
+        title: "8. Causative II: accidents and misfortunes",
+        badge: "Causative · Misfortunes",
+        html: `
+          <p>The causative can also describe bad things that happen to someone. The subject suffers the result; they do not arrange the action.</p>
+
+          <div class="box">
+            <strong>Someone stole my phone.</strong><br>
+            I had my phone stolen.<br><br>
+            <strong>Someone broke his glasses.</strong><br>
+            He had his glasses broken.
+          </div>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Stolen</strong>
+              <p>I had my wallet stolen.</p>
+              <p>She had her bike stolen.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Broken</strong>
+              <p>He had his glasses broken.</p>
+              <p>They had a window broken.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Damaged</strong>
+              <p>We had our luggage damaged.</p>
+              <p>She had her car scratched.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Lost / deleted</strong>
+              <p>He had his files deleted.</p>
+              <p>They had their tickets lost.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 thinking:</strong><br>
+            Ask yourself: <em>Did the subject do the action?</em><br>
+            If not, and something bad happened to their possession, causative misfortune may be needed.
+          </div>
+        `
+      },
+      {
+        title: "9. Causative III: make / let / get someone to do",
+        badge: "Causative · People Doing Actions",
+        html: `
+          <p>These causative verbs are about causing another person to do something. The structure depends on the meaning.</p>
+
+          <table class="tense-table">
+            <thead>
+              <tr>
+                <th>Meaning</th>
+                <th>Structure</th>
+                <th>Example</th>
+                <th>Trap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Force</td>
+                <td><strong>make + object + bare infinitive</strong></td>
+                <td>The teacher made us rewrite it.</td>
+                <td>Not <em>made us to rewrite</em>.</td>
+              </tr>
+              <tr>
+                <td>Permission</td>
+                <td><strong>let + object + bare infinitive</strong></td>
+                <td>They let us leave early.</td>
+                <td>Not <em>let us to leave</em>.</td>
+              </tr>
+              <tr>
+                <td>Persuasion</td>
+                <td><strong>get + object + to-infinitive</strong></td>
+                <td>I got him to help me.</td>
+                <td>Do not forget <em>to</em>.</td>
+              </tr>
+              <tr>
+                <td>Arrangement / instruction</td>
+                <td><strong>have + object + bare infinitive</strong></td>
+                <td>The manager had the assistant print it.</td>
+                <td>Not <em>had the assistant to print</em>.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>FCE decision rule:</strong><br>
+            forced → <strong>made someone do</strong><br>
+            allowed → <strong>let someone do</strong><br>
+            persuaded → <strong>got someone to do</strong><br>
+            asked/arranged → <strong>had someone do</strong>
+          </div>
+        `
+      },
+      {
+        title: "10. Common FCE traps",
+        badge: "Exam Accuracy · Traps",
+        html: `
+          <p>These are the mistakes that most often cost marks in B2 First Part 4.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Forgetting BEING</strong>
+              <p>They are repairing the road.</p>
+              <p>✅ The road <strong>is being repaired</strong>.</p>
+              <p>❌ The road <em>is repaired</em>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Forgetting BEEN</strong>
+              <p>They have repaired the road.</p>
+              <p>✅ The road <strong>has been repaired</strong>.</p>
+              <p>❌ The road <em>has repaired</em>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Wrong causative order</strong>
+              <p>✅ I <strong>had my car checked</strong>.</p>
+              <p>❌ I <em>had checked my car</em>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Wrong infinitive after make / let / get</strong>
+              <p>✅ made us stay</p>
+              <p>✅ let us go</p>
+              <p>✅ got us to help</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Reporting passive time reference</strong>
+              <p>Same time: <strong>is believed to be</strong></p>
+              <p>Earlier past: <strong>is believed to have been</strong></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Unnecessary agent</strong>
+              <p>✅ The printer was repaired.</p>
+              <p>Usually avoid: <em>by someone</em></p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Final FCE reminder:</strong><br>
+            Every answer must use the key word, keep the same meaning and contain between <strong>two and five words</strong>.
+          </div>
+        `
+      }
+    ];
+
     function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "") {
       return { type, expression, meaning, original, second, answers, keyOptions, distractors, note };
     }
 
-    const items = [
-      item("Active → Passive basic", "Past simple active → past simple passive",
-        "Object becomes subject. Past simple active becomes was/were + past participle.",
-        "The staff cleaned the hall after the event.",
-        "The hall ______ after the event.",
-        ["was cleaned"], ["WAS"],
-        ["is cleaned", "was being cleaned", "has been cleaned"],
-        "Keep the tense: cleaned → was cleaned."),
+    const data = {
+      simplePresentSingular: [
+        ["The museum", "displays", "rare coins", "Rare coins", "are displayed"],
+        ["This factory", "produces", "electric bikes", "Electric bikes", "are produced"],
+        ["The company", "checks", "every application", "Every application", "is checked"],
+        ["The school", "organises", "several exchanges", "Several exchanges", "are organised"],
+        ["The website", "updates", "the timetable", "The timetable", "is updated"],
+        ["The hotel", "serves", "breakfast", "Breakfast", "is served"]
+      ],
 
-      item("Active → Passive basic", "Past simple active → past simple passive",
-        "Use were when the new passive subject is plural.",
-        "The organisers cancelled the workshops yesterday.",
-        "The workshops ______ yesterday.",
-        ["were cancelled"], ["WERE"],
-        ["was cancelled", "were being cancelled", "have been cancelled"],
-        "Plural subject: workshops were cancelled."),
+      pastSimple: [
+        ["The staff", "cleaned", "the hall", "after the event", "The hall", "was cleaned"],
+        ["The organisers", "cancelled", "the workshop", "at the last minute", "The workshop", "was cancelled"],
+        ["The police", "arrested", "the suspect", "outside the station", "The suspect", "was arrested"],
+        ["The technician", "repaired", "the projector", "before the lesson", "The projector", "was repaired"],
+        ["The school", "uploaded", "the photos", "yesterday evening", "The photos", "were uploaded"],
+        ["The committee", "approved", "the proposal", "last week", "The proposal", "was approved"],
+        ["The volunteers", "planted", "new trees", "in the park", "New trees", "were planted"],
+        ["The chef", "prepared", "the desserts", "early in the morning", "The desserts", "were prepared"]
+      ],
 
-      item("Active → Passive basic", "Present simple active → present simple passive",
-        "Use am/is/are + past participle for present simple passive.",
-        "They sell fresh bread in this bakery.",
-        "Fresh bread ______ in this bakery.",
-        ["is sold"], ["IS"],
-        ["is selling", "has sold", "was sold"],
-        "Fresh bread is uncountable/singular in this sentence: is sold."),
+      futureSimple: [
+        ["The results", "on Monday", "will be announced"],
+        ["The winners", "tomorrow morning", "will be announced"],
+        ["The new rules", "next month", "will be introduced"],
+        ["The tickets", "later today", "will be sent"],
+        ["The problem", "as soon as possible", "will be solved"],
+        ["The documents", "before the meeting", "will be printed"]
+      ],
 
-      item("Active → Passive basic", "Present simple active → present simple passive",
-        "Present simple passive describes regular facts or processes.",
-        "They make these shoes by hand.",
-        "These shoes ______ by hand.",
-        ["are made"], ["ARE"],
-        ["are making", "were made", "have made"],
-        "Present simple passive: are made."),
+      modalPassive: [
+        ["They must update the software immediately.", "The software ______ immediately.", "must be updated", "MUST", "must updated"],
+        ["They should check the figures again.", "The figures ______ again.", "should be checked", "BE", "should checked"],
+        ["They can complete the form online.", "The form ______ online.", "can be completed", "BE", "can completed"],
+        ["They must repair the bridge before winter.", "The bridge ______ before winter.", "must be repaired", "BE", "must repaired"],
+        ["They should replace these old computers.", "These old computers ______.", "should be replaced", "BE", "should replaced"],
+        ["They cannot use phones during the exam.", "Phones ______ during the exam.", "cannot be used", "BE", "cannot used"]
+      ],
 
-      item("Active → Passive basic", "Future active → future passive",
-        "Will + base verb becomes will be + past participle.",
-        "They will announce the results on Friday.",
-        "The results ______ on Friday.",
-        ["will be announced"], ["BE"],
-        ["will announced", "will have announced", "will be announcing"],
-        "Future passive: will be + past participle."),
+      presentContinuous: [
+        ["They are repairing", "the road", "outside the school", "The road", "is being repaired"],
+        ["They are interviewing", "the candidates", "this morning", "The candidates", "are being interviewed"],
+        ["The teacher is marking", "the essays", "right now", "The essays", "are being marked"],
+        ["They are painting", "the classroom", "this week", "The classroom", "is being painted"],
+        ["The council is building", "a new sports centre", "near the river", "A new sports centre", "is being built"],
+        ["They are translating", "the instructions", "into French", "The instructions", "are being translated"]
+      ],
 
-      item("Active → Passive basic", "Modal active → modal passive",
-        "Modal + active verb becomes modal + be + past participle.",
-        "They must replace the broken screen.",
-        "The broken screen ______.",
-        ["must be replaced"], ["BE"],
-        ["must replaced", "must been replaced", "must be replacing"],
-        "After a modal, use be + past participle."),
+      pastContinuous: [
+        ["They were checking", "the tickets", "when we arrived", "The tickets", "were being checked"],
+        ["They were repairing", "the lift", "all morning", "The lift", "was being repaired"],
+        ["The students were preparing", "the posters", "during the break", "The posters", "were being prepared"],
+        ["They were recording", "the interview", "when the alarm rang", "The interview", "was being recorded"],
+        ["They were cleaning", "the windows", "at lunchtime", "The windows", "were being cleaned"]
+      ],
 
-      item("Active → Passive basic", "Question passive",
-        "Keep the question form when transforming into the passive.",
-        "Did they invite you to the ceremony?",
-        "Were ______ to the ceremony?",
-        ["you invited"], ["INVITED"],
-        ["you invite", "invited you", "you being invited"],
-        "Did they invite you? → Were you invited?"),
+      presentPerfect: [
+        ["Someone has repaired", "the printer", "The printer", "has been repaired"],
+        ["They have delivered", "the packages", "The packages", "have been delivered"],
+        ["The school has published", "the timetable", "The timetable", "has been published"],
+        ["They have corrected", "all the mistakes", "All the mistakes", "have been corrected"],
+        ["Someone has stolen", "the documents", "The documents", "have been stolen"],
+        ["The company has hired", "a new designer", "A new designer", "has been hired"]
+      ],
 
-      item("Passive tense control", "Present continuous passive",
-        "Is/are + -ing becomes is/are being + past participle.",
-        "They are repairing the lift at the moment.",
-        "The lift ______ at the moment.",
-        ["is being repaired"], ["BEING"],
-        ["is repaired", "has been repaired", "is repairing"],
-        "Present continuous passive needs being."),
+      pastPerfect: [
+        ["They had completed", "the report", "before the meeting", "The report", "had been completed"],
+        ["Someone had delivered", "the parcel", "before we got home", "The parcel", "had been delivered"],
+        ["They had repaired", "the roof", "before the storm", "The roof", "had been repaired"],
+        ["They had informed", "all the parents", "before Friday", "All the parents", "had been informed"],
+        ["The assistant had printed", "the documents", "before the interview", "The documents", "had been printed"]
+      ],
 
-      item("Passive tense control", "Present continuous passive",
-        "Use are being + past participle with plural subjects.",
-        "The teachers are checking the essays now.",
-        "The essays ______ now.",
-        ["are being checked"], ["BEING"],
-        ["are checked", "have been checked", "are checking"],
-        "Present continuous passive: are being checked."),
+      futurePerfect: [
+        ["They will have finished the extension by June.", "The extension ______ by June.", "will have been finished", "BEEN"],
+        ["Someone will have cleaned the room before we arrive.", "The room ______ before we arrive.", "will have been cleaned", "BEEN"],
+        ["They will have repaired the road by next week.", "The road ______ by next week.", "will have been repaired", "BEEN"],
+        ["They will have checked all the passports before boarding.", "All the passports ______ before boarding.", "will have been checked", "BEEN"]
+      ],
 
-      item("Passive tense control", "Past continuous passive",
-        "Was/were + -ing becomes was/were being + past participle.",
-        "They were painting the classroom when we arrived.",
-        "The classroom ______ when we arrived.",
-        ["was being painted"], ["BEING"],
-        ["was painted", "has been painted", "was painting"],
-        "Past continuous passive: was being painted."),
+      goingTo: [
+        ["They are going to publish the list tonight.", "The list ______ tonight.", "is going to be published", "BE"],
+        ["Someone is going to deliver the furniture tomorrow.", "The furniture ______ tomorrow.", "is going to be delivered", "BE"],
+        ["They are going to repair the computers this afternoon.", "The computers ______ this afternoon.", "are going to be repaired", "BE"],
+        ["They are going to announce the decision soon.", "The decision ______ soon.", "is going to be announced", "BE"]
+      ],
 
-      item("Passive tense control", "Present perfect passive",
-        "Has/have + past participle becomes has/have been + past participle.",
-        "Someone has repaired the projector.",
-        "The projector ______.",
-        ["has been repaired"], ["BEEN"],
-        ["has repaired", "was been repaired", "has being repaired"],
-        "Do not forget been in perfect passive forms."),
+      twoObject: [
+        ["They gave the students extra time.", "The students ______ extra time.", "were given", "GIVEN"],
+        ["Someone offered Mia a place on the course.", "Mia ______ a place on the course.", "was offered", "WAS"],
+        ["The school sent the parents an email.", "The parents ______ an email.", "were sent", "SENT"],
+        ["The guide showed the tourists the old castle.", "The tourists ______ the old castle.", "were shown", "SHOWN"],
+        ["The company paid the workers a bonus.", "The workers ______ a bonus.", "were paid", "PAID"],
+        ["Someone lent Tom a professional camera.", "Tom ______ a professional camera.", "was lent", "LENT"],
+        ["They taught the children basic first aid.", "The children ______ basic first aid.", "were taught", "TAUGHT"],
+        ["They awarded the young scientist a prize.", "The young scientist ______ a prize.", "was awarded", "AWARDED"]
+      ],
 
-      item("Passive tense control", "Present perfect passive",
-        "Use have been + past participle with plural subjects.",
-        "The company has delivered the packages.",
-        "The packages ______.",
-        ["have been delivered"], ["BEEN"],
-        ["have delivered", "were been delivered", "have being delivered"],
-        "Present perfect passive: have been delivered."),
+      reportingItPresent: [
+        ["People say that the restaurant is excellent.", "______ that the restaurant is excellent.", "it is said", "SAID"],
+        ["People believe that the painting is genuine.", "______ that the painting is genuine.", "it is believed", "BELIEVED"],
+        ["Experts think that the bridge is unsafe.", "______ that the bridge is unsafe.", "it is thought", "THOUGHT"],
+        ["People claim that the castle is haunted.", "______ that the castle is haunted.", "it is claimed", "CLAIMED"],
+        ["Scientists report that the lake is polluted.", "______ that the lake is polluted.", "it is reported", "REPORTED"]
+      ],
 
-      item("Passive tense control", "Past perfect passive",
-        "Had + past participle becomes had been + past participle.",
-        "They had completed the report before the meeting.",
-        "The report ______ before the meeting.",
-        ["had been completed"], ["BEEN"],
-        ["had completed", "was been completed", "had being completed"],
-        "Past perfect passive: had been completed."),
+      reportingItPast: [
+        ["Journalists reported that the actor had left the country.", "______ that the actor had left the country.", "it was reported", "REPORTED"],
+        ["They announced that the match was cancelled.", "______ that the match was cancelled.", "it was announced", "ANNOUNCED"],
+        ["People believed that the painting was fake.", "______ that the painting was fake.", "it was believed", "BELIEVED"],
+        ["Experts thought that the building was dangerous.", "______ that the building was dangerous.", "it was thought", "THOUGHT"]
+      ],
 
-      item("Passive tense control", "Future perfect passive",
-        "Will have + past participle becomes will have been + past participle.",
-        "They will have finished the building by June.",
-        "The building ______ by June.",
-        ["will have been finished"], ["BEEN"],
-        ["will have finished", "will be finished", "will have being finished"],
-        "Future perfect passive needs will have been + past participle."),
+      reportingSubjectSame: [
+        ["People believe that he is a talented musician.", "He ______ a talented musician.", "is believed to be", "BELIEVED"],
+        ["People say that she is the best player in the team.", "She ______ the best player in the team.", "is said to be", "SAID"],
+        ["Experts think that the building is unsafe.", "The building ______ unsafe.", "is thought to be", "THOUGHT"],
+        ["People consider that the method is reliable.", "The method ______ reliable.", "is considered to be", "CONSIDERED"],
+        ["They expect that the new coach will be successful.", "The new coach ______ successful.", "is expected to be", "EXPECTED"]
+      ],
 
-      item("Passive tense control", "Going to passive",
-        "Is/are going to + verb becomes is/are going to be + past participle.",
-        "They are going to publish the timetable tonight.",
-        "The timetable ______ tonight.",
-        ["is going to be published"], ["BE"],
-        ["is going to publish", "will be publishing", "is published"],
-        "Going to passive: going to be + past participle."),
+      reportingSubjectAction: [
+        ["People think that she works for an international charity.", "She ______ for an international charity.", "is thought to work", "THOUGHT"],
+        ["People believe that he owns several houses.", "He ______ several houses.", "is believed to own", "BELIEVED"],
+        ["People say that they live abroad.", "They ______ abroad.", "are said to live", "SAID"],
+        ["Experts think that the company employs over 500 people.", "The company ______ over 500 people.", "is thought to employ", "THOUGHT"]
+      ],
 
-      item("Passive tense control", "Conditional passive",
-        "Would + verb becomes would be + past participle.",
-        "They would accept your proposal immediately.",
-        "Your proposal ______ immediately.",
-        ["would be accepted"], ["BE"],
-        ["would accepted", "would have accepted", "would be accepting"],
-        "Conditional passive: would be accepted."),
+      reportingSubjectPast: [
+        ["People believe that the thief escaped through the back door.", "The thief ______ through the back door.", "is believed to have escaped", "BELIEVED"],
+        ["People say that the scientist discovered the cure by accident.", "The scientist ______ the cure by accident.", "is said to have discovered", "SAID"],
+        ["Experts think that the painting belonged to a royal family.", "The painting ______ to a royal family.", "is thought to have belonged", "THOUGHT"],
+        ["People believe that the climbers reached the summit before dawn.", "The climbers ______ the summit before dawn.", "are believed to have reached", "BELIEVED"]
+      ],
 
-      item("Two-object passive", "Indirect object as passive subject",
-        "With verbs like give, send, offer and teach, the person often becomes the passive subject.",
-        "They gave the students extra time.",
-        "The students ______ extra time.",
-        ["were given"], ["GIVEN"],
-        ["were gave", "were giving", "had given"],
-        "The person object becomes the subject: The students were given..."),
+      reportingSubjectContinuous: [
+        ["People think that she is writing a new novel.", "She ______ a new novel.", "is thought to be writing", "THOUGHT"],
+        ["People say that they are developing a new app.", "They ______ a new app.", "are said to be developing", "SAID"],
+        ["Experts believe that the ice is melting faster than expected.", "The ice ______ faster than expected.", "is believed to be melting", "BELIEVED"]
+      ],
 
-      item("Two-object passive", "Indirect object as passive subject",
-        "The person receiving something can become the passive subject.",
-        "Someone offered Mia a place on the course.",
-        "Mia ______ a place on the course.",
-        ["was offered"], ["WAS"],
-        ["was offering", "has offered", "was been offered"],
-        "Offer + person + thing → person was offered thing."),
+      causativeHave: [
+        ["A mechanic checked my car yesterday.", "I ______ yesterday.", "had my car checked", "HAD"],
+        ["A hairdresser cut my hair this morning.", "I ______ this morning.", "had my hair cut", "HAD"],
+        ["A professional photographer took our class photo.", "We ______ by a professional photographer.", "had our photo taken", "HAD"],
+        ["A tailor altered my jacket.", "I ______ by a tailor.", "had my jacket altered", "HAD"],
+        ["A technician fixed my laptop.", "I ______ by a technician.", "had my laptop fixed", "HAD"],
+        ["A dentist checked her teeth.", "She ______ by a dentist.", "had her teeth checked", "HAD"]
+      ],
 
-      item("Two-object passive", "Indirect object as passive subject",
-        "Use plural agreement when the receiver is plural.",
-        "The school sent the parents an email.",
-        "The parents ______ an email.",
-        ["were sent"], ["SENT"],
-        ["were send", "were sending", "have sent"],
-        "The parents were sent an email."),
+      causativeFuture: [
+        ["An optician will test my eyes next week.", "I ______ next week.", "will have my eyes tested", "HAVE"],
+        ["A plumber will fix the leak tomorrow.", "He will ______ tomorrow.", "have the leak fixed", "HAVE"],
+        ["A mechanic will service our car on Monday.", "We will ______ on Monday.", "have our car serviced", "HAVE"],
+        ["A dentist will whiten her teeth tomorrow.", "She will ______ tomorrow.", "get her teeth whitened", "GET"]
+      ],
 
-      item("Two-object passive", "Indirect object as passive subject",
-        "Teach, give, show, send and pay often allow this pattern.",
-        "The guide showed the tourists the old castle.",
-        "The tourists ______ the old castle.",
-        ["were shown"], ["SHOWN"],
-        ["were showed", "had shown", "were showing"],
-        "Showed → were shown."),
+      causativeGet: [
+        ["They paid someone to repair the roof.", "They ______.", "got the roof repaired", "GOT"],
+        ["She arranged for someone to paint her house.", "She ______.", "got her house painted", "GOT"],
+        ["The family arranged for someone to decorate the living room.", "The family ______.", "got the living room decorated", "GOT"],
+        ["He finally arranged for someone to fix the door.", "He finally ______.", "got the door fixed", "GOT"],
+        ["They arranged for someone to sign the documents.", "They ______.", "got the documents signed", "GOT"]
+      ],
 
-      item("Two-object passive", "Direct object as passive subject",
-        "The thing can also become the subject, often with to + person.",
-        "They gave clear instructions to all candidates.",
-        "Clear instructions ______ all candidates.",
-        ["were given to"], ["GIVEN"],
-        ["were gave to", "were giving to", "had given to"],
-        "Direct object passive: instructions were given to candidates."),
+      misfortunes: [
+        ["Someone stole my wallet on the train.", "I ______ on the train.", "had my wallet stolen", "STOLEN"],
+        ["Someone scratched her car in the car park.", "She ______ in the car park.", "had her car scratched", "HAD"],
+        ["Someone broke his glasses during the match.", "He ______ during the match.", "had his glasses broken", "HAD"],
+        ["Someone damaged our luggage at the airport.", "We ______ at the airport.", "had our luggage damaged", "HAD"],
+        ["Someone stole Jack's bike outside the library.", "Jack ______ outside the library.", "had his bike stolen", "HAD"],
+        ["Someone deleted their files by mistake.", "They ______ by mistake.", "had their files deleted", "HAD"]
+      ],
 
-      item("Two-object passive", "Indirect object as passive subject",
-        "A person object is often the most natural passive subject.",
-        "The company paid the workers a bonus.",
-        "The workers ______ a bonus.",
-        ["were paid"], ["PAID"],
-        ["were payed", "were paying", "had paid"],
-        "Pay → paid → were paid."),
+      makeLetGet: [
+        ["The coach forced the players to train in the rain.", "The coach ______ in the rain.", "made the players train", "MADE"],
+        ["The teacher forced us to rewrite the composition.", "The teacher ______ the composition.", "made us rewrite", "MADE"],
+        ["My parents allowed me to stay out late.", "My parents ______ out late.", "let me stay", "LET"],
+        ["They didn't allow us to enter the building.", "They ______ the building.", "didn't let us enter", "LET"],
+        ["I persuaded my brother to lend me his bike.", "I ______ me his bike.", "got my brother to lend", "GOT"],
+        ["She persuaded the manager to give her another chance.", "She ______ her another chance.", "got the manager to give", "GOT"],
+        ["The director asked the assistant to print the documents.", "The director ______ the documents.", "had the assistant print", "HAD"],
+        ["The teacher allowed the students to work in pairs.", "The teacher ______ in pairs.", "let the students work", "LET"]
+      ]
+    };
 
-      item("Reporting passive: It + passive", "People say that... → It is said that...",
+    function makeVariants(answer) {
+      const variants = [answer];
+
+      if (answer.includes("n't")) {
+        variants.push(answer.replace("n't", " not"));
+      }
+
+      if (answer.includes("cannot")) {
+        variants.push(answer.replace("cannot", "can't"));
+      }
+
+      return [...new Set(variants)];
+    }
+
+    function makeDistractors(correct, type) {
+      const c = correct;
+
+      if (type === "continuous") {
+        return [
+          c.replace("being ", ""),
+          c.replace("being ", "been "),
+          c.replace(/is |are |was |were /, ""),
+          c.replace("repaired", "repairing").replace("checked", "checking").replace("built", "building").replace("painted", "painting")
+        ];
+      }
+
+      if (type === "perfect") {
+        return [
+          c.replace("been ", ""),
+          c.replace("been ", "being "),
+          c.replace("has ", "was ").replace("have ", "were ").replace("had ", "was "),
+          c.replace("delivered", "delivering").replace("repaired", "repairing").replace("completed", "completing")
+        ];
+      }
+
+      if (type === "causative") {
+        return [
+          c.replace(/had my|had her|had his|had our|had their|had the|got the|got her|got his|got my|got our/, "had").replace(" checked", " my car checked"),
+          c.replace(/ checked| repaired| painted| fixed| taken| altered| cut| serviced| whitened| decorated| signed/, " check"),
+          c.replace(/had |got /, "was "),
+          c.replace(/ checked| repaired| painted| fixed| taken| altered| cut| serviced| whitened| decorated| signed/, " checking")
+        ];
+      }
+
+      if (type === "reporting") {
+        return [
+          c.replace(" to have ", " to "),
+          c.replace(" to be ", " being "),
+          c.replace("is ", "").replace("are ", "").replace("was ", ""),
+          c.replace("believed", "believing").replace("thought", "thinking").replace("said", "saying")
+        ];
+      }
+
+      if (type === "makeletget") {
+        return [
+          c.replace(" to ", " "),
+          c.replace("made ", "made to "),
+          c.replace("let ", "let to "),
+          c.replace("got ", "got to ")
+        ];
+      }
+
+      return [
+        c.replace("was ", "is "),
+        c.replace("were ", "are "),
+        c.replace("is ", ""),
+        c.replace("are ", ""),
+        c.replace("will be ", "will "),
+        c.replace("be ", ""),
+        c.replace("ed", "ing")
+      ];
+    }
+
+    function cleanGeneratedDistractors(correct, distractors) {
+      const accepted = makeVariants(correct).map(normalise);
+      return [...new Set(distractors)]
+        .map(item => String(item || "").trim())
+        .filter(item =>
+          item &&
+          wordCount(item) >= 2 &&
+          wordCount(item) <= 5 &&
+          !accepted.includes(normalise(item))
+        )
+        .slice(0, 6);
+    }
+
+    function fromPastSimple() {
+      const row = pick(data.pastSimple);
+      const [agent, activeVerb, object, time, passiveSubject, answer] = row;
+      return item(
+        "Active → Passive basic",
+        "Past simple active → past simple passive",
+        "Find the object and make it the passive subject. Keep the tense in past simple.",
+        `${agent} ${activeVerb} ${object} ${time}.`,
+        `${passiveSubject} ______ ${time}.`,
+        makeVariants(answer),
+        answer.startsWith("was") ? ["WAS"] : ["WERE"],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "basic")),
+        "Past simple passive uses was/were + past participle."
+      );
+    }
+
+    function fromPresentSimple() {
+      const row = pick(data.simplePresentSingular);
+      const [agent, activeVerb, object, passiveSubject, answer] = row;
+      return item(
+        "Active → Passive basic",
+        "Present simple active → present simple passive",
+        "Use present simple passive for routines, facts and processes.",
+        `${agent} ${activeVerb} ${object}.`,
+        `${passiveSubject} ______.`,
+        makeVariants(answer),
+        answer.startsWith("is") ? ["IS"] : ["ARE"],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "basic")),
+        "Present simple passive uses am/is/are + past participle."
+      );
+    }
+
+    function fromFutureSimple() {
+      const row = pick(data.futureSimple);
+      const [subject, time, answer] = row;
+      return item(
+        "Active → Passive basic",
+        "Future active → future passive",
+        "Will + active verb becomes will be + past participle.",
+        `They will announce or complete the action related to ${subject.toLowerCase()} ${time}.`,
+        `${subject} ______ ${time}.`,
+        [answer],
+        ["BE"],
+        cleanGeneratedDistractors(answer, ["will announced", "will be announcing", "will have announced", "will been announced"]),
+        "Future passive uses will be + past participle."
+      );
+    }
+
+    function fromModalPassive() {
+      const row = pick(data.modalPassive);
+      const [original, second, answer, key, bad] = row;
+      return item(
+        "Active → Passive basic",
+        "Modal active → modal passive",
+        "After a modal verb, passive voice uses be + past participle.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, [bad, answer.replace("be ", "been "), answer.replace("be ", ""), answer.replace("updated", "updating").replace("repaired", "repairing").replace("checked", "checking")]),
+        "Modal passive: modal + be + past participle."
+      );
+    }
+
+    function fromPresentContinuous() {
+      const row = pick(data.presentContinuous);
+      const [activeStart, object, time, passiveSubject, answer] = row;
+      return item(
+        "Passive tense control",
+        "Present continuous passive",
+        "Present continuous active becomes am/is/are being + past participle.",
+        `${activeStart} ${object} ${time}.`,
+        `${passiveSubject} ______ ${time}.`,
+        makeVariants(answer),
+        ["BEING"],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "continuous")),
+        "Continuous passive forms need being."
+      );
+    }
+
+    function fromPastContinuous() {
+      const row = pick(data.pastContinuous);
+      const [activeStart, object, time, passiveSubject, answer] = row;
+      return item(
+        "Passive tense control",
+        "Past continuous passive",
+        "Past continuous active becomes was/were being + past participle.",
+        `${activeStart} ${object} ${time}.`,
+        `${passiveSubject} ______ ${time}.`,
+        makeVariants(answer),
+        ["BEING"],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "continuous")),
+        "Past continuous passive needs was/were being + past participle."
+      );
+    }
+
+    function fromPresentPerfect() {
+      const row = pick(data.presentPerfect);
+      const [activeStart, object, passiveSubject, answer] = row;
+      return item(
+        "Passive tense control",
+        "Present perfect passive",
+        "Present perfect active becomes has/have been + past participle.",
+        `${activeStart} ${object}.`,
+        `${passiveSubject} ______.`,
+        makeVariants(answer),
+        ["BEEN"],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "perfect")),
+        "Do not forget been in perfect passive forms."
+      );
+    }
+
+    function fromPastPerfect() {
+      const row = pick(data.pastPerfect);
+      const [activeStart, object, time, passiveSubject, answer] = row;
+      return item(
+        "Passive tense control",
+        "Past perfect passive",
+        "Past perfect active becomes had been + past participle.",
+        `${activeStart} ${object} ${time}.`,
+        `${passiveSubject} ______ ${time}.`,
+        [answer],
+        ["BEEN"],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "perfect")),
+        "Past perfect passive: had been + past participle."
+      );
+    }
+
+    function fromFuturePerfect() {
+      const row = pick(data.futurePerfect);
+      const [original, second, answer, key] = row;
+      return item(
+        "Passive tense control",
+        "Future perfect passive",
+        "Future perfect active becomes will have been + past participle.",
+        original,
+        second,
+        [answer],
+        [key],
+        cleanGeneratedDistractors(answer, ["will have finished", "will be finished", "will have being finished", "will been finished"]),
+        "Future perfect passive is long but very common in tense-control practice."
+      );
+    }
+
+    function fromGoingTo() {
+      const row = pick(data.goingTo);
+      const [original, second, answer, key] = row;
+      return item(
+        "Passive tense control",
+        "Going to passive",
+        "Going to + verb becomes going to be + past participle.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, ["is going to publish", "will be publishing", "is published", "are going published"]),
+        "Going to passive: am/is/are going to be + past participle."
+      );
+    }
+
+    function fromTwoObject() {
+      const row = pick(data.twoObject);
+      const [original, second, answer, key] = row;
+      return item(
+        "Two-object passive",
+        "Two-object passive: person as subject",
+        "With verbs like give, send, offer, show and pay, the person often becomes the passive subject.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, [answer.replace("was", "were").replace("were", "was"), answer.replace("given", "gave").replace("shown", "showed"), answer.replace("were ", ""), answer.replace("was ", "")]),
+        "The person receiving something is often the most natural passive subject."
+      );
+    }
+
+    function fromReportingItPresent() {
+      const row = pick(data.reportingItPresent);
+      const [original, second, answer, key] = row;
+      return item(
+        "Reporting passive: It + passive",
+        "People say/believe/think → It is said/believed/thought",
         "Use It + passive reporting verb + that-clause.",
-        "People say that the hotel is excellent.",
-        "______ that the hotel is excellent.",
-        ["it is said"], ["SAID"],
-        ["it said is", "it is saying", "it has said"],
-        "This is the impersonal passive: It is said that..."),
+        original,
+        second,
+        [answer],
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "reporting")),
+        "Do not forget the passive auxiliary be."
+      );
+    }
 
-      item("Reporting passive: It + passive", "People believe that... → It is believed that...",
-        "Use It is believed that when the original subject is general.",
-        "People believe that the painting is genuine.",
-        "______ that the painting is genuine.",
-        ["it is believed"], ["BELIEVED"],
-        ["it believed is", "it is believing", "it has believed"],
-        "People believe that... → It is believed that..."),
+    function fromReportingItPast() {
+      const row = pick(data.reportingItPast);
+      const [original, second, answer, key] = row;
+      return item(
+        "Reporting passive: It + passive",
+        "Past reporting passive",
+        "If the reporting verb is past, use It was reported/announced/believed.",
+        original,
+        second,
+        [answer],
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "reporting")),
+        "Past reporting passive uses was + past participle."
+      );
+    }
 
-      item("Reporting passive: It + passive", "People think that... → It is thought that...",
-        "The impersonal passive keeps the that-clause.",
-        "Experts think that the building is unsafe.",
-        "______ that the building is unsafe.",
-        ["it is thought"], ["THOUGHT"],
-        ["it thought is", "it is thinking", "it has thought"],
-        "Experts think that... → It is thought that..."),
+    function fromReportingSame() {
+      const row = pick(data.reportingSubjectSame);
+      const [original, second, answer, key] = row;
+      return item(
+        "Reporting passive: subject + infinitive",
+        "Reporting passive with same time reference",
+        "When the reported information is simultaneous, use to be / to do.",
+        original,
+        second,
+        [answer],
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "reporting")),
+        "Same time reference: subject + passive reporting verb + to be / to do."
+      );
+    }
 
-      item("Reporting passive: It + passive", "Past reporting passive",
-        "If the reporting verb is past, use It was reported/said/believed.",
-        "Journalists reported that the actor had left the country.",
-        "______ that the actor had left the country.",
-        ["it was reported"], ["REPORTED"],
-        ["it is reported", "it reported was", "it was reporting"],
-        "Past reporting verb: was reported."),
+    function fromReportingAction() {
+      const row = pick(data.reportingSubjectAction);
+      const [original, second, answer, key] = row;
+      return item(
+        "Reporting passive: subject + infinitive",
+        "Reporting passive with to + base verb",
+        "Present simple in the that-clause often becomes to + base verb.",
+        original,
+        second,
+        [answer],
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "reporting")),
+        "People think she works... → She is thought to work..."
+      );
+    }
 
-      item("Reporting passive: It + passive", "Future reporting passive",
-        "Future reporting can become It will be announced/reported that...",
-        "They will announce that the concert is cancelled.",
-        "______ that the concert is cancelled.",
-        ["it will be announced"], ["BE"],
-        ["it will announced", "it will be announcing", "it is announced"],
-        "Future passive reporting: It will be announced that..."),
+    function fromReportingPast() {
+      const row = pick(data.reportingSubjectPast);
+      const [original, second, answer, key] = row;
+      return item(
+        "Reporting passive: subject + infinitive",
+        "Reporting passive with perfect infinitive",
+        "Past reference after a present reporting passive needs to have + past participle.",
+        original,
+        second,
+        [answer],
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "reporting")),
+        "Earlier action: to have + past participle."
+      );
+    }
 
-      item("Reporting passive: subject + infinitive", "People believe that he is... → He is believed to be...",
-        "Same time reference uses to be / to do.",
-        "People believe that he is a talented musician.",
-        "He ______ a talented musician.",
-        ["is believed to be"], ["BELIEVED"],
-        ["is believed being", "believes to be", "is believed have been"],
-        "Same time reference: is believed to be."),
+    function fromReportingContinuous() {
+      const row = pick(data.reportingSubjectContinuous);
+      const [original, second, answer, key] = row;
+      return item(
+        "Reporting passive: subject + infinitive",
+        "Reporting passive with continuous infinitive",
+        "Use to be + -ing when the reported action is in progress.",
+        original,
+        second,
+        [answer],
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "reporting")),
+        "Continuous reference: to be + -ing."
+      );
+    }
 
-      item("Reporting passive: subject + infinitive", "People think that she works... → She is thought to work...",
-        "Present simple in the that-clause becomes to + base verb.",
-        "People think that she works for an international company.",
-        "She ______ for an international company.",
-        ["is thought to work"], ["THOUGHT"],
-        ["is thought working", "is thought to working", "thought to work"],
-        "She is thought to work..."),
+    function fromCausativeHave() {
+      const row = pick(data.causativeHave);
+      const [original, second, answer, key] = row;
+      return item(
+        "Causative: have/get something done",
+        "Have + object + past participle",
+        "Use have something done when someone else performs a service for the subject.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "causative")),
+        "Correct order: have + object + past participle."
+      );
+    }
 
-      item("Reporting passive: subject + infinitive", "People say that they are... → They are said to be...",
-        "Plural subject needs are said to be.",
-        "People say that the twins are very competitive.",
-        "The twins ______ very competitive.",
-        ["are said to be"], ["SAID"],
-        ["are said being", "is said to be", "are said have been"],
-        "The twins are said to be..."),
+    function fromCausativeFuture() {
+      const row = pick(data.causativeFuture);
+      const [original, second, answer, key] = row;
+      return item(
+        "Causative: have/get something done",
+        "Future causative",
+        "Use will have/get + object + past participle for future arrangements.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "causative")),
+        "The subject does not do the action personally."
+      );
+    }
 
-      item("Reporting passive: subject + infinitive", "Past reference: to have + past participle",
-        "When the that-clause refers to an earlier past action, use to have + past participle.",
-        "People believe that the thief escaped through the back door.",
-        "The thief ______ through the back door.",
-        ["is believed to have escaped"], ["BELIEVED"],
-        ["is believed to escape", "is believed escaped", "is believed have escaped"],
-        "Past reference: to have escaped."),
+    function fromCausativeGet() {
+      const row = pick(data.causativeGet);
+      const [original, second, answer, key] = row;
+      return item(
+        "Causative: have/get something done",
+        "Get + object + past participle",
+        "Get something done often suggests arrangement, sometimes with effort.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "causative")),
+        "GET + object + past participle."
+      );
+    }
 
-      item("Reporting passive: subject + infinitive", "Past reference with be: to have been",
-        "If the second verb is past with be, use to have been.",
-        "People thought that the driver was responsible for the accident.",
-        "The driver ______ responsible for the accident.",
-        ["was thought to have been"], ["THOUGHT"],
-        ["was thought to be", "is thought to have been", "was thought have been"],
-        "Past reporting + earlier state: was thought to have been."),
+    function fromMisfortune() {
+      const row = pick(data.misfortunes);
+      const [original, second, answer, key] = row;
+      return item(
+        "Causative: accidents and misfortunes",
+        "Misfortune causative",
+        "Use have + possession + past participle when something bad happens to the subject.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "causative")),
+        "This structure focuses on the person affected by the negative event."
+      );
+    }
 
-      item("Reporting passive: subject + infinitive", "Present continuous reference: to be + -ing",
-        "If the that-clause is continuous, use to be + -ing.",
-        "People think that she is writing a new novel.",
-        "She ______ a new novel.",
-        ["is thought to be writing"], ["THOUGHT"],
-        ["is thought writing", "is thought to write", "is thought to have written"],
-        "Continuous reference: to be writing."),
+    function fromMakeLetGet() {
+      const row = pick(data.makeLetGet);
+      const [original, second, answer, key] = row;
+      return item(
+        "Make / Let / Get someone to do",
+        "Causative verb pattern",
+        "Choose the structure according to meaning: force, permission, persuasion or arrangement.",
+        original,
+        second,
+        makeVariants(answer),
+        [key],
+        cleanGeneratedDistractors(answer, makeDistractors(answer, "makeletget")),
+        "MAKE and LET take bare infinitive. GET takes to-infinitive."
+      );
+    }
 
-      item("Reporting passive: subject + infinitive", "Passive infinitive after reporting passive",
-        "If the action in the that-clause is passive, use to be + past participle.",
-        "People expect that the museum will be reopened soon.",
-        "The museum ______ soon.",
-        ["is expected to be reopened"], ["EXPECTED"],
-        ["is expected reopening", "is expected to reopen", "expects to be reopened"],
-        "Expected + passive infinitive: to be reopened."),
-
-      item("Causative: have/get something done", "Arrange a service: HAVE + object + past participle",
-        "Use have something done when someone else does a service for you.",
-        "A mechanic checked my car yesterday.",
-        "I ______ yesterday.",
-        ["had my car checked"], ["HAD"],
-        ["had checked my car", "had my car check", "got my car check"],
-        "You did not check it yourself; a mechanic did it."),
-
-      item("Causative: have/get something done", "Arrange a service: HAVE + object + past participle",
-        "The object comes between have and the past participle.",
-        "A hairdresser cut my hair this morning.",
-        "I ______ this morning.",
-        ["had my hair cut"], ["HAD"],
-        ["had cut my hair", "had my hair cutting", "had my hair to cut"],
-        "Have + object + past participle."),
-
-      item("Causative: have/get something done", "Future causative",
-        "Use will have + object + past participle for future arrangements.",
-        "An optician will test my eyes next week.",
-        "I ______ next week.",
-        ["will have my eyes tested"], ["HAVE"],
-        ["will have tested my eyes", "will get my eyes test", "will have my eyes testing"],
-        "Future causative: will have my eyes tested."),
-
-      item("Causative: have/get something done", "GET + object + past participle",
-        "Get something done often suggests arrangement, sometimes with more effort.",
-        "They paid someone to repair the roof.",
-        "They ______.",
-        ["got the roof repaired"], ["GOT"],
-        ["got repaired the roof", "got the roof repair", "had the roof repair"],
-        "Get + object + past participle."),
-
-      item("Causative: have/get something done", "Present continuous causative",
-        "Use am/is/are having + object + past participle for an arrangement happening now.",
-        "A technician is installing our new router.",
-        "We ______.",
-        ["are having our router installed"], ["HAVING"],
-        ["are having installed our router", "are having our router install", "have our router installed"],
-        "Present continuous causative: are having our router installed."),
-
-      item("Causative: have/get something done", "Need + object + past participle",
-        "Need can combine naturally with causative meaning.",
-        "Someone should clean these carpets.",
-        "We need ______.",
-        ["these carpets cleaned"], ["CLEANED"],
-        ["cleaned these carpets", "these carpets cleaning", "to clean these carpets"],
-        "Need + object + past participle."),
-
-      item("Causative: accidents and misfortunes", "Misfortune: HAVE + object + past participle",
-        "Use have something stolen/broken/damaged when something bad happens to you.",
-        "Someone stole my wallet on the train.",
-        "I ______ on the train.",
-        ["had my wallet stolen"], ["STOLEN"],
-        ["had stolen my wallet", "had my wallet steal", "was stolen my wallet"],
-        "Misfortune causative: had my wallet stolen."),
-
-      item("Causative: accidents and misfortunes", "Misfortune causative",
-        "This structure focuses on the person affected by the event.",
-        "Someone scratched her car in the car park.",
-        "She ______ in the car park.",
-        ["had her car scratched"], ["HAD"],
-        ["had scratched her car", "had her car scratch", "was had her car scratched"],
-        "She was affected; someone else scratched the car."),
-
-      item("Causative: accidents and misfortunes", "Misfortune causative",
-        "Had + object + past participle can describe an accident.",
-        "Someone broke his glasses during the match.",
-        "He ______ during the match.",
-        ["had his glasses broken"], ["HAD"],
-        ["had broken his glasses", "had his glasses break", "was broken his glasses"],
-        "He had his glasses broken."),
-
-      item("Causative: accidents and misfortunes", "Misfortune causative",
-        "Use this when the subject does not cause the event deliberately.",
-        "Someone damaged our luggage at the airport.",
-        "We ______ at the airport.",
-        ["had our luggage damaged"], ["HAD"],
-        ["had damaged our luggage", "had our luggage damage", "were had our luggage damaged"],
-        "Misfortune: we had our luggage damaged."),
-
-      item("Make / Let / Get someone to do", "MAKE + object + bare infinitive",
-        "Use make someone do something for force or strong pressure.",
-        "The coach forced the players to train in the rain.",
-        "The coach ______ in the rain.",
-        ["made the players train"], ["MADE"],
-        ["made the players to train", "made train the players", "got the players train"],
-        "Make is followed by object + bare infinitive, not to."),
-
-      item("Make / Let / Get someone to do", "MAKE + object + bare infinitive",
-        "After made, do not use to.",
-        "The teacher forced us to rewrite the composition.",
-        "The teacher ______ the composition.",
-        ["made us rewrite"], ["MADE"],
-        ["made us to rewrite", "made rewrite us", "let us rewrite"],
-        "Correct: made us rewrite."),
-
-      item("Make / Let / Get someone to do", "LET + object + bare infinitive",
-        "Use let someone do something for permission.",
-        "My parents allowed me to stay out late.",
-        "My parents ______ out late.",
-        ["let me stay"], ["LET"],
-        ["let me to stay", "allowed me stay", "made me stay"],
-        "Let + object + bare infinitive."),
-
-      item("Make / Let / Get someone to do", "LET + object + bare infinitive",
-        "Negative permission can use didn’t let.",
-        "They didn’t allow us to enter the building.",
-        "They ______ the building.",
-        ["didn't let us enter", "did not let us enter"], ["LET"],
-        ["didn't let us to enter", "didn't allow us enter", "weren't let us enter"],
-        "Negative form: didn’t let us enter."),
-
-      item("Make / Let / Get someone to do", "GET + object + to-infinitive",
-        "Use get someone to do something for persuasion.",
-        "I persuaded my brother to lend me his bike.",
-        "I ______ me his bike.",
-        ["got my brother to lend"], ["GOT"],
-        ["got my brother lend", "made my brother to lend", "let my brother to lend"],
-        "Get + object + to-infinitive."),
-
-      item("Make / Let / Get someone to do", "GET + object + to-infinitive",
-        "Get someone to do means persuade or arrange for someone to do something.",
-        "She persuaded the manager to give her another chance.",
-        "She ______ her another chance.",
-        ["got the manager to give"], ["GOT"],
-        ["got the manager give", "made the manager to give", "let the manager to give"],
-        "Do not forget to after get someone."),
-
-      item("Make / Let / Get someone to do", "HAVE + object + bare infinitive",
-        "Have someone do something can mean arrange or ask someone to do it.",
-        "The director asked the assistant to print the documents.",
-        "The director ______ the documents.",
-        ["had the assistant print"], ["HAD"],
-        ["had the assistant to print", "had printed the assistant", "got the assistant print"],
-        "Have + object + bare infinitive."),
-
-      item("Mixed exam decisions", "Passive or causative?",
-        "If the subject arranged the action but did not do it, use causative.",
-        "A professional photographer took our class photo.",
-        "We ______ by a professional photographer.",
-        ["had our photo taken"], ["HAD"],
-        ["had taken our photo", "were taken our photo", "had our photo take"],
-        "We arranged the service; the photographer did the action."),
-
-      item("Mixed exam decisions", "Active → passive with modal",
-        "Do not lose the modal when transforming.",
-        "They should update the software immediately.",
-        "The software ______ immediately.",
-        ["should be updated"], ["BE"],
-        ["should updated", "should have updated", "should being updated"],
-        "Modal passive: should be updated."),
-
-      item("Mixed exam decisions", "Reporting passive with past reference",
-        "Past reference after reporting passive needs perfect infinitive.",
-        "People say that the scientist discovered the cure years ago.",
-        "The scientist ______ the cure years ago.",
-        ["is said to have discovered"], ["SAID"],
-        ["is said to discover", "is said discovered", "is said have discovered"],
-        "Past action: to have discovered."),
-
-      item("Mixed exam decisions", "Two-object passive",
-        "The receiver is often the natural subject in the passive.",
-        "Someone lent Tom a very expensive camera.",
-        "Tom ______ a very expensive camera.",
-        ["was lent"], ["LENT"],
-        ["was lend", "was lending", "had lent"],
-        "Tom was lent a camera."),
-
-      item("Mixed exam decisions", "Causative with GET",
-        "Use get something done when someone arranges for a task to be completed.",
-        "The family arranged for someone to decorate the living room.",
-        "The family ______.",
-        ["got the living room decorated"], ["GOT"],
-        ["got decorated the living room", "got the living room decorate", "had decorate the living room"],
-        "Get + object + past participle."),
-
-      item("Mixed exam decisions", "Passive continuous",
-        "When the active verb is continuous, passive normally includes being.",
-        "They are interviewing the candidates this morning.",
-        "The candidates ______ this morning.",
-        ["are being interviewed"], ["BEING"],
-        ["are interviewed", "have been interviewed", "are interviewing"],
-        "Present continuous passive: are being interviewed."),
-
-      item("Mixed exam decisions", "Permission with LET",
-        "Allowed to can often become let + object + bare infinitive.",
-        "They allowed the children to choose their own seats.",
-        "They ______ their own seats.",
-        ["let the children choose"], ["LET"],
-        ["let the children to choose", "let choose the children", "made the children choose"],
-        "Let + object + bare infinitive."),
-
-      item("Mixed exam decisions", "Future causative",
-        "If a professional will do the action for the subject, use causative.",
-        "The dentist will clean my teeth tomorrow.",
-        "I ______ tomorrow.",
-        ["will have my teeth cleaned"], ["HAVE"],
-        ["will clean my teeth", "will have cleaned my teeth", "will have my teeth clean"],
-        "The dentist does it; I have it done."),
-
-      item("Cambridge traps", "Do not forget BEEN in perfect passive",
+    function trapForBeen() {
+      return item(
+        "Cambridge traps",
+        "Do not forget BEEN in perfect passive",
         "Present perfect passive needs has/have been + past participle.",
         "Someone has stolen the documents.",
         "The documents ______.",
-        ["have been stolen"], ["BEEN"],
-        ["have stolen", "were been stolen", "have being stolen"],
-        "Trap: have stolen is active, not passive."),
+        ["have been stolen"],
+        ["BEEN"],
+        ["have stolen", "were been stolen", "have being stolen", "have been stealing"],
+        "Have stolen is active. Have been stolen is passive."
+      );
+    }
 
-      item("Cambridge traps", "Do not forget BEING in continuous passive",
+    function trapForBeing() {
+      return item(
+        "Cambridge traps",
+        "Do not forget BEING in continuous passive",
         "Continuous passive needs being.",
         "They are filming the scene now.",
         "The scene ______ now.",
-        ["is being filmed"], ["BEING"],
-        ["is filmed", "has been filmed", "is filming"],
-        "Trap: is filmed is present simple passive, not present continuous."),
+        ["is being filmed"],
+        ["BEING"],
+        ["is filmed", "has been filmed", "is filming", "is been filmed"],
+        "Is filmed is present simple passive, not present continuous."
+      );
+    }
 
-      item("Cambridge traps", "Make takes bare infinitive",
-        "Do not use to after make in the active causative.",
+    function trapForMake() {
+      return item(
+        "Cambridge traps",
+        "MAKE takes bare infinitive",
+        "Do not use to after make in active causative structures.",
         "The manager forced the staff to work late.",
         "The manager ______ late.",
-        ["made the staff work"], ["MADE"],
-        ["made the staff to work", "got the staff work", "let the staff to work"],
-        "Trap: made them to work is wrong."),
+        ["made the staff work"],
+        ["MADE"],
+        ["made the staff to work", "got the staff work", "let the staff to work", "made working the staff"],
+        "Correct: made the staff work."
+      );
+    }
 
-      item("Cambridge traps", "Get someone to do",
+    function trapForGet() {
+      return item(
+        "Cambridge traps",
+        "GET someone TO do",
         "Do not forget to after get + person.",
         "I persuaded Anna to help us.",
         "I ______ us.",
-        ["got anna to help"], ["GOT"],
-        ["got anna help", "made anna to help", "let anna to help"],
-        "Trap: got Anna help is wrong."),
+        ["got anna to help"],
+        ["GOT"],
+        ["got anna help", "made anna to help", "let anna to help", "got to anna help"],
+        "Correct: got Anna to help."
+      );
+    }
 
-      item("Cambridge traps", "Have something done",
+    function trapForCausativeOrder() {
+      return item(
+        "Cambridge traps",
+        "Have something done: word order",
         "Do not put the past participle before the object.",
         "A tailor altered my jacket.",
         "I ______ by a tailor.",
-        ["had my jacket altered"], ["HAD"],
-        ["had altered my jacket", "had my jacket alter", "was had my jacket altered"],
-        "Correct order: had + object + past participle."),
+        ["had my jacket altered"],
+        ["HAD"],
+        ["had altered my jacket", "had my jacket alter", "was had my jacket altered", "had my jacket altering"],
+        "Correct order: had + object + past participle."
+      );
+    }
 
-      item("Cambridge traps", "Reporting passive: simple or perfect infinitive",
+    function trapForReportingPast() {
+      return item(
+        "Cambridge traps",
+        "Reporting passive: simple or perfect infinitive",
         "Use to have + past participle when the reported action happened earlier.",
         "People believe that the prisoner escaped last night.",
         "The prisoner ______ last night.",
-        ["is believed to have escaped"], ["BELIEVED"],
-        ["is believed to escape", "is believed escaped", "is believed have escaped"],
-        "Trap: use to have escaped for past reference."),
+        ["is believed to have escaped"],
+        ["BELIEVED"],
+        ["is believed to escape", "is believed escaped", "is believed have escaped", "believes to have escaped"],
+        "Past reference: to have escaped."
+      );
+    }
 
-      item("Cambridge traps", "By someone is usually unnecessary",
+    function trapForAgent() {
+      return item(
+        "Cambridge traps",
+        "Avoid unnecessary by someone",
         "In KWT, do not add unnecessary agents if the meaning is already clear.",
         "Someone repaired the printer yesterday.",
         "The printer ______ yesterday.",
-        ["was repaired"], ["WAS"],
-        ["was repaired by someone", "was being repaired", "has been repaired"],
-        "By someone is normally unnecessary and may exceed the word limit."),
+        ["was repaired"],
+        ["WAS"],
+        ["was repaired by someone", "was being repaired", "has been repaired", "is repaired"],
+        "By someone is normally unnecessary and may exceed the word limit."
+      );
+    }
 
-      item("Cambridge traps", "Passive past participle form",
+    function trapForParticiple() {
+      return item(
+        "Cambridge traps",
+        "Past participle form",
         "The passive needs the past participle, not the infinitive.",
         "They built the stadium in 2018.",
         "The stadium ______ in 2018.",
-        ["was built"], ["WAS"],
-        ["was build", "was building", "has built"],
-        "Trap: built is the past participle of build.")
+        ["was built"],
+        ["WAS"],
+        ["was build", "was building", "has built", "is built"],
+        "Built is the past participle of build."
+      );
+    }
+
+    const generators = {
+      "Active → Passive basic": [fromPastSimple, fromPresentSimple, fromFutureSimple, fromModalPassive],
+      "Passive tense control": [fromPresentContinuous, fromPastContinuous, fromPresentPerfect, fromPastPerfect, fromFuturePerfect, fromGoingTo],
+      "Two-object passive": [fromTwoObject],
+      "Reporting passive: It + passive": [fromReportingItPresent, fromReportingItPast],
+      "Reporting passive: subject + infinitive": [fromReportingSame, fromReportingAction, fromReportingPast, fromReportingContinuous],
+      "Causative: have/get something done": [fromCausativeHave, fromCausativeFuture, fromCausativeGet],
+      "Causative: accidents and misfortunes": [fromMisfortune],
+      "Make / Let / Get someone to do": [fromMakeLetGet],
+      "Cambridge traps": [trapForBeen, trapForBeing, trapForMake, trapForGet, trapForCausativeOrder, trapForReportingPast, trapForAgent, trapForParticiple]
+    };
+
+    generators["Mixed exam decisions"] = [
+      fromPastSimple,
+      fromPresentSimple,
+      fromPresentContinuous,
+      fromPresentPerfect,
+      fromTwoObject,
+      fromReportingSame,
+      fromReportingPast,
+      fromCausativeHave,
+      fromCausativeGet,
+      fromMisfortune,
+      fromMakeLetGet,
+      fromModalPassive,
+      fromGoingTo
     ];
 
+    const allPracticeGenerators = Object.entries(generators)
+      .filter(([category]) => category !== "Mixed exam decisions")
+      .flatMap(([, list]) => list);
+
     const state = {
-      studyCategory: "All categories",
       studyIndex: 0,
-      studyFlipped: false,
       mcCategory: "All categories",
       mcCurrent: null,
       mcSelected: null,
       mcScore: 0,
       mcAttempts: 0,
+      mcRecent: [],
       trCategory: "All categories",
       trCurrent: null,
       trChecked: false,
       trScore: 0,
       trAttempts: 0,
+      trRecent: [],
       examCategory: "All categories",
       examQuestions: [],
       examIndex: 0,
@@ -1214,65 +2022,76 @@
 
     function cleanDistractors(exercise) {
       const accepted = getAcceptedAnswers(exercise).map(normalise);
-      return (exercise.distractors || []).filter(item =>
-        wordCount(item) >= 2 &&
-        wordCount(item) <= 5 &&
-        !accepted.includes(normalise(item))
+      return (exercise.distractors || []).filter(option =>
+        wordCount(option) >= 2 &&
+        wordCount(option) <= 5 &&
+        !accepted.includes(normalise(option))
       );
     }
 
-    function filteredItems(category) {
-      if (category === "All categories") return items;
-      return items.filter(item => item.type === category);
+    function signature(exercise) {
+      return normalise(`${exercise.original} ${exercise.second} ${primaryAnswer(exercise)}`);
     }
 
-    function makeExercise(raw, mode = "transform") {
-      const validKeys = shuffle(raw.keyOptions).filter(key =>
-        raw.answers.some(answer => keyIsIncluded(answer, key))
-      );
-
-      if (!validKeys.length) return null;
-
-      const selectedKey = pick(validKeys);
-      const exercise = {
-        ...raw,
-        key: selectedKey,
-        answers: raw.answers.filter(answer => keyIsIncluded(answer, selectedKey)),
-        answer: raw.answers.find(answer => keyIsIncluded(answer, selectedKey))
-      };
-
-      if (!isValidExercise(exercise)) return null;
-      if (mode === "multiple" && cleanDistractors(exercise).length < 3) return null;
-
-      return exercise;
+    function getGeneratorList(category) {
+      if (category === "All categories") return allPracticeGenerators;
+      if (category === "Mixed exam decisions") return generators["Mixed exam decisions"];
+      return generators[category] || allPracticeGenerators;
     }
 
-    function generateExercise(category = "All categories", mode = "transform") {
-      const possible = shuffle(filteredItems(category));
+    function generateExercise(category = "All categories", mode = "transform", recent = []) {
+      const generatorList = getGeneratorList(category);
 
-      for (const raw of possible) {
-        const exercise = makeExercise(raw, mode);
-        if (exercise) return exercise;
+      for (let attempt = 0; attempt < 80; attempt++) {
+        const generator = pick(generatorList);
+        const exercise = generator();
+
+        const validKeys = shuffle(exercise.keyOptions || []).filter(key =>
+          getAcceptedAnswers(exercise).some(answer => keyIsIncluded(answer, key))
+        );
+
+        if (!validKeys.length) continue;
+
+        const selectedKey = pick(validKeys);
+        const accepted = getAcceptedAnswers(exercise).filter(answer => keyIsIncluded(answer, selectedKey));
+
+        const finalExercise = {
+          ...exercise,
+          key: selectedKey,
+          answers: accepted,
+          answer: accepted[0]
+        };
+
+        if (!isValidExercise(finalExercise)) continue;
+        if (mode === "multiple" && cleanDistractors(finalExercise).length < 3) continue;
+
+        const sig = signature(finalExercise);
+        if (recent.includes(sig) && attempt < 60) continue;
+
+        return finalExercise;
       }
 
+      const fallback = fromPresentPerfect();
       return {
-        type: "System",
-        expression: "No valid item",
-        meaning: "No valid item could be generated.",
-        original: "No valid exercise could be generated.",
-        second: "Please choose another category.",
-        answers: ["try again"],
-        answer: "try again",
-        key: "TRY",
-        keyOptions: ["TRY"],
-        distractors: ["try later", "new question", "other category"],
-        note: "The generator could not create a valid item."
+        ...fallback,
+        key: fallback.keyOptions[0]
       };
     }
 
-    function populateSelect(id, value) {
+    function remember(recentList, exercise) {
+      recentList.push(signature(exercise));
+      while (recentList.length > 18) recentList.shift();
+    }
+
+    function populatePracticeSelect(id, value) {
       $(id).innerHTML = categories
         .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function populateStudySelect() {
+      $("studySection").innerHTML = studySections
+        .map((section, index) => `<option value="${index}" ${index === state.studyIndex ? "selected" : ""}>${section.title}</option>`)
         .join("");
     }
 
@@ -1284,35 +2103,22 @@
     }
 
     function renderStudy() {
-      const list = filteredItems(state.studyCategory);
-      if (state.studyIndex >= list.length) state.studyIndex = 0;
-      const current = list[state.studyIndex];
+      const section = studySections[state.studyIndex];
 
-      $("studyCard").innerHTML = state.studyFlipped
-        ? `
-          <div>
-            <span class="badge badge-blue">${current.type}</span>
-            <p class="muted"><strong>Exam thinking</strong></p>
-            <h2 style="font-size:30px">${current.meaning}</h2>
-            <div class="box"><strong>Example pattern:</strong> ${current.original} → ${current.second.replace("______", `<strong>${primaryAnswer(current)}</strong>`)}</div>
-            <div class="box"><strong>Part 4 note:</strong> ${current.note || "Keep the same meaning, use the key word, and respect the 2–5 word limit."}</div>
-            <p class="muted">Click the card to return to the transformation pattern.</p>
-          </div>
-        `
-        : `
-          <div>
-            <span class="badge badge-blue">${current.type}</span>
-            <p class="muted"><strong>Transformation pattern</strong></p>
-            <h2>${current.expression}</h2>
-            <p class="muted">Click the card to reveal exam thinking, example and Part 4 note.</p>
-          </div>
-        `;
+      $("studyCard").innerHTML = `
+        <span class="badge badge-blue">${section.badge}</span>
+        <h2>${section.title}</h2>
+        ${section.html}
+      `;
 
-      $("studyCounter").textContent = `Card ${state.studyIndex + 1} of ${list.length}`;
+      $("studyCounter").textContent = `Study section ${state.studyIndex + 1} of ${studySections.length}`;
+      $("studySection").value = String(state.studyIndex);
     }
 
     function newMcQuestion() {
-      const exercise = generateExercise(state.mcCategory, "multiple");
+      const exercise = generateExercise(state.mcCategory, "multiple", state.mcRecent);
+      remember(state.mcRecent, exercise);
+
       const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
 
       state.mcCurrent = { ...exercise, options };
@@ -1382,7 +2188,9 @@
     }
 
     function newTransformation() {
-      state.trCurrent = generateExercise(state.trCategory, "transform");
+      state.trCurrent = generateExercise(state.trCategory, "transform", state.trRecent);
+      remember(state.trRecent, state.trCurrent);
+
       state.trChecked = false;
       $("trInput").value = "";
       $("trFeedback").classList.add("hidden");
@@ -1445,18 +2253,18 @@
     }
 
     function buildExamQuestions() {
-      const pool = shuffle(filteredItems(state.examCategory));
       const selected = [];
+      const used = [];
 
-      for (const raw of pool) {
-        const exercise = makeExercise(raw, "transform");
-        if (!exercise) continue;
+      for (let attempt = 0; attempt < 120; attempt++) {
+        const exercise = generateExercise(state.examCategory, "transform", used);
+        const sig = signature(exercise);
 
-        const repeated = selected.some(item =>
-          item.expression === exercise.expression && item.original === exercise.original
-        );
+        if (!used.includes(sig)) {
+          selected.push(exercise);
+          used.push(sig);
+        }
 
-        if (!repeated) selected.push(exercise);
         if (selected.length === 10) break;
       }
 
@@ -1589,7 +2397,7 @@
       } else if (score >= 5) {
         message = "You understand several patterns, but you need more controlled practice with passive verb forms and causatives.";
       } else {
-        message = "Revise Study Mode and Multiple Choice before trying Exam Mode again.";
+        message = "Revise Study Mode carefully, especially the tense table and causative patterns, before trying Exam Mode again.";
       }
 
       const review = state.examAnswers.map(item => `
@@ -1636,38 +2444,27 @@
     }
 
     function init() {
-      populateSelect("studyCategory", state.studyCategory);
-      populateSelect("mcCategory", state.mcCategory);
-      populateSelect("trCategory", state.trCategory);
-      populateSelect("examCategory", state.examCategory);
+      populateStudySelect();
+      populatePracticeSelect("mcCategory", state.mcCategory);
+      populatePracticeSelect("trCategory", state.trCategory);
+      populatePracticeSelect("examCategory", state.examCategory);
 
       document.querySelectorAll(".tab").forEach(button => {
         button.addEventListener("click", () => showTab(button.dataset.tab));
       });
 
-      $("studyCategory").addEventListener("change", event => {
-        state.studyCategory = event.target.value;
-        state.studyIndex = 0;
-        state.studyFlipped = false;
-        renderStudy();
-      });
-
-      $("studyCard").addEventListener("click", () => {
-        state.studyFlipped = !state.studyFlipped;
+      $("studySection").addEventListener("change", event => {
+        state.studyIndex = Number(event.target.value);
         renderStudy();
       });
 
       $("studyNext").addEventListener("click", () => {
-        const list = filteredItems(state.studyCategory);
-        state.studyIndex = (state.studyIndex + 1) % list.length;
-        state.studyFlipped = false;
+        state.studyIndex = (state.studyIndex + 1) % studySections.length;
         renderStudy();
       });
 
-      $("studyRandom").addEventListener("click", () => {
-        const list = filteredItems(state.studyCategory);
-        state.studyIndex = Math.floor(Math.random() * list.length);
-        state.studyFlipped = false;
+      $("studyPrev").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex - 1 + studySections.length) % studySections.length;
         renderStudy();
       });
 
@@ -1675,6 +2472,7 @@
         state.mcCategory = event.target.value;
         state.mcScore = 0;
         state.mcAttempts = 0;
+        state.mcRecent = [];
         newMcQuestion();
       });
 
@@ -1682,6 +2480,7 @@
       $("mcReset").addEventListener("click", () => {
         state.mcScore = 0;
         state.mcAttempts = 0;
+        state.mcRecent = [];
         renderMc();
       });
 
@@ -1689,6 +2488,7 @@
         state.trCategory = event.target.value;
         state.trScore = 0;
         state.trAttempts = 0;
+        state.trRecent = [];
         newTransformation();
       });
 
@@ -1699,6 +2499,7 @@
       $("trReset").addEventListener("click", () => {
         state.trScore = 0;
         state.trAttempts = 0;
+        state.trRecent = [];
         renderTransformation();
       });
 
