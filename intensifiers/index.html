@@ -1,1 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block 3 · Mr John’s KWT Lab</title>
+  <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
 
+  <style>
+    :root {
+      --navy: #062b63;
+      --blue: #005eb8;
+      --light-blue: #eaf3ff;
+      --orange: #f28c00;
+      --orange-soft: #fff3df;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d9e2ef;
+      --white: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 94, 184, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 0, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 46px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 0 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand img {
+      height: auto;
+      width: 260px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .home-link {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(6, 43, 99, 0.06);
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--orange-soft);
+      color: #9a5700;
+      border: 1px solid rgba(242, 140, 0, 0.25);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -1.4px;
+    }
+
+    .highlight { color: var(--orange); }
+
+    .hero p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 900px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    button,
+    .tab {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
+
+    button:hover,
+    .tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab.active,
+    .primary {
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      border-color: transparent;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    select,
+    input {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+    }
+
+    select { min-width: 240px; }
+    input { width: 100%; }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hidden { display: none !important; }
+
+    .badge,
+    .pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .badge-blue {
+      background: var(--light-blue);
+      color: var(--blue);
+      border-color: rgba(0, 94, 184, 0.18);
+    }
+
+    .badge-orange {
+      background: var(--orange-soft);
+      color: #9a5700;
+      border-color: rgba(242, 140, 0, 0.25);
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bbf7d0;
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: #fecaca;
+    }
+
+    .muted { color: var(--muted); }
+
+    .flashcard {
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .flashcard h2 {
+      font-size: clamp(32px, 5vw, 50px);
+      color: var(--navy);
+      margin: 14px 0;
+    }
+
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      border-color: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      text-align: left;
+      min-height: 58px;
+    }
+
+    .option.good {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: #14532d;
+    }
+
+    .option.bad {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: #7f1d1d;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+
+    .result-number {
+      color: var(--navy);
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin: 8px 0;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 760px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brand img {
+        width: 220px;
+        height: auto;
+      }
+
+      .tabs,
+      .answer-row,
+      .option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding: 26px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
+        <div>
+          <span class="brand-title">Mr John’s KWT Lab</span>
+          <span class="brand-subtitle">Block 3 · Intensifiers</span>
+        </div>
+      </div>
+
+      <a class="home-link" href="../index.html">← Back to Lab Home</a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
+      <h1>Intensifiers <span class="highlight">Transformation</span> Trainer</h1>
+      <p>
+        Practise B2 First Part 4 transformations with TOO, ENOUGH, SO and SUCH.
+        This block trains excess, lack of sufficiency, intensity, result clauses and
+        realistic exam decisions, always following the official 2–5-word answer limit.
+      </p>
+      <div class="stats">
+        <span class="pill">Core patterns</span>
+        <span class="pill">TOO ⇄ ENOUGH</span>
+        <span class="pill">SO ⇄ SUCH</span>
+        <span class="pill">ENOUGH + NOUN</span>
+        <span class="pill">RESULT CLAUSES</span>
+        <span class="pill">EXAM DECISIONS</span>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="study">🧠 Study Mode</button>
+      <button class="tab" data-tab="multiple">✓ Multiple Choice</button>
+      <button class="tab" data-tab="transform">✎ Transformations</button>
+      <button class="tab" data-tab="exam">🏆 Exam Mode</button>
+    </nav>
+
+    <section id="study" class="tab-section">
+      <div class="toolbar">
+        <select id="studyCategory"></select>
+        <div class="button-group">
+          <button id="studyRandom">Random</button>
+          <button id="studyNext" class="primary">Next</button>
+        </div>
+      </div>
+
+      <div id="studyCard" class="card flashcard"></div>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
+    </section>
+
+    <section id="multiple" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="mcCategory"></select>
+        <div class="button-group">
+          <button id="mcNew">New question</button>
+          <button id="mcReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="mcType" class="badge badge-blue"></span>
+          <span id="mcScore" class="pill"></span>
+        </div>
+
+        <div id="mcQuestion" class="question"></div>
+        <div id="mcOptions" class="option-grid"></div>
+        <div id="mcFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="transform" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="trCategory"></select>
+        <div class="button-group">
+          <button id="trHint">Hint</button>
+          <button id="trNew">New exercise</button>
+          <button id="trReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="trType" class="badge badge-blue"></span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
+          <span id="trScore" class="pill"></span>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="trFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="trSecond" class="box"></div>
+
+        <p><span id="trKey" class="badge badge-orange"></span></p>
+
+        <div id="trHintBox" class="box hidden"></div>
+
+        <div class="answer-row">
+          <input id="trInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="trCheck" class="primary">Check</button>
+          <button id="trReveal">Reveal</button>
+        </div>
+
+        <div id="trFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="exam" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="examCategory"></select>
+        <div class="button-group">
+          <button id="examStart" class="primary">Start 10-question challenge</button>
+          <button id="examRestart">Restart challenge</button>
+        </div>
+      </div>
+
+      <div class="card" id="examIntro">
+        <span class="badge badge-orange">Exam Mode</span>
+        <h2 style="color:var(--navy); margin-bottom:8px;">10-question challenge</h2>
+        <p class="muted">
+          Complete 10 written Key Word Transformations. Each answer must contain between
+          two and five words and include the key word exactly as given.
+        </p>
+        <div class="box">
+          <strong>Recommended classroom use:</strong> revise first in Study Mode, warm up with
+          Multiple Choice, and then complete Exam Mode individually.
+        </div>
+      </div>
+
+      <div class="card hidden" id="examCard">
+        <div class="toolbar">
+          <span id="examType" class="badge badge-blue"></span>
+          <span id="examScore" class="pill"></span>
+          <span id="examWords" class="pill">Words: 0/2–5</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="examProgress" class="progress-bar"></div>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="examFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="examSecond" class="box"></div>
+
+        <p><span id="examKey" class="badge badge-orange"></span></p>
+
+        <div class="answer-row">
+          <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="examCheck" class="primary">Check</button>
+          <button id="examNext" disabled>Next</button>
+        </div>
+
+        <div id="examFeedback" class="box hidden"></div>
+      </div>
+
+      <div class="card hidden" id="examResult"></div>
+    </section>
+
+    <footer class="footer">
+      <span><strong>Mr John’s KWT Lab</strong> · Block 3 · v1.0</span>
+      <span>Intensifiers · FCE Part 4 focused practice</span>
+    </footer>
+  </main>
+
+  <script>
+    const categories = [
+      "All categories",
+      "TOO → ENOUGH adjective",
+      "TOO → ENOUGH noun",
+      "ENOUGH → TOO",
+      "SO → SUCH",
+      "SUCH → SO",
+      "Mixed exam decisions",
+      "Cambridge traps"
+    ];
+
+    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "") {
+      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note };
+    }
+
+    const items = [
+      item("TOO → ENOUGH adjective", "TOO → NOT + opposite adjective + ENOUGH",
+        "When TOO expresses excess, change the perspective: too cold becomes not warm enough.",
+        "The classroom was too cold for the students to concentrate.",
+        "The classroom ______ for the students to concentrate.",
+        ["wasn't warm enough", "was not warm enough"], ["ENOUGH"],
+        ["was enough warm", "was too warm enough", "wasn't enough warm"],
+        "TOO means excess. With ENOUGH, use the useful opposite adjective: cold → warm."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + opposite adjective + ENOUGH",
+        "Too difficult means not easy enough.",
+        "The puzzle was too difficult for the children to solve.",
+        "The puzzle ______ for the children to solve.",
+        ["wasn't easy enough", "was not easy enough"], ["ENOUGH"],
+        ["wasn't enough easy", "was too easy enough", "didn't have easy enough"],
+        "Do not write enough before the adjective. The correct order is adjective + enough."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adjective + ENOUGH",
+        "Too slow can become not fast enough.",
+        "The runner was too slow to qualify for the final.",
+        "The runner ______ to qualify for the final.",
+        ["wasn't fast enough", "was not fast enough"], ["ENOUGH"],
+        ["wasn't enough fast", "didn't run enough fast", "was too fast enough"],
+        "Find the opposite adjective: slow → fast."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adjective + ENOUGH",
+        "Too small can become not big enough.",
+        "The suitcase was too small to hold all my clothes.",
+        "The suitcase ______ to hold all my clothes.",
+        ["wasn't big enough", "was not big enough"], ["ENOUGH"],
+        ["wasn't enough big", "was too big enough", "didn't have big enough"],
+        "TOO + negative result can often become NOT + opposite adjective + ENOUGH."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adjective + ENOUGH",
+        "Too dark can become not bright enough.",
+        "The room was too dark for us to read comfortably.",
+        "The room ______ for us to read comfortably.",
+        ["wasn't bright enough", "was not bright enough"], ["ENOUGH"],
+        ["wasn't enough bright", "was too bright enough", "didn't have bright enough"],
+        "ENOUGH goes after adjectives and adverbs."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adverb + ENOUGH",
+        "Too slowly can become not quickly enough.",
+        "She spoke too slowly to finish the presentation on time.",
+        "She ______ to finish the presentation on time.",
+        ["didn't speak quickly enough", "did not speak quickly enough"], ["ENOUGH"],
+        ["didn't speak enough quickly", "spoke not quickly enough", "didn't have enough quick"],
+        "With adverbs, the order is also adverb + enough."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adjective + ENOUGH",
+        "Too weak can become not strong enough.",
+        "The shelf was too weak to support the books.",
+        "The shelf ______ to support the books.",
+        ["wasn't strong enough", "was not strong enough"], ["ENOUGH"],
+        ["wasn't enough strong", "was too strong enough", "didn't have strong enough"],
+        "Weak → strong. The meaning stays negative."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adjective + ENOUGH",
+        "Too narrow can become not wide enough.",
+        "The doorway was too narrow for the sofa to go through.",
+        "The doorway ______ for the sofa to go through.",
+        ["wasn't wide enough", "was not wide enough"], ["ENOUGH"],
+        ["wasn't enough wide", "didn't have enough wide", "was too wide enough"],
+        "Narrow → wide. Keep the action in the second half."),
+
+      item("TOO → ENOUGH noun", "TOO → DIDN'T HAVE ENOUGH + NOUN",
+        "Sometimes FCE expects a noun after enough, especially money, time, space or strength.",
+        "The tickets were too expensive for us to buy.",
+        "We ______ to buy the tickets.",
+        ["didn't have enough money", "did not have enough money"], ["ENOUGH", "HAVE"],
+        ["didn't have money enough", "weren't cheap enough money", "hadn't enough money"],
+        "Too expensive often becomes didn't have enough money."),
+
+      item("TOO → ENOUGH noun", "TOO → DIDN'T HAVE ENOUGH + NOUN",
+        "Too heavy can naturally become didn't have enough strength.",
+        "The box was too heavy for me to lift.",
+        "I ______ to lift the box.",
+        ["didn't have enough strength", "did not have enough strength"], ["ENOUGH", "HAVE"],
+        ["didn't have strength enough", "wasn't strong enough strength", "hadn't enough strength"],
+        "Use ENOUGH + noun: enough strength."),
+
+      item("TOO → ENOUGH noun", "TOO → THERE WASN'T ENOUGH + NOUN",
+        "Too crowded can become there wasn't enough room or space.",
+        "The lift was too crowded for everyone to get in.",
+        "There ______ for everyone to get in.",
+        ["wasn't enough room", "was not enough room", "wasn't enough space", "was not enough space"], ["ENOUGH"],
+        ["wasn't room enough", "was enough not room", "wasn't enough crowded"],
+        "For places, room/space are natural nouns after enough."),
+
+      item("TOO → ENOUGH noun", "TOO → DIDN'T HAVE ENOUGH + NOUN",
+        "Too short can sometimes be expressed as not having enough time.",
+        "The break was too short for us to have lunch.",
+        "We ______ to have lunch.",
+        ["didn't have enough time", "did not have enough time"], ["ENOUGH", "HAVE"],
+        ["didn't have time enough", "hadn't enough time", "weren't enough time"],
+        "Enough + noun: enough time."),
+
+      item("TOO → ENOUGH noun", "TOO → THERE WASN'T ENOUGH + NOUN",
+        "Too dark can also become there wasn't enough light.",
+        "The corridor was too dark for us to see the signs.",
+        "There ______ for us to see the signs.",
+        ["wasn't enough light", "was not enough light"], ["ENOUGH"],
+        ["wasn't light enough", "wasn't enough dark", "was no enough light"],
+        "Here ENOUGH + noun is more precise: enough light."),
+
+      item("TOO → ENOUGH noun", "TOO → DIDN'T HAVE ENOUGH + NOUN",
+        "Too slow can sometimes become not enough speed.",
+        "The old laptop was too slow to run the program.",
+        "The old laptop ______ to run the program.",
+        ["didn't have enough speed", "did not have enough speed"], ["ENOUGH", "HAVE"],
+        ["didn't have speed enough", "wasn't enough speed", "didn't had enough speed"],
+        "This trains the noun pattern: enough speed."),
+
+      item("TOO → ENOUGH noun", "TOO → THERE WASN'T ENOUGH + NOUN",
+        "Too noisy can become there wasn't enough silence or quiet.",
+        "The hotel was too noisy for us to sleep.",
+        "There ______ for us to sleep.",
+        ["wasn't enough quiet", "was not enough quiet", "wasn't enough silence", "was not enough silence"], ["ENOUGH"],
+        ["wasn't quiet enough", "was too quiet enough", "was no enough quiet"],
+        "This pattern is less common but useful: there wasn't enough quiet/silence."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not warm enough can become too cold.",
+        "The soup wasn't warm enough to serve.",
+        "The soup ______ to serve.",
+        ["was too cold"], ["TOO"],
+        ["was too warm", "wasn't too cold", "was enough cold"],
+        "When changing ENOUGH into TOO, look for the opposite adjective."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not clear enough can become too confusing.",
+        "The explanation wasn't clear enough for beginners to follow.",
+        "The explanation ______ for beginners to follow.",
+        ["was too confusing"], ["TOO"],
+        ["was too clear", "wasn't too confusing", "was too enough confusing"],
+        "Clear → confusing. Keep the meaning negative."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not big enough can become too small.",
+        "The apartment wasn't big enough for a family of five.",
+        "The apartment ______ for a family of five.",
+        ["was too small"], ["TOO"],
+        ["was too big", "wasn't too small", "was too enough small"],
+        "Big → small."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not strong enough can become too weak.",
+        "The rope wasn't strong enough to hold the weight.",
+        "The rope ______ to hold the weight.",
+        ["was too weak"], ["TOO"],
+        ["was too strong", "wasn't too weak", "was too weak enough"],
+        "Strong → weak."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not fast enough can become too slow.",
+        "The train wasn't fast enough to beat the bus.",
+        "The train ______ to beat the bus.",
+        ["was too slow"], ["TOO"],
+        ["was too fast", "wasn't too slow", "was too slowly"],
+        "Fast → slow."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not deep enough can become too shallow.",
+        "The pool wasn't deep enough to dive into safely.",
+        "The pool ______ to dive into safely.",
+        ["was too shallow"], ["TOO"],
+        ["was too deep", "wasn't too shallow", "was too depth"],
+        "Deep → shallow."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not interesting enough can become too boring.",
+        "The article wasn't interesting enough to keep my attention.",
+        "The article ______ to keep my attention.",
+        ["was too boring"], ["TOO"],
+        ["was too interesting", "wasn't too boring", "was too bored"],
+        "Interesting → boring."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not safe enough can become too dangerous.",
+        "The path wasn't safe enough to use after dark.",
+        "The path ______ after dark.",
+        ["was too dangerous to use"], ["TOO"],
+        ["was too safe to use", "wasn't too dangerous", "was too danger to use"],
+        "Sometimes the to-infinitive must move inside the answer."),
+
+      item("SO → SUCH", "SO + adjective → SUCH + adjective + noun",
+        "SO is used with adjectives. SUCH is used with noun phrases.",
+        "The instructions were so unclear that several students made mistakes.",
+        "They were ______ that several students made mistakes.",
+        ["such unclear instructions"], ["SUCH"],
+        ["so unclear instructions", "such instructions unclear", "such an unclear instructions"],
+        "SO + adjective becomes SUCH + adjective + plural noun."),
+
+      item("SO → SUCH", "SO + adjective → SUCH A/AN + adjective + noun",
+        "Add a suitable noun when transforming SO into SUCH.",
+        "The story was so moving that many people cried.",
+        "It was ______ that many people cried.",
+        ["such a moving story"], ["SUCH"],
+        ["so a moving story", "such moving", "such moving story"],
+        "Use such a + adjective + singular countable noun."),
+
+      item("SO → SUCH", "SO + adjective → SUCH A/AN + adjective + noun",
+        "When the subject is an event, use a suitable noun phrase.",
+        "The match was so exciting that nobody left early.",
+        "It was ______ that nobody left early.",
+        ["such an exciting match"], ["SUCH"],
+        ["so an exciting match", "such exciting match", "such a exciting match"],
+        "Before a vowel sound, use an: such an exciting match."),
+
+      item("SO → SUCH", "SO + adjective → SUCH A/AN + adjective + noun",
+        "Transform the adjective into a noun phrase.",
+        "The question was so complicated that few candidates answered it correctly.",
+        "It was ______ that few candidates answered it correctly.",
+        ["such a complicated question"], ["SUCH"],
+        ["so a complicated question", "such complicated question", "such a question complicated"],
+        "SO + complicated becomes SUCH A complicated question."),
+
+      item("SO → SUCH", "SO + adjective → SUCH + plural noun phrase",
+        "With plural nouns, do not use a/an.",
+        "The results were so surprising that everyone discussed them.",
+        "They were ______ that everyone discussed them.",
+        ["such surprising results"], ["SUCH"],
+        ["such a surprising results", "so surprising results", "such results surprising"],
+        "Plural noun: such surprising results."),
+
+      item("SO → SUCH", "SO + adjective → SUCH A/AN + adjective + noun",
+        "Use SUCH when the new sentence contains a noun.",
+        "The explanation was so simple that everyone understood it.",
+        "It was ______ that everyone understood it.",
+        ["such a simple explanation"], ["SUCH"],
+        ["so a simple explanation", "such simple explanation", "such an simple explanation"],
+        "Singular countable noun: such a simple explanation."),
+
+      item("SO → SUCH", "SO + adjective → SUCH A/AN + adjective + noun",
+        "Use such a/an when you add a singular noun.",
+        "The decision was so unexpected that nobody knew what to say.",
+        "It was ______ that nobody knew what to say.",
+        ["such an unexpected decision"], ["SUCH"],
+        ["so an unexpected decision", "such unexpected decision", "such a unexpected decision"],
+        "Unexpected begins with a vowel sound: such an unexpected decision."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "When you remove the noun, that noun usually becomes the subject.",
+        "It was such a tiring journey that we needed a rest.",
+        "The journey ______ that we needed a rest.",
+        ["was so tiring"], ["SO"],
+        ["was such tiring", "so was tiring", "was so a tiring"],
+        "SUCH + adjective + noun becomes noun + be + SO + adjective."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "Move the noun to subject position and use SO + adjective.",
+        "It was such a noisy party that the neighbours complained.",
+        "The party ______ that the neighbours complained.",
+        ["was so noisy"], ["SO"],
+        ["was such noisy", "was so a noisy", "so noisy party"],
+        "SO is followed directly by the adjective."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "Transform such a confusing explanation into the explanation was so confusing.",
+        "It was such a confusing explanation that nobody understood it.",
+        "The explanation ______ that nobody understood it.",
+        ["was so confusing"], ["SO"],
+        ["was such confusing", "was so a confusing", "so was confusing"],
+        "The noun explanation becomes the subject."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "Use SO when the noun is removed.",
+        "She gave such a convincing speech that everyone applauded.",
+        "Her speech ______ that everyone applauded.",
+        ["was so convincing"], ["SO"],
+        ["was such convincing", "was so a convincing", "so convincing speech"],
+        "Such a convincing speech → Her speech was so convincing."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "Use SO + adjective with the new subject.",
+        "It was such an easy test that most students finished early.",
+        "The test ______ that most students finished early.",
+        ["was so easy"], ["SO"],
+        ["was such easy", "was so an easy", "so easy test"],
+        "No noun after SO."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "A plural noun phrase with SUCH can become subject + were so + adjective.",
+        "They were such useful suggestions that we followed them immediately.",
+        "The suggestions ______ that we followed them immediately.",
+        ["were so useful"], ["SO"],
+        ["were such useful", "were so suggestions", "so useful suggestions"],
+        "Plural subject: the suggestions were so useful."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "Use SO when the second sentence focuses on the quality, not the noun phrase.",
+        "It was such a dramatic ending that everyone was silent.",
+        "The ending ______ that everyone was silent.",
+        ["was so dramatic"], ["SO"],
+        ["was such dramatic", "was so a dramatic", "so dramatic ending"],
+        "Such a dramatic ending → The ending was so dramatic."),
+
+      item("Mixed exam decisions", "TOO → SUCH",
+        "This works when TOO creates a clear consequence and the new sentence uses SUCH + noun phrase.",
+        "The task was too complicated for beginners to complete.",
+        "It was ______ that beginners couldn't complete it.",
+        ["such a complicated task"], ["SUCH"],
+        ["so complicated task", "such complicated", "such a task complicated"],
+        "TOO can sometimes become SUCH when the result clause is clear."),
+
+      item("Mixed exam decisions", "SO → TOO",
+        "SO + adjective + result can sometimes become TOO + adjective + for someone + to infinitive.",
+        "The lecture was so boring that many students stopped listening.",
+        "The lecture ______ for many students to keep listening.",
+        ["was too boring"], ["TOO"],
+        ["was so boring", "was too bored", "wasn't interesting enough"],
+        "The consequence is that students could not keep listening."),
+
+      item("Mixed exam decisions", "SO → ENOUGH",
+        "A negative consequence can sometimes become NOT + opposite adjective + ENOUGH.",
+        "The room was so cold that nobody stayed inside.",
+        "The room ______ for anyone to stay inside.",
+        ["wasn't warm enough", "was not warm enough"], ["ENOUGH"],
+        ["wasn't enough warm", "was too warm enough", "wasn't cold enough"],
+        "Cold creates a negative result. Change to lack of warmth."),
+
+      item("Mixed exam decisions", "SUCH → TOO",
+        "SUCH + adjective + noun + negative result can become TOO + adjective.",
+        "It was such a heavy bag that I couldn't carry it.",
+        "The bag ______ for me to carry.",
+        ["was too heavy"], ["TOO"],
+        ["was such heavy", "was too much heavy", "wasn't heavy enough"],
+        "The consequence is impossibility, so TOO is natural."),
+
+      item("Mixed exam decisions", "ENOUGH → SO",
+        "Not adjective enough can become so opposite adjective that + consequence.",
+        "The classroom wasn't quiet enough for us to concentrate.",
+        "The classroom ______ that we couldn't concentrate.",
+        ["was so noisy"], ["SO"],
+        ["was such noisy", "was so quiet", "was too noisy"],
+        "Not quiet enough → so noisy that we couldn't concentrate."),
+
+      item("Mixed exam decisions", "TOO → SO",
+        "TOO can sometimes become SO + adjective + that + negative consequence.",
+        "The road was too narrow for two buses to pass.",
+        "The road ______ that two buses couldn't pass.",
+        ["was so narrow"], ["SO"],
+        ["was such narrow", "was too narrow", "wasn't wide enough"],
+        "SO introduces the result clause with that."),
+
+      item("Mixed exam decisions", "ENOUGH → SUCH",
+        "Not adjective enough can become such + opposite adjective + noun + that + result.",
+        "The explanation wasn't clear enough for us to understand the instructions.",
+        "It was ______ that we couldn't understand the instructions.",
+        ["such a confusing explanation"], ["SUCH"],
+        ["so confusing explanation", "such confusing", "such an confusing explanation"],
+        "Not clear enough can become such a confusing explanation."),
+
+      item("Mixed exam decisions", "SO → TOO",
+        "A result clause may be rewritten with TOO + adjective + to infinitive.",
+        "The film was so frightening that my little brother couldn't watch it.",
+        "The film ______ for my little brother to watch.",
+        ["was too frightening"], ["TOO"],
+        ["was so frightening", "was too frightened", "wasn't frightening enough"],
+        "SO + result can sometimes become TOO + for someone + to infinitive."),
+
+      item("Cambridge traps", "Position of ENOUGH",
+        "Enough goes after adjectives and adverbs, but before nouns.",
+        "The water was too cold for the children to swim in.",
+        "The water ______ for the children to swim in.",
+        ["wasn't warm enough", "was not warm enough"], ["ENOUGH"],
+        ["wasn't enough warm", "was enough not warm", "was too warm enough"],
+        "Trap: not enough warm is wrong. Correct order: warm enough."),
+
+      item("Cambridge traps", "ENOUGH + noun",
+        "When enough is followed by a noun, enough comes before the noun.",
+        "The concert tickets were too expensive for Jake to buy.",
+        "Jake ______ to buy the concert tickets.",
+        ["didn't have enough money", "did not have enough money"], ["ENOUGH", "HAVE"],
+        ["didn't have money enough", "didn't had enough money", "didn't have enough expensive"],
+        "Trap: money enough is wrong. Correct order: enough money."),
+
+      item("Cambridge traps", "SO vs SUCH",
+        "SO is followed by an adjective or adverb. SUCH is followed by a noun phrase.",
+        "The film was so dull that I almost fell asleep.",
+        "It was ______ that I almost fell asleep.",
+        ["such a dull film"], ["SUCH"],
+        ["so a dull film", "such dull", "such dull film"],
+        "Trap: with a singular countable noun, use such a/an."),
+
+      item("Cambridge traps", "SO + adjective, not SO + noun phrase",
+        "When the noun disappears, use SO + adjective.",
+        "It was such an impressive performance that the audience stood up.",
+        "The performance ______ that the audience stood up.",
+        ["was so impressive"], ["SO"],
+        ["was such impressive", "was so an impressive", "so impressive performance"],
+        "Trap: do not use a/an after SO."),
+
+      item("Cambridge traps", "TOO is not VERY",
+        "TOO normally means more than acceptable and causes a problem.",
+        "The coffee was too bitter for me to drink.",
+        "The coffee ______ for me to drink.",
+        ["wasn't sweet enough", "was not sweet enough"], ["ENOUGH"],
+        ["was very bitter enough", "was too sweet enough", "wasn't enough sweet"],
+        "TOO is not just emphasis. It usually prevents the action."),
+
+      item("Cambridge traps", "TOO + adjective + to infinitive",
+        "Do not add unnecessary words between TOO and the adjective.",
+        "The printer was not fast enough to print all the documents.",
+        "The printer ______ to print all the documents.",
+        ["was too slow"], ["TOO"],
+        ["was too much slow", "was too slowly", "was enough slow"],
+        "Trap: too much slow is wrong. Use too slow."),
+
+      item("Cambridge traps", "SUCH with plural nouns",
+        "With plural nouns, do not use a/an after SUCH.",
+        "The comments were so helpful that I changed my essay.",
+        "They were ______ that I changed my essay.",
+        ["such helpful comments"], ["SUCH"],
+        ["such a helpful comments", "so helpful comments", "such comments helpful"],
+        "Plural noun: such helpful comments."),
+
+      item("Cambridge traps", "Avoid forcing unnatural noun forms",
+        "Sometimes adjective + enough is more natural than enough + noun.",
+        "The chair was too uncomfortable to sit on for long.",
+        "The chair ______ to sit on for long.",
+        ["wasn't comfortable enough", "was not comfortable enough"], ["ENOUGH"],
+        ["didn't have enough comfort", "wasn't enough comfortable", "hadn't enough comfort"],
+        "For this sentence, comfortable enough is more natural than enough comfort."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adjective + ENOUGH",
+        "Too boring can become not interesting enough.",
+        "The documentary was too boring to keep our attention.",
+        "The documentary ______ to keep our attention.",
+        ["wasn't interesting enough", "was not interesting enough"], ["ENOUGH"],
+        ["wasn't enough interesting", "was too interesting enough", "didn't have enough interested"],
+        "Boring → interesting."),
+
+      item("TOO → ENOUGH adjective", "TOO → NOT + adjective + ENOUGH",
+        "Too dangerous can become not safe enough.",
+        "The bridge was too dangerous for pedestrians to cross.",
+        "The bridge ______ for pedestrians to cross.",
+        ["wasn't safe enough", "was not safe enough"], ["ENOUGH"],
+        ["wasn't enough safe", "was too safe enough", "didn't have enough safe"],
+        "Dangerous → safe."),
+
+      item("TOO → ENOUGH noun", "TOO → THERE WASN'T ENOUGH + NOUN",
+        "Too small can sometimes become there wasn't enough space.",
+        "The office was too small for the whole team to work in.",
+        "There ______ for the whole team to work in.",
+        ["wasn't enough space", "was not enough space", "wasn't enough room", "was not enough room"], ["ENOUGH"],
+        ["wasn't space enough", "wasn't enough small", "was no enough space"],
+        "Enough + noun: enough space / enough room."),
+
+      item("ENOUGH → TOO", "NOT + adjective + ENOUGH → TOO + opposite adjective",
+        "Not bright enough can become too dark.",
+        "The screen wasn't bright enough to see in the sunlight.",
+        "The screen ______ in the sunlight.",
+        ["was too dark to see"], ["TOO"],
+        ["was too bright to see", "wasn't too dark", "was too darkness"],
+        "The infinitive can be part of the answer if needed."),
+
+      item("SO → SUCH", "SO + adjective → SUCH A/AN + adjective + noun",
+        "Add an appropriate noun phrase.",
+        "The storm was so violent that several trees fell.",
+        "It was ______ that several trees fell.",
+        ["such a violent storm"], ["SUCH"],
+        ["so a violent storm", "such violent storm", "such storm violent"],
+        "Such a violent storm is the natural noun phrase."),
+
+      item("SUCH → SO", "SUCH + noun phrase → SO + adjective",
+        "Remove the noun phrase and use SO + adjective.",
+        "It was such a useful app that I recommended it to everyone.",
+        "The app ______ that I recommended it to everyone.",
+        ["was so useful"], ["SO"],
+        ["was such useful", "was so a useful", "so useful app"],
+        "Such a useful app → The app was so useful."),
+
+      item("Mixed exam decisions", "ENOUGH → TOO",
+        "If something lacks length, it may be too short.",
+        "The report wasn't detailed enough to answer all the questions.",
+        "The report ______ to answer all the questions.",
+        ["was too brief"], ["TOO"],
+        ["was too detailed", "wasn't too brief", "was too briefly"],
+        "Not detailed enough can naturally become too brief."),
+
+      item("Mixed exam decisions", "SO → ENOUGH",
+        "SO + adjective + negative consequence can become NOT + opposite adjective + ENOUGH.",
+        "The password was so weak that the system rejected it.",
+        "The password ______ for the system to accept.",
+        ["wasn't strong enough", "was not strong enough"], ["ENOUGH"],
+        ["wasn't enough strong", "was too strong enough", "wasn't weak enough"],
+        "Weak → not strong enough."),
+
+      item("Mixed exam decisions", "TOO → SUCH",
+        "TOO can become SUCH when the second sentence uses a result clause.",
+        "The noise was too loud for the baby to sleep.",
+        "It was ______ that the baby couldn't sleep.",
+        ["such a loud noise"], ["SUCH"],
+        ["so loud noise", "such loud", "such a noise loud"],
+        "TOO + impossible action becomes SUCH + noun + that + couldn't."),
+
+      item("Mixed exam decisions", "SUCH → ENOUGH",
+        "A strong negative description can be reframed as not enough of the opposite quality.",
+        "It was such a dark room that reading was impossible.",
+        "There ______ for us to read.",
+        ["wasn't enough light", "was not enough light"], ["ENOUGH"],
+        ["wasn't light enough", "wasn't enough dark", "was no enough light"],
+        "Dark room → not enough light."),
+
+      item("Cambridge traps", "Do not change the key word",
+        "The key word must appear exactly as given in your answer.",
+        "The explanation was so confusing that nobody understood it.",
+        "It was ______ that nobody understood it.",
+        ["such a confusing explanation"], ["SUCH"],
+        ["so confusing explanation", "a confusing explanation", "such confusing"],
+        "The answer must include the key word SUCH.")
+    ];
+
+    const state = {
+      studyCategory: "All categories",
+      studyIndex: 0,
+      studyFlipped: false,
+      mcCategory: "All categories",
+      mcCurrent: null,
+      mcSelected: null,
+      mcScore: 0,
+      mcAttempts: 0,
+      trCategory: "All categories",
+      trCurrent: null,
+      trChecked: false,
+      trScore: 0,
+      trAttempts: 0,
+      examCategory: "All categories",
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+      examChecked: false,
+      examAnswers: []
+    };
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function normalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/[.,!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function wordCount(text) {
+      const clean = normalise(text);
+      if (!clean) return 0;
+      return clean.split(" ").filter(Boolean).length;
+    }
+
+    function keyIsIncluded(answer, key) {
+      const answerWords = normalise(answer).split(" ");
+      const keyWords = normalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function getAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
+    }
+
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
+    }
+
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
+    }
+
+    function isValidExercise(exercise) {
+      const answers = getAcceptedAnswers(exercise);
+      return answers.length > 0 && answers.every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
+      });
+    }
+
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+      return (exercise.distractors || []).filter(item =>
+        wordCount(item) >= 2 &&
+        wordCount(item) <= 5 &&
+        !accepted.includes(normalise(item))
+      );
+    }
+
+    function filteredItems(category) {
+      if (category === "All categories") return items;
+      return items.filter(item => item.type === category);
+    }
+
+    function makeExercise(raw, mode = "transform") {
+      const validKeys = shuffle(raw.keyOptions).filter(key =>
+        raw.answers.some(answer => keyIsIncluded(answer, key))
+      );
+
+      if (!validKeys.length) return null;
+
+      const selectedKey = pick(validKeys);
+      const exercise = {
+        ...raw,
+        key: selectedKey,
+        answers: raw.answers.filter(answer => keyIsIncluded(answer, selectedKey)),
+        answer: raw.answers.find(answer => keyIsIncluded(answer, selectedKey))
+      };
+
+      if (!isValidExercise(exercise)) return null;
+      if (mode === "multiple" && cleanDistractors(exercise).length < 3) return null;
+
+      return exercise;
+    }
+
+    function generateExercise(category = "All categories", mode = "transform") {
+      const possible = shuffle(filteredItems(category));
+
+      for (const raw of possible) {
+        const exercise = makeExercise(raw, mode);
+        if (exercise) return exercise;
+      }
+
+      return {
+        type: "System",
+        expression: "No valid item",
+        meaning: "No valid item could be generated.",
+        original: "No valid exercise could be generated.",
+        second: "Please choose another category.",
+        answers: ["try again"],
+        answer: "try again",
+        key: "TRY",
+        keyOptions: ["TRY"],
+        distractors: ["try later", "new question", "other category"],
+        note: "The generator could not create a valid item."
+      };
+    }
+
+    function populateSelect(id, value) {
+      $(id).innerHTML = categories
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+      document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+      $(tab).classList.remove("hidden");
+      document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
+    }
+
+    function renderStudy() {
+      const list = filteredItems(state.studyCategory);
+      if (state.studyIndex >= list.length) state.studyIndex = 0;
+      const current = list[state.studyIndex];
+
+      $("studyCard").innerHTML = state.studyFlipped
+        ? `
+          <div>
+            <span class="badge badge-blue">${current.type}</span>
+            <p class="muted"><strong>Exam thinking</strong></p>
+            <h2 style="font-size:30px">${current.meaning}</h2>
+            <div class="box"><strong>Example pattern:</strong> ${current.original} → ${current.second.replace("______", `<strong>${primaryAnswer(current)}</strong>`)}</div>
+            <div class="box"><strong>Part 4 note:</strong> ${current.note || "Keep the same meaning, use the key word, and respect the 2–5 word limit."}</div>
+            <p class="muted">Click the card to return to the transformation pattern.</p>
+          </div>
+        `
+        : `
+          <div>
+            <span class="badge badge-blue">${current.type}</span>
+            <p class="muted"><strong>Transformation pattern</strong></p>
+            <h2>${current.expression}</h2>
+            <p class="muted">Click the card to reveal exam thinking, example and Part 4 note.</p>
+          </div>
+        `;
+
+      $("studyCounter").textContent = `Card ${state.studyIndex + 1} of ${list.length}`;
+    }
+
+    function newMcQuestion() {
+      const exercise = generateExercise(state.mcCategory, "multiple");
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
+
+      state.mcCurrent = { ...exercise, options };
+      state.mcSelected = null;
+      renderMc();
+    }
+
+    function renderMc() {
+      const q = state.mcCurrent;
+      $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
+
+      if (!q) {
+        $("mcType").textContent = "";
+        $("mcQuestion").textContent = "Click 'New question' to start.";
+        $("mcOptions").innerHTML = "";
+        $("mcFeedback").classList.add("hidden");
+        return;
+      }
+
+      $("mcType").textContent = `${q.type} · Generated transformation`;
+
+      $("mcQuestion").innerHTML = `
+        <p>${q.original}</p>
+        <div class="box">${q.second}</div>
+      `;
+
+      $("mcOptions").innerHTML = "";
+
+      q.options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+
+        if (state.mcSelected) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
+        }
+
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
+      });
+
+      if (state.mcSelected) {
+        const correct = isCorrectAnswer(state.mcSelected, q);
+        $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+        $("mcFeedback").innerHTML = `
+          <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
+          <p>${q.note || ""}</p>
+          <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+        `;
+      } else {
+        $("mcFeedback").classList.add("hidden");
+      }
+    }
+
+    function chooseMc(option) {
+      if (state.mcSelected) return;
+      state.mcSelected = option;
+      state.mcAttempts++;
+      if (isCorrectAnswer(option, state.mcCurrent)) state.mcScore++;
+      renderMc();
+    }
+
+    function newTransformation() {
+      state.trCurrent = generateExercise(state.trCategory, "transform");
+      state.trChecked = false;
+      $("trInput").value = "";
+      $("trFeedback").classList.add("hidden");
+      $("trHintBox").classList.add("hidden");
+      renderTransformation();
+    }
+
+    function renderTransformation() {
+      const q = state.trCurrent;
+      $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
+
+      if (!q) {
+        $("trType").textContent = "";
+        $("trFirst").textContent = "Click 'New exercise' to start.";
+        $("trSecond").textContent = "";
+        $("trKey").textContent = "";
+        return;
+      }
+
+      const input = $("trInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+
+      $("trType").textContent = `${q.type} · Generated transformation`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("trFirst").textContent = q.original;
+      $("trSecond").textContent = q.second;
+      $("trKey").textContent = `Key word: ${q.key}`;
+    }
+
+    function checkTransformation(reveal = false) {
+      if (!state.trCurrent || state.trChecked) return;
+
+      const input = $("trInput").value;
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
+
+      state.trChecked = true;
+      state.trAttempts++;
+      if (correct) state.trScore++;
+
+      $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("trFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
+        <p>${state.trCurrent.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${state.trCurrent.expression}</p>
+        <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
+      `;
+
+      renderTransformation();
+    }
+
+    function showHint() {
+      if (!state.trCurrent) return;
+      $("trHintBox").classList.remove("hidden");
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.meaning}`;
+    }
+
+    function buildExamQuestions() {
+      const pool = shuffle(filteredItems(state.examCategory));
+      const selected = [];
+
+      for (const raw of pool) {
+        const exercise = makeExercise(raw, "transform");
+        if (!exercise) continue;
+
+        const repeated = selected.some(item =>
+          item.expression === exercise.expression && item.original === exercise.original
+        );
+
+        if (!repeated) selected.push(exercise);
+        if (selected.length === 10) break;
+      }
+
+      return selected;
+    }
+
+    function startExam() {
+      state.examQuestions = buildExamQuestions();
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examCard").classList.remove("hidden");
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function resetExam() {
+      state.examQuestions = [];
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.remove("hidden");
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examFeedback").classList.add("hidden");
+      $("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = state.examQuestions.length;
+      const q = state.examQuestions[state.examIndex];
+
+      if (!q || total === 0) {
+        $("examIntro").classList.remove("hidden");
+        $("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = $("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (state.examIndex / total) * 100;
+
+      $("examProgress").style.width = `${progress}%`;
+      $("examType").textContent = `${q.type} · Question ${state.examIndex + 1}/${total}`;
+      $("examScore").textContent = `Score: ${state.examScore}/${state.examIndex}`;
+      $("examWords").textContent = `Words: ${words}/2–5`;
+      $("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("examFirst").textContent = q.original;
+      $("examSecond").textContent = q.second;
+      $("examKey").textContent = `Key word: ${q.key}`;
+      $("examCheck").disabled = state.examChecked;
+      $("examInput").disabled = state.examChecked;
+      $("examNext").disabled = !state.examChecked;
+      $("examNext").textContent = state.examIndex === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (state.examChecked) return;
+
+      const q = state.examQuestions[state.examIndex];
+      const input = $("examInput").value;
+      const correct = isCorrectAnswer(input, q);
+
+      state.examChecked = true;
+
+      if (correct) state.examScore++;
+
+      state.examAnswers.push({
+        number: state.examIndex + 1,
+        pattern: q.expression,
+        correct,
+        userAnswer: input,
+        accepted: acceptedAnswersText(q)
+      });
+
+      $("examFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("examFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+        <p>${q.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+      `;
+      $("examFeedback").classList.remove("hidden");
+
+      renderExam();
+    }
+
+    function nextExamQuestion() {
+      if (!state.examChecked) return;
+
+      if (state.examIndex >= state.examQuestions.length - 1) {
+        finishExam();
+        return;
+      }
+
+      state.examIndex++;
+      state.examChecked = false;
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function finishExam() {
+      const total = state.examQuestions.length;
+      const score = state.examScore;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
+
+      let message = "";
+      if (score >= 9) {
+        message = "Excellent exam control. You are using intensifier transformations with strong accuracy.";
+      } else if (score >= 7) {
+        message = "Good result. Keep practising the difference between TOO / ENOUGH and SO / SUCH.";
+      } else if (score >= 5) {
+        message = "You understand several patterns, but you need more controlled practice with transformation logic.";
+      } else {
+        message = "Revise Study Mode and Multiple Choice before trying Exam Mode again.";
+      }
+
+      const review = state.examAnswers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.pattern}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+        </tr>
+      `).join("");
+
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.remove("hidden");
+
+      $("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Pattern</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart challenge</button>
+        </div>
+      `;
+
+      $("examAgain").addEventListener("click", startExam);
+    }
+
+    function init() {
+      populateSelect("studyCategory", state.studyCategory);
+      populateSelect("mcCategory", state.mcCategory);
+      populateSelect("trCategory", state.trCategory);
+      populateSelect("examCategory", state.examCategory);
+
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => showTab(button.dataset.tab));
+      });
+
+      $("studyCategory").addEventListener("change", event => {
+        state.studyCategory = event.target.value;
+        state.studyIndex = 0;
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("studyCard").addEventListener("click", () => {
+        state.studyFlipped = !state.studyFlipped;
+        renderStudy();
+      });
+
+      $("studyNext").addEventListener("click", () => {
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = (state.studyIndex + 1) % list.length;
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("studyRandom").addEventListener("click", () => {
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = Math.floor(Math.random() * list.length);
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        newMcQuestion();
+      });
+
+      $("mcNew").addEventListener("click", newMcQuestion);
+      $("mcReset").addEventListener("click", () => {
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        renderMc();
+      });
+
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
+        state.trScore = 0;
+        state.trAttempts = 0;
+        newTransformation();
+      });
+
+      $("trNew").addEventListener("click", newTransformation);
+      $("trHint").addEventListener("click", showHint);
+      $("trCheck").addEventListener("click", () => checkTransformation(false));
+      $("trReveal").addEventListener("click", () => checkTransformation(true));
+      $("trReset").addEventListener("click", () => {
+        state.trScore = 0;
+        state.trAttempts = 0;
+        renderTransformation();
+      });
+
+      $("trInput").addEventListener("input", renderTransformation);
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") checkTransformation(false);
+      });
+
+      $("examCategory").addEventListener("change", event => {
+        state.examCategory = event.target.value;
+        resetExam();
+      });
+
+      $("examStart").addEventListener("click", startExam);
+      $("examRestart").addEventListener("click", startExam);
+      $("examCheck").addEventListener("click", checkExamAnswer);
+      $("examNext").addEventListener("click", nextExamQuestion);
+      $("examInput").addEventListener("input", renderExam);
+      $("examInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          if (!state.examChecked) checkExamAnswer();
+          else nextExamQuestion();
+        }
+      });
+
+      renderStudy();
+      newMcQuestion();
+      newTransformation();
+    }
+
+    init();
+  </script>
+</body>
+</html>
