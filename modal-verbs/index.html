@@ -3,61 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mr John’s KWT Lab · Modal Verbs</title>
+  <title>Block 2 · Mr John’s KWT Lab</title>
+  <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
 
   <style>
     :root {
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --ink: #102033;
+      --navy: #062b63;
+      --blue: #005eb8;
+      --light-blue: #eaf3ff;
+      --orange: #f28c00;
+      --orange-soft: #fff3df;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --text: #172033;
       --muted: #667085;
-      --line: #dde5ef;
-      --brand: #193b68;
-      --brand-2: #2f80ed;
-      --accent: #f4b400;
-      --success: #1f9d55;
-      --error: #d64545;
-      --warning: #b7791f;
-      --soft-blue: #eaf3ff;
-      --soft-green: #eafaf1;
-      --soft-red: #fff0f0;
-      --soft-yellow: #fff8df;
-      --shadow: 0 18px 45px rgba(16, 32, 51, 0.12);
-      --radius: 22px;
+      --border: #d9e2ef;
+      --white: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(47, 128, 237, 0.14), transparent 34%),
-        radial-gradient(circle at top right, rgba(244, 180, 0, 0.16), transparent 28%),
+        radial-gradient(circle at top left, rgba(0, 94, 184, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 0, 0.10), transparent 32%),
         var(--bg);
-      color: var(--ink);
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+      color: var(--text);
+      line-height: 1.5;
     }
 
     .page {
-      width: min(1180px, calc(100% - 32px));
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 28px 0 48px;
+      padding: 24px 16px 46px;
     }
 
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 26px;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 0 24px;
     }
 
     .brand {
@@ -67,434 +59,108 @@
     }
 
     .brand img {
-      width: 74px;
-      height: 74px;
+      height: auto;
+      width: 260px;
       object-fit: contain;
-      border-radius: 18px;
-      background: white;
-      box-shadow: 0 10px 25px rgba(16, 32, 51, 0.12);
-      padding: 6px;
     }
 
     .brand-title {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.3px;
     }
 
-    .brand-title strong {
-      font-size: clamp(1.25rem, 2.4vw, 2rem);
-      letter-spacing: -0.04em;
-      color: var(--brand);
-      line-height: 1;
-    }
-
-    .brand-title span {
+    .brand-subtitle {
+      display: block;
+      font-size: 14px;
       color: var(--muted);
-      font-size: 0.98rem;
+      font-weight: 600;
     }
 
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 15px;
+    .home-link {
+      background: var(--white);
+      border: 1px solid var(--border);
       border-radius: 999px;
-      background: white;
-      border: 1px solid var(--line);
-      color: var(--brand);
-      font-weight: 800;
-      box-shadow: 0 8px 20px rgba(16, 32, 51, 0.08);
+      padding: 10px 16px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(6, 43, 99, 0.06);
       white-space: nowrap;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .back-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 28px rgba(16, 32, 51, 0.12);
     }
 
     .hero {
-      background: linear-gradient(135deg, #ffffff 0%, #edf6ff 100%);
-      border: 1px solid rgba(47, 128, 237, 0.18);
-      border-radius: 34px;
-      padding: clamp(24px, 4vw, 42px);
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
       box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
       margin-bottom: 22px;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -80px;
-      width: 260px;
-      height: 260px;
-      border-radius: 999px;
-      background: rgba(244, 180, 0, 0.18);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 850px;
-    }
-
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 13px;
+      display: inline-block;
+      background: var(--orange-soft);
+      color: #9a5700;
+      border: 1px solid rgba(242, 140, 0, 0.25);
       border-radius: 999px;
-      background: var(--soft-blue);
-      color: var(--brand);
+      padding: 7px 13px;
+      font-size: 13px;
       font-weight: 900;
-      font-size: 0.83rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
       margin-bottom: 16px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.2rem, 6vw, 4.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.07em;
-      color: var(--brand);
+      color: var(--navy);
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -1.4px;
     }
+
+    .highlight { color: var(--orange); }
 
     .hero p {
       margin: 18px 0 0;
-      color: #39485d;
-      font-size: clamp(1rem, 1.6vw, 1.18rem);
-      line-height: 1.65;
-      max-width: 760px;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 900px;
     }
 
-    .pattern-strip {
-      margin-top: 22px;
+    .stats {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
-    }
-
-    .pattern-strip span {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 9px 13px;
-      color: var(--brand);
-      font-weight: 850;
-      font-size: 0.9rem;
-      box-shadow: 0 8px 18px rgba(16, 32, 51, 0.06);
+      flex-wrap: wrap;
+      margin-top: 18px;
     }
 
     .tabs {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
       margin: 22px 0;
     }
 
+    button,
     .tab {
-      border: 1px solid var(--line);
-      background: white;
-      color: var(--brand);
-      font-weight: 900;
-      border-radius: 18px;
-      padding: 15px 12px;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(16, 32, 51, 0.08);
-      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
-      font-size: 0.98rem;
-    }
-
-    .tab:hover {
-      transform: translateY(-2px);
-    }
-
-    .tab.active {
-      background: var(--brand);
-      color: white;
-      border-color: var(--brand);
-    }
-
-    .panel {
-      display: none;
-    }
-
-    .panel.active {
-      display: block;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 14px 35px rgba(16, 32, 51, 0.08);
-      padding: clamp(20px, 3vw, 30px);
-    }
-
-    .section-title {
-      margin: 0 0 10px;
-      font-size: clamp(1.45rem, 3vw, 2.1rem);
-      letter-spacing: -0.04em;
-      color: var(--brand);
-    }
-
-    .section-intro {
-      color: var(--muted);
-      line-height: 1.65;
-      margin: 0 0 22px;
-      max-width: 880px;
-    }
-
-    .study-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .study-card {
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 18px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-
-    .study-card h3 {
-      margin: 0 0 10px;
-      color: var(--brand);
-      font-size: 1.12rem;
-    }
-
-    .study-card ul {
-      margin: 0;
-      padding-left: 20px;
-      color: #344054;
-      line-height: 1.65;
-    }
-
-    .formula {
-      display: inline-block;
-      font-weight: 900;
-      color: #14365f;
-      background: var(--soft-blue);
-      border: 1px solid rgba(47, 128, 237, 0.18);
-      border-radius: 10px;
-      padding: 2px 7px;
-      margin: 2px 0;
-    }
-
-    .trainer-layout {
-      display: grid;
-      grid-template-columns: 1fr 330px;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .exercise-card {
-      min-height: 430px;
-    }
-
-    .meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--soft-blue);
-      color: var(--brand);
-      font-weight: 850;
-      font-size: 0.88rem;
-    }
-
-    .score-pill {
-      background: var(--soft-yellow);
-      color: #7a4b00;
-    }
-
-    .question {
-      border-radius: 22px;
-      background: #f8fbff;
-      border: 1px solid var(--line);
-      padding: clamp(18px, 3vw, 26px);
-      margin-bottom: 18px;
-    }
-
-    .question-label {
-      color: var(--muted);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.76rem;
-      margin-bottom: 8px;
-    }
-
-    .sentence {
-      font-size: clamp(1.05rem, 2vw, 1.28rem);
-      line-height: 1.55;
-      margin: 10px 0;
-    }
-
-    .key-word {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 92px;
-      margin: 8px 0 4px;
-      padding: 8px 14px;
-      border-radius: 14px;
-      background: var(--brand);
-      color: white;
-      font-weight: 950;
-      letter-spacing: 0.08em;
-    }
-
-    .gap {
-      display: inline-block;
-      min-width: min(320px, 100%);
-      border-bottom: 3px solid #9fb2c8;
-      transform: translateY(-2px);
-    }
-
-    .answer-input {
-      width: 100%;
-      border: 2px solid var(--line);
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
       border-radius: 16px;
-      padding: 15px 16px;
-      font-size: 1.05rem;
-      outline: none;
-      color: var(--ink);
-      background: white;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease;
-      margin-top: 8px;
-    }
-
-    .answer-input:focus {
-      border-color: var(--brand-2);
-      box-shadow: 0 0 0 4px rgba(47, 128, 237, 0.12);
-    }
-
-    .choices {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .choice {
-      border: 1px solid var(--line);
-      background: white;
-      color: var(--ink);
-      border-radius: 16px;
-      padding: 14px 16px;
-      text-align: left;
-      font-size: 1rem;
-      cursor: pointer;
-      font-weight: 750;
-      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-    }
-
-    .choice:hover {
-      transform: translateY(-1px);
-      border-color: var(--brand-2);
-      background: #f7fbff;
-    }
-
-    .choice.correct {
-      background: var(--soft-green);
-      border-color: rgba(31, 157, 85, 0.35);
-      color: #11633a;
-    }
-
-    .choice.wrong {
-      background: var(--soft-red);
-      border-color: rgba(214, 69, 69, 0.35);
-      color: #912f2f;
-    }
-
-    .feedback {
-      display: none;
-      border-radius: 18px;
-      padding: 15px 16px;
-      margin-top: 16px;
-      line-height: 1.55;
-      font-weight: 700;
-    }
-
-    .feedback.show {
-      display: block;
-    }
-
-    .feedback.good {
-      background: var(--soft-green);
-      border: 1px solid rgba(31, 157, 85, 0.25);
-      color: #11633a;
-    }
-
-    .feedback.bad {
-      background: var(--soft-red);
-      border: 1px solid rgba(214, 69, 69, 0.25);
-      color: #912f2f;
-    }
-
-    .feedback.info {
-      background: var(--soft-blue);
-      border: 1px solid rgba(47, 128, 237, 0.22);
-      color: var(--brand);
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    button.primary,
-    button.secondary,
-    button.ghost {
-      border: none;
-      border-radius: 15px;
       padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
       cursor: pointer;
-      font-weight: 900;
-      font-size: 0.96rem;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      transition: 0.16s ease;
     }
 
-    button.primary {
-      background: var(--brand);
-      color: white;
-      box-shadow: 0 12px 24px rgba(25, 59, 104, 0.22);
-    }
-
-    button.secondary {
-      background: var(--accent);
-      color: #3c2a00;
-      box-shadow: 0 12px 24px rgba(244, 180, 0, 0.18);
-    }
-
-    button.ghost {
-      background: white;
-      color: var(--brand);
-      border: 1px solid var(--line);
-    }
-
-    button:hover {
-      transform: translateY(-2px);
+    button:hover,
+    .tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
     }
 
     button:disabled {
@@ -504,145 +170,234 @@
       box-shadow: none;
     }
 
-    .side-card {
-      position: sticky;
-      top: 18px;
+    .tab.active,
+    .primary {
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      border-color: transparent;
     }
 
-    .side-card h3 {
-      margin: 0 0 10px;
-      color: var(--brand);
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
     }
 
-    .side-card p {
-      color: var(--muted);
-      line-height: 1.55;
-      margin: 0 0 14px;
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
-    .progress {
+    select,
+    input {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+    }
+
+    select { min-width: 240px; }
+    input { width: 100%; }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hidden { display: none !important; }
+
+    .badge,
+    .pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .badge-blue {
+      background: var(--light-blue);
+      color: var(--blue);
+      border-color: rgba(0, 94, 184, 0.18);
+    }
+
+    .badge-orange {
+      background: var(--orange-soft);
+      color: #9a5700;
+      border-color: rgba(242, 140, 0, 0.25);
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bbf7d0;
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: #fecaca;
+    }
+
+    .muted { color: var(--muted); }
+
+    .flashcard {
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .flashcard h2 {
+      font-size: clamp(32px, 5vw, 50px);
+      color: var(--navy);
+      margin: 14px 0;
+    }
+
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      border-color: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      text-align: left;
+      min-height: 58px;
+    }
+
+    .option.good {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: #14532d;
+    }
+
+    .option.bad {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: #7f1d1d;
+    }
+
+    .progress-wrap {
       width: 100%;
       height: 12px;
-      background: #e9eef5;
+      background: #e5e7eb;
       border-radius: 999px;
       overflow: hidden;
-      margin: 14px 0;
+      margin: 12px 0 18px;
     }
 
     .progress-bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--brand-2), var(--accent));
-      transition: width 0.22s ease;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+      border-radius: 999px;
+      transition: width 0.2s ease;
     }
 
-    .mini-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .mini-list span {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      border: 1px solid var(--line);
-      background: #f8fbff;
-      padding: 9px 11px;
-      border-radius: 12px;
-      color: #344054;
-      font-size: 0.9rem;
-      font-weight: 750;
-    }
-
-    .exam-start {
-      text-align: center;
-      padding: 28px;
-      border-radius: 22px;
-      background: #f8fbff;
-      border: 1px solid var(--line);
-    }
-
-    .exam-result {
-      display: none;
-      text-align: center;
-      padding: 28px;
-      border-radius: 22px;
-      background: var(--soft-blue);
-      border: 1px solid rgba(47, 128, 237, 0.22);
-      margin-top: 18px;
-    }
-
-    .exam-result.show {
-      display: block;
-    }
-
-    .big-score {
-      font-size: clamp(2.7rem, 8vw, 5.2rem);
-      font-weight: 1000;
-      color: var(--brand);
-      letter-spacing: -0.08em;
+    .result-number {
+      color: var(--navy);
+      font-size: clamp(42px, 8vw, 76px);
       line-height: 1;
       margin: 8px 0;
+      font-weight: 900;
+      letter-spacing: -2px;
     }
 
-    .hidden {
-      display: none !important;
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
     }
 
-    .footer-note {
-      margin-top: 22px;
+    .review-table th,
+    .review-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
       color: var(--muted);
-      text-align: center;
-      font-size: 0.92rem;
-      line-height: 1.5;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 880px) {
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 760px) {
       .topbar {
-        align-items: flex-start;
         flex-direction: column;
-      }
-
-      .tabs {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .trainer-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .side-card {
-        position: static;
-      }
-
-      .study-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .page {
-        width: min(100% - 22px, 1180px);
-        padding-top: 18px;
+        align-items: flex-start;
       }
 
       .brand img {
-        width: 62px;
-        height: 62px;
+        width: 220px;
+        height: auto;
       }
 
-      .tabs {
+      .tabs,
+      .answer-row,
+      .option-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        border-radius: 24px;
-      }
-
-      .button-row button {
-        width: 100%;
-      }
+      .hero { padding: 26px 20px; }
     }
   </style>
 </head>
@@ -650,874 +405,628 @@
 <body>
   <main class="page">
     <header class="topbar">
-      <a class="brand" href="../">
+      <div class="brand">
         <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
-        <div class="brand-title">
-          <strong>Mr John’s KWT Lab</strong>
-          <span>B2 First Key Word Transformations</span>
+        <div>
+          <span class="brand-title">Mr John’s KWT Lab</span>
+          <span class="brand-subtitle">Block 2 · Modal Verbs</span>
         </div>
-      </a>
+      </div>
 
-      <a class="back-link" href="../">← Back to Lab</a>
+      <a class="home-link" href="../index.html">← Back to Lab Home</a>
     </header>
 
     <section class="hero">
-      <div class="hero-content">
-        <div class="eyebrow">Block 2 · Available</div>
-        <h1>Modal Verbs</h1>
-        <p>
-          Practise B2 First transformations with modal verbs: certainty, possibility,
-          impossibility, obligation, prohibition, advice, criticism, regret and ability.
-        </p>
-
-        <div class="pattern-strip" aria-label="Core patterns">
-          <span>Core patterns</span>
-          <span>MUST / CAN’T</span>
-          <span>MIGHT / MAY / COULD</span>
-          <span>HAVE TO / NEEDN’T</span>
-          <span>SHOULD / HAD BETTER</span>
-          <span>BE ABLE TO / MANAGED TO</span>
-        </div>
+      <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
+      <h1>Modal Verbs <span class="highlight">Transformation</span> Trainer</h1>
+      <p>
+        Practise B2 First Part 4 transformations with modal verbs. This block trains
+        certainty, possibility, impossibility, obligation, prohibition, advice, criticism,
+        regret and ability, following the official 2–5-word answer limit.
+      </p>
+      <div class="stats">
+        <span class="pill">Core patterns</span>
+        <span class="pill">MUST / CAN’T</span>
+        <span class="pill">MIGHT / MAY / COULD</span>
+        <span class="pill">HAVE TO / NEEDN’T</span>
+        <span class="pill">SHOULD / HAD BETTER</span>
+        <span class="pill">BE ABLE TO / MANAGED TO</span>
       </div>
     </section>
 
-    <nav class="tabs" aria-label="Practice modes">
-      <button class="tab active" data-panel="study">Study Mode</button>
-      <button class="tab" data-panel="mc">Multiple Choice</button>
-      <button class="tab" data-panel="transform">Transformations</button>
-      <button class="tab" data-panel="exam">Exam Mode</button>
+    <nav class="tabs">
+      <button class="tab active" data-tab="study">🧠 Study Mode</button>
+      <button class="tab" data-tab="multiple">✓ Multiple Choice</button>
+      <button class="tab" data-tab="transform">✎ Transformations</button>
+      <button class="tab" data-tab="exam">🏆 Exam Mode</button>
     </nav>
 
-    <section id="study" class="panel active">
+    <section id="study" class="tab-section">
+      <div class="toolbar">
+        <select id="studyCategory"></select>
+        <div class="button-group">
+          <button id="studyRandom">Random</button>
+          <button id="studyNext" class="primary">Next</button>
+        </div>
+      </div>
+
+      <div id="studyCard" class="card flashcard"></div>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
+    </section>
+
+    <section id="multiple" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="mcCategory"></select>
+        <div class="button-group">
+          <button id="mcNew">New question</button>
+          <button id="mcReset">Reset score</button>
+        </div>
+      </div>
+
       <div class="card">
-        <h2 class="section-title">Study Mode</h2>
-        <p class="section-intro">
-          Review the main modal verb patterns before practising. In B2 First Part 4,
-          the most important thing is to recognise the meaning behind the first sentence
-          and express it with the correct modal structure in the second sentence.
+        <div class="toolbar">
+          <span id="mcType" class="badge badge-blue"></span>
+          <span id="mcScore" class="pill"></span>
+        </div>
+
+        <div id="mcQuestion" class="question"></div>
+        <div id="mcOptions" class="option-grid"></div>
+        <div id="mcFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="transform" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="trCategory"></select>
+        <div class="button-group">
+          <button id="trHint">Hint</button>
+          <button id="trNew">New exercise</button>
+          <button id="trReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="trType" class="badge badge-blue"></span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
+          <span id="trScore" class="pill"></span>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="trFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="trSecond" class="box"></div>
+
+        <p><span id="trKey" class="badge badge-orange"></span></p>
+
+        <div id="trHintBox" class="box hidden"></div>
+
+        <div class="answer-row">
+          <input id="trInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="trCheck" class="primary">Check</button>
+          <button id="trReveal">Reveal</button>
+        </div>
+
+        <div id="trFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="exam" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="examCategory"></select>
+        <div class="button-group">
+          <button id="examStart" class="primary">Start 10-question challenge</button>
+          <button id="examRestart">Restart challenge</button>
+        </div>
+      </div>
+
+      <div class="card" id="examIntro">
+        <span class="badge badge-orange">Exam Mode</span>
+        <h2 style="color:var(--navy); margin-bottom:8px;">10-question challenge</h2>
+        <p class="muted">
+          Complete 10 written Key Word Transformations. Each answer must contain between
+          two and five words and include the key word exactly as given.
         </p>
-
-        <div class="study-grid">
-          <article class="study-card">
-            <h3>1. Certainty, possibility and impossibility</h3>
-            <ul>
-              <li>Present certainty: <span class="formula">must + base verb</span></li>
-              <li>Past certainty: <span class="formula">must have + past participle</span></li>
-              <li>Present possibility: <span class="formula">might / may / could + base verb</span></li>
-              <li>Past possibility: <span class="formula">might / may / could have + past participle</span></li>
-              <li>Present impossibility: <span class="formula">can’t + base verb</span></li>
-              <li>Past impossibility: <span class="formula">can’t have + past participle</span></li>
-            </ul>
-          </article>
-
-          <article class="study-card">
-            <h3>2. Obligation, prohibition and necessity</h3>
-            <ul>
-              <li>Present/future obligation: <span class="formula">must / have to + base verb</span></li>
-              <li>Past obligation: <span class="formula">had to + base verb</span></li>
-              <li>No obligation now: <span class="formula">don’t have to / needn’t + base verb</span></li>
-              <li>Prohibition: <span class="formula">mustn’t / can’t + base verb</span></li>
-              <li>Unnecessary action done: <span class="formula">needn’t have + past participle</span></li>
-              <li>Unnecessary action not done: <span class="formula">didn’t need to + base verb</span></li>
-            </ul>
-          </article>
-
-          <article class="study-card">
-            <h3>3. Advice, criticism and regret</h3>
-            <ul>
-              <li>Advice now: <span class="formula">should / ought to + base verb</span></li>
-              <li>Strong advice: <span class="formula">had better + base verb</span></li>
-              <li>Regret about the past: <span class="formula">should have + past participle</span></li>
-              <li>Criticism of a past action: <span class="formula">shouldn’t have + past participle</span></li>
-            </ul>
-          </article>
-
-          <article class="study-card">
-            <h3>4. Ability and achievement</h3>
-            <ul>
-              <li>Present ability: <span class="formula">can / be able to + base verb</span></li>
-              <li>General past ability: <span class="formula">could + base verb</span></li>
-              <li>Specific past achievement: <span class="formula">was/were able to + base verb</span></li>
-              <li>Success after effort: <span class="formula">managed to + base verb</span></li>
-              <li>Failure: <span class="formula">couldn’t / wasn’t able to / didn’t manage to</span></li>
-            </ul>
-          </article>
+        <div class="box">
+          <strong>Recommended classroom use:</strong> revise first in Study Mode, warm up with
+          Multiple Choice, and then complete Exam Mode individually.
         </div>
       </div>
-    </section>
 
-    <section id="mc" class="panel">
-      <div class="trainer-layout">
-        <div class="card exercise-card">
-          <div class="meta-row">
-            <span class="pill" id="mcCategory">Multiple Choice</span>
-            <span class="pill score-pill" id="mcScore">Score: 0 / 0</span>
-          </div>
-
-          <div class="question">
-            <div class="question-label">Original sentence</div>
-            <div class="sentence" id="mcOriginal"></div>
-
-            <div class="question-label">Complete the second sentence</div>
-            <div class="sentence" id="mcSecond"></div>
-
-            <div class="choices" id="mcChoices"></div>
-
-            <div class="feedback" id="mcFeedback"></div>
-          </div>
-
-          <div class="button-row">
-            <button class="primary" id="mcNext">Next question</button>
-            <button class="ghost" id="mcRestart">Restart</button>
-          </div>
+      <div class="card hidden" id="examCard">
+        <div class="toolbar">
+          <span id="examType" class="badge badge-blue"></span>
+          <span id="examScore" class="pill"></span>
+          <span id="examWords" class="pill">Words: 0/2–5</span>
         </div>
 
-        <aside class="card side-card">
-          <h3>Multiple Choice</h3>
-          <p>
-            Choose the option that best completes the second sentence. The key word is hidden
-            before you answer, so focus on meaning and structure.
-          </p>
-          <div class="progress">
-            <div class="progress-bar" id="mcProgress"></div>
-          </div>
-          <div class="mini-list">
-            <span><b>Questions</b><b id="mcTotalSide">0</b></span>
-            <span><b>Correct</b><b id="mcCorrectSide">0</b></span>
-            <span><b>Wrong</b><b id="mcWrongSide">0</b></span>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="transform" class="panel">
-      <div class="trainer-layout">
-        <div class="card exercise-card">
-          <div class="meta-row">
-            <span class="pill" id="trCategory">Transformations</span>
-            <span class="pill score-pill" id="trScore">Score: 0 / 0</span>
-          </div>
-
-          <div class="question">
-            <div class="question-label">Original sentence</div>
-            <div class="sentence" id="trOriginal"></div>
-
-            <div class="question-label">Key word</div>
-            <div class="key-word" id="trKey"></div>
-
-            <div class="question-label">Complete the second sentence</div>
-            <div class="sentence" id="trSecond"></div>
-
-            <input
-              class="answer-input"
-              id="trInput"
-              type="text"
-              autocomplete="off"
-              placeholder="Write between two and five words..."
-            />
-
-            <div class="feedback" id="trFeedback"></div>
-          </div>
-
-          <div class="button-row">
-            <button class="primary" id="trCheck">Check answer</button>
-            <button class="secondary" id="trShow">Show answer</button>
-            <button class="ghost" id="trNext">Next question</button>
-            <button class="ghost" id="trRestart">Restart</button>
-          </div>
+        <div class="progress-wrap">
+          <div id="examProgress" class="progress-bar"></div>
         </div>
 
-        <aside class="card side-card">
-          <h3>Transformations</h3>
-          <p>
-            Use the word given without changing it. Your answer must be between two and five words,
-            exactly as in B2 First Reading and Use of English Part 4.
-          </p>
-          <div class="progress">
-            <div class="progress-bar" id="trProgress"></div>
-          </div>
-          <div class="mini-list">
-            <span><b>Questions</b><b id="trTotalSide">0</b></span>
-            <span><b>Correct</b><b id="trCorrectSide">0</b></span>
-            <span><b>Wrong</b><b id="trWrongSide">0</b></span>
-          </div>
-        </aside>
-      </div>
-    </section>
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="examFirst" class="question"></div>
 
-    <section id="exam" class="panel">
-      <div class="trainer-layout">
-        <div class="card exercise-card">
-          <h2 class="section-title">Exam Mode</h2>
-          <p class="section-intro">
-            Complete 10 random modal verb transformations. You will receive your score at the end.
-          </p>
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="examSecond" class="box"></div>
 
-          <div id="examStart" class="exam-start">
-            <p>
-              No hints, no immediate correction. The key word is visible and must not be changed.
-            </p>
-            <button class="primary" id="examBegin">Start Exam Mode</button>
-          </div>
+        <p><span id="examKey" class="badge badge-orange"></span></p>
 
-          <div id="examBox" class="hidden">
-            <div class="meta-row">
-              <span class="pill" id="examCategory">Exam Mode</span>
-              <span class="pill score-pill" id="examCounter">Question 1 / 10</span>
-            </div>
-
-            <div class="question">
-              <div class="question-label">Original sentence</div>
-              <div class="sentence" id="examOriginal"></div>
-
-              <div class="question-label">Key word</div>
-              <div class="key-word" id="examKey"></div>
-
-              <div class="question-label">Complete the second sentence</div>
-              <div class="sentence" id="examSecond"></div>
-
-              <input
-                class="answer-input"
-                id="examInput"
-                type="text"
-                autocomplete="off"
-                placeholder="Write between two and five words..."
-              />
-            </div>
-
-            <div class="button-row">
-              <button class="primary" id="examSubmit">Submit answer</button>
-            </div>
-          </div>
-
-          <div class="exam-result" id="examResult">
-            <h3>Your result</h3>
-            <div class="big-score" id="examFinalScore">0 / 10</div>
-            <p id="examFinalMessage"></p>
-            <div class="button-row" style="justify-content:center;">
-              <button class="primary" id="examAgain">Try again</button>
-            </div>
-          </div>
+        <div class="answer-row">
+          <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="examCheck" class="primary">Check</button>
+          <button id="examNext" disabled>Next</button>
         </div>
 
-        <aside class="card side-card">
-          <h3>Exam tips</h3>
-          <p>
-            Read the meaning carefully. Decide whether the sentence expresses certainty, possibility,
-            obligation, advice, regret, prohibition or ability.
-          </p>
-          <div class="mini-list">
-            <span><b>Length</b><b>2–5 words</b></span>
-            <span><b>Key word</b><b>Do not change</b></span>
-            <span><b>Format</b><b>B2 First Part 4</b></span>
-          </div>
-        </aside>
+        <div id="examFeedback" class="box hidden"></div>
       </div>
+
+      <div class="card hidden" id="examResult"></div>
     </section>
 
-    <p class="footer-note">
-      Mr John’s KWT Lab · Block 2 · Modal Verbs · Cambridge B2 First practice
-    </p>
+    <footer class="footer">
+      <span><strong>Mr John’s KWT Lab</strong> · Block 2 · v1.0</span>
+      <span>Modal Verbs · Parallel generated practice</span>
+    </footer>
   </main>
 
   <script>
-    const exercises = [
-      {
-        category: "Certainty · Present",
-        original: "I’m sure Lara is still in the library.",
-        key: "MUST",
-        second: "Lara ________ still in the library.",
-        answers: ["must be"],
-        choices: ["must be", "must have been", "can’t be", "might have been"]
-      },
-      {
-        category: "Certainty · Present",
-        original: "I’m certain Daniel knows the answer.",
-        key: "MUST",
-        second: "Daniel ________ the answer.",
-        answers: ["must know"],
-        choices: ["must know", "must have known", "should know", "might know"]
-      },
-      {
-        category: "Certainty · Present",
-        original: "I’m sure they are waiting outside.",
-        key: "MUST",
-        second: "They ________ outside.",
-        answers: ["must be waiting"],
-        choices: ["must be waiting", "must have waited", "can’t be waiting", "needn’t be waiting"]
-      },
-      {
-        category: "Certainty · Present",
-        original: "It is obvious that the students are tired.",
-        key: "MUST",
-        second: "The students ________ tired.",
-        answers: ["must be"],
-        choices: ["must be", "might be", "can’t be", "should have been"]
-      },
-      {
-        category: "Certainty · Past",
-        original: "I’m sure Elena missed the bus.",
-        key: "MUST",
-        second: "Elena ________ the bus.",
-        answers: ["must have missed"],
-        choices: ["must have missed", "must miss", "should have missed", "can’t have missed"]
-      },
-      {
-        category: "Certainty · Past",
-        original: "I’m certain they left before eight.",
-        key: "MUST",
-        second: "They ________ before eight.",
-        answers: ["must have left"],
-        choices: ["must have left", "must leave", "might leave", "needn’t have left"]
-      },
-      {
-        category: "Certainty · Past",
-        original: "I’m convinced that he deleted the file by accident.",
-        key: "MUST",
-        second: "He ________ the file by accident.",
-        answers: ["must have deleted"],
-        choices: ["must have deleted", "must delete", "should delete", "could delete"]
-      },
-      {
-        category: "Certainty · Past",
-        original: "I’m sure she was feeling disappointed after the interview.",
-        key: "MUST",
-        second: "She ________ disappointed after the interview.",
-        answers: ["must have felt", "must have been feeling"],
-        choices: ["must have felt", "must feel", "can’t have felt", "should feel"]
-      },
-      {
-        category: "Possibility · Present",
-        original: "Perhaps Marco is studying in his room.",
-        key: "MIGHT",
-        second: "Marco ________ in his room.",
-        answers: ["might be studying"],
-        choices: ["might be studying", "might have studied", "must be studying", "needn’t be studying"]
-      },
-      {
-        category: "Possibility · Present",
-        original: "There is a chance that the shop is still open.",
-        key: "MAY",
-        second: "The shop ________ still open.",
-        answers: ["may be"],
-        choices: ["may be", "may have been", "must be", "can’t be"]
-      },
-      {
-        category: "Possibility · Present",
-        original: "Maybe they don’t understand the instructions.",
-        key: "COULD",
-        second: "They ________ the instructions.",
-        answers: ["could not understand", "couldn't understand"],
-        choices: ["could not understand", "could not have understood", "must not understand", "should not understand"]
-      },
-      {
-        category: "Possibility · Present",
-        original: "Perhaps he is trying to contact us.",
-        key: "MAY",
-        second: "He ________ to contact us.",
-        answers: ["may be trying"],
-        choices: ["may be trying", "may have tried", "must have tried", "should be trying"]
-      },
-      {
-        category: "Possibility · Past",
-        original: "Perhaps Olivia forgot about the meeting.",
-        key: "MIGHT",
-        second: "Olivia ________ about the meeting.",
-        answers: ["might have forgotten"],
-        choices: ["might have forgotten", "might forget", "must forget", "should have forgotten"]
-      },
-      {
-        category: "Possibility · Past",
-        original: "There is a chance that they took the wrong train.",
-        key: "MAY",
-        second: "They ________ the wrong train.",
-        answers: ["may have taken"],
-        choices: ["may have taken", "may take", "must take", "can’t have taken"]
-      },
-      {
-        category: "Possibility · Past",
-        original: "Maybe he misunderstood your message.",
-        key: "COULD",
-        second: "He ________ your message.",
-        answers: ["could have misunderstood"],
-        choices: ["could have misunderstood", "could misunderstand", "must misunderstand", "should misunderstand"]
-      },
-      {
-        category: "Possibility · Past",
-        original: "Perhaps she didn’t notice the spelling mistake.",
-        key: "MIGHT",
-        second: "She ________ the spelling mistake.",
-        answers: ["might not have noticed", "mightn't have noticed"],
-        choices: ["might not have noticed", "might not notice", "must not have noticed", "needn’t have noticed"]
-      },
-      {
-        category: "Impossibility · Present",
-        original: "It is impossible that he is the new teacher.",
-        key: "CAN’T",
-        second: "He ________ the new teacher.",
-        answers: ["can't be", "cannot be"],
-        choices: ["can’t be", "can’t have been", "must be", "might be"]
-      },
-      {
-        category: "Impossibility · Present",
-        original: "There is no way that Sara is telling the truth.",
-        key: "CAN’T",
-        second: "Sara ________ the truth.",
-        answers: ["can't be telling", "cannot be telling"],
-        choices: ["can’t be telling", "can’t have told", "must be telling", "should be telling"]
-      },
-      {
-        category: "Impossibility · Present",
-        original: "I’m sure this answer is not correct.",
-        key: "CAN’T",
-        second: "This answer ________ correct.",
-        answers: ["can't be", "cannot be"],
-        choices: ["can’t be", "can’t have been", "mustn’t be", "shouldn’t have been"]
-      },
-      {
-        category: "Impossibility · Past",
-        original: "It is impossible that Alex saw us at the cinema.",
-        key: "CAN’T",
-        second: "Alex ________ us at the cinema.",
-        answers: ["can't have seen", "cannot have seen"],
-        choices: ["can’t have seen", "can’t see", "must have seen", "should have seen"]
-      },
-      {
-        category: "Impossibility · Past",
-        original: "I’m sure they didn’t finish the report yesterday.",
-        key: "CAN’T",
-        second: "They ________ the report yesterday.",
-        answers: ["can't have finished", "cannot have finished"],
-        choices: ["can’t have finished", "can’t finish", "mustn’t have finished", "needn’t have finished"]
-      },
-      {
-        category: "Impossibility · Past",
-        original: "There is no way she knew about the surprise.",
-        key: "CAN’T",
-        second: "She ________ about the surprise.",
-        answers: ["can't have known", "cannot have known"],
-        choices: ["can’t have known", "can’t know", "shouldn’t know", "might not know"]
-      },
-      {
-        category: "Obligation · Present",
-        original: "It is essential to bring your passport.",
-        key: "MUST",
-        second: "You ________ your passport.",
-        answers: ["must bring"],
-        choices: ["must bring", "must have brought", "needn’t bring", "should have brought"]
-      },
-      {
-        category: "Obligation · Present",
-        original: "All students are required to complete the form.",
-        key: "HAVE",
-        second: "All students ________ the form.",
-        answers: ["have to complete"],
-        choices: ["have to complete", "had to complete", "needn’t complete", "should have completed"]
-      },
-      {
-        category: "Obligation · Present",
-        original: "It is necessary to arrive ten minutes early.",
-        key: "MUST",
-        second: "You ________ ten minutes early.",
-        answers: ["must arrive"],
-        choices: ["must arrive", "must have arrived", "might arrive", "needn’t arrive"]
-      },
-      {
-        category: "Obligation · Present",
-        original: "Wearing safety glasses is compulsory in the laboratory.",
-        key: "HAVE",
-        second: "You ________ safety glasses in the laboratory.",
-        answers: ["have to wear"],
-        choices: ["have to wear", "had to wear", "needn’t wear", "should have worn"]
-      },
-      {
-        category: "Obligation · Past",
-        original: "It was necessary for us to wait outside.",
-        key: "HAD",
-        second: "We ________ outside.",
-        answers: ["had to wait"],
-        choices: ["had to wait", "have to wait", "needn’t have waited", "should wait"]
-      },
-      {
-        category: "Obligation · Past",
-        original: "They were obliged to repeat the experiment.",
-        key: "HAD",
-        second: "They ________ the experiment.",
-        answers: ["had to repeat"],
-        choices: ["had to repeat", "have to repeat", "must have repeated", "didn’t need to repeat"]
-      },
-      {
-        category: "Obligation · Past",
-        original: "Because of the delay, I was forced to change my plans.",
-        key: "HAD",
-        second: "Because of the delay, I ________ my plans.",
-        answers: ["had to change"],
-        choices: ["had to change", "have to change", "needn’t have changed", "must change"]
-      },
-      {
-        category: "No obligation · Present",
-        original: "It isn’t necessary to print the tickets.",
-        key: "HAVE",
-        second: "You ________ the tickets.",
-        answers: ["don't have to print", "do not have to print"],
-        choices: ["don’t have to print", "didn’t have to print", "mustn’t print", "shouldn’t have printed"]
-      },
-      {
-        category: "No obligation · Present",
-        original: "There is no need to wear a tie.",
-        key: "NEEDN’T",
-        second: "You ________ a tie.",
-        answers: ["needn't wear", "need not wear"],
-        choices: ["needn’t wear", "needn’t have worn", "mustn’t wear", "couldn’t wear"]
-      },
-      {
-        category: "No obligation · Present",
-        original: "It is not necessary for visitors to book in advance.",
-        key: "HAVE",
-        second: "Visitors ________ in advance.",
-        answers: ["don't have to book", "do not have to book"],
-        choices: ["don’t have to book", "didn’t have to book", "mustn’t book", "shouldn’t book"]
-      },
-      {
-        category: "No obligation · Past",
-        original: "We didn’t reserve a table because it wasn’t necessary.",
-        key: "NEED",
-        second: "We ________ a table.",
-        answers: ["didn't need to reserve", "did not need to reserve"],
-        choices: ["didn’t need to reserve", "needn’t have reserved", "mustn’t reserve", "shouldn’t have reserved"]
-      },
-      {
-        category: "No obligation · Past",
-        original: "It wasn’t necessary to show our ID, so we didn’t.",
-        key: "HAVE",
-        second: "We ________ our ID.",
-        answers: ["didn't have to show", "did not have to show"],
-        choices: ["didn’t have to show", "needn’t have shown", "mustn’t show", "shouldn’t have shown"]
-      },
-      {
-        category: "Unnecessary action done",
-        original: "Marta bought a new notebook, but it wasn’t necessary.",
-        key: "NEEDN’T",
-        second: "Marta ________ a new notebook.",
-        answers: ["needn't have bought", "need not have bought"],
-        choices: ["needn’t have bought", "didn’t need to buy", "mustn’t have bought", "should buy"]
-      },
-      {
-        category: "Unnecessary action done",
-        original: "We arrived two hours early, but that wasn’t necessary.",
-        key: "NEEDN’T",
-        second: "We ________ two hours early.",
-        answers: ["needn't have arrived", "need not have arrived"],
-        choices: ["needn’t have arrived", "didn’t need to arrive", "mustn’t arrive", "couldn’t have arrived"]
-      },
-      {
-        category: "Unnecessary action done",
-        original: "Tom apologised, although he had done nothing wrong.",
-        key: "NEEDN’T",
-        second: "Tom ________ because he had done nothing wrong.",
-        answers: ["needn't have apologised", "need not have apologised", "needn't have apologized", "need not have apologized"],
-        choices: ["needn’t have apologised", "didn’t need to apologise", "mustn’t have apologised", "shouldn’t apologise"]
-      },
-      {
-        category: "Prohibition",
-        original: "It is forbidden to park in front of the entrance.",
-        key: "MUSTN’T",
-        second: "You ________ in front of the entrance.",
-        answers: ["mustn't park", "must not park"],
-        choices: ["mustn’t park", "don’t have to park", "needn’t park", "shouldn’t have parked"]
-      },
-      {
-        category: "Prohibition",
-        original: "Students are not allowed to use calculators in this test.",
-        key: "CAN’T",
-        second: "Students ________ calculators in this test.",
-        answers: ["can't use", "cannot use"],
-        choices: ["can’t use", "can’t have used", "don’t have to use", "needn’t use"]
-      },
-      {
-        category: "Prohibition",
-        original: "You are not permitted to enter this area.",
-        key: "MUSTN’T",
-        second: "You ________ this area.",
-        answers: ["mustn't enter", "must not enter"],
-        choices: ["mustn’t enter", "needn’t enter", "didn’t need to enter", "shouldn’t have entered"]
-      },
-      {
-        category: "Advice · Present",
-        original: "It is a good idea to revise your notes tonight.",
-        key: "SHOULD",
-        second: "You ________ your notes tonight.",
-        answers: ["should revise"],
-        choices: ["should revise", "should have revised", "must have revised", "needn’t revise"]
-      },
-      {
-        category: "Advice · Present",
-        original: "I advise you to speak more slowly.",
-        key: "OUGHT",
-        second: "You ________ more slowly.",
-        answers: ["ought to speak"],
-        choices: ["ought to speak", "ought to have spoken", "must speak", "might speak"]
-      },
-      {
-        category: "Advice · Present",
-        original: "If I were you, I would check the timetable again.",
-        key: "BETTER",
-        second: "You ________ the timetable again.",
-        answers: ["had better check", "'d better check"],
-        choices: ["had better check", "had better checked", "should have checked", "needn’t check"]
-      },
-      {
-        category: "Advice · Present",
-        original: "It is advisable to save your work regularly.",
-        key: "SHOULD",
-        second: "You ________ your work regularly.",
-        answers: ["should save"],
-        choices: ["should save", "should have saved", "must have saved", "could have saved"]
-      },
-      {
-        category: "Regret · Past",
-        original: "You didn’t tell me the truth, and that was a mistake.",
-        key: "SHOULD",
-        second: "You ________ me the truth.",
-        answers: ["should have told"],
-        choices: ["should have told", "should tell", "must have told", "needn’t have told"]
-      },
-      {
-        category: "Regret · Past",
-        original: "It was a mistake not to ask for help.",
-        key: "SHOULD",
-        second: "You ________ for help.",
-        answers: ["should have asked"],
-        choices: ["should have asked", "should ask", "might have asked", "didn’t need to ask"]
-      },
-      {
-        category: "Regret · Past",
-        original: "He didn’t listen to the instructions, which was unwise.",
-        key: "OUGHT",
-        second: "He ________ to the instructions.",
-        answers: ["ought to have listened"],
-        choices: ["ought to have listened", "ought to listen", "must listen", "needn’t have listened"]
-      },
-      {
-        category: "Regret · Past",
-        original: "You forgot to attach the document.",
-        key: "SHOULD",
-        second: "You ________ the document.",
-        answers: ["should have attached"],
-        choices: ["should have attached", "should attach", "must attach", "can’t have attached"]
-      },
-      {
-        category: "Criticism · Past",
-        original: "It was wrong of them to copy the homework.",
-        key: "SHOULDN’T",
-        second: "They ________ the homework.",
-        answers: ["shouldn't have copied", "should not have copied"],
-        choices: ["shouldn’t have copied", "shouldn’t copy", "mustn’t copy", "needn’t have copied"]
-      },
-      {
-        category: "Criticism · Past",
-        original: "It was not a good idea to spend all your savings.",
-        key: "SHOULDN’T",
-        second: "You ________ all your savings.",
-        answers: ["shouldn't have spent", "should not have spent"],
-        choices: ["shouldn’t have spent", "shouldn’t spend", "can’t have spent", "needn’t spend"]
-      },
-      {
-        category: "Criticism · Past",
-        original: "They were wrong to ignore the warning.",
-        key: "SHOULDN’T",
-        second: "They ________ the warning.",
-        answers: ["shouldn't have ignored", "should not have ignored"],
-        choices: ["shouldn’t have ignored", "shouldn’t ignore", "mustn’t ignore", "couldn’t ignore"]
-      },
-      {
-        category: "Ability · Present",
-        original: "Clara knows how to design simple websites.",
-        key: "CAN",
-        second: "Clara ________ simple websites.",
-        answers: ["can design"],
-        choices: ["can design", "could design", "was able to design", "managed to design"]
-      },
-      {
-        category: "Ability · Present",
-        original: "He is capable of solving difficult problems.",
-        key: "ABLE",
-        second: "He ________ difficult problems.",
-        answers: ["is able to solve"],
-        choices: ["is able to solve", "was able to solve", "managed to solve", "should solve"]
-      },
-      {
-        category: "Ability · Present",
-        original: "My brother knows how to repair old bicycles.",
-        key: "CAN",
-        second: "My brother ________ old bicycles.",
-        answers: ["can repair"],
-        choices: ["can repair", "could repair", "managed to repair", "must repair"]
-      },
-      {
-        category: "Inability · Present",
-        original: "I find it impossible to concentrate with so much noise.",
-        key: "CAN’T",
-        second: "I ________ with so much noise.",
-        answers: ["can't concentrate", "cannot concentrate"],
-        choices: ["can’t concentrate", "couldn’t concentrate", "wasn’t able to concentrate", "shouldn’t concentrate"]
-      },
-      {
-        category: "Ability · Past general",
-        original: "When I was six, I knew how to ride a bike.",
-        key: "COULD",
-        second: "When I was six, I ________ a bike.",
-        answers: ["could ride"],
-        choices: ["could ride", "was able to ride", "managed to ride", "must have ridden"]
-      },
-      {
-        category: "Ability · Past general",
-        original: "As a child, she knew how to speak Italian.",
-        key: "COULD",
-        second: "As a child, she ________ Italian.",
-        answers: ["could speak"],
-        choices: ["could speak", "managed to speak", "was able to speak", "must speak"]
-      },
-      {
-        category: "Specific achievement · Past",
-        original: "After three attempts, we succeeded in opening the door.",
-        key: "MANAGED",
-        second: "After three attempts, we ________ the door.",
-        answers: ["managed to open"],
-        choices: ["managed to open", "could open", "must open", "needn’t have opened"]
-      },
-      {
-        category: "Specific achievement · Past",
-        original: "She succeeded in passing the driving test on her first attempt.",
-        key: "ABLE",
-        second: "She ________ the driving test on her first attempt.",
-        answers: ["was able to pass"],
-        choices: ["was able to pass", "could pass", "can pass", "should have passed"]
-      },
-      {
-        category: "Specific achievement · Past",
-        original: "They finally succeeded in finding the missing key.",
-        key: "MANAGED",
-        second: "They finally ________ the missing key.",
-        answers: ["managed to find"],
-        choices: ["managed to find", "could find", "can find", "must have found"]
-      },
-      {
-        category: "Inability · Past",
-        original: "I didn’t manage to finish the essay on time.",
-        key: "ABLE",
-        second: "I ________ the essay on time.",
-        answers: ["wasn't able to finish", "was not able to finish"],
-        choices: ["wasn’t able to finish", "could finish", "managed to finish", "needn’t finish"]
-      },
-      {
-        category: "Inability · Past",
-        original: "He failed to answer the final question.",
-        key: "COULDN’T",
-        second: "He ________ the final question.",
-        answers: ["couldn't answer", "could not answer"],
-        choices: ["couldn’t answer", "couldn’t have answered", "didn’t need to answer", "shouldn’t answer"]
-      },
-      {
-        category: "Inability · Past",
-        original: "We weren’t able to contact the hotel.",
-        key: "MANAGE",
-        second: "We ________ the hotel.",
-        answers: ["didn't manage to contact", "did not manage to contact"],
-        choices: ["didn’t manage to contact", "could contact", "must contact", "needn’t have contacted"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "I’m sure the children are playing in the garden.",
-        key: "MUST",
-        second: "The children ________ in the garden.",
-        answers: ["must be playing"],
-        choices: ["must be playing", "might have played", "should have played", "can’t be playing"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "It is possible that the email went to your spam folder.",
-        key: "MAY",
-        second: "The email ________ to your spam folder.",
-        answers: ["may have gone"],
-        choices: ["may have gone", "may go", "must go", "should go"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "You are not allowed to take photos inside the museum.",
-        key: "MUSTN’T",
-        second: "You ________ photos inside the museum.",
-        answers: ["mustn't take", "must not take"],
-        choices: ["mustn’t take", "don’t have to take", "needn’t take", "couldn’t have taken"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "It wasn’t necessary for Ana to call a taxi, but she did.",
-        key: "NEEDN’T",
-        second: "Ana ________ a taxi.",
-        answers: ["needn't have called", "need not have called"],
-        choices: ["needn’t have called", "didn’t need to call", "mustn’t have called", "shouldn’t call"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "Perhaps he is still working on the project.",
-        key: "COULD",
-        second: "He ________ on the project.",
-        answers: ["could still be working"],
-        choices: ["could still be working", "could still have worked", "must still work", "needn’t still work"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "It was a mistake to send the message so late.",
-        key: "SHOULDN’T",
-        second: "You ________ the message so late.",
-        answers: ["shouldn't have sent", "should not have sent"],
-        choices: ["shouldn’t have sent", "shouldn’t send", "mustn’t send", "couldn’t send"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "There is no need for you to reply today.",
-        key: "HAVE",
-        second: "You ________ today.",
-        answers: ["don't have to reply", "do not have to reply"],
-        choices: ["don’t have to reply", "didn’t have to reply", "mustn’t reply", "shouldn’t have replied"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "I’m certain he didn’t write this essay himself.",
-        key: "CAN’T",
-        second: "He ________ this essay himself.",
-        answers: ["can't have written", "cannot have written"],
-        choices: ["can’t have written", "can’t write", "mustn’t write", "shouldn’t have written"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "They succeeded in completing the task before lunch.",
-        key: "ABLE",
-        second: "They ________ the task before lunch.",
-        answers: ["were able to complete"],
-        choices: ["were able to complete", "could complete", "must complete", "should complete"]
-      },
-      {
-        category: "Mixed modal meaning",
-        original: "It is advisable to check your answers carefully.",
-        key: "SHOULD",
-        second: "You ________ your answers carefully.",
-        answers: ["should check"],
-        choices: ["should check", "should have checked", "must have checked", "needn’t check"]
-      }
+    const categories = [
+      "All categories",
+      "Certainty / Possibility / Impossibility",
+      "Obligation / Prohibition / Necessity",
+      "Advice / Regret / Criticism",
+      "Ability / Achievement"
+    ];
+
+    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "") {
+      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note };
+    }
+
+    const items = [
+      item("Certainty / Possibility / Impossibility", "Present certainty: MUST + base verb", "Use must when you are sure something is true now.",
+        "I’m sure Lara is still in the library.",
+        "Lara ______ still in the library.",
+        ["must be"], ["MUST"],
+        ["might be", "must have been", "should be"],
+        "MUST + base verb expresses certainty about the present."),
+
+      item("Certainty / Possibility / Impossibility", "Present certainty: MUST + base verb", "Use must when the speaker is certain about a present situation.",
+        "I’m certain Daniel knows the answer.",
+        "Daniel ______ the answer.",
+        ["must know"], ["MUST"],
+        ["might know", "must have known", "should have known"],
+        "Do not use have after MUST unless you are referring to the past."),
+
+      item("Certainty / Possibility / Impossibility", "Present certainty: MUST BE + -ING", "Use must be + -ing for certainty about an action happening now.",
+        "I’m sure they are waiting outside.",
+        "They ______ outside.",
+        ["must be waiting"], ["MUST"],
+        ["might be waiting", "must have waited", "should have waited"],
+        "MUST BE + -ING expresses present deduction about an action in progress."),
+
+      item("Certainty / Possibility / Impossibility", "Past certainty: MUST HAVE + past participle", "Use must have + past participle when you are sure something happened.",
+        "I’m sure Elena missed the bus.",
+        "Elena ______ the bus.",
+        ["must have missed"], ["MUST"],
+        ["must miss", "might have missed", "should miss"],
+        "MUST HAVE + past participle expresses certainty about the past."),
+
+      item("Certainty / Possibility / Impossibility", "Past certainty: MUST HAVE + past participle", "Use must have when the conclusion refers to a past event.",
+        "I’m certain they left before eight.",
+        "They ______ before eight.",
+        ["must have left"], ["MUST"],
+        ["must leave", "should have left", "might leave"],
+        "The perfect infinitive is needed because the action is in the past."),
+
+      item("Certainty / Possibility / Impossibility", "Past certainty: MUST HAVE + past participle", "Use must have + past participle for a strong past deduction.",
+        "I’m convinced that he deleted the file by accident.",
+        "He ______ the file by accident.",
+        ["must have deleted"], ["MUST"],
+        ["must delete", "might delete", "should delete"],
+        "The action happened before now, so use MUST HAVE + past participle."),
+
+      item("Certainty / Possibility / Impossibility", "Present possibility: MIGHT / MAY / COULD + base verb", "Use might, may or could for present possibility.",
+        "Perhaps Marco is studying in his room.",
+        "Marco ______ in his room.",
+        ["might be studying", "may be studying", "could be studying"], ["MIGHT", "MAY", "COULD"],
+        ["must be studying", "should be studying", "might have studied"],
+        "MIGHT / MAY / COULD + be + -ing expresses possible action happening now."),
+
+      item("Certainty / Possibility / Impossibility", "Present possibility: MAY + base verb", "Use may when something is possible now.",
+        "There is a chance that the shop is still open.",
+        "The shop ______ still open.",
+        ["may be"], ["MAY"],
+        ["must be", "may have been", "can’t be"],
+        "MAY + base verb expresses possibility in the present."),
+
+      item("Certainty / Possibility / Impossibility", "Present possibility: COULD + base verb", "Use could to express a possible present explanation.",
+        "Maybe they don’t understand the instructions.",
+        "They ______ the instructions.",
+        ["could not understand"], ["COULD"],
+        ["could not have understood", "must not understand", "should not understand"],
+        "COULD can express possibility; avoid perfect forms unless the meaning is past."),
+
+      item("Certainty / Possibility / Impossibility", "Past possibility: MIGHT / MAY / COULD HAVE + past participle", "Use might have, may have or could have for past possibility.",
+        "Perhaps Olivia forgot about the meeting.",
+        "Olivia ______ about the meeting.",
+        ["might have forgotten", "may have forgotten", "could have forgotten"], ["MIGHT", "MAY", "COULD"],
+        ["might forget", "must forget", "should have forgotten"],
+        "The action is in the past, so use a perfect modal form."),
+
+      item("Certainty / Possibility / Impossibility", "Past possibility: MAY HAVE + past participle", "Use may have + past participle when something possibly happened.",
+        "There is a chance that they took the wrong train.",
+        "They ______ the wrong train.",
+        ["may have taken"], ["MAY"],
+        ["may take", "must take", "can’t have taken"],
+        "MAY HAVE + past participle expresses past possibility."),
+
+      item("Certainty / Possibility / Impossibility", "Past possibility: COULD HAVE + past participle", "Use could have for a possible past event.",
+        "Maybe he misunderstood your message.",
+        "He ______ your message.",
+        ["could have misunderstood"], ["COULD"],
+        ["could misunderstand", "must misunderstand", "should misunderstand"],
+        "COULD HAVE + past participle refers to a possible past action."),
+
+      item("Certainty / Possibility / Impossibility", "Past possibility: MIGHT NOT HAVE + past participle", "Use might not have when something possibly did not happen.",
+        "Perhaps she didn’t notice the spelling mistake.",
+        "She ______ the spelling mistake.",
+        ["might not have noticed"], ["MIGHT"],
+        ["might not notice", "must not have noticed", "needn’t have noticed"],
+        "The negative goes after the modal: MIGHT NOT HAVE + past participle."),
+
+      item("Certainty / Possibility / Impossibility", "Present impossibility: CAN’T + base verb", "Use can’t when something is impossible or you are sure it is not true.",
+        "It is impossible that he is the new teacher.",
+        "He ______ the new teacher.",
+        ["can't be"], ["CAN'T"],
+        ["can’t have been", "must be", "might be"],
+        "CAN’T + base verb expresses impossibility in the present."),
+
+      item("Certainty / Possibility / Impossibility", "Present impossibility: CAN’T BE + -ING", "Use can’t be + -ing when you are sure an action is not happening.",
+        "There is no way that Sara is telling the truth.",
+        "Sara ______ the truth.",
+        ["can't be telling"], ["CAN'T"],
+        ["can’t have told", "must be telling", "should be telling"],
+        "CAN’T BE + -ING expresses present impossibility."),
+
+      item("Certainty / Possibility / Impossibility", "Past impossibility: CAN’T HAVE + past participle", "Use can’t have + past participle when you are sure something did not happen.",
+        "It is impossible that Alex saw us at the cinema.",
+        "Alex ______ us at the cinema.",
+        ["can't have seen"], ["CAN'T"],
+        ["can’t see", "must have seen", "should have seen"],
+        "CAN’T HAVE + past participle expresses impossibility in the past."),
+
+      item("Certainty / Possibility / Impossibility", "Past impossibility: CAN’T HAVE + past participle", "Use can’t have when the speaker is sure a past action did not happen.",
+        "I’m sure they didn’t finish the report yesterday.",
+        "They ______ the report yesterday.",
+        ["can't have finished"], ["CAN'T"],
+        ["can’t finish", "must have finished", "needn’t have finished"],
+        "Yesterday makes the meaning past, so use CAN’T HAVE + past participle."),
+
+      item("Certainty / Possibility / Impossibility", "Past impossibility: CAN’T HAVE + past participle", "Use can’t have + past participle for a negative past deduction.",
+        "There is no way she knew about the surprise.",
+        "She ______ about the surprise.",
+        ["can't have known"], ["CAN'T"],
+        ["can’t know", "shouldn’t know", "might not know"],
+        "The meaning is: I am sure she did not know."),
+
+      item("Obligation / Prohibition / Necessity", "Present obligation: MUST + base verb", "Use must when something is essential or compulsory.",
+        "It is essential to bring your passport.",
+        "You ______ your passport.",
+        ["must bring"], ["MUST"],
+        ["must have brought", "needn’t bring", "should have brought"],
+        "MUST + base verb expresses obligation in the present or future."),
+
+      item("Obligation / Prohibition / Necessity", "Present obligation: HAVE TO + base verb", "Use have to when someone is required to do something.",
+        "All students are required to complete the form.",
+        "All students ______ the form.",
+        ["have to complete"], ["HAVE"],
+        ["had to complete", "needn’t complete", "should have completed"],
+        "HAVE TO + base verb expresses obligation."),
+
+      item("Obligation / Prohibition / Necessity", "Present obligation: MUST + base verb", "Use must for strong necessity.",
+        "It is necessary to arrive ten minutes early.",
+        "You ______ ten minutes early.",
+        ["must arrive"], ["MUST"],
+        ["must have arrived", "might arrive", "needn’t arrive"],
+        "MUST + base verb is used for present or future necessity."),
+
+      item("Obligation / Prohibition / Necessity", "Present obligation: HAVE TO + base verb", "Use have to when a rule makes something necessary.",
+        "Wearing safety glasses is compulsory in the laboratory.",
+        "You ______ safety glasses in the laboratory.",
+        ["have to wear"], ["HAVE"],
+        ["had to wear", "needn’t wear", "should have worn"],
+        "HAVE TO + base verb expresses external obligation."),
+
+      item("Obligation / Prohibition / Necessity", "Past obligation: HAD TO + base verb", "Use had to for obligation in the past.",
+        "It was necessary for us to wait outside.",
+        "We ______ outside.",
+        ["had to wait"], ["HAD"],
+        ["have to wait", "needn’t have waited", "should wait"],
+        "HAD TO + base verb expresses past obligation."),
+
+      item("Obligation / Prohibition / Necessity", "Past obligation: HAD TO + base verb", "Use had to when somebody was obliged to do something.",
+        "They were obliged to repeat the experiment.",
+        "They ______ the experiment.",
+        ["had to repeat"], ["HAD"],
+        ["have to repeat", "must have repeated", "didn’t need to repeat"],
+        "MUST is normally not used for past obligation; use HAD TO."),
+
+      item("Obligation / Prohibition / Necessity", "Past obligation: HAD TO + base verb", "Use had to for necessity caused by past circumstances.",
+        "Because of the delay, I was forced to change my plans.",
+        "Because of the delay, I ______ my plans.",
+        ["had to change"], ["HAD"],
+        ["have to change", "needn’t have changed", "must change"],
+        "Was forced to can often be transformed into HAD TO."),
+
+      item("Obligation / Prohibition / Necessity", "No obligation: DON’T HAVE TO + base verb", "Use don’t have to when something is not necessary.",
+        "It isn’t necessary to print the tickets.",
+        "You ______ the tickets.",
+        ["don't have to print"], ["HAVE"],
+        ["didn’t have to print", "mustn’t print", "shouldn’t have printed"],
+        "DON’T HAVE TO means there is no obligation."),
+
+      item("Obligation / Prohibition / Necessity", "No obligation: NEEDN’T + base verb", "Use needn’t when something is not necessary.",
+        "There is no need to wear a tie.",
+        "You ______ a tie.",
+        ["needn't wear"], ["NEEDN'T"],
+        ["needn’t have worn", "mustn’t wear", "couldn’t wear"],
+        "NEEDN’T + base verb means it is not necessary now."),
+
+      item("Obligation / Prohibition / Necessity", "No obligation: DON’T HAVE TO + base verb", "Use don’t have to for absence of obligation.",
+        "It is not necessary for visitors to book in advance.",
+        "Visitors ______ in advance.",
+        ["don't have to book"], ["HAVE"],
+        ["didn’t have to book", "mustn’t book", "shouldn’t book"],
+        "DON’T HAVE TO does not mean prohibition; it means no obligation."),
+
+      item("Obligation / Prohibition / Necessity", "Unnecessary action not done: DIDN’T NEED TO + base verb", "Use didn’t need to when something was unnecessary and was not done.",
+        "We didn’t reserve a table because it wasn’t necessary.",
+        "We ______ a table.",
+        ["didn't need to reserve"], ["NEED"],
+        ["needn’t have reserved", "mustn’t reserve", "shouldn’t have reserved"],
+        "DIDN’T NEED TO usually means the action was not necessary and was not done."),
+
+      item("Obligation / Prohibition / Necessity", "Unnecessary action not done: DIDN’T HAVE TO + base verb", "Use didn’t have to when there was no past obligation.",
+        "It wasn’t necessary to show our ID, so we didn’t.",
+        "We ______ our ID.",
+        ["didn't have to show"], ["HAVE"],
+        ["needn’t have shown", "mustn’t show", "shouldn’t have shown"],
+        "DIDN’T HAVE TO means there was no obligation in the past."),
+
+      item("Obligation / Prohibition / Necessity", "Unnecessary action done: NEEDN’T HAVE + past participle", "Use needn’t have when something was unnecessary but was done.",
+        "Marta bought a new notebook, but it wasn’t necessary.",
+        "Marta ______ a new notebook.",
+        ["needn't have bought"], ["NEEDN'T"],
+        ["didn’t need to buy", "mustn’t have bought", "should buy"],
+        "NEEDN’T HAVE + past participle means the action happened but was unnecessary."),
+
+      item("Obligation / Prohibition / Necessity", "Unnecessary action done: NEEDN’T HAVE + past participle", "Use needn’t have for unnecessary past actions that actually happened.",
+        "We arrived two hours early, but that wasn’t necessary.",
+        "We ______ two hours early.",
+        ["needn't have arrived"], ["NEEDN'T"],
+        ["didn’t need to arrive", "mustn’t arrive", "couldn’t have arrived"],
+        "This means we arrived, but arriving so early was unnecessary."),
+
+      item("Obligation / Prohibition / Necessity", "Unnecessary action done: NEEDN’T HAVE + past participle", "Use needn’t have when somebody did something unnecessary.",
+        "Tom apologised, although he had done nothing wrong.",
+        "Tom ______ because he had done nothing wrong.",
+        ["needn't have apologised", "needn't have apologized"], ["NEEDN'T"],
+        ["didn’t need to apologise", "mustn’t have apologised", "shouldn’t apologise"],
+        "The action happened, but it was unnecessary."),
+
+      item("Obligation / Prohibition / Necessity", "Prohibition: MUSTN’T + base verb", "Use mustn’t when something is forbidden.",
+        "It is forbidden to park in front of the entrance.",
+        "You ______ in front of the entrance.",
+        ["mustn't park"], ["MUSTN'T"],
+        ["don’t have to park", "needn’t park", "shouldn’t have parked"],
+        "MUSTN’T means prohibition, not absence of obligation."),
+
+      item("Obligation / Prohibition / Necessity", "Prohibition: CAN’T + base verb", "Use can’t when a rule does not allow something.",
+        "Students are not allowed to use calculators in this test.",
+        "Students ______ calculators in this test.",
+        ["can't use"], ["CAN'T"],
+        ["can’t have used", "don’t have to use", "needn’t use"],
+        "CAN’T + base verb can express prohibition."),
+
+      item("Obligation / Prohibition / Necessity", "Prohibition: MUSTN’T + base verb", "Use mustn’t for rules and prohibitions.",
+        "You are not permitted to enter this area.",
+        "You ______ this area.",
+        ["mustn't enter"], ["MUSTN'T"],
+        ["needn’t enter", "didn’t need to enter", "shouldn’t have entered"],
+        "Not permitted to can be transformed into MUSTN’T."),
+
+      item("Advice / Regret / Criticism", "Advice now: SHOULD + base verb", "Use should to give advice.",
+        "It is a good idea to revise your notes tonight.",
+        "You ______ your notes tonight.",
+        ["should revise"], ["SHOULD"],
+        ["should have revised", "must have revised", "needn’t revise"],
+        "SHOULD + base verb gives advice about now or the future."),
+
+      item("Advice / Regret / Criticism", "Advice now: OUGHT TO + base verb", "Use ought to to give advice.",
+        "I advise you to speak more slowly.",
+        "You ______ more slowly.",
+        ["ought to speak"], ["OUGHT"],
+        ["ought to have spoken", "must speak", "might speak"],
+        "OUGHT TO + base verb is similar to SHOULD."),
+
+      item("Advice / Regret / Criticism", "Strong advice: HAD BETTER + base verb", "Use had better for strong advice.",
+        "If I were you, I would check the timetable again.",
+        "You ______ the timetable again.",
+        ["had better check", "'d better check"], ["BETTER"],
+        ["had better checked", "should have checked", "needn’t check"],
+        "HAD BETTER is followed by a base verb."),
+
+      item("Advice / Regret / Criticism", "Advice now: SHOULD + base verb", "Use should for recommendations.",
+        "It is advisable to save your work regularly.",
+        "You ______ your work regularly.",
+        ["should save"], ["SHOULD"],
+        ["should have saved", "must have saved", "could have saved"],
+        "It is advisable to often becomes SHOULD."),
+
+      item("Advice / Regret / Criticism", "Past regret: SHOULD HAVE + past participle", "Use should have when somebody did not do the right thing.",
+        "You didn’t tell me the truth, and that was a mistake.",
+        "You ______ me the truth.",
+        ["should have told"], ["SHOULD"],
+        ["should tell", "must have told", "needn’t have told"],
+        "SHOULD HAVE + past participle expresses regret or criticism about the past."),
+
+      item("Advice / Regret / Criticism", "Past regret: SHOULD HAVE + past participle", "Use should have for a missed good action.",
+        "It was a mistake not to ask for help.",
+        "You ______ for help.",
+        ["should have asked"], ["SHOULD"],
+        ["should ask", "might have asked", "didn’t need to ask"],
+        "Not doing it was a mistake, so use SHOULD HAVE."),
+
+      item("Advice / Regret / Criticism", "Past regret: OUGHT TO HAVE + past participle", "Use ought to have for past criticism or regret.",
+        "He didn’t listen to the instructions, which was unwise.",
+        "He ______ to the instructions.",
+        ["ought to have listened"], ["OUGHT"],
+        ["ought to listen", "must listen", "needn’t have listened"],
+        "OUGHT TO HAVE + past participle refers to the past."),
+
+      item("Advice / Regret / Criticism", "Past regret: SHOULD HAVE + past participle", "Use should have when someone forgot to do something important.",
+        "You forgot to attach the document.",
+        "You ______ the document.",
+        ["should have attached"], ["SHOULD"],
+        ["should attach", "must attach", "can’t have attached"],
+        "Forgot to often becomes SHOULD HAVE + past participle."),
+
+      item("Advice / Regret / Criticism", "Past criticism: SHOULDN’T HAVE + past participle", "Use shouldn’t have when somebody did something wrong.",
+        "It was wrong of them to copy the homework.",
+        "They ______ the homework.",
+        ["shouldn't have copied"], ["SHOULDN'T"],
+        ["shouldn’t copy", "mustn’t copy", "needn’t have copied"],
+        "SHOULDN’T HAVE + past participle criticises a past action."),
+
+      item("Advice / Regret / Criticism", "Past criticism: SHOULDN’T HAVE + past participle", "Use shouldn’t have for past actions that were a bad idea.",
+        "It was not a good idea to spend all your savings.",
+        "You ______ all your savings.",
+        ["shouldn't have spent"], ["SHOULDN'T"],
+        ["shouldn’t spend", "can’t have spent", "needn’t spend"],
+        "The action happened, but it was not advisable."),
+
+      item("Advice / Regret / Criticism", "Past criticism: SHOULDN’T HAVE + past participle", "Use shouldn’t have to say that a past action was wrong.",
+        "They were wrong to ignore the warning.",
+        "They ______ the warning.",
+        ["shouldn't have ignored"], ["SHOULDN'T"],
+        ["shouldn’t ignore", "mustn’t ignore", "couldn’t ignore"],
+        "Wrong to do something can become SHOULDN’T HAVE + past participle."),
+
+      item("Ability / Achievement", "Present ability: CAN + base verb", "Use can for present ability.",
+        "Clara knows how to design simple websites.",
+        "Clara ______ simple websites.",
+        ["can design"], ["CAN"],
+        ["could design", "was able to design", "managed to design"],
+        "CAN + base verb expresses present ability."),
+
+      item("Ability / Achievement", "Present ability: BE ABLE TO + base verb", "Use be able to to express ability.",
+        "He is capable of solving difficult problems.",
+        "He ______ difficult problems.",
+        ["is able to solve"], ["ABLE"],
+        ["was able to solve", "managed to solve", "should solve"],
+        "BE ABLE TO is followed by a base verb."),
+
+      item("Ability / Achievement", "Present ability: CAN + base verb", "Use can for skills and abilities.",
+        "My brother knows how to repair old bicycles.",
+        "My brother ______ old bicycles.",
+        ["can repair"], ["CAN"],
+        ["could repair", "managed to repair", "must repair"],
+        "Know how to can often become CAN."),
+
+      item("Ability / Achievement", "Present inability: CAN’T + base verb", "Use can’t when something is impossible for someone now.",
+        "I find it impossible to concentrate with so much noise.",
+        "I ______ with so much noise.",
+        ["can't concentrate"], ["CAN'T"],
+        ["couldn’t concentrate", "wasn’t able to concentrate", "shouldn’t concentrate"],
+        "CAN’T + base verb expresses present inability."),
+
+      item("Ability / Achievement", "General past ability: COULD + base verb", "Use could for general ability in the past.",
+        "When I was six, I knew how to ride a bike.",
+        "When I was six, I ______ a bike.",
+        ["could ride"], ["COULD"],
+        ["was able to ride", "managed to ride", "must have ridden"],
+        "COULD is natural for general past ability."),
+
+      item("Ability / Achievement", "General past ability: COULD + base verb", "Use could for past skills.",
+        "As a child, she knew how to speak Italian.",
+        "As a child, she ______ Italian.",
+        ["could speak"], ["COULD"],
+        ["managed to speak", "was able to speak", "must speak"],
+        "This describes a general ability in childhood."),
+
+      item("Ability / Achievement", "Specific past achievement: MANAGED TO + base verb", "Use managed to when someone succeeded after effort.",
+        "After three attempts, we succeeded in opening the door.",
+        "After three attempts, we ______ the door.",
+        ["managed to open"], ["MANAGED"],
+        ["could open", "must open", "needn’t have opened"],
+        "For a specific achievement, MANAGED TO is often better than COULD."),
+
+      item("Ability / Achievement", "Specific past achievement: WAS ABLE TO + base verb", "Use was/were able to for a specific past success.",
+        "She succeeded in passing the driving test on her first attempt.",
+        "She ______ the driving test on her first attempt.",
+        ["was able to pass"], ["ABLE"],
+        ["could pass", "can pass", "should have passed"],
+        "For a one-off achievement, use WAS/WERE ABLE TO."),
+
+      item("Ability / Achievement", "Specific past achievement: MANAGED TO + base verb", "Use managed to for successful completion after effort.",
+        "They finally succeeded in finding the missing key.",
+        "They finally ______ the missing key.",
+        ["managed to find"], ["MANAGED"],
+        ["could find", "can find", "must have found"],
+        "Finally suggests effort, so MANAGED TO is natural."),
+
+      item("Ability / Achievement", "Past inability: WASN’T ABLE TO + base verb", "Use wasn’t able to when someone failed to do something.",
+        "I didn’t manage to finish the essay on time.",
+        "I ______ the essay on time.",
+        ["wasn't able to finish"], ["ABLE"],
+        ["could finish", "managed to finish", "needn’t finish"],
+        "WASN’T ABLE TO + base verb expresses past inability."),
+
+      item("Ability / Achievement", "Past inability: COULDN’T + base verb", "Use couldn’t when someone failed to do something.",
+        "He failed to answer the final question.",
+        "He ______ the final question.",
+        ["couldn't answer"], ["COULDN'T"],
+        ["couldn’t have answered", "didn’t need to answer", "shouldn’t answer"],
+        "FAILED TO can often be transformed into COULDN’T."),
+
+      item("Ability / Achievement", "Past inability: DIDN’T MANAGE TO + base verb", "Use didn’t manage to when someone failed after trying.",
+        "We weren’t able to contact the hotel.",
+        "We ______ the hotel.",
+        ["didn't manage to contact"], ["MANAGE"],
+        ["could contact", "must contact", "needn’t have contacted"],
+        "DIDN’T MANAGE TO suggests an unsuccessful attempt.")
     ];
 
     const state = {
-      mc: { pool: [], index: 0, correct: 0, answered: false },
-      tr: { pool: [], index: 0, correct: 0, wrong: 0, answered: false },
-      exam: { pool: [], index: 0, correct: 0, answers: [] }
+      studyCategory: "All categories",
+      studyIndex: 0,
+      studyFlipped: false,
+      mcCategory: "All categories",
+      mcCurrent: null,
+      mcSelected: null,
+      mcScore: 0,
+      mcAttempts: 0,
+      trCategory: "All categories",
+      trCurrent: null,
+      trChecked: false,
+      trScore: 0,
+      trAttempts: 0,
+      examCategory: "All categories",
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+      examChecked: false,
+      examAnswers: []
     };
 
-    const $ = (id) => document.getElementById(id);
+    function $(id) {
+      return document.getElementById(id);
+    }
 
     function shuffle(array) {
-      const copy = [...array];
+      const copy = array.slice();
       for (let i = copy.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [copy[i], copy[j]] = [copy[j], copy[i]];
@@ -1525,336 +1034,582 @@
       return copy;
     }
 
-    function normalise(text) {
-      return text
-        .toLowerCase()
-        .trim()
-        .replace(/[’‘]/g, "'")
-        .replace(/[“”]/g, '"')
-        .replace(/[.,!?;:]/g, "")
-        .replace(/\s+/g, " ");
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
     }
 
-    function isCorrect(userAnswer, acceptedAnswers) {
-      const cleanUserAnswer = normalise(userAnswer);
-      return acceptedAnswers.some(answer => normalise(answer) === cleanUserAnswer);
+    function normalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/[.,!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
     }
 
     function wordCount(text) {
       const clean = normalise(text);
       if (!clean) return 0;
-      return clean.split(" ").length;
+      return clean.split(" ").filter(Boolean).length;
     }
 
-    function sentenceWithGap(sentence) {
-      return sentence.replace("________", '<span class="gap"></span>');
+    function keyIsIncluded(answer, key) {
+      const cleanAnswer = normalise(answer);
+      const cleanKey = normalise(key);
+
+      if (cleanKey === "can't") return cleanAnswer.includes("can't");
+      if (cleanKey === "couldn't") return cleanAnswer.includes("couldn't");
+      if (cleanKey === "mustn't") return cleanAnswer.includes("mustn't");
+      if (cleanKey === "shouldn't") return cleanAnswer.includes("shouldn't");
+      if (cleanKey === "needn't") return cleanAnswer.includes("needn't");
+
+      const answerWords = cleanAnswer.split(" ");
+      const keyWords = cleanKey.split(" ");
+      return keyWords.every(word => answerWords.includes(word));
     }
 
-    function fillSentence(sentence, answer) {
-      return sentence.replace("________", `<strong>${answer}</strong>`);
+    function getAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
     }
 
-    function setFeedback(element, type, html) {
-      element.className = `feedback show ${type}`;
-      element.innerHTML = html;
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
     }
 
-    function clearFeedback(element) {
-      element.className = "feedback";
-      element.innerHTML = "";
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
     }
 
-    function updateProgress(bar, current, total) {
-      const percentage = total === 0 ? 0 : Math.min(100, Math.round((current / total) * 100));
-      bar.style.width = `${percentage}%`;
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
     }
 
-    document.querySelectorAll(".tab").forEach(tab => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-        tab.classList.add("active");
-        $(tab.dataset.panel).classList.add("active");
+    function isValidExercise(exercise) {
+      const answers = getAcceptedAnswers(exercise);
+      return answers.length > 0 && answers.every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
       });
-    });
-
-    function startMC() {
-      state.mc.pool = shuffle(exercises);
-      state.mc.index = 0;
-      state.mc.correct = 0;
-      state.mc.answered = false;
-      renderMC();
     }
 
-    function renderMC() {
-      const item = state.mc.pool[state.mc.index];
-      state.mc.answered = false;
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+      return (exercise.distractors || []).filter(item =>
+        wordCount(item) >= 2 &&
+        wordCount(item) <= 5 &&
+        !accepted.includes(normalise(item))
+      );
+    }
 
-      $("mcCategory").textContent = item.category;
-      $("mcOriginal").textContent = item.original;
-      $("mcSecond").innerHTML = sentenceWithGap(item.second);
-      $("mcScore").textContent = `Score: ${state.mc.correct} / ${state.mc.index}`;
-      $("mcTotalSide").textContent = state.mc.pool.length;
-      $("mcCorrectSide").textContent = state.mc.correct;
-      $("mcWrongSide").textContent = state.mc.index - state.mc.correct;
-      updateProgress($("mcProgress"), state.mc.index, state.mc.pool.length);
-      clearFeedback($("mcFeedback"));
+    function filteredItems(category) {
+      if (category === "All categories") return items;
+      return items.filter(item => item.type === category);
+    }
 
-      const choicesBox = $("mcChoices");
-      choicesBox.innerHTML = "";
+    function makeExercise(raw, mode = "transform") {
+      const validKeys = shuffle(raw.keyOptions).filter(key =>
+        raw.answers.some(answer => keyIsIncluded(answer, key))
+      );
 
-      shuffle(item.choices).forEach(choice => {
+      if (!validKeys.length) return null;
+
+      const selectedKey = pick(validKeys);
+      const exercise = {
+        ...raw,
+        key: selectedKey,
+        answers: raw.answers.filter(answer => keyIsIncluded(answer, selectedKey)),
+        answer: raw.answers.find(answer => keyIsIncluded(answer, selectedKey))
+      };
+
+      if (!isValidExercise(exercise)) return null;
+      if (mode === "multiple" && cleanDistractors(exercise).length < 3) return null;
+
+      return exercise;
+    }
+
+    function generateExercise(category = "All categories", mode = "transform") {
+      const possible = shuffle(filteredItems(category));
+
+      for (const raw of possible) {
+        const exercise = makeExercise(raw, mode);
+        if (exercise) return exercise;
+      }
+
+      return {
+        type: "System",
+        expression: "No valid item",
+        meaning: "No valid item could be generated.",
+        original: "No valid exercise could be generated.",
+        second: "Please choose another category.",
+        answers: ["try again"],
+        answer: "try again",
+        key: "TRY",
+        keyOptions: ["TRY"],
+        distractors: ["try later", "new question", "other category"],
+        note: "The generator could not create a valid item."
+      };
+    }
+
+    function populateSelect(id, value) {
+      $(id).innerHTML = categories
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+      document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+      $(tab).classList.remove("hidden");
+      document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
+    }
+
+    function renderStudy() {
+      const list = filteredItems(state.studyCategory);
+      if (state.studyIndex >= list.length) state.studyIndex = 0;
+      const current = list[state.studyIndex];
+
+      $("studyCard").innerHTML = state.studyFlipped
+        ? `
+          <div>
+            <span class="badge badge-blue">${current.type}</span>
+            <p class="muted"><strong>Meaning</strong></p>
+            <h2 style="font-size:30px">${current.meaning}</h2>
+            <div class="box"><strong>Example pattern:</strong> ${current.original} → ${current.second.replace("______", `<strong>${primaryAnswer(current)}</strong>`)}</div>
+            <div class="box"><strong>Exam note:</strong> ${current.note || "Remember the exact structure and the 2–5 word limit."}</div>
+            <p class="muted">Click the card to return to the expression.</p>
+          </div>
+        `
+        : `
+          <div>
+            <span class="badge badge-blue">${current.type}</span>
+            <p class="muted"><strong>Transformation pattern</strong></p>
+            <h2>${current.expression}</h2>
+            <p class="muted">Click the card to reveal meaning, example and exam note.</p>
+          </div>
+        `;
+
+      $("studyCounter").textContent = `Card ${state.studyIndex + 1} of ${list.length}`;
+    }
+
+    function newMcQuestion() {
+      const exercise = generateExercise(state.mcCategory, "multiple");
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
+
+      state.mcCurrent = { ...exercise, options };
+      state.mcSelected = null;
+      renderMc();
+    }
+
+    function renderMc() {
+      const q = state.mcCurrent;
+      $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
+
+      if (!q) {
+        $("mcType").textContent = "";
+        $("mcQuestion").textContent = "Click 'New question' to start.";
+        $("mcOptions").innerHTML = "";
+        $("mcFeedback").classList.add("hidden");
+        return;
+      }
+
+      $("mcType").textContent = `${q.type} · Generated transformation`;
+
+      $("mcQuestion").innerHTML = `
+        <p>${q.original}</p>
+        <div class="box">${q.second}</div>
+      `;
+
+      $("mcOptions").innerHTML = "";
+
+      q.options.forEach(option => {
         const button = document.createElement("button");
-        button.className = "choice";
-        button.textContent = choice;
-        button.addEventListener("click", () => answerMC(button, choice, item));
-        choicesBox.appendChild(button);
-      });
-    }
+        button.className = "option";
+        button.textContent = option;
 
-    function answerMC(button, choice, item) {
-      if (state.mc.answered) return;
+        if (state.mcSelected) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
+        }
 
-      state.mc.answered = true;
-      const correct = isCorrect(choice, item.answers);
-
-      document.querySelectorAll("#mcChoices .choice").forEach(btn => {
-        if (isCorrect(btn.textContent, item.answers)) btn.classList.add("correct");
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
       });
 
-      if (correct) {
-        state.mc.correct++;
-        setFeedback(
-          $("mcFeedback"),
-          "good",
-          `Correct. The key word was <strong>${item.key}</strong>.<br>Answer: <strong>${item.answers[0]}</strong>`
-        );
+      if (state.mcSelected) {
+        const correct = isCorrectAnswer(state.mcSelected, q);
+        $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+        $("mcFeedback").innerHTML = `
+          <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
+          <p>${q.note || ""}</p>
+          <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+        `;
       } else {
-        button.classList.add("wrong");
-        setFeedback(
-          $("mcFeedback"),
-          "bad",
-          `Not quite. The key word was <strong>${item.key}</strong>.<br>Correct answer: <strong>${item.answers[0]}</strong>`
-        );
+        $("mcFeedback").classList.add("hidden");
       }
-
-      $("mcScore").textContent = `Score: ${state.mc.correct} / ${state.mc.index + 1}`;
-      $("mcCorrectSide").textContent = state.mc.correct;
-      $("mcWrongSide").textContent = state.mc.index + 1 - state.mc.correct;
-      updateProgress($("mcProgress"), state.mc.index + 1, state.mc.pool.length);
     }
 
-    $("mcNext").addEventListener("click", () => {
-      state.mc.index++;
-      if (state.mc.index >= state.mc.pool.length) {
-        startMC();
-      } else {
-        renderMC();
-      }
-    });
+    function chooseMc(option) {
+      if (state.mcSelected) return;
+      state.mcSelected = option;
+      state.mcAttempts++;
+      if (isCorrectAnswer(option, state.mcCurrent)) state.mcScore++;
+      renderMc();
+    }
 
-    $("mcRestart").addEventListener("click", startMC);
-
-    function startTransformations() {
-      state.tr.pool = shuffle(exercises);
-      state.tr.index = 0;
-      state.tr.correct = 0;
-      state.tr.wrong = 0;
-      state.tr.answered = false;
+    function newTransformation() {
+      state.trCurrent = generateExercise(state.trCategory, "transform");
+      state.trChecked = false;
+      $("trInput").value = "";
+      $("trFeedback").classList.add("hidden");
+      $("trHintBox").classList.add("hidden");
       renderTransformation();
     }
 
     function renderTransformation() {
-      const item = state.tr.pool[state.tr.index];
-      state.tr.answered = false;
+      const q = state.trCurrent;
+      $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
 
-      $("trCategory").textContent = item.category;
-      $("trOriginal").textContent = item.original;
-      $("trKey").textContent = item.key;
-      $("trSecond").innerHTML = sentenceWithGap(item.second);
-      $("trInput").value = "";
-      $("trInput").disabled = false;
-      $("trInput").focus();
-
-      $("trScore").textContent = `Score: ${state.tr.correct} / ${state.tr.correct + state.tr.wrong}`;
-      $("trTotalSide").textContent = state.tr.pool.length;
-      $("trCorrectSide").textContent = state.tr.correct;
-      $("trWrongSide").textContent = state.tr.wrong;
-      updateProgress($("trProgress"), state.tr.index, state.tr.pool.length);
-      clearFeedback($("trFeedback"));
-    }
-
-    function checkTransformation() {
-      if (state.tr.answered) return;
-
-      const item = state.tr.pool[state.tr.index];
-      const userAnswer = $("trInput").value;
-      const words = wordCount(userAnswer);
-
-      if (words < 2 || words > 5) {
-        setFeedback(
-          $("trFeedback"),
-          "bad",
-          `Your answer has <strong>${words}</strong> word${words === 1 ? "" : "s"}. Remember: you must use between <strong>two and five words</strong>.`
-        );
+      if (!q) {
+        $("trType").textContent = "";
+        $("trFirst").textContent = "Click 'New exercise' to start.";
+        $("trSecond").textContent = "";
+        $("trKey").textContent = "";
         return;
       }
 
-      state.tr.answered = true;
-      $("trInput").disabled = true;
+      const input = $("trInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
 
-      if (isCorrect(userAnswer, item.answers)) {
-        state.tr.correct++;
-        setFeedback(
-          $("trFeedback"),
-          "good",
-          `Excellent. Correct answer: <strong>${item.answers[0]}</strong>`
-        );
-      } else {
-        state.tr.wrong++;
-        setFeedback(
-          $("trFeedback"),
-          "bad",
-          `Not quite.<br>Your answer: <strong>${userAnswer}</strong><br>Correct answer: <strong>${item.answers[0]}</strong>`
-        );
-      }
+      $("trType").textContent = `${q.type} · Generated transformation`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
 
-      $("trScore").textContent = `Score: ${state.tr.correct} / ${state.tr.correct + state.tr.wrong}`;
-      $("trCorrectSide").textContent = state.tr.correct;
-      $("trWrongSide").textContent = state.tr.wrong;
-      updateProgress($("trProgress"), state.tr.index + 1, state.tr.pool.length);
+      $("trFirst").textContent = q.original;
+      $("trSecond").textContent = q.second;
+      $("trKey").textContent = `Key word: ${q.key}`;
     }
 
-    function showTransformationAnswer() {
-      const item = state.tr.pool[state.tr.index];
-      if (!state.tr.answered) {
-        state.tr.answered = true;
-        state.tr.wrong++;
-        $("trInput").disabled = true;
-      }
+    function checkTransformation(reveal = false) {
+      if (!state.trCurrent || state.trChecked) return;
 
-      setFeedback(
-        $("trFeedback"),
-        "info",
-        `Answer: <strong>${item.answers[0]}</strong><br>${fillSentence(item.second, item.answers[0])}`
-      );
+      const input = $("trInput").value;
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
 
-      $("trScore").textContent = `Score: ${state.tr.correct} / ${state.tr.correct + state.tr.wrong}`;
-      $("trCorrectSide").textContent = state.tr.correct;
-      $("trWrongSide").textContent = state.tr.wrong;
-      updateProgress($("trProgress"), state.tr.index + 1, state.tr.pool.length);
+      state.trChecked = true;
+      state.trAttempts++;
+      if (correct) state.trScore++;
+
+      $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("trFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
+        <p>${state.trCurrent.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${state.trCurrent.expression}</p>
+        <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
+      `;
+
+      renderTransformation();
     }
 
-    $("trCheck").addEventListener("click", checkTransformation);
-    $("trShow").addEventListener("click", showTransformationAnswer);
-    $("trNext").addEventListener("click", () => {
-      state.tr.index++;
-      if (state.tr.index >= state.tr.pool.length) {
-        startTransformations();
-      } else {
-        renderTransformation();
+    function showHint() {
+      if (!state.trCurrent) return;
+      $("trHintBox").classList.remove("hidden");
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.meaning}`;
+    }
+
+    function buildExamQuestions() {
+      const pool = shuffle(filteredItems(state.examCategory));
+      const selected = [];
+
+      for (const raw of pool) {
+        const exercise = makeExercise(raw, "transform");
+        if (!exercise) continue;
+
+        const repeated = selected.some(item =>
+          item.expression === exercise.expression && item.original === exercise.original
+        );
+
+        if (!repeated) selected.push(exercise);
+        if (selected.length === 10) break;
       }
-    });
-    $("trRestart").addEventListener("click", startTransformations);
-    $("trInput").addEventListener("keydown", (event) => {
-      if (event.key === "Enter") checkTransformation();
-    });
+
+      return selected;
+    }
 
     function startExam() {
-      state.exam.pool = shuffle(exercises).slice(0, 10);
-      state.exam.index = 0;
-      state.exam.correct = 0;
-      state.exam.answers = [];
+      state.examQuestions = buildExamQuestions();
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
 
-      $("examStart").classList.add("hidden");
-      $("examResult").classList.remove("show");
-      $("examBox").classList.remove("hidden");
-
-      renderExamQuestion();
-    }
-
-    function renderExamQuestion() {
-      const item = state.exam.pool[state.exam.index];
-
-      $("examCategory").textContent = item.category;
-      $("examCounter").textContent = `Question ${state.exam.index + 1} / ${state.exam.pool.length}`;
-      $("examOriginal").textContent = item.original;
-      $("examKey").textContent = item.key;
-      $("examSecond").innerHTML = sentenceWithGap(item.second);
+      $("examIntro").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examCard").classList.remove("hidden");
       $("examInput").value = "";
-      $("examInput").focus();
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
     }
 
-    function submitExamAnswer() {
-      const item = state.exam.pool[state.exam.index];
-      const userAnswer = $("examInput").value;
-      const correct = isCorrect(userAnswer, item.answers);
-      const words = wordCount(userAnswer);
+    function resetExam() {
+      state.examQuestions = [];
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
 
-      state.exam.answers.push({
-        item,
-        userAnswer,
-        correct: correct && words >= 2 && words <= 5
+      $("examIntro").classList.remove("hidden");
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examFeedback").classList.add("hidden");
+      $("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = state.examQuestions.length;
+      const q = state.examQuestions[state.examIndex];
+
+      if (!q || total === 0) {
+        $("examIntro").classList.remove("hidden");
+        $("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = $("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (state.examIndex / total) * 100;
+
+      $("examProgress").style.width = `${progress}%`;
+      $("examType").textContent = `${q.type} · Question ${state.examIndex + 1}/${total}`;
+      $("examScore").textContent = `Score: ${state.examScore}/${state.examIndex}`;
+      $("examWords").textContent = `Words: ${words}/2–5`;
+      $("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("examFirst").textContent = q.original;
+      $("examSecond").textContent = q.second;
+      $("examKey").textContent = `Key word: ${q.key}`;
+      $("examCheck").disabled = state.examChecked;
+      $("examInput").disabled = state.examChecked;
+      $("examNext").disabled = !state.examChecked;
+      $("examNext").textContent = state.examIndex === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (state.examChecked) return;
+
+      const q = state.examQuestions[state.examIndex];
+      const input = $("examInput").value;
+      const correct = isCorrectAnswer(input, q);
+
+      state.examChecked = true;
+
+      if (correct) state.examScore++;
+
+      state.examAnswers.push({
+        number: state.examIndex + 1,
+        pattern: q.expression,
+        correct,
+        userAnswer: input,
+        accepted: acceptedAnswersText(q)
       });
 
-      if (correct && words >= 2 && words <= 5) {
-        state.exam.correct++;
-      }
+      $("examFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("examFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+        <p>${q.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+      `;
+      $("examFeedback").classList.remove("hidden");
 
-      state.exam.index++;
+      renderExam();
+    }
 
-      if (state.exam.index >= state.exam.pool.length) {
+    function nextExamQuestion() {
+      if (!state.examChecked) return;
+
+      if (state.examIndex >= state.examQuestions.length - 1) {
         finishExam();
-      } else {
-        renderExamQuestion();
+        return;
       }
+
+      state.examIndex++;
+      state.examChecked = false;
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
     }
 
     function finishExam() {
-      $("examBox").classList.add("hidden");
-      $("examResult").classList.add("show");
-      $("examFinalScore").textContent = `${state.exam.correct} / ${state.exam.pool.length}`;
+      const total = state.examQuestions.length;
+      const score = state.examScore;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
 
       let message = "";
-      if (state.exam.correct >= 9) {
-        message = "Excellent work. You are handling modal transformations with real confidence.";
-      } else if (state.exam.correct >= 7) {
-        message = "Very good. Review the few patterns you missed and try again.";
-      } else if (state.exam.correct >= 5) {
-        message = "Good effort. You should revise the difference between present and past modal forms.";
+      if (score >= 9) {
+        message = "Excellent exam control. You are using modal verb transformations with strong accuracy.";
+      } else if (score >= 7) {
+        message = "Good result. Keep practising the difference between present and past modal forms.";
+      } else if (score >= 5) {
+        message = "You understand several patterns, but you need more controlled practice with perfect modal structures.";
       } else {
-        message = "Keep practising. Focus especially on perfect modal forms: must have, might have, can’t have, should have and needn’t have.";
+        message = "Revise Study Mode and Multiple Choice before trying Exam Mode again.";
       }
 
-      const review = state.exam.answers.map((entry, index) => {
-        const mark = entry.correct ? "✅" : "❌";
-        return `
-          <div style="text-align:left; margin-top:14px; padding:14px; border-radius:14px; background:white; border:1px solid var(--line);">
-            <strong>${mark} Question ${index + 1}</strong><br>
-            <span style="color:var(--muted);">${entry.item.original}</span><br>
-            <strong>Key:</strong> ${entry.item.key}<br>
-            <strong>Your answer:</strong> ${entry.userAnswer || "—"}<br>
-            <strong>Correct answer:</strong> ${entry.item.answers[0]}
-          </div>
-        `;
-      }).join("");
+      const review = state.examAnswers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.pattern}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+        </tr>
+      `).join("");
 
-      $("examFinalMessage").innerHTML = `${message}${review}`;
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.remove("hidden");
+
+      $("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Pattern</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart challenge</button>
+        </div>
+      `;
+
+      $("examAgain").addEventListener("click", startExam);
     }
 
-    $("examBegin").addEventListener("click", startExam);
-    $("examSubmit").addEventListener("click", submitExamAnswer);
-    $("examAgain").addEventListener("click", () => {
-      $("examStart").classList.remove("hidden");
-      $("examResult").classList.remove("show");
-      $("examBox").classList.add("hidden");
-    });
-    $("examInput").addEventListener("keydown", (event) => {
-      if (event.key === "Enter") submitExamAnswer();
-    });
+    function init() {
+      populateSelect("studyCategory", state.studyCategory);
+      populateSelect("mcCategory", state.mcCategory);
+      populateSelect("trCategory", state.trCategory);
+      populateSelect("examCategory", state.examCategory);
 
-    startMC();
-    startTransformations();
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => showTab(button.dataset.tab));
+      });
+
+      $("studyCategory").addEventListener("change", event => {
+        state.studyCategory = event.target.value;
+        state.studyIndex = 0;
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("studyCard").addEventListener("click", () => {
+        state.studyFlipped = !state.studyFlipped;
+        renderStudy();
+      });
+
+      $("studyNext").addEventListener("click", () => {
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = (state.studyIndex + 1) % list.length;
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("studyRandom").addEventListener("click", () => {
+        const list = filteredItems(state.studyCategory);
+        state.studyIndex = Math.floor(Math.random() * list.length);
+        state.studyFlipped = false;
+        renderStudy();
+      });
+
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        newMcQuestion();
+      });
+
+      $("mcNew").addEventListener("click", newMcQuestion);
+      $("mcReset").addEventListener("click", () => {
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        renderMc();
+      });
+
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
+        state.trScore = 0;
+        state.trAttempts = 0;
+        newTransformation();
+      });
+
+      $("trNew").addEventListener("click", newTransformation);
+      $("trHint").addEventListener("click", showHint);
+      $("trCheck").addEventListener("click", () => checkTransformation(false));
+      $("trReveal").addEventListener("click", () => checkTransformation(true));
+      $("trReset").addEventListener("click", () => {
+        state.trScore = 0;
+        state.trAttempts = 0;
+        renderTransformation();
+      });
+
+      $("trInput").addEventListener("input", renderTransformation);
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") checkTransformation(false);
+      });
+
+      $("examCategory").addEventListener("change", event => {
+        state.examCategory = event.target.value;
+        resetExam();
+      });
+
+      $("examStart").addEventListener("click", startExam);
+      $("examRestart").addEventListener("click", startExam);
+      $("examCheck").addEventListener("click", checkExamAnswer);
+      $("examNext").addEventListener("click", nextExamQuestion);
+      $("examInput").addEventListener("input", renderExam);
+      $("examInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          if (!state.examChecked) checkExamAnswer();
+          else nextExamQuestion();
+        }
+      });
+
+      renderStudy();
+      newMcQuestion();
+      newTransformation();
+    }
+
+    init();
   </script>
 </body>
 </html>
