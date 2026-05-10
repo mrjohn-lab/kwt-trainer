@@ -1,1 +1,2489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block 9 · Mr John’s KWT Lab</title>
+  <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
 
+  <style>
+    :root {
+      --navy: #062b63;
+      --blue: #005eb8;
+      --light-blue: #eaf3ff;
+      --orange: #f28c00;
+      --orange-soft: #fff3df;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d9e2ef;
+      --white: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 94, 184, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 0, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 46px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 0 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand img {
+      height: auto;
+      width: 260px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .home-link {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(6, 43, 99, 0.06);
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--orange-soft);
+      color: #9a5700;
+      border: 1px solid rgba(242, 140, 0, 0.25);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -1.4px;
+    }
+
+    .highlight { color: var(--orange); }
+
+    .hero p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 930px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    button,
+    .tab {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
+
+    button:hover,
+    .tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab.active,
+    .primary {
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      border-color: transparent;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    select,
+    input {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+    }
+
+    select { min-width: 300px; }
+    input { width: 100%; }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hidden { display: none !important; }
+
+    .badge,
+    .pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .badge-blue {
+      background: var(--light-blue);
+      color: var(--blue);
+      border-color: rgba(0, 94, 184, 0.18);
+    }
+
+    .badge-orange {
+      background: var(--orange-soft);
+      color: #9a5700;
+      border-color: rgba(242, 140, 0, 0.25);
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bbf7d0;
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: #fecaca;
+    }
+
+    .muted { color: var(--muted); }
+
+    .study-card { min-height: 480px; }
+
+    .study-card h2 {
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+      margin: 12px 0 12px;
+    }
+
+    .study-card h3 {
+      color: var(--navy);
+      margin: 18px 0 8px;
+      font-size: 21px;
+    }
+
+    .study-card p,
+    .study-card li {
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .study-mini {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .study-mini strong { color: var(--navy); }
+
+    .formula {
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--navy);
+      border: 1px solid rgba(0, 94, 184, 0.18);
+      border-radius: 10px;
+      padding: 3px 7px;
+      font-weight: 900;
+      margin: 2px 0;
+    }
+
+    .warning-line {
+      display: inline-block;
+      background: var(--red-soft);
+      color: #7f1d1d;
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      padding: 5px 8px;
+      font-weight: 900;
+      margin-top: 6px;
+    }
+
+    .pattern-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 15px;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .pattern-table th,
+    .pattern-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .pattern-table th {
+      background: var(--light-blue);
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .pattern-table tr:nth-child(even) td { background: #f8fafc; }
+
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      border-color: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      text-align: left;
+      min-height: 58px;
+    }
+
+    .option.good {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: #14532d;
+    }
+
+    .option.bad {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: #7f1d1d;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+
+    .result-number {
+      color: var(--navy);
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin: 8px 0;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 760px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brand img {
+        width: 220px;
+        height: auto;
+      }
+
+      .tabs,
+      .answer-row,
+      .option-grid,
+      .study-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding: 26px 20px; }
+      select { width: 100%; min-width: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
+        <div>
+          <span class="brand-title">Mr John’s KWT Lab</span>
+          <span class="brand-subtitle">Block 9 · Comparatives, Superlatives & Degree Structures</span>
+        </div>
+      </div>
+
+      <a class="home-link" href="../index.html">← Back to Lab Home</a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
+      <h1>Comparatives & Superlatives <span class="highlight">Transformation</span> Trainer</h1>
+      <p>
+        Practise B2 First Part 4 transformations with AS...AS, MORE THAN, LESS THAN,
+        THE MOST, NEVER...SUCH, NOWHERE NEAR, NOTHING LIKE, FEWER, LESS, MUCH,
+        MANY and ANY + comparative. This block focuses on understanding the exact direction
+        and strength of the comparison.
+      </p>
+      <div class="stats">
+        <span class="pill">Core patterns</span>
+        <span class="pill">AS ⇄ THAN</span>
+        <span class="pill">NOT AS...AS</span>
+        <span class="pill">MORE / LESS / FEWER</span>
+        <span class="pill">THE MOST</span>
+        <span class="pill">NEVER...SUCH</span>
+        <span class="pill">NOWHERE NEAR</span>
+        <span class="pill">NOTHING LIKE</span>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="study">🧠 Study Mode</button>
+      <button class="tab" data-tab="multiple">✓ Multiple Choice</button>
+      <button class="tab" data-tab="transform">✎ Transformations</button>
+      <button class="tab" data-tab="exam">🏆 Exam Mode</button>
+    </nav>
+
+    <section id="study" class="tab-section">
+      <div class="toolbar">
+        <select id="studySection"></select>
+        <div class="button-group">
+          <button id="studyPrev">Previous</button>
+          <button id="studyNext" class="primary">Next</button>
+        </div>
+      </div>
+
+      <div id="studyCard" class="card study-card"></div>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
+    </section>
+
+    <section id="multiple" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="mcCategory"></select>
+        <div class="button-group">
+          <button id="mcNew">New question</button>
+          <button id="mcReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="mcType" class="badge badge-blue"></span>
+          <span id="mcScore" class="pill"></span>
+        </div>
+
+        <div id="mcQuestion" class="question"></div>
+        <div id="mcOptions" class="option-grid"></div>
+        <div id="mcFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="transform" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="trCategory"></select>
+        <div class="button-group">
+          <button id="trHint">Hint</button>
+          <button id="trNew">New exercise</button>
+          <button id="trReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="trType" class="badge badge-blue"></span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
+          <span id="trScore" class="pill"></span>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="trFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="trSecond" class="box"></div>
+
+        <p><span id="trKey" class="badge badge-orange"></span></p>
+
+        <div id="trHintBox" class="box hidden"></div>
+
+        <div class="answer-row">
+          <input id="trInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="trCheck" class="primary">Check</button>
+          <button id="trReveal">Reveal</button>
+        </div>
+
+        <div id="trFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="exam" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="examCategory"></select>
+        <div class="button-group">
+          <button id="examStart" class="primary">Start official 6-question round</button>
+          <button id="examRestart">Restart round</button>
+        </div>
+      </div>
+
+      <div class="card" id="examIntro">
+        <span class="badge badge-orange">Exam Mode</span>
+        <h2 style="color:var(--navy); margin-bottom:8px;">6-question official-style round</h2>
+        <p class="muted">
+          Complete 6 written Key Word Transformations. Each answer must contain between
+          two and five words and include the key word exactly as given.
+        </p>
+        <div class="box">
+          <strong>Round design:</strong> each mixed round includes AS ⇄ THAN, superlative transformations,
+          strong negative comparison, and quantity or advanced degree structures.
+          Feedback is shown at the end, as an exam-style review.
+        </div>
+      </div>
+
+      <div class="card hidden" id="examCard">
+        <div class="toolbar">
+          <span id="examType" class="badge badge-blue"></span>
+          <span id="examScore" class="pill"></span>
+          <span id="examWords" class="pill">Words: 0/2–5</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="examProgress" class="progress-bar"></div>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="examFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="examSecond" class="box"></div>
+
+        <p><span id="examKey" class="badge badge-orange"></span></p>
+
+        <div class="answer-row">
+          <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="examCheck" class="primary">Save answer</button>
+          <button id="examNext" disabled>Next</button>
+        </div>
+
+        <div id="examFeedback" class="box hidden"></div>
+      </div>
+
+      <div class="card hidden" id="examResult"></div>
+    </section>
+
+    <footer class="footer">
+      <span><strong>Mr John’s KWT Lab</strong> · Block 9 · v1.0</span>
+      <span>Comparatives, Superlatives & Degree Structures · Large-scale B2 generator · FCE Part 4 focused practice</span>
+    </footer>
+  </main>
+
+  <script>
+    const blockId = "comparatives-superlatives";
+    const seenExercisesKey = "kwt_seen_exercises_comparatives_v1";
+    const patternStatsKey = "kwt_pattern_stats_comparatives_v1";
+
+    const categories = [
+      "All categories",
+      "MORE THAN → NOT AS...AS",
+      "NOT AS...AS → COMPARATIVE",
+      "LESS THAN → NOT AS...AS",
+      "Superlative → NEVER...SUCH",
+      "NEVER...A MORE → Superlative",
+      "Superlative → Nobody / No other",
+      "NOWHERE NEAR / NOTHING LIKE",
+      "Quantity comparisons",
+      "ANY + comparative",
+      "Advanced degree structures",
+      "Mixed exam decisions",
+      "Cambridge traps"
+    ];
+
+    const studySections = [
+      {
+        title: "1. What comparative transformations test",
+        badge: "Comparatives · Foundation",
+        html: `
+          <p>Comparative and superlative transformations test whether you understand exactly what is being compared and from which point of view.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Step 1 · Identify the two things</strong>
+              <p>Who or what is being compared?</p>
+              <p><span class="formula">Tom</span> and <span class="formula">Mark</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 2 · Identify the direction</strong>
+              <p>Is A bigger/better/more difficult than B, or is B not as big/good/difficult as A?</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 3 · Identify the strength</strong>
+              <p>Is it equal, slightly different, much less, the most, or not nearly as...?</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 4 · Respect the keyword</strong>
+              <p>The answer must include the keyword unchanged and contain 2–5 words.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 priority:</strong><br>
+            Do not only look at the adjective. Check whether the transformation reverses the two subjects.
+          </div>
+        `
+      },
+      {
+        title: "2. MORE THAN → NOT AS...AS",
+        badge: "AS ⇄ THAN",
+        html: `
+          <p>When one thing is more + adjective than another, the other thing is not as + adjective as the first one.</p>
+
+          <h3>Structure</h3>
+          <p><span class="formula">A is more adjective than B</span> → <span class="formula">B is not as adjective as A</span></p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>First sentence</th>
+                <th>Key word</th>
+                <th>Second sentence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tom is taller than Mark.</td>
+                <td>AS</td>
+                <td>Mark is not <strong>as tall as</strong> Tom.</td>
+              </tr>
+              <tr>
+                <td>This hotel is more expensive than the one near the station.</td>
+                <td>AS</td>
+                <td>The hotel near the station is not <strong>as expensive as</strong> this one.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="warning-line">Common trap: do not compare the wrong subject.</p>
+          <p>❌ Tom is not as tall as Mark.<br>✅ Mark is not as tall as Tom.</p>
+        `
+      },
+      {
+        title: "3. NOT AS...AS → COMPARATIVE THAN",
+        badge: "AS ⇄ THAN",
+        html: `
+          <p>If A is not as adjective as B, then B is more adjective than A. You usually need to reverse the two things being compared.</p>
+
+          <h3>Structure</h3>
+          <p><span class="formula">A is not as adjective as B</span> → <span class="formula">B is comparative than A</span></p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Original</strong>
+              <p>This exercise is not as difficult as the previous one.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Transformation</strong>
+              <p>The previous exercise was <span class="formula">more difficult than</span> this one.</p>
+            </div>
+          </div>
+
+          <p class="warning-line">Common trap: do not use THAN with AS...AS.</p>
+          <p>❌ not as difficult than<br>✅ not as difficult as</p>
+        `
+      },
+      {
+        title: "4. LESS THAN → NOT AS...AS",
+        badge: "Inferiority",
+        html: `
+          <p><strong>Less + adjective than</strong> can often be transformed into <strong>not as + adjective + as</strong>. In this pattern, the subject normally stays the same.</p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>First sentence</th>
+                <th>Key word</th>
+                <th>Second sentence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The second film was less exciting than the first one.</td>
+                <td>AS</td>
+                <td>The second film was not <strong>as exciting as</strong> the first one.</td>
+              </tr>
+              <tr>
+                <td>The lecture was less useful than I expected.</td>
+                <td>AS</td>
+                <td>The lecture was not <strong>as useful as</strong> I expected.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>Exam note:</strong> This is often safer than trying to create a different opposite adjective.
+          </div>
+        `
+      },
+      {
+        title: "5. Superlative → HAVE NEVER...SUCH",
+        badge: "Superlatives",
+        html: `
+          <p>A superlative experience can often be transformed into a Present Perfect negative structure with <strong>NEVER</strong> and <strong>SUCH</strong>.</p>
+
+          <h3>Structure</h3>
+          <p><span class="formula">This is the best / most interesting + noun I have ever...</span></p>
+          <p>→ <span class="formula">I have never + past participle + such a/an + adjective + noun</span></p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Original</strong>
+              <p>This is the best film I have ever seen.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Transformation</strong>
+              <p>I have <strong>never seen such a</strong> good film before.</p>
+            </div>
+          </div>
+
+          <p class="warning-line">Common trap: SUCH needs a noun.</p>
+          <p>❌ I have never seen such beautiful.<br>✅ I have never seen such a beautiful place.</p>
+        `
+      },
+      {
+        title: "6. NEVER...A MORE → Superlative",
+        badge: "Superlatives",
+        html: `
+          <p><strong>I have never seen a more...</strong> has a superlative meaning. It usually becomes <strong>the most...</strong>.</p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>First sentence</th>
+                <th>Key word</th>
+                <th>Second sentence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>I have never met a more generous person.</td>
+                <td>THE</td>
+                <td>She is <strong>the most generous person</strong> I have ever met.</td>
+              </tr>
+              <tr>
+                <td>I have never read a more confusing article.</td>
+                <td>THE</td>
+                <td>This is <strong>the most confusing article</strong> I have ever read.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>Exam note:</strong> This is a meaning transformation, not just a word order change.
+          </div>
+        `
+      },
+      {
+        title: "7. THE MOST → Nobody / No other + comparative",
+        badge: "Superlative Meaning",
+        html: `
+          <p>A superlative can be transformed using a negative subject such as <strong>nobody</strong>, <strong>nothing</strong> or <strong>no other</strong> plus a comparative.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Original</strong>
+              <p>She had the most beautiful voice in the choir.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Transformation</strong>
+              <p>Nobody in the choir <span class="formula">had a more beautiful</span> voice.</p>
+            </div>
+          </div>
+
+          <h3>Common frames</h3>
+          <p><span class="formula">Nobody had a more...</span></p>
+          <p><span class="formula">No other student was more...</span></p>
+          <p><span class="formula">We have not found a more...</span></p>
+        `
+      },
+      {
+        title: "8. NOWHERE NEAR AS...AS",
+        badge: "Strong Negative Comparison",
+        html: `
+          <p><strong>Nowhere near as...as</strong> means much less than. It is stronger than simply saying <strong>not as...as</strong>.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Original</strong>
+              <p>Your laptop is not nearly as fast as mine.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Transformation</strong>
+              <p>Your laptop is <span class="formula">nowhere near as fast as</span> mine.</p>
+            </div>
+          </div>
+
+          <p class="warning-line">Common trap: do not use THAN after NOWHERE NEAR AS.</p>
+          <p>❌ nowhere near faster than<br>✅ nowhere near as fast as</p>
+        `
+      },
+      {
+        title: "9. NOTHING LIKE AS...AS",
+        badge: "Strong Negative Comparison",
+        html: `
+          <p><strong>Nothing like as...as</strong> also means much less than. It is an advanced emphatic comparison.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Original</strong>
+              <p>The sequel was much less exciting than the original film.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Transformation</strong>
+              <p>The sequel was <span class="formula">nothing like as exciting as</span> the original film.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Exam note:</strong> After NOTHING LIKE AS, use the adjective, not the comparative form.
+          </div>
+        `
+      },
+      {
+        title: "10. Quantity comparisons: MANY / MUCH / FEWER / LESS",
+        badge: "Quantity",
+        html: `
+          <p>Quantity comparisons often test whether the noun is countable or uncountable.</p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Use</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Plural countable</td>
+                <td>many / fewer</td>
+                <td>There were not <strong>as many students as</strong> I expected.</td>
+              </tr>
+              <tr>
+                <td>Uncountable</td>
+                <td>much / less</td>
+                <td>We did not have <strong>as much money as</strong> we needed.</td>
+              </tr>
+              <tr>
+                <td>Countable mistake</td>
+                <td>fewer students</td>
+                <td>❌ less students → ✅ fewer students</td>
+              </tr>
+              <tr>
+                <td>Uncountable mistake</td>
+                <td>less money</td>
+                <td>❌ fewer money → ✅ less money</td>
+              </tr>
+            </tbody>
+          </table>
+        `
+      },
+      {
+        title: "11. ANY + comparative",
+        badge: "Advanced Comparison",
+        html: `
+          <p><strong>ANY + comparative</strong> is common in negative or conditional-style comparisons. It means “even slightly more”.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Original</strong>
+              <p>The suitcase was so heavy that I could only just lift it.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Transformation</strong>
+              <p>If the suitcase had been <span class="formula">any heavier</span>, I wouldn’t have been able to lift it.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Short adjective</strong>
+              <p>heavy → any heavier<br>late → any later<br>small → any smaller</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Long adjective</strong>
+              <p>expensive → any more expensive<br>complicated → any more complicated</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        title: "12. Common Cambridge traps",
+        badge: "Exam Accuracy · Traps",
+        html: `
+          <p>Most mistakes in comparison transformations come from a small number of repeated traps.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Trap 1 · Wrong subject</strong>
+              <p>Tom is taller than Mark.</p>
+              <p>✅ Mark is not as tall as Tom.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 2 · AS only once</strong>
+              <p>❌ not as difficult the previous one</p>
+              <p>✅ not as difficult as the previous one</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 3 · THAN with AS...AS</strong>
+              <p>❌ not as interesting than</p>
+              <p>✅ not as interesting as</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 4 · SUCH without noun</strong>
+              <p>❌ never seen such beautiful</p>
+              <p>✅ never seen such a beautiful place</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 5 · MUCH / MANY</strong>
+              <p>✅ as many students as</p>
+              <p>✅ as much time as</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 6 · NEAR / NOTHING LIKE</strong>
+              <p>✅ nowhere near as fast as</p>
+              <p>✅ nothing like as exciting as</p>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    const comparisonScenarios = [
+      { id: "exam_difficult", subjectA: "The first exam", subjectB: "the second one", subjectBCap: "The second one", subjectAEnd: "the first exam", adjective: "difficult", comparative: "more difficult" },
+      { id: "book_interesting", subjectA: "This book", subjectB: "the one we read last term", subjectBCap: "The one we read last term", subjectAEnd: "this book", adjective: "interesting", comparative: "more interesting" },
+      { id: "hotel_expensive", subjectA: "This hotel", subjectB: "the hotel near the station", subjectBCap: "The hotel near the station", subjectAEnd: "this one", adjective: "expensive", comparative: "more expensive" },
+      { id: "journey_long", subjectA: "The journey by bus", subjectB: "the journey by train", subjectBCap: "The journey by train", subjectAEnd: "the journey by bus", adjective: "long", comparative: "longer" },
+      { id: "phone_fast", subjectA: "My new phone", subjectB: "my old one", subjectBCap: "My old phone", subjectAEnd: "my new one", adjective: "fast", comparative: "faster" },
+      { id: "room_big", subjectA: "The classroom", subjectB: "the meeting room", subjectBCap: "The meeting room", subjectAEnd: "the classroom", adjective: "big", comparative: "bigger" },
+      { id: "task_simple", subjectA: "This task", subjectB: "the previous one", subjectBCap: "The previous task", subjectAEnd: "this one", adjective: "simple", comparative: "simpler" },
+      { id: "explanation_clear", subjectA: "Her explanation", subjectB: "mine", subjectBCap: "My explanation", subjectAEnd: "hers", adjective: "clear", comparative: "clearer" },
+      { id: "system_reliable", subjectA: "The new system", subjectB: "the old one", subjectBCap: "The old system", subjectAEnd: "the new one", adjective: "reliable", comparative: "more reliable" },
+      { id: "argument_convincing", subjectA: "His argument", subjectB: "Laura’s", subjectBCap: "Laura’s argument", subjectAEnd: "his", adjective: "convincing", comparative: "more convincing" },
+      { id: "route_direct", subjectA: "This route", subjectB: "the alternative route", subjectBCap: "The alternative route", subjectAEnd: "this one", adjective: "direct", comparative: "more direct" },
+      { id: "instructions_confusing", subjectA: "The online instructions", subjectB: "the printed ones", subjectBCap: "The printed instructions", subjectAEnd: "the online ones", adjective: "confusing", comparative: "more confusing" },
+      { id: "schedule_flexible", subjectA: "The new schedule", subjectB: "the old timetable", subjectBCap: "The old timetable", subjectAEnd: "the new schedule", adjective: "flexible", comparative: "more flexible" },
+      { id: "solution_practical", subjectA: "This solution", subjectB: "the first suggestion", subjectBCap: "The first suggestion", subjectAEnd: "this solution", adjective: "practical", comparative: "more practical" },
+      { id: "application_secure", subjectA: "This application", subjectB: "the previous version", subjectBCap: "The previous version", subjectAEnd: "this application", adjective: "secure", comparative: "more secure" },
+      { id: "method_efficient", subjectA: "This method", subjectB: "the traditional approach", subjectBCap: "The traditional approach", subjectAEnd: "this method", adjective: "efficient", comparative: "more efficient" },
+      { id: "course_demanding", subjectA: "The advanced course", subjectB: "the standard course", subjectBCap: "The standard course", subjectAEnd: "the advanced course", adjective: "demanding", comparative: "more demanding" },
+      { id: "interview_stressful", subjectA: "The final interview", subjectB: "the written test", subjectBCap: "The written test", subjectAEnd: "the final interview", adjective: "stressful", comparative: "more stressful" },
+      { id: "platform_user_friendly", subjectA: "The new platform", subjectB: "the old system", subjectBCap: "The old system", subjectAEnd: "the new platform", adjective: "user-friendly", comparative: "more user-friendly" },
+      { id: "feedback_detailed", subjectA: "The teacher’s feedback", subjectB: "the automatic report", subjectBCap: "The automatic report", subjectAEnd: "the teacher’s feedback", adjective: "detailed", comparative: "more detailed" }
+    ];
+
+    const superlativeExperiences = [
+      { id: "film_good", item: "film", adjective: "good", superlative: "best", suchArticle: "a", verb: "seen" },
+      { id: "book_interesting", item: "book", adjective: "interesting", superlative: "most interesting", suchArticle: "an", verb: "read" },
+      { id: "meal_delicious", item: "meal", adjective: "delicious", superlative: "most delicious", suchArticle: "a", verb: "had" },
+      { id: "place_beautiful", item: "place", adjective: "beautiful", superlative: "most beautiful", suchArticle: "a", verb: "visited" },
+      { id: "match_exciting", item: "match", adjective: "exciting", superlative: "most exciting", suchArticle: "an", verb: "watched" },
+      { id: "story_funny", item: "story", adjective: "funny", superlative: "funniest", suchArticle: "a", verb: "heard" },
+      { id: "decision_difficult", item: "decision", adjective: "difficult", superlative: "most difficult", suchArticle: "a", verb: "taken" },
+      { id: "lecture_inspiring", item: "lecture", adjective: "inspiring", superlative: "most inspiring", suchArticle: "an", verb: "attended" },
+      { id: "view_spectacular", item: "view", adjective: "spectacular", superlative: "most spectacular", suchArticle: "a", verb: "seen" },
+      { id: "performance_impressive", item: "performance", adjective: "impressive", superlative: "most impressive", suchArticle: "an", verb: "watched" },
+      { id: "article_confusing", item: "article", adjective: "confusing", superlative: "most confusing", suchArticle: "a", verb: "read" },
+      { id: "lesson_useful", item: "lesson", adjective: "useful", superlative: "most useful", suchArticle: "a", verb: "had" }
+    ];
+
+    const neverMoreScenarios = [
+      { id: "person_generous", first: "I have never met a more generous person.", subject: "She", itemPhrase: "person", adjective: "generous", superlative: "most generous", verb: "met" },
+      { id: "article_confusing", first: "I have never read a more confusing article.", subject: "This", itemPhrase: "article", adjective: "confusing", superlative: "most confusing", verb: "read" },
+      { id: "lesson_useful", first: "I have never had a more useful lesson.", subject: "This", itemPhrase: "lesson", adjective: "useful", superlative: "most useful", verb: "had" },
+      { id: "painting_beautiful", first: "I have never seen a more beautiful painting.", subject: "This", itemPhrase: "painting", adjective: "beautiful", superlative: "most beautiful", verb: "seen" },
+      { id: "final_exciting", first: "I have never watched a more exciting final.", subject: "That", itemPhrase: "final", adjective: "exciting", superlative: "most exciting", verb: "watched" },
+      { id: "village_peaceful", first: "I have never visited a more peaceful village.", subject: "This", itemPhrase: "village", adjective: "peaceful", superlative: "most peaceful", verb: "visited" },
+      { id: "solution_practical", first: "I have never found a more practical solution.", subject: "This", itemPhrase: "solution", adjective: "practical", superlative: "most practical", verb: "found" },
+      { id: "speaker_persuasive", first: "I have never listened to a more persuasive speaker.", subject: "He", itemPhrase: "speaker", adjective: "persuasive", superlative: "most persuasive", verb: "listened to" }
+    ];
+
+    const nobodyMoreScenarios = [
+      { id: "voice_beautiful", original: "She had the most beautiful voice in the choir.", key: "MORE", second: "Nobody in the choir ______ voice.", answer: "had a more beautiful", note: "The superlative is transformed using NOBODY + comparative." },
+      { id: "student_hardworking", original: "Daniel is the most hardworking student in the class.", key: "MORE", second: "No other student in the class ______ Daniel.", answer: "is more hardworking than", note: "No other + comparative keeps the same superlative meaning." },
+      { id: "city_expensive", original: "Paris was the most expensive city we visited.", key: "MORE", second: "No other city we visited ______ Paris.", answer: "was more expensive than", note: "The most expensive becomes no other city was more expensive." },
+      { id: "solution_practical", original: "This is the most practical solution we have found.", key: "MORE", second: "We have not found ______ solution.", answer: "a more practical", note: "The superlative can be transformed with not found a more..." },
+      { id: "explanation_clear", original: "Laura gave the clearest explanation in the group.", key: "MORE", second: "Nobody in the group ______ explanation.", answer: "gave a clearer", note: "Clearest becomes nobody gave a clearer explanation." },
+      { id: "restaurant_cheap", original: "This is the cheapest restaurant in the area.", key: "LESS", second: "No other restaurant in the area ______ this one.", answer: "is less expensive than", note: "Cheapest can be expressed as less expensive than all the others." },
+      { id: "candidate_suitable", original: "Marta was the most suitable candidate for the position.", key: "MORE", second: "No other candidate ______ Marta.", answer: "was more suitable than", note: "No other candidate was more suitable than Marta." },
+      { id: "option_convenient", original: "This is the most convenient option available.", key: "MORE", second: "There is no ______ option available.", answer: "more convenient", note: "The superlative becomes no more convenient option." },
+      { id: "proposal_convincing", original: "His proposal was the most convincing one.", key: "MORE", second: "Nobody made ______ proposal.", answer: "a more convincing", note: "Nobody made a more convincing proposal." },
+      { id: "method_effective", original: "This is the most effective method we have tried.", key: "MORE", second: "We have not tried ______ method.", answer: "a more effective", note: "The superlative can become not tried a more..." }
+    ];
+
+    const strongNegativeScenarios = [
+      { id: "laptop_fast", subjectA: "Your laptop", subjectB: "mine", adjective: "fast", tense: "is" },
+      { id: "exam_easy", subjectA: "This exam", subjectB: "last year’s exam", adjective: "easy", tense: "was" },
+      { id: "film_funny", subjectA: "The sequel", subjectB: "the original film", adjective: "funny", tense: "was" },
+      { id: "team_strong", subjectA: "Our team", subjectB: "their team", adjective: "strong", tense: "is" },
+      { id: "presentation_clear", subjectA: "His presentation", subjectB: "Laura’s presentation", adjective: "clear", tense: "was" },
+      { id: "hotel_comfortable", subjectA: "The hotel", subjectB: "the apartment", adjective: "comfortable", tense: "was" },
+      { id: "system_reliable", subjectA: "The new system", subjectB: "the previous one", adjective: "reliable", tense: "is" },
+      { id: "lecture_useful", subjectA: "The lecture", subjectB: "the workshop", adjective: "useful", tense: "was" },
+      { id: "argument_convincing", subjectA: "His argument", subjectB: "hers", adjective: "convincing", tense: "was" },
+      { id: "route_direct", subjectA: "This route", subjectB: "the old one", adjective: "direct", tense: "is" },
+      { id: "task_demanding", subjectA: "The first task", subjectB: "the final project", adjective: "demanding", tense: "was" },
+      { id: "platform_intuitive", subjectA: "The app", subjectB: "the website", adjective: "intuitive", tense: "is" }
+    ];
+
+    const quantityScenarios = [
+      { id: "students_expected", verbFrame: "There were", negativeFrame: "There were not", nounPhrase: "students", expectedPhrase: "I expected", determiner: "many", type: "countable" },
+      { id: "people_party", verbFrame: "There were", negativeFrame: "There were not", nounPhrase: "people at the party", expectedPhrase: "we expected", determiner: "many", type: "countable" },
+      { id: "mistakes_test", verbFrame: "He made", negativeFrame: "He did not make", nounPhrase: "mistakes in the test", expectedPhrase: "usual", determiner: "many", type: "countable" },
+      { id: "applications_received", verbFrame: "We received", negativeFrame: "We did not receive", nounPhrase: "applications", expectedPhrase: "last year", determiner: "many", type: "countable" },
+      { id: "questions_asked", verbFrame: "They asked", negativeFrame: "They did not ask", nounPhrase: "questions", expectedPhrase: "we expected", determiner: "many", type: "countable" },
+      { id: "volunteers_needed", verbFrame: "There were", negativeFrame: "There were not", nounPhrase: "volunteers", expectedPhrase: "we needed", determiner: "many", type: "countable" },
+      { id: "money_needed", verbFrame: "We had", negativeFrame: "We did not have", nounPhrase: "money", expectedPhrase: "we needed", determiner: "much", type: "uncountable" },
+      { id: "time_expected", verbFrame: "They spent", negativeFrame: "They did not spend", nounPhrase: "time", expectedPhrase: "I expected", determiner: "much", type: "uncountable" },
+      { id: "free_time_brother", verbFrame: "I have", negativeFrame: "I do not have", nounPhrase: "free time", expectedPhrase: "my brother", determiner: "much", type: "uncountable" },
+      { id: "information_required", verbFrame: "They gave us", negativeFrame: "They did not give us", nounPhrase: "information", expectedPhrase: "we required", determiner: "much", type: "uncountable" },
+      { id: "support_expected", verbFrame: "The team received", negativeFrame: "The team did not receive", nounPhrase: "support", expectedPhrase: "they expected", determiner: "much", type: "uncountable" },
+      { id: "progress_hoped", verbFrame: "We made", negativeFrame: "We did not make", nounPhrase: "progress", expectedPhrase: "we had hoped", determiner: "much", type: "uncountable" }
+    ];
+
+    const sameAsScenarios = [
+      { id: "score_points", original: "My score was the same as yours.", second: "I got ______ you.", answer: "as many points as", key: "AS", note: "Use many with countable plural nouns such as points." },
+      { id: "salary_money", original: "Her salary is the same as mine.", second: "She earns ______ I do.", answer: "as much money as", key: "AS", note: "Use much with uncountable nouns such as money." },
+      { id: "work_hours", original: "I worked the same number of hours as Daniel.", second: "I worked ______ Daniel.", answer: "as many hours as", key: "AS", note: "Use many with plural countable nouns." },
+      { id: "homework_amount", original: "We had the same amount of homework as the other group.", second: "We had ______ the other group.", answer: "as much homework as", key: "AS", note: "Homework is uncountable." },
+      { id: "votes_number", original: "She received the same number of votes as Oliver.", second: "She received ______ Oliver.", answer: "as many votes as", key: "AS", note: "Votes is countable plural." },
+      { id: "experience_amount", original: "He has the same amount of experience as his colleague.", second: "He has ______ his colleague.", answer: "as much experience as", key: "AS", note: "Experience is uncountable in this meaning." }
+    ];
+
+    const anyComparativeScenarios = [
+      { id: "suitcase_heavy", original: "The suitcase was so heavy that I could only just lift it.", second: "If the suitcase had been ______, I wouldn’t have been able to lift it.", answer: "any heavier", key: "ANY", note: "ANY + comparative means even slightly more." },
+      { id: "arrived_late", original: "We arrived so late that we only just caught the train.", second: "If we had arrived ______, we would have missed the train.", answer: "any later", key: "ANY", note: "ANY LATER means even slightly later." },
+      { id: "tickets_expensive", original: "The tickets were so expensive that we could only just afford them.", second: "If the tickets had been ______, we couldn’t have afforded them.", answer: "any more expensive", key: "ANY", note: "Use ANY MORE + long adjective." },
+      { id: "room_small", original: "The room was so small that one more person would not have fitted in.", second: "If the room had been ______, one more person would not have fitted in.", answer: "any smaller", key: "ANY", note: "ANY SMALLER means even slightly smaller." },
+      { id: "task_complicated", original: "The task was so complicated that we only just finished on time.", second: "If the task had been ______, we would not have finished on time.", answer: "any more complicated", key: "ANY", note: "Long adjectives use MORE after ANY." },
+      { id: "road_narrow", original: "The road was so narrow that the bus only just got through.", second: "If the road had been ______, the bus would not have got through.", answer: "any narrower", key: "ANY", note: "Narrow can form narrower." },
+      { id: "explanation_confusing", original: "The explanation was so confusing that I only just understood it.", second: "If the explanation had been ______, I would not have understood it.", answer: "any more confusing", key: "ANY", note: "Use ANY MORE with long adjectives." },
+      { id: "deadline_short", original: "The deadline was so short that we only just completed the work.", second: "If the deadline had been ______, we would not have completed the work.", answer: "any shorter", key: "ANY", note: "ANY SHORTER means even slightly shorter." }
+    ];
+
+    const degreeScenarios = [
+      { id: "test_easy", original: "The test was so easy that everyone finished early.", second: "It was ______ that everyone finished early.", answer: "such an easy test", key: "SUCH", note: "Use SUCH + article + adjective + noun." },
+      { id: "road_narrow", original: "The road was so narrow that two cars couldn’t pass.", second: "It was ______ that two cars couldn’t pass.", answer: "such a narrow road", key: "SUCH", note: "Use SUCH A + adjective + singular noun." },
+      { id: "film_boring", original: "The film was so boring that many people left early.", second: "It was ______ that many people left early.", answer: "such a boring film", key: "SUCH", note: "SO + adjective can become SUCH + adjective + noun." },
+      { id: "instructions_confusing", original: "The instructions were so confusing that nobody knew what to do.", second: "They were ______ that nobody knew what to do.", answer: "such confusing instructions", key: "SUCH", note: "With plural nouns, do not use a/an after SUCH." },
+      { id: "bag_heavy", original: "The bag was too heavy for me to carry.", second: "I was not ______ the bag.", answer: "strong enough to carry", key: "ENOUGH", note: "TOO heavy can become not strong enough." },
+      { id: "mountain_low", original: "The mountain wasn’t high enough to be covered in snow.", second: "The mountain was ______ covered in snow.", answer: "too low to be", key: "TOO", note: "Not high enough can become too low." },
+      { id: "chair_uncomfortable", original: "The chair was not comfortable enough to sit on for long.", second: "The chair was ______ on for long.", answer: "too uncomfortable to sit", key: "TOO", note: "Not comfortable enough can become too uncomfortable." },
+      { id: "room_small", original: "The room was too small for all of us to work in.", second: "The room was not ______ all of us to work in.", answer: "big enough for", key: "ENOUGH", note: "Too small can become not big enough." }
+    ];
+
+    const trapScenarios = [
+      {
+        id: "wrong_subject_as",
+        type: "Cambridge traps",
+        pattern: "Comparing the wrong subject",
+        original: "Tom is taller than Mark.",
+        second: "Mark is not ______ Tom.",
+        key: "AS",
+        answers: ["as tall as"],
+        distractors: ["taller than", "as taller as", "as tall than", "not as tall as"],
+        note: "A is taller than B means B is not as tall as A."
+      },
+      {
+        id: "as_than",
+        type: "Cambridge traps",
+        pattern: "Do not use THAN with AS...AS",
+        original: "This book is not as interesting as that one.",
+        second: "That book is ______ this one.",
+        key: "THAN",
+        answers: ["more interesting than"],
+        distractors: ["more interesting as", "as interesting than", "the most interesting", "interesting than"],
+        note: "Use a comparative form before THAN."
+      },
+      {
+        id: "such_noun",
+        type: "Cambridge traps",
+        pattern: "SUCH needs a noun",
+        original: "This is the most beautiful painting I have ever seen.",
+        second: "I have ______ beautiful painting before.",
+        key: "NEVER",
+        answers: ["never seen such a"],
+        distractors: ["never seen such", "never saw such a", "never seen so a", "never have seen such"],
+        note: "Use HAVE NEVER + past participle + SUCH A + adjective + noun."
+      },
+      {
+        id: "near_structure",
+        type: "Cambridge traps",
+        pattern: "NOWHERE NEAR AS...AS",
+        original: "Your laptop isn’t nearly as fast as mine.",
+        second: "Your laptop is ______ mine.",
+        key: "NEAR",
+        answers: ["nowhere near as fast as"],
+        distractors: ["nowhere as near fast as", "nowhere near faster than", "not nowhere near as fast", "near nowhere as fast as"],
+        note: "The correct expression is NOWHERE NEAR AS + adjective + AS."
+      },
+      {
+        id: "nothing_like_structure",
+        type: "Cambridge traps",
+        pattern: "NOTHING LIKE AS...AS",
+        original: "The sequel was much less exciting than the original film.",
+        second: "The sequel was ______ the original film.",
+        key: "NOTHING",
+        answers: ["nothing like as exciting as"],
+        distractors: ["nothing as exciting than", "nothing like more exciting", "nothing like exciting as", "nothing as like exciting"],
+        note: "Use NOTHING LIKE AS + adjective + AS."
+      },
+      {
+        id: "many_much",
+        type: "Cambridge traps",
+        pattern: "MANY / MUCH with the correct noun type",
+        original: "There were fewer students than I expected.",
+        second: "There were not ______ I expected.",
+        key: "MANY",
+        answers: ["as many students as"],
+        distractors: ["as much students as", "as many student as", "less students than", "fewer students as"],
+        note: "Use MANY with plural countable nouns such as students."
+      },
+      {
+        id: "much_money",
+        type: "Cambridge traps",
+        pattern: "MUCH with uncountable nouns",
+        original: "We had less money than we needed.",
+        second: "We did not have ______ we needed.",
+        key: "MUCH",
+        answers: ["as much money as"],
+        distractors: ["as many money as", "as much monies as", "fewer money than", "less money as"],
+        note: "Use MUCH with uncountable nouns such as money."
+      },
+      {
+        id: "any_comparative",
+        type: "Cambridge traps",
+        pattern: "ANY + comparative",
+        original: "The suitcase was so heavy that I could only just lift it.",
+        second: "If the suitcase had been ______, I wouldn’t have been able to lift it.",
+        key: "ANY",
+        answers: ["any heavier"],
+        distractors: ["any more heavy", "more heavy", "the heaviest", "any heavy"],
+        note: "Use ANY + comparative: any heavier, any later, any more expensive."
+      }
+    ];
+
+    const feedbackBank = {
+      correct: [
+        "Excellent. You identified the comparison and transformed it correctly.",
+        "Good job. The meaning is the same and the comparative structure is accurate.",
+        "Correct. You used the key word properly and respected the 2–5 word limit."
+      ],
+      asAs: "Remember the structure: NOT AS + adjective + AS. Do not use THAN with AS...AS.",
+      comparative: "Use a comparative form before THAN: easier than, more interesting than, better than.",
+      superlative: "A superlative experience often becomes HAVE NEVER + past participle + SUCH.",
+      nobody: "A superlative can be rewritten with NOBODY / NO OTHER + comparative.",
+      near: "The correct expression is NOWHERE NEAR AS + adjective + AS.",
+      nothing: "The correct expression is NOTHING LIKE AS + adjective + AS.",
+      quantity: "Use MANY / FEWER with plural countable nouns and MUCH / LESS with uncountable nouns.",
+      any: "ANY + comparative means even slightly more."
+    };
+
+    const state = {
+      studyIndex: 0,
+      mcCategory: "All categories",
+      mcCurrent: null,
+      mcSelected: null,
+      mcScore: 0,
+      mcAttempts: 0,
+      mcRecent: [],
+      trCategory: "All categories",
+      trCurrent: null,
+      trChecked: false,
+      trScore: 0,
+      trAttempts: 0,
+      trRecent: [],
+      examCategory: "All categories",
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+      examChecked: false,
+      examAnswers: [],
+      sessionUsage: {}
+    };
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function normalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/\bisn't\b/g, "is not")
+        .replace(/\bwasn't\b/g, "was not")
+        .replace(/\baren't\b/g, "are not")
+        .replace(/\bweren't\b/g, "were not")
+        .replace(/\bhaven't\b/g, "have not")
+        .replace(/\bhasn't\b/g, "has not")
+        .replace(/\bdon't\b/g, "do not")
+        .replace(/\bdoesn't\b/g, "does not")
+        .replace(/[.,!?;]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function wordCount(text) {
+      const clean = String(text || "").replace(/[.,!?;]/g, "").trim();
+      if (!clean) return 0;
+      return clean.split(/\s+/).filter(Boolean).length;
+    }
+
+    function keyIsIncluded(answer, key) {
+      const answerWords = normalise(answer).split(" ");
+      const keyWords = normalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function expandAcceptedAnswers(answers) {
+      const expanded = [];
+
+      answers.forEach(answer => {
+        expanded.push(answer);
+
+        const variants = [
+          [/\bis not\b/gi, "isn't"],
+          [/\bwas not\b/gi, "wasn't"],
+          [/\bare not\b/gi, "aren't"],
+          [/\bwere not\b/gi, "weren't"],
+          [/\bhave not\b/gi, "haven't"],
+          [/\bhas not\b/gi, "hasn't"],
+          [/\bdo not\b/gi, "don't"],
+          [/\bdoes not\b/gi, "doesn't"]
+        ];
+
+        variants.forEach(([pattern, replacement]) => {
+          const variant = answer.replace(pattern, replacement);
+          if (variant !== answer) expanded.push(variant);
+        });
+      });
+
+      return [...new Set(expanded)].filter(answer => wordCount(answer) >= 2 && wordCount(answer) <= 5);
+    }
+
+    function makeExercise(data) {
+      const answers = expandAcceptedAnswers(data.answers || [data.answer]);
+
+      return {
+        block: blockId,
+        type: data.type,
+        pattern: data.pattern,
+        patternId: data.patternId,
+        original: data.original,
+        second: data.second,
+        key: data.key,
+        keyOptions: data.keyOptions || [data.key],
+        answers,
+        answer: answers[0],
+        distractors: data.distractors || [],
+        note: data.note || "",
+        feedbackType: data.feedbackType || "",
+        signature: `${blockId}_${data.patternId}_${data.scenarioId}_${data.templateId}`
+      };
+    }
+
+    function getAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
+    }
+
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
+    }
+
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
+    }
+
+    function isValidExercise(exercise) {
+      return getAcceptedAnswers(exercise).every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
+      });
+    }
+
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+
+      return [...new Set(exercise.distractors || [])]
+        .map(option => String(option || "").trim())
+        .filter(option =>
+          wordCount(option) >= 2 &&
+          wordCount(option) <= 5 &&
+          keyIsIncluded(option, exercise.key) &&
+          !accepted.includes(normalise(option))
+        )
+        .slice(0, 8);
+    }
+
+    function getSeenRecords() {
+      try {
+        return JSON.parse(localStorage.getItem(seenExercisesKey)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveSeenRecords(records) {
+      localStorage.setItem(seenExercisesKey, JSON.stringify(records));
+    }
+
+    function getPatternStats() {
+      try {
+        return JSON.parse(localStorage.getItem(patternStatsKey)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function savePatternStats(stats) {
+      localStorage.setItem(patternStatsKey, JSON.stringify(stats));
+    }
+
+    function recordExercise(exercise, correct = null) {
+      const records = getSeenRecords();
+      const now = new Date().toISOString();
+
+      const previous = records[exercise.signature] || {
+        signature: exercise.signature,
+        pattern: exercise.patternId,
+        seenAt: now,
+        attempts: 0,
+        correct: false,
+        wrong: false
+      };
+
+      previous.seenAt = now;
+      previous.attempts += 1;
+
+      if (correct === true) previous.correct = true;
+      if (correct === false) previous.wrong = true;
+
+      records[exercise.signature] = previous;
+      saveSeenRecords(records);
+
+      if (correct !== null) {
+        const stats = getPatternStats();
+        stats[exercise.patternId] = stats[exercise.patternId] || { seen: 0, correct: 0, wrong: 0 };
+        stats[exercise.patternId].seen += 1;
+        if (correct) stats[exercise.patternId].correct += 1;
+        else stats[exercise.patternId].wrong += 1;
+        savePatternStats(stats);
+      }
+    }
+
+    function generateMoreThanToNotAs() {
+      const s = pick(comparisonScenarios);
+      const tense = Math.random() < 0.55 ? "is" : "was";
+      const templateId = tense === "is" ? "more_than_to_not_as_present" : "more_than_to_not_as_past";
+
+      return makeExercise({
+        type: "MORE THAN → NOT AS...AS",
+        pattern: "MORE THAN → NOT AS...AS",
+        patternId: "more_than_to_not_as_as",
+        scenarioId: s.id,
+        templateId,
+        original: `${s.subjectA} ${tense} ${s.comparative} than ${s.subjectB}.`,
+        second: `${s.subjectBCap} ${tense} not ______ ${s.subjectAEnd}.`,
+        key: "AS",
+        answers: [`as ${s.adjective} as`],
+        distractors: [
+          `as ${s.adjective} than`,
+          `so ${s.adjective} than`,
+          `not so ${s.comparative} as`,
+          `not as ${s.comparative} as`,
+          `${s.comparative} than`
+        ],
+        note: "A is more adjective than B means B is not as adjective as A.",
+        feedbackType: "asAs"
+      });
+    }
+
+    function generateNotAsToComparative() {
+      const s = pick(comparisonScenarios);
+      const tense = Math.random() < 0.55 ? "is" : "was";
+      const templateId = tense === "is" ? "not_as_to_comparative_present" : "not_as_to_comparative_past";
+
+      return makeExercise({
+        type: "NOT AS...AS → COMPARATIVE",
+        pattern: "NOT AS...AS → COMPARATIVE THAN",
+        patternId: "not_as_as_to_comparative",
+        scenarioId: s.id,
+        templateId,
+        original: `${s.subjectA} ${tense} not as ${s.adjective} as ${s.subjectB}.`,
+        second: `${s.subjectBCap} ${tense} ______ ${s.subjectAEnd}.`,
+        key: "THAN",
+        answers: [`${s.comparative} than`],
+        distractors: [
+          `more ${s.adjective} as`,
+          `as ${s.adjective} than`,
+          `${s.adjective} than`,
+          `the most ${s.adjective}`,
+          `as ${s.comparative} as`
+        ],
+        note: "If A is not as adjective as B, then B is more adjective than A.",
+        feedbackType: "comparative"
+      });
+    }
+
+    function generateLessThanToNotAs() {
+      const s = pick(comparisonScenarios);
+      const tense = Math.random() < 0.5 ? "is" : "was";
+      const templateId = tense === "is" ? "less_than_to_not_as_present" : "less_than_to_not_as_past";
+
+      return makeExercise({
+        type: "LESS THAN → NOT AS...AS",
+        pattern: "LESS THAN → NOT AS...AS",
+        patternId: "less_than_to_not_as_as",
+        scenarioId: s.id,
+        templateId,
+        original: `${s.subjectA} ${tense} less ${s.adjective} than ${s.subjectB}.`,
+        second: `${s.subjectA} ${tense} not ______ ${s.subjectB}.`,
+        key: "AS",
+        answers: [`as ${s.adjective} as`],
+        distractors: [
+          `as ${s.adjective} than`,
+          `less ${s.adjective} as`,
+          `not as ${s.comparative} as`,
+          `${s.comparative} than`,
+          `so ${s.adjective} than`
+        ],
+        note: "Less adjective than can be rewritten as not as adjective as.",
+        feedbackType: "asAs"
+      });
+    }
+
+    function generateSuperlativeToNeverSuch() {
+      const s = pick(superlativeExperiences);
+
+      return makeExercise({
+        type: "Superlative → NEVER...SUCH",
+        pattern: "SUPERLATIVE → HAVE NEVER...SUCH",
+        patternId: "superlative_to_never_such",
+        scenarioId: s.id,
+        templateId: "superlative_to_never_such",
+        original: `This is the ${s.superlative} ${s.item} I have ever ${s.verb}.`,
+        second: `I have ______ ${s.adjective} ${s.item} before.`,
+        key: "NEVER",
+        answers: [`never ${s.verb} such ${s.suchArticle}`],
+        distractors: [
+          `never saw such ${s.suchArticle}`,
+          `never ${s.verb} so ${s.suchArticle}`,
+          `never have ${s.verb} such`,
+          `never ${s.verb} such`,
+          `not ever ${s.verb} such`
+        ],
+        note: "Use HAVE NEVER + past participle + SUCH A/AN + adjective + noun.",
+        feedbackType: "superlative"
+      });
+    }
+
+    function generateNeverMoreToSuperlative() {
+      const s = pick(neverMoreScenarios);
+
+      return makeExercise({
+        type: "NEVER...A MORE → Superlative",
+        pattern: "NEVER...A MORE → THE MOST",
+        patternId: "never_more_to_superlative",
+        scenarioId: s.id,
+        templateId: "never_more_to_superlative",
+        original: s.first,
+        second: `${s.subject} is ______ I have ever ${s.verb}.`,
+        key: "THE",
+        answers: [`the ${s.superlative} ${s.itemPhrase}`],
+        distractors: [
+          `the more ${s.adjective} ${s.itemPhrase}`,
+          `a most ${s.adjective} ${s.itemPhrase}`,
+          `the most ${s.adjective}`,
+          `more ${s.adjective} than`
+        ],
+        note: "I have never seen/met/read a more... has a superlative meaning.",
+        feedbackType: "superlative"
+      });
+    }
+
+    function generateNobodyMore() {
+      const s = pick(nobodyMoreScenarios);
+
+      return makeExercise({
+        type: "Superlative → Nobody / No other",
+        pattern: "THE MOST → NOBODY / NO OTHER + COMPARATIVE",
+        patternId: "superlative_to_nobody_more",
+        scenarioId: s.id,
+        templateId: "superlative_to_nobody_more",
+        original: s.original,
+        second: s.second,
+        key: s.key,
+        answers: [s.answer],
+        distractors: [
+          s.answer.replace("more", "most"),
+          s.answer.replace("than", "as"),
+          s.answer.replace("a more", "the more"),
+          s.answer.replace("more", "as"),
+          s.answer.replace("less", "least")
+        ],
+        note: s.note,
+        feedbackType: "nobody"
+      });
+    }
+
+    function generateNowhereNear() {
+      const s = pick(strongNegativeScenarios);
+
+      return makeExercise({
+        type: "NOWHERE NEAR / NOTHING LIKE",
+        pattern: "NOT NEARLY AS...AS → NOWHERE NEAR AS...AS",
+        patternId: "not_nearly_to_nowhere_near",
+        scenarioId: s.id,
+        templateId: "nowhere_near",
+        original: `${s.subjectA} ${s.tense} not nearly as ${s.adjective} as ${s.subjectB}.`,
+        second: `${s.subjectA} ${s.tense} ______ ${s.subjectB}.`,
+        key: "NEAR",
+        answers: [`nowhere near as ${s.adjective} as`],
+        distractors: [
+          `nowhere as near ${s.adjective}`,
+          `near nowhere as ${s.adjective}`,
+          `not nowhere near as ${s.adjective}`,
+          `nowhere near ${s.adjective} than`,
+          `nowhere near more ${s.adjective}`
+        ],
+        note: "NOWHERE NEAR AS means much less than.",
+        feedbackType: "near"
+      });
+    }
+
+    function generateNothingLike() {
+      const s = pick(strongNegativeScenarios);
+
+      return makeExercise({
+        type: "NOWHERE NEAR / NOTHING LIKE",
+        pattern: "MUCH LESS...THAN → NOTHING LIKE AS...AS",
+        patternId: "less_than_to_nothing_like",
+        scenarioId: s.id,
+        templateId: "nothing_like",
+        original: `${s.subjectA} ${s.tense} much less ${s.adjective} than ${s.subjectB}.`,
+        second: `${s.subjectA} ${s.tense} ______ ${s.subjectB}.`,
+        key: "NOTHING",
+        answers: [`nothing like as ${s.adjective} as`],
+        distractors: [
+          `nothing as like ${s.adjective}`,
+          `nothing like ${s.adjective} than`,
+          `not like as ${s.adjective}`,
+          `nothing as ${s.adjective} as`,
+          `nothing like more ${s.adjective}`
+        ],
+        note: "NOTHING LIKE AS...AS is a strong negative comparison.",
+        feedbackType: "nothing"
+      });
+    }
+
+    function generateQuantity() {
+      const s = pick(quantityScenarios);
+      const isCountable = s.type === "countable";
+
+      return makeExercise({
+        type: "Quantity comparisons",
+        pattern: isCountable ? "FEWER → NOT AS MANY AS" : "LESS → NOT AS MUCH AS",
+        patternId: "fewer_less_to_not_as_many_much",
+        scenarioId: s.id,
+        templateId: isCountable ? "fewer_to_not_as_many" : "less_to_not_as_much",
+        original: isCountable
+          ? `${s.verbFrame} fewer ${s.nounPhrase} than ${s.expectedPhrase}.`
+          : `${s.verbFrame} less ${s.nounPhrase} than ${s.expectedPhrase}.`,
+        second: `${s.negativeFrame} ______ ${s.expectedPhrase}.`,
+        key: isCountable ? "MANY" : "MUCH",
+        answers: [`as ${s.determiner} ${s.nounPhrase} as`],
+        distractors: isCountable
+          ? [
+              `as much ${s.nounPhrase} as`,
+              `less ${s.nounPhrase} than`,
+              `fewer ${s.nounPhrase} as`,
+              `as many ${s.nounPhrase} than`
+            ]
+          : [
+              `as many ${s.nounPhrase} as`,
+              `fewer ${s.nounPhrase} than`,
+              `less ${s.nounPhrase} as`,
+              `as much ${s.nounPhrase} than`
+            ],
+        note: isCountable
+          ? "Use MANY with plural countable nouns."
+          : "Use MUCH with uncountable nouns.",
+        feedbackType: "quantity"
+      });
+    }
+
+    function generateSameAs() {
+      const s = pick(sameAsScenarios);
+
+      return makeExercise({
+        type: "Quantity comparisons",
+        pattern: "THE SAME AS → AS MANY / MUCH AS",
+        patternId: "same_as_to_as_many_much_as",
+        scenarioId: s.id,
+        templateId: "same_as_quantity",
+        original: s.original,
+        second: s.second,
+        key: s.key,
+        answers: [s.answer],
+        distractors: [
+          s.answer.replace("many", "much"),
+          s.answer.replace("much", "many"),
+          s.answer.replace("as", "than"),
+          s.answer.replace("as ", ""),
+          s.answer.replace(" as", " than")
+        ],
+        note: s.note,
+        feedbackType: "quantity"
+      });
+    }
+
+    function generateAnyComparative() {
+      const s = pick(anyComparativeScenarios);
+
+      return makeExercise({
+        type: "ANY + comparative",
+        pattern: "ANY + COMPARATIVE",
+        patternId: "any_comparative_condition",
+        scenarioId: s.id,
+        templateId: "any_comparative",
+        original: s.original,
+        second: s.second,
+        key: s.key,
+        answers: [s.answer],
+        distractors: [
+          s.answer.replace("any more", "more"),
+          s.answer.replace("any ", ""),
+          s.answer.replace("more expensive", "more heavy"),
+          s.answer.replace("heavier", "more heavy"),
+          `the ${s.answer.replace("any ", "")}`
+        ],
+        note: s.note,
+        feedbackType: "any"
+      });
+    }
+
+    function generateAdvancedDegree() {
+      const s = pick(degreeScenarios);
+
+      return makeExercise({
+        type: "Advanced degree structures",
+        pattern: "SO / SUCH / TOO / ENOUGH",
+        patternId: "advanced_degree_structures",
+        scenarioId: s.id,
+        templateId: "advanced_degree",
+        original: s.original,
+        second: s.second,
+        key: s.key,
+        answers: [s.answer],
+        distractors: [
+          s.answer.replace("such", "so"),
+          s.answer.replace("enough", "too"),
+          s.answer.replace("too", "enough"),
+          s.answer.replace(" to ", " for "),
+          s.answer.replace(" a ", " ")
+        ],
+        note: s.note,
+        feedbackType: s.key === "SUCH" ? "superlative" : "any"
+      });
+    }
+
+    function generateTrap() {
+      const s = pick(trapScenarios);
+
+      return makeExercise({
+        type: s.type,
+        pattern: s.pattern,
+        patternId: "cambridge_traps",
+        scenarioId: s.id,
+        templateId: "trap",
+        original: s.original,
+        second: s.second,
+        key: s.key,
+        answers: s.answers,
+        distractors: s.distractors,
+        note: s.note,
+        feedbackType: s.key === "MANY" || s.key === "MUCH" ? "quantity" : ""
+      });
+    }
+
+    const generators = {
+      "MORE THAN → NOT AS...AS": [generateMoreThanToNotAs],
+      "NOT AS...AS → COMPARATIVE": [generateNotAsToComparative],
+      "LESS THAN → NOT AS...AS": [generateLessThanToNotAs],
+      "Superlative → NEVER...SUCH": [generateSuperlativeToNeverSuch],
+      "NEVER...A MORE → Superlative": [generateNeverMoreToSuperlative],
+      "Superlative → Nobody / No other": [generateNobodyMore],
+      "NOWHERE NEAR / NOTHING LIKE": [generateNowhereNear, generateNothingLike],
+      "Quantity comparisons": [generateQuantity, generateSameAs],
+      "ANY + comparative": [generateAnyComparative],
+      "Advanced degree structures": [generateAdvancedDegree],
+      "Cambridge traps": [generateTrap]
+    };
+
+    generators["Mixed exam decisions"] = [
+      generateMoreThanToNotAs,
+      generateNotAsToComparative,
+      generateLessThanToNotAs,
+      generateSuperlativeToNeverSuch,
+      generateNeverMoreToSuperlative,
+      generateNobodyMore,
+      generateNowhereNear,
+      generateNothingLike,
+      generateQuantity,
+      generateSameAs,
+      generateAnyComparative,
+      generateAdvancedDegree,
+      generateTrap
+    ];
+
+    const allPracticeGenerators = Object.entries(generators)
+      .filter(([category]) => category !== "Mixed exam decisions")
+      .flatMap(([, list]) => list);
+
+    function getGeneratorList(category) {
+      if (category === "All categories") return allPracticeGenerators;
+      if (category === "Mixed exam decisions") return generators["Mixed exam decisions"];
+      return generators[category] || allPracticeGenerators;
+    }
+
+    function safeGenerate(generator) {
+      try {
+        return generator();
+      } catch {
+        return null;
+      }
+    }
+
+    function generateExercise(category = "All categories", mode = "transform", recent = []) {
+      const generatorList = getGeneratorList(category);
+      const seenRecords = getSeenRecords();
+      const stats = getPatternStats();
+
+      const usageKey = `${mode}::${category}`;
+      state.sessionUsage[usageKey] = state.sessionUsage[usageKey] || {};
+      const sessionUsage = state.sessionUsage[usageKey];
+
+      const candidates = [];
+
+      for (let i = 0; i < 320; i++) {
+        const generator = pick(generatorList);
+        const exercise = safeGenerate(generator);
+        if (!exercise) continue;
+
+        const validKeys = shuffle(exercise.keyOptions || [exercise.key]).filter(key =>
+          getAcceptedAnswers(exercise).some(answer => keyIsIncluded(answer, key))
+        );
+
+        if (!validKeys.length) continue;
+
+        const selectedKey = pick(validKeys);
+        const accepted = getAcceptedAnswers(exercise).filter(answer => keyIsIncluded(answer, selectedKey));
+
+        const finalExercise = {
+          ...exercise,
+          key: selectedKey,
+          answers: accepted,
+          answer: accepted[0]
+        };
+
+        if (!isValidExercise(finalExercise)) continue;
+        if (mode === "multiple" && cleanDistractors(finalExercise).length < 3) continue;
+
+        const record = seenRecords[finalExercise.signature];
+        const patternStat = stats[finalExercise.patternId] || { seen: 0, correct: 0, wrong: 0 };
+        const weakPattern = patternStat.seen > 0 && patternStat.correct / patternStat.seen < 0.65;
+
+        let score = 0;
+
+        if (record) {
+          score += record.wrong ? 25 : 700;
+          score += Math.min(record.attempts || 0, 10) * 18;
+        } else {
+          score -= 500;
+        }
+
+        if (weakPattern) score -= 80;
+        if (recent.includes(finalExercise.signature)) score += 2500;
+        score += (sessionUsage[finalExercise.patternId] || 0) * 30;
+
+        candidates.push({ exercise: finalExercise, score });
+      }
+
+      if (!candidates.length) return generateTrap();
+
+      candidates.sort((a, b) => a.score - b.score);
+      const chosen = candidates[0].exercise;
+
+      sessionUsage[chosen.patternId] = (sessionUsage[chosen.patternId] || 0) + 1;
+      recordExercise(chosen, null);
+
+      return chosen;
+    }
+
+    function remember(recentList, exercise) {
+      recentList.push(exercise.signature);
+      while (recentList.length > 140) recentList.shift();
+    }
+
+    function populatePracticeSelect(id, value) {
+      $(id).innerHTML = categories
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function populateStudySelect() {
+      $("studySection").innerHTML = studySections
+        .map((section, index) => `<option value="${index}" ${index === state.studyIndex ? "selected" : ""}>${section.title}</option>`)
+        .join("");
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+      document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+      $(tab).classList.remove("hidden");
+      document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
+    }
+
+    function renderStudy() {
+      const section = studySections[state.studyIndex];
+
+      $("studyCard").innerHTML = `
+        <span class="badge badge-blue">${section.badge}</span>
+        <h2>${section.title}</h2>
+        ${section.html}
+      `;
+
+      $("studyCounter").textContent = `Study section ${state.studyIndex + 1} of ${studySections.length}`;
+      $("studySection").value = String(state.studyIndex);
+    }
+
+    function newMcQuestion() {
+      const exercise = generateExercise(state.mcCategory, "multiple", state.mcRecent);
+      remember(state.mcRecent, exercise);
+
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
+
+      state.mcCurrent = { ...exercise, options };
+      state.mcSelected = null;
+      renderMc();
+    }
+
+    function renderMc() {
+      const q = state.mcCurrent;
+      $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
+
+      if (!q) {
+        $("mcType").textContent = "";
+        $("mcQuestion").textContent = "Click 'New question' to start.";
+        $("mcOptions").innerHTML = "";
+        $("mcFeedback").classList.add("hidden");
+        return;
+      }
+
+      $("mcType").textContent = `${q.type} · ${q.pattern}`;
+
+      $("mcQuestion").innerHTML = `
+        <p>${q.original}</p>
+        <div class="box">${q.second}</div>
+      `;
+
+      $("mcOptions").innerHTML = "";
+
+      q.options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+
+        if (state.mcSelected) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
+        }
+
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
+      });
+
+      if (state.mcSelected) {
+        const correct = isCorrectAnswer(state.mcSelected, q);
+        $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+        $("mcFeedback").innerHTML = `
+          <p><strong>${correct ? pick(feedbackBank.correct) : "Not quite."}</strong></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
+          <p>${q.note || feedbackFor(q)}</p>
+          <p class="muted"><strong>Target pattern:</strong> ${q.pattern}</p>
+        `;
+      } else {
+        $("mcFeedback").classList.add("hidden");
+      }
+    }
+
+    function chooseMc(option) {
+      if (state.mcSelected) return;
+      state.mcSelected = option;
+      state.mcAttempts++;
+
+      const correct = isCorrectAnswer(option, state.mcCurrent);
+      if (correct) state.mcScore++;
+
+      recordExercise(state.mcCurrent, correct);
+      renderMc();
+    }
+
+    function newTransformation() {
+      state.trCurrent = generateExercise(state.trCategory, "transform", state.trRecent);
+      remember(state.trRecent, state.trCurrent);
+
+      state.trChecked = false;
+      $("trInput").value = "";
+      $("trFeedback").classList.add("hidden");
+      $("trHintBox").classList.add("hidden");
+      renderTransformation();
+    }
+
+    function renderTransformation() {
+      const q = state.trCurrent;
+      $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
+
+      if (!q) {
+        $("trType").textContent = "";
+        $("trFirst").textContent = "Click 'New exercise' to start.";
+        $("trSecond").textContent = "";
+        $("trKey").textContent = "";
+        return;
+      }
+
+      const input = $("trInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+
+      $("trType").textContent = `${q.type} · ${q.pattern}`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("trFirst").textContent = q.original;
+      $("trSecond").textContent = q.second;
+      $("trKey").textContent = `Key word: ${q.key}`;
+    }
+
+    function checkTransformation(reveal = false) {
+      if (!state.trCurrent || state.trChecked) return;
+
+      const input = $("trInput").value;
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
+
+      state.trChecked = true;
+      state.trAttempts++;
+      if (correct) state.trScore++;
+
+      recordExercise(state.trCurrent, correct);
+
+      $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("trFeedback").innerHTML = `
+        <p><strong>${correct ? pick(feedbackBank.correct) : reveal ? "Answer revealed." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
+        <p>${state.trCurrent.note || feedbackFor(state.trCurrent)}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${state.trCurrent.pattern}</p>
+        <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
+      `;
+
+      $("trFeedback").classList.remove("hidden");
+      renderTransformation();
+    }
+
+    function showHint() {
+      if (!state.trCurrent) return;
+      $("trHintBox").classList.remove("hidden");
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.pattern}. ${feedbackFor(state.trCurrent)}`;
+    }
+
+    function feedbackFor(exercise) {
+      if (exercise.feedbackType && feedbackBank[exercise.feedbackType]) return feedbackBank[exercise.feedbackType];
+      if (exercise.patternId.includes("as")) return feedbackBank.asAs;
+      if (exercise.patternId.includes("comparative")) return feedbackBank.comparative;
+      if (exercise.patternId.includes("superlative")) return feedbackBank.superlative;
+      if (exercise.patternId.includes("nobody")) return feedbackBank.nobody;
+      if (exercise.patternId.includes("near")) return feedbackBank.near;
+      if (exercise.patternId.includes("nothing")) return feedbackBank.nothing;
+      if (exercise.patternId.includes("quantity") || exercise.patternId.includes("many") || exercise.patternId.includes("much")) return feedbackBank.quantity;
+      return "Check the comparison, the direction of meaning and the exact keyword.";
+    }
+
+    function buildOfficialExamQuestions() {
+      const roundPlan = [
+        [generateMoreThanToNotAs],
+        [generateNotAsToComparative],
+        [generateSuperlativeToNeverSuch, generateNeverMoreToSuperlative],
+        [generateNobodyMore],
+        [generateNowhereNear, generateNothingLike],
+        [generateQuantity, generateSameAs, generateAnyComparative, generateAdvancedDegree]
+      ];
+
+      const selected = [];
+      const used = [];
+
+      roundPlan.forEach(group => {
+        let exercise = null;
+
+        for (let attempt = 0; attempt < 100; attempt++) {
+          const candidate = safeGenerate(pick(group));
+          if (!candidate || !isValidExercise(candidate)) continue;
+          if (used.includes(candidate.signature)) continue;
+
+          exercise = candidate;
+          used.push(candidate.signature);
+          recordExercise(candidate, null);
+          break;
+        }
+
+        if (exercise) selected.push(exercise);
+      });
+
+      return selected;
+    }
+
+    function buildExamQuestions() {
+      if (state.examCategory === "All categories" || state.examCategory === "Mixed exam decisions") {
+        return buildOfficialExamQuestions();
+      }
+
+      const selected = [];
+      const used = [];
+
+      for (let attempt = 0; attempt < 240; attempt++) {
+        const exercise = generateExercise(state.examCategory, "exam", used);
+        if (!used.includes(exercise.signature)) {
+          selected.push(exercise);
+          used.push(exercise.signature);
+        }
+
+        if (selected.length === 6) break;
+      }
+
+      return selected;
+    }
+
+    function startExam() {
+      state.examQuestions = buildExamQuestions();
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examCard").classList.remove("hidden");
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function resetExam() {
+      state.examQuestions = [];
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.remove("hidden");
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examFeedback").classList.add("hidden");
+      $("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = state.examQuestions.length;
+      const q = state.examQuestions[state.examIndex];
+
+      if (!q || total === 0) {
+        $("examIntro").classList.remove("hidden");
+        $("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = $("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (state.examIndex / total) * 100;
+
+      $("examProgress").style.width = `${progress}%`;
+      $("examType").textContent = `${q.type} · Question ${state.examIndex + 1}/${total}`;
+      $("examScore").textContent = `Score: ${state.examScore}/${state.examIndex}`;
+      $("examWords").textContent = `Words: ${words}/2–5`;
+      $("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("examFirst").textContent = q.original;
+      $("examSecond").textContent = q.second;
+      $("examKey").textContent = `Key word: ${q.key}`;
+      $("examCheck").disabled = state.examChecked;
+      $("examInput").disabled = state.examChecked;
+      $("examNext").disabled = !state.examChecked;
+      $("examNext").textContent = state.examIndex === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (state.examChecked) return;
+
+      const q = state.examQuestions[state.examIndex];
+      const input = $("examInput").value;
+      const correct = isCorrectAnswer(input, q);
+
+      state.examChecked = true;
+      if (correct) state.examScore++;
+
+      recordExercise(q, correct);
+
+      state.examAnswers.push({
+        number: state.examIndex + 1,
+        pattern: q.pattern,
+        patternId: q.patternId,
+        correct,
+        userAnswer: input,
+        accepted: acceptedAnswersText(q),
+        note: q.note || feedbackFor(q)
+      });
+
+      $("examFeedback").className = "box";
+      $("examFeedback").innerHTML = `
+        <p><strong>Answer saved.</strong></p>
+        <p class="muted">Feedback will appear at the end of the round.</p>
+      `;
+      $("examFeedback").classList.remove("hidden");
+
+      renderExam();
+    }
+
+    function nextExamQuestion() {
+      if (!state.examChecked) return;
+
+      if (state.examIndex >= state.examQuestions.length - 1) {
+        finishExam();
+        return;
+      }
+
+      state.examIndex++;
+      state.examChecked = false;
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function finishExam() {
+      const total = state.examQuestions.length;
+      const score = state.examScore;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
+
+      let message = "";
+      if (score >= 6) {
+        message = "Excellent exam control. You are handling comparison transformations with strong accuracy.";
+      } else if (score >= 5) {
+        message = "Very good result. Keep practising strong negative comparison and superlative paraphrases.";
+      } else if (score >= 4) {
+        message = "Good progress. Review the difference between AS...AS and comparative THAN structures.";
+      } else if (score >= 3) {
+        message = "You understand some patterns, but you need more controlled practice with direction of comparison.";
+      } else {
+        message = "Revise Study Mode carefully before repeating Exam Mode, especially AS...AS, NEVER...SUCH and quantity comparisons.";
+      }
+
+      const patternSummary = buildPatternSummary();
+      const review = state.examAnswers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.pattern}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+          <td>${item.note}</td>
+        </tr>
+      `).join("");
+
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.remove("hidden");
+
+      $("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <div class="box">${patternSummary}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Pattern</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart official round</button>
+        </div>
+      `;
+
+      $("examAgain").addEventListener("click", startExam);
+    }
+
+    function buildPatternSummary() {
+      const stats = getPatternStats();
+      const entries = Object.entries(stats);
+
+      if (!entries.length) {
+        return "<strong>Pattern tracking:</strong> Complete more practice to build a personalised pattern profile.";
+      }
+
+      const sorted = entries
+        .filter(([, value]) => value.seen >= 2)
+        .map(([pattern, value]) => ({
+          pattern,
+          seen: value.seen,
+          correct: value.correct,
+          wrong: value.wrong,
+          rate: value.correct / value.seen
+        }))
+        .sort((a, b) => a.rate - b.rate);
+
+      if (!sorted.length) {
+        return "<strong>Pattern tracking:</strong> More attempts are needed before identifying strong and weak patterns.";
+      }
+
+      const weakest = sorted[0];
+      const strongest = sorted[sorted.length - 1];
+
+      return `
+        <strong>Pattern tracking:</strong><br>
+        Strongest pattern so far: <strong>${formatPatternName(strongest.pattern)}</strong> (${strongest.correct}/${strongest.seen}).<br>
+        Needs more practice: <strong>${formatPatternName(weakest.pattern)}</strong> (${weakest.correct}/${weakest.seen}).
+      `;
+    }
+
+    function formatPatternName(patternId) {
+      return patternId
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, letter => letter.toUpperCase());
+    }
+
+    function init() {
+      populateStudySelect();
+      populatePracticeSelect("mcCategory", state.mcCategory);
+      populatePracticeSelect("trCategory", state.trCategory);
+      populatePracticeSelect("examCategory", state.examCategory);
+
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => showTab(button.dataset.tab));
+      });
+
+      $("studySection").addEventListener("change", event => {
+        state.studyIndex = Number(event.target.value);
+        renderStudy();
+      });
+
+      $("studyNext").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex + 1) % studySections.length;
+        renderStudy();
+      });
+
+      $("studyPrev").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex - 1 + studySections.length) % studySections.length;
+        renderStudy();
+      });
+
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        newMcQuestion();
+      });
+
+      $("mcNew").addEventListener("click", newMcQuestion);
+
+      $("mcReset").addEventListener("click", () => {
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        state.sessionUsage[`multiple::${state.mcCategory}`] = {};
+        renderMc();
+      });
+
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        newTransformation();
+      });
+
+      $("trNew").addEventListener("click", newTransformation);
+      $("trHint").addEventListener("click", showHint);
+      $("trCheck").addEventListener("click", () => checkTransformation(false));
+      $("trReveal").addEventListener("click", () => checkTransformation(true));
+
+      $("trReset").addEventListener("click", () => {
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        state.sessionUsage[`transform::${state.trCategory}`] = {};
+        renderTransformation();
+      });
+
+      $("trInput").addEventListener("input", renderTransformation);
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") checkTransformation(false);
+      });
+
+      $("examCategory").addEventListener("change", event => {
+        state.examCategory = event.target.value;
+        resetExam();
+      });
+
+      $("examStart").addEventListener("click", startExam);
+      $("examRestart").addEventListener("click", startExam);
+      $("examCheck").addEventListener("click", checkExamAnswer);
+      $("examNext").addEventListener("click", nextExamQuestion);
+      $("examInput").addEventListener("input", renderExam);
+      $("examInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          if (!state.examChecked) checkExamAnswer();
+          else nextExamQuestion();
+        }
+      });
+
+      renderStudy();
+      newMcQuestion();
+      newTransformation();
+    }
+
+    init();
+  </script>
+</body>
+</html>
