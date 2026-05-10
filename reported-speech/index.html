@@ -1,1 +1,2419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block 6 · Mr John’s KWT Lab</title>
+  <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
 
+  <style>
+    :root {
+      --navy: #062b63;
+      --blue: #005eb8;
+      --light-blue: #eaf3ff;
+      --orange: #f28c00;
+      --orange-soft: #fff3df;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d9e2ef;
+      --white: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 94, 184, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 0, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 46px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 0 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand img {
+      height: auto;
+      width: 260px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .home-link {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(6, 43, 99, 0.06);
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--orange-soft);
+      color: #9a5700;
+      border: 1px solid rgba(242, 140, 0, 0.25);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -1.4px;
+    }
+
+    .highlight { color: var(--orange); }
+
+    .hero p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 900px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    button,
+    .tab {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
+
+    button:hover,
+    .tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab.active,
+    .primary {
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      border-color: transparent;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    select,
+    input {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+    }
+
+    select { min-width: 280px; }
+    input { width: 100%; }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hidden { display: none !important; }
+
+    .badge,
+    .pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .badge-blue {
+      background: var(--light-blue);
+      color: var(--blue);
+      border-color: rgba(0, 94, 184, 0.18);
+    }
+
+    .badge-orange {
+      background: var(--orange-soft);
+      color: #9a5700;
+      border-color: rgba(242, 140, 0, 0.25);
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bbf7d0;
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: #fecaca;
+    }
+
+    .muted { color: var(--muted); }
+
+    .study-card {
+      min-height: 460px;
+    }
+
+    .study-card h2 {
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+      margin: 12px 0 12px;
+    }
+
+    .study-card h3 {
+      color: var(--navy);
+      margin: 18px 0 8px;
+      font-size: 21px;
+    }
+
+    .study-card p,
+    .study-card li {
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .study-mini {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .study-mini strong {
+      color: var(--navy);
+    }
+
+    .formula {
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--navy);
+      border: 1px solid rgba(0, 94, 184, 0.18);
+      border-radius: 10px;
+      padding: 3px 7px;
+      font-weight: 900;
+      margin: 2px 0;
+    }
+
+    .tense-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 15px;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .tense-table th,
+    .tense-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .tense-table th {
+      background: var(--light-blue);
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .tense-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      border-color: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      text-align: left;
+      min-height: 58px;
+    }
+
+    .option.good {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: #14532d;
+    }
+
+    .option.bad {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: #7f1d1d;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+
+    .result-number {
+      color: var(--navy);
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin: 8px 0;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 760px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brand img {
+        width: 220px;
+        height: auto;
+      }
+
+      .tabs,
+      .answer-row,
+      .option-grid,
+      .study-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding: 26px 20px; }
+      select { width: 100%; min-width: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
+        <div>
+          <span class="brand-title">Mr John’s KWT Lab</span>
+          <span class="brand-subtitle">Block 6 · Reported Speech</span>
+        </div>
+      </div>
+
+      <a class="home-link" href="../index.html">← Back to Lab Home</a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
+      <h1>Reported Speech <span class="highlight">Transformation</span> Trainer</h1>
+      <p>
+        Practise B2 First Part 4 transformations with reported statements, tense backshift,
+        reported questions, commands, requests, time-reference changes and advanced reporting verbs.
+        This block uses a controlled B2 generator to create varied exam-style practice.
+      </p>
+      <div class="stats">
+        <span class="pill">Core patterns</span>
+        <span class="pill">BACKSHIFT</span>
+        <span class="pill">SAY / TELL / ASK</span>
+        <span class="pill">IF / WHETHER</span>
+        <span class="pill">WH- QUESTIONS</span>
+        <span class="pill">TO-INFINITIVE</span>
+        <span class="pill">REPORTING VERBS</span>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="study">🧠 Study Mode</button>
+      <button class="tab" data-tab="multiple">✓ Multiple Choice</button>
+      <button class="tab" data-tab="transform">✎ Transformations</button>
+      <button class="tab" data-tab="exam">🏆 Exam Mode</button>
+    </nav>
+
+    <section id="study" class="tab-section">
+      <div class="toolbar">
+        <select id="studySection"></select>
+        <div class="button-group">
+          <button id="studyPrev">Previous</button>
+          <button id="studyNext" class="primary">Next</button>
+        </div>
+      </div>
+
+      <div id="studyCard" class="card study-card"></div>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
+    </section>
+
+    <section id="multiple" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="mcCategory"></select>
+        <div class="button-group">
+          <button id="mcNew">New question</button>
+          <button id="mcReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="mcType" class="badge badge-blue"></span>
+          <span id="mcScore" class="pill"></span>
+        </div>
+
+        <div id="mcQuestion" class="question"></div>
+        <div id="mcOptions" class="option-grid"></div>
+        <div id="mcFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="transform" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="trCategory"></select>
+        <div class="button-group">
+          <button id="trHint">Hint</button>
+          <button id="trNew">New exercise</button>
+          <button id="trReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="trType" class="badge badge-blue"></span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
+          <span id="trScore" class="pill"></span>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="trFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="trSecond" class="box"></div>
+
+        <p><span id="trKey" class="badge badge-orange"></span></p>
+
+        <div id="trHintBox" class="box hidden"></div>
+
+        <div class="answer-row">
+          <input id="trInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="trCheck" class="primary">Check</button>
+          <button id="trReveal">Reveal</button>
+        </div>
+
+        <div id="trFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="exam" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="examCategory"></select>
+        <div class="button-group">
+          <button id="examStart" class="primary">Start 10-question challenge</button>
+          <button id="examRestart">Restart challenge</button>
+        </div>
+      </div>
+
+      <div class="card" id="examIntro">
+        <span class="badge badge-orange">Exam Mode</span>
+        <h2 style="color:var(--navy); margin-bottom:8px;">10-question challenge</h2>
+        <p class="muted">
+          Complete 10 written Key Word Transformations. Each answer must contain between
+          two and five words and include the key word exactly as given.
+        </p>
+        <div class="box">
+          <strong>Recommended classroom use:</strong> revise the Study Mode theory first, practise specific categories,
+          then complete Mixed Exam Decisions under exam conditions.
+        </div>
+      </div>
+
+      <div class="card hidden" id="examCard">
+        <div class="toolbar">
+          <span id="examType" class="badge badge-blue"></span>
+          <span id="examScore" class="pill"></span>
+          <span id="examWords" class="pill">Words: 0/2–5</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="examProgress" class="progress-bar"></div>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="examFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="examSecond" class="box"></div>
+
+        <p><span id="examKey" class="badge badge-orange"></span></p>
+
+        <div class="answer-row">
+          <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="examCheck" class="primary">Check</button>
+          <button id="examNext" disabled>Next</button>
+        </div>
+
+        <div id="examFeedback" class="box hidden"></div>
+      </div>
+
+      <div class="card hidden" id="examResult"></div>
+    </section>
+
+    <footer class="footer">
+      <span><strong>Mr John’s KWT Lab</strong> · Block 6 · v1.0</span>
+      <span>Reported Speech · Large-scale B2 generator · FCE Part 4 focused practice</span>
+    </footer>
+  </main>
+
+  <script>
+    const categories = [
+      "All categories",
+      "Backshift statements",
+      "Say / Tell / Ask",
+      "Time and place changes",
+      "Reported yes/no questions",
+      "Reported wh- questions",
+      "Commands and requests",
+      "Reporting verbs + to-infinitive",
+      "Reporting verbs + -ing",
+      "Reporting verbs + that-clause",
+      "No-backshift situations",
+      "Mixed exam decisions",
+      "Cambridge traps"
+    ];
+
+    const studySections = [
+      {
+        title: "1. What reported speech really changes",
+        badge: "Reported Speech · Foundation",
+        html: `
+          <p>Reported speech is not only a tense exercise. In B2 First Part 4, it usually tests whether you can change the speaker’s perspective accurately.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Person changes</strong>
+              <p><span class="formula">I → he / she</span></p>
+              <p>“I am tired,” said Laura.<br>Laura said that <strong>she</strong> was tired.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Tense changes</strong>
+              <p><span class="formula">am → was</span></p>
+              <p>“I am revising.”<br>She said she <strong>was revising</strong>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Time reference changes</strong>
+              <p><span class="formula">today → that day</span></p>
+              <p>“I have an interview today.”<br>He said he had an interview <strong>that day</strong>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Word order changes</strong>
+              <p><span class="formula">question → statement order</span></p>
+              <p>“Where are you going?”<br>She asked where I <strong>was going</strong>.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 priority:</strong><br>
+            Always check the reporting verb, the key word, the number of words, the pronouns and the word order.
+          </div>
+        `
+      },
+      {
+        title: "2. Backshift: the main tense changes",
+        badge: "Reported Speech · Backshift",
+        html: `
+          <p>When the reporting verb is in the past, the verb in the original message usually moves one step back.</p>
+
+          <table class="tense-table">
+            <thead>
+              <tr>
+                <th>Direct speech</th>
+                <th>Reported speech</th>
+                <th>Example</th>
+                <th>FCE trap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Present Simple</td>
+                <td>Past Simple</td>
+                <td>I work → she worked</td>
+                <td>Do not keep present simple unless there is a reason.</td>
+              </tr>
+              <tr>
+                <td>Present Continuous</td>
+                <td>Past Continuous</td>
+                <td>I am working → she was working</td>
+                <td>Do not forget <em>was/were</em>.</td>
+              </tr>
+              <tr>
+                <td>Past Simple</td>
+                <td>Past Perfect</td>
+                <td>I worked → she had worked</td>
+                <td>Very common Part 4 trap.</td>
+              </tr>
+              <tr>
+                <td>Present Perfect</td>
+                <td>Past Perfect</td>
+                <td>I have worked → she had worked</td>
+                <td>Past Simple and Present Perfect can both become Past Perfect.</td>
+              </tr>
+              <tr>
+                <td>Will</td>
+                <td>Would</td>
+                <td>I will help → she would help</td>
+                <td>Do not write <em>will</em> after a past reporting verb.</td>
+              </tr>
+              <tr>
+                <td>Can</td>
+                <td>Could</td>
+                <td>I can attend → she could attend</td>
+                <td>Use <em>could</em>, not <em>can</em>.</td>
+              </tr>
+              <tr>
+                <td>May</td>
+                <td>Might</td>
+                <td>I may apply → she might apply</td>
+                <td>May normally becomes might.</td>
+              </tr>
+              <tr>
+                <td>Must / have to</td>
+                <td>Had to</td>
+                <td>I must leave → she had to leave</td>
+                <td>Obligation usually becomes <em>had to</em>.</td>
+              </tr>
+            </tbody>
+          </table>
+        `
+      },
+      {
+        title: "3. Say, tell and ask",
+        badge: "Reported Speech · Reporting Verbs",
+        html: `
+          <p><strong>Say</strong>, <strong>tell</strong> and <strong>ask</strong> are basic, but they are frequent sources of mistakes in Key Word Transformations.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>SAY</strong>
+              <p>No person directly after it.</p>
+              <p>✅ He said that he was tired.<br>❌ He said me that he was tired.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>TELL</strong>
+              <p>Needs a listener.</p>
+              <p>✅ He told me that he was tired.<br>❌ He told that he was tired.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>ASK</strong>
+              <p>Used for questions and requests.</p>
+              <p>She asked me where I lived.<br>She asked me to wait.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Exam choice</strong>
+              <p>If the sentence includes a listener, <strong>told me / asked me</strong> is usually the best choice.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            <em>He said me...</em> is wrong. Use <strong>He told me...</strong> or <strong>He said to me...</strong>.
+          </div>
+        `
+      },
+      {
+        title: "4. Time and place changes",
+        badge: "Reported Speech · Context Changes",
+        html: `
+          <p>Reported speech often changes time and place expressions because the original moment of speaking has passed.</p>
+
+          <table class="tense-table">
+            <thead>
+              <tr>
+                <th>Direct speech</th>
+                <th>Reported speech</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>now</td><td>then / at that moment</td><td>He said he was busy then.</td></tr>
+              <tr><td>today</td><td>that day</td><td>She said she had an exam that day.</td></tr>
+              <tr><td>tonight</td><td>that night</td><td>He said he was leaving that night.</td></tr>
+              <tr><td>yesterday</td><td>the day before / the previous day</td><td>She said she had called the day before.</td></tr>
+              <tr><td>tomorrow</td><td>the next day / the following day</td><td>He said he would return the next day.</td></tr>
+              <tr><td>last week</td><td>the week before / the previous week</td><td>They said they had met the week before.</td></tr>
+              <tr><td>next month</td><td>the following month</td><td>She said she would apply the following month.</td></tr>
+              <tr><td>here</td><td>there</td><td>He said he had left it there.</td></tr>
+              <tr><td>this / these</td><td>that / those</td><td>She said she preferred those options.</td></tr>
+            </tbody>
+          </table>
+        `
+      },
+      {
+        title: "5. Reported questions",
+        badge: "Reported Speech · Questions",
+        html: `
+          <p>When we report a question, it stops being a direct question and becomes a statement. That means the word order changes.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Yes/No questions</strong>
+              <p>Use <span class="formula">if / whether</span>.</p>
+              <p>“Have you finished?”<br>She asked <strong>if I had finished</strong>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Wh- questions</strong>
+              <p>Keep the question word.</p>
+              <p>“Where did you save it?”<br>She asked <strong>where I had saved</strong> it.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Statement word order</strong>
+              <p>❌ She asked where <em>had I saved</em> it.</p>
+              <p>✅ She asked where <strong>I had saved</strong> it.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>No question mark</strong>
+              <p>The reported question is no longer a real question.</p>
+              <p>She wanted to know what time the meeting started.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        title: "6. Commands, requests and reminders",
+        badge: "Reported Speech · To-infinitive",
+        html: `
+          <p>Commands, requests, warnings and reminders usually use a to-infinitive structure instead of a that-clause.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Commands</strong>
+              <p><span class="formula">told + person + to + infinitive</span></p>
+              <p>“Wait here.”<br>He told us <strong>to wait</strong> there.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Negative commands</strong>
+              <p><span class="formula">told + person + not to + infinitive</span></p>
+              <p>“Don’t touch it.”<br>She told us <strong>not to touch</strong> it.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Requests</strong>
+              <p><span class="formula">asked + person + to + infinitive</span></p>
+              <p>“Please send the form.”<br>He asked me <strong>to send</strong> the form.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Reminders / warnings</strong>
+              <p>reminded me to post<br>warned us not to enter</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        title: "7. Advanced reporting verbs",
+        badge: "Reported Speech · B2 Reporting Verbs",
+        html: `
+          <p>B2 First often tests reporting verbs that express the speaker’s intention. These are essential for Part 4.</p>
+
+          <table class="tense-table">
+            <thead>
+              <tr>
+                <th>Pattern</th>
+                <th>Common verbs</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>verb + to-infinitive</td>
+                <td>offer, promise, refuse, agree, threaten</td>
+                <td>offered to help / promised to call / refused to apologise</td>
+              </tr>
+              <tr>
+                <td>verb + object + to-infinitive</td>
+                <td>advise, remind, warn, invite, encourage</td>
+                <td>advised me to apply / warned us not to enter</td>
+              </tr>
+              <tr>
+                <td>verb + -ing</td>
+                <td>suggest, deny, admit, recommend</td>
+                <td>suggested going / denied sharing / admitted making</td>
+              </tr>
+              <tr>
+                <td>verb + preposition + -ing</td>
+                <td>apologise for, accuse of, congratulate on</td>
+                <td>apologised for being late / accused him of copying</td>
+              </tr>
+              <tr>
+                <td>verb + that-clause</td>
+                <td>explain, claim, insist, complain, warn</td>
+                <td>explained that / claimed that / warned that</td>
+              </tr>
+            </tbody>
+          </table>
+        `
+      },
+      {
+        title: "8. No-backshift situations",
+        badge: "Reported Speech · No Backshift",
+        html: `
+          <p>Sometimes we do not backshift. This is important because applying backshift automatically can create incorrect or unnatural answers.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>General truths</strong>
+              <p>“Water boils at 100 degrees.”</p>
+              <p>The teacher said that water <strong>boils</strong> at 100 degrees.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Still true information</strong>
+              <p>“My brother works in Paris.”</p>
+              <p>She said that her brother <strong>works</strong> in Paris. If it is still true, no backshift is needed.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Present reporting verb</strong>
+              <p>John says, “I am ready.”</p>
+              <p>John says that he <strong>is ready</strong>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Exam advice</strong>
+              <p>In FCE Part 4, use no-backshift only when the sentence clearly justifies it.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        title: "9. Common FCE traps",
+        badge: "Exam Accuracy · Traps",
+        html: `
+          <p>Most mistakes in reported speech transformations come from five areas.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Wrong word order</strong>
+              <p>❌ She asked where had I been.</p>
+              <p>✅ She asked where I had been.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Say/tell confusion</strong>
+              <p>❌ He said me that...</p>
+              <p>✅ He told me that...</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Missing if/whether</strong>
+              <p>❌ She asked I had finished.</p>
+              <p>✅ She asked if I had finished.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Wrong verb pattern</strong>
+              <p>❌ suggested to go</p>
+              <p>✅ suggested going</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Wrong infinitive after warned/reminded</strong>
+              <p>✅ warned us not to enter</p>
+              <p>✅ reminded me to post</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Forgetting time changes</strong>
+              <p>tomorrow → the next day / the following day</p>
+              <p>yesterday → the day before / the previous day</p>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    const banks = {
+      speakers: [
+        { name: "Clara", pronoun: "she", poss: "her" },
+        { name: "Marcus", pronoun: "he", poss: "his" },
+        { name: "Sophie", pronoun: "she", poss: "her" },
+        { name: "Daniel", pronoun: "he", poss: "his" },
+        { name: "Emma", pronoun: "she", poss: "her" },
+        { name: "Lucas", pronoun: "he", poss: "his" },
+        { name: "Nora", pronoun: "she", poss: "her" },
+        { name: "Adam", pronoun: "he", poss: "his" },
+        { name: "The students", pronoun: "they", poss: "their" },
+        { name: "The organisers", pronoun: "they", poss: "their" },
+        { name: "The volunteers", pronoun: "they", poss: "their" },
+        { name: "The candidates", pronoun: "they", poss: "their" }
+      ],
+
+      listeners: [
+        { object: "me", subject: "I", poss: "my" },
+        { object: "us", subject: "we", poss: "our" },
+        { object: "him", subject: "he", poss: "his" },
+        { object: "her", subject: "she", poss: "her" },
+        { object: "them", subject: "they", poss: "their" }
+      ],
+
+      actions: [
+        { base: "submit", past: "submitted", part: "submitted", ing: "submitting", object: "the application", family: "application" },
+        { base: "revise", past: "revised", part: "revised", ing: "revising", object: "the final report", family: "study" },
+        { base: "attend", past: "attended", part: "attended", ing: "attending", object: "the interview", family: "interview" },
+        { base: "complete", past: "completed", part: "completed", ing: "completing", object: "the project", family: "project" },
+        { base: "check", past: "checked", part: "checked", ing: "checking", object: "the timetable", family: "school" },
+        { base: "contact", past: "contacted", part: "contacted", ing: "contacting", object: "the coordinator", family: "communication" },
+        { base: "prepare", past: "prepared", part: "prepared", ing: "preparing", object: "the presentation", family: "presentation" },
+        { base: "update", past: "updated", part: "updated", ing: "updating", object: "the information", family: "information" },
+        { base: "send", past: "sent", part: "sent", ing: "sending", object: "the documents", family: "documents" },
+        { base: "organise", past: "organised", part: "organised", ing: "organising", object: "the exchange programme", family: "school" },
+        { base: "review", past: "reviewed", part: "reviewed", ing: "reviewing", object: "the evidence", family: "evidence" },
+        { base: "confirm", past: "confirmed", part: "confirmed", ing: "confirming", object: "the booking", family: "booking" },
+        { base: "explain", past: "explained", part: "explained", ing: "explaining", object: "the procedure", family: "explanation" },
+        { base: "cancel", past: "cancelled", part: "cancelled", ing: "cancelling", object: "the appointment", family: "scheduling" },
+        { base: "translate", past: "translated", part: "translated", ing: "translating", object: "the instructions", family: "language" },
+        { base: "upload", past: "uploaded", part: "uploaded", ing: "uploading", object: "the file", family: "technology" },
+        { base: "analyse", past: "analysed", part: "analysed", ing: "analysing", object: "the results", family: "analysis" },
+        { base: "discuss", past: "discussed", part: "discussed", ing: "discussing", object: "the proposal", family: "discussion" },
+        { base: "join", past: "joined", part: "joined", ing: "joining", object: "the training session", family: "training" },
+        { base: "book", past: "booked", part: "booked", ing: "booking", object: "the accommodation", family: "travel" }
+      ],
+
+      timeChanges: [
+        { direct: "today", reported: "that day", key: "THAT", family: "today" },
+        { direct: "tonight", reported: "that night", key: "THAT", family: "tonight" },
+        { direct: "tomorrow", reported: "the following day", key: "FOLLOWING", family: "tomorrow" },
+        { direct: "tomorrow", reported: "the next day", key: "NEXT", family: "tomorrow" },
+        { direct: "yesterday", reported: "the day before", key: "BEFORE", family: "yesterday" },
+        { direct: "yesterday", reported: "the previous day", key: "PREVIOUS", family: "yesterday" },
+        { direct: "last week", reported: "the week before", key: "BEFORE", family: "last-week" },
+        { direct: "last month", reported: "the previous month", key: "PREVIOUS", family: "last-month" },
+        { direct: "next week", reported: "the following week", key: "FOLLOWING", family: "next-week" },
+        { direct: "next month", reported: "the following month", key: "FOLLOWING", family: "next-month" },
+        { direct: "now", reported: "at that moment", key: "THAT", family: "now" },
+        { direct: "here", reported: "there", key: "THERE", family: "here" }
+      ],
+
+      whWords: [
+        { wh: "where", complement: "the file", verb: "save", past: "saved", part: "saved", family: "where" },
+        { wh: "why", complement: "the meeting", verb: "cancel", past: "cancelled", part: "cancelled", family: "why" },
+        { wh: "when", complement: "the application", verb: "submit", past: "submitted", part: "submitted", family: "when" },
+        { wh: "how", complement: "the problem", verb: "solve", past: "solved", part: "solved", family: "how" },
+        { wh: "where", complement: "the documents", verb: "put", past: "put", part: "put", family: "where" },
+        { wh: "why", complement: "the invitation", verb: "refuse", past: "refused", part: "refused", family: "why" },
+        { wh: "when", complement: "the results", verb: "publish", past: "published", part: "published", family: "when" },
+        { wh: "how", complement: "the evidence", verb: "analyse", past: "analysed", part: "analysed", family: "how" }
+      ],
+
+      commands: [
+        { direct: "wait outside", second: "outside", answer: "told us to wait", key: "TOLD", family: "command" },
+        { direct: "not enter the laboratory", second: "the laboratory", answer: "warned us not to enter", key: "WARNED", family: "warning" },
+        { direct: "send the form before Friday", second: "the form before Friday", answer: "reminded me to send", key: "REMINDED", family: "reminder" },
+        { direct: "not share the password", second: "the password", answer: "told us not to share", key: "TOLD", family: "negative-command" },
+        { direct: "check the timetable carefully", second: "the timetable carefully", answer: "asked me to check", key: "ASKED", family: "request" },
+        { direct: "not forget the appointment", second: "the appointment", answer: "reminded me not to forget", key: "REMINDED", family: "reminder" },
+        { direct: "apply before the deadline", second: "before the deadline", answer: "advised me to apply", key: "ADVISED", family: "advice" },
+        { direct: "not touch the equipment", second: "the equipment", answer: "warned us not to touch", key: "WARNED", family: "warning" }
+      ],
+
+      toInfinitiveVerbs: [
+        { verb: "offered", key: "OFFERED", action: "help me", second: "help me", family: "offer" },
+        { verb: "promised", key: "PROMISED", action: "call later", second: "call later", family: "promise" },
+        { verb: "refused", key: "REFUSED", action: "answer the question", second: "answer the question", family: "refuse" },
+        { verb: "agreed", key: "AGREED", action: "attend the meeting", second: "attend the meeting", family: "agree" },
+        { verb: "threatened", key: "THREATENED", action: "cancel the trip", second: "cancel the trip", family: "threaten" },
+        { verb: "decided", key: "DECIDED", action: "postpone the decision", second: "postpone the decision", family: "decide" },
+        { verb: "volunteered", key: "VOLUNTEERED", action: "organise the event", second: "organise the event", family: "volunteer" },
+        { verb: "managed", key: "MANAGED", action: "finish the report", second: "finish the report", family: "manage" }
+      ],
+
+      ingVerbs: [
+        { verb: "suggested", key: "SUGGESTED", action: "reviewing the plan", family: "suggest" },
+        { verb: "denied", key: "DENIED", action: "sharing the password", family: "deny" },
+        { verb: "admitted", key: "ADMITTED", action: "making a mistake", family: "admit" },
+        { verb: "apologised for", key: "APOLOGISED", action: "being late", family: "apologise" },
+        { verb: "accused me of", key: "ACCUSED", action: "copying the answer", family: "accuse" },
+        { verb: "congratulated her on", key: "CONGRATULATED", action: "winning the prize", family: "congratulate" },
+        { verb: "recommended", key: "RECOMMENDED", action: "checking the details", family: "recommend" },
+        { verb: "insisted on", key: "INSISTED", action: "paying for the tickets", family: "insist" }
+      ],
+
+      thatVerbs: [
+        { verb: "explained", key: "EXPLAINED", clause: "that the delay was unavoidable", family: "explain" },
+        { verb: "claimed", key: "CLAIMED", clause: "that he had seen the results", family: "claim" },
+        { verb: "insisted", key: "INSISTED", clause: "that she had followed the rules", family: "insist" },
+        { verb: "complained", key: "COMPLAINED", clause: "that they had been waiting", family: "complain" },
+        { verb: "warned us", key: "WARNED", clause: "that we would be late", family: "warn" },
+        { verb: "admitted", key: "ADMITTED", clause: "that he had forgotten the meeting", family: "admit" },
+        { verb: "confirmed", key: "CONFIRMED", clause: "that the booking had been cancelled", family: "confirm" },
+        { verb: "announced", key: "ANNOUNCED", clause: "that the timetable would change", family: "announce" }
+      ],
+
+      generalTruths: [
+        { direct: "water boils at 100 degrees", answer: "that water boils", key: "THAT", family: "truth" },
+        { direct: "the Earth goes round the Sun", answer: "that the Earth goes", key: "THAT", family: "truth" },
+        { direct: "light travels faster than sound", answer: "that light travels", key: "THAT", family: "truth" },
+        { direct: "practice improves performance", answer: "that practice improves", key: "THAT", family: "truth" },
+        { direct: "regular reading builds vocabulary", answer: "that regular reading builds", key: "THAT", family: "truth" },
+        { direct: "honest feedback helps students", answer: "that honest feedback helps", key: "THAT", family: "truth" }
+      ]
+    };
+
+    const state = {
+      studyIndex: 0,
+      mcCategory: "All categories",
+      mcCurrent: null,
+      mcSelected: null,
+      mcScore: 0,
+      mcAttempts: 0,
+      mcRecent: [],
+      trCategory: "All categories",
+      trCurrent: null,
+      trChecked: false,
+      trScore: 0,
+      trAttempts: 0,
+      trRecent: [],
+      examCategory: "All categories",
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+      examChecked: false,
+      examAnswers: [],
+      usage: {}
+    };
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function item(type, expression, meaning, original, second, answers, keyOptions, distractors, note = "", family = "") {
+      return { type, expression, meaning, original, second, answers, keyOptions, distractors, note, family };
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function capitalise(text) {
+      return String(text).charAt(0).toUpperCase() + String(text).slice(1);
+    }
+
+    function normalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/[.,!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function wordCount(text) {
+      const clean = normalise(text);
+      if (!clean) return 0;
+      return clean.split(" ").filter(Boolean).length;
+    }
+
+    function keyIsIncluded(answer, key) {
+      const answerWords = normalise(answer).split(" ");
+      const keyWords = normalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function getAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
+    }
+
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
+    }
+
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
+    }
+
+    function isValidExercise(exercise) {
+      return getAcceptedAnswers(exercise).every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
+      });
+    }
+
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+
+      return [...new Set(exercise.distractors || [])]
+        .map(option => String(option || "").trim())
+        .filter(option =>
+          wordCount(option) >= 2 &&
+          wordCount(option) <= 5 &&
+          !accepted.includes(normalise(option))
+        )
+        .slice(0, 8);
+    }
+
+    function signature(exercise) {
+      return normalise(`${exercise.original} ${exercise.second} ${primaryAnswer(exercise)}`);
+    }
+
+    function patternSignature(exercise) {
+      return `${exercise.type}::${exercise.family || exercise.expression}`;
+    }
+
+    function lexicalSignature(exercise) {
+      return normalise(`${exercise.family || ""} ${exercise.second} ${primaryAnswer(exercise)}`);
+    }
+
+    function generateBackshiftStatement() {
+      const speaker = pick(banks.speakers);
+      const action = pick(banks.actions);
+      const pattern = pick([
+        "present-simple",
+        "present-continuous",
+        "past-simple",
+        "present-perfect",
+        "will",
+        "can",
+        "may",
+        "must"
+      ]);
+
+      let direct = "";
+      let answer = "";
+      let second = `${speaker.name} said ______ ${action.object}.`;
+      let expression = "";
+      let key = "THAT";
+
+      if (pattern === "present-simple") {
+        direct = `"I regularly ${action.base} ${action.object}," said ${speaker.name}.`;
+        answer = `that ${speaker.pronoun} regularly ${action.past}`;
+        expression = "Present simple → Past simple";
+      }
+
+      if (pattern === "present-continuous") {
+        direct = `"I am currently ${action.ing} ${action.object}," said ${speaker.name}.`;
+        answer = `that ${speaker.pronoun} was ${action.ing}`;
+        expression = "Present continuous → Past continuous";
+      }
+
+      if (pattern === "past-simple") {
+        direct = `"I ${action.past} ${action.object} yesterday," said ${speaker.name}.`;
+        answer = `that ${speaker.pronoun} had ${action.part}`;
+        expression = "Past simple → Past perfect";
+      }
+
+      if (pattern === "present-perfect") {
+        direct = `"I have already ${action.part} ${action.object}," said ${speaker.name}.`;
+        answer = `that ${speaker.pronoun} had ${action.part}`;
+        expression = "Present perfect → Past perfect";
+      }
+
+      if (pattern === "will") {
+        direct = `"I will ${action.base} ${action.object} tomorrow," said ${speaker.name}.`;
+        second = `${speaker.name} said ${speaker.pronoun} ______ ${action.object}.`;
+        answer = `would ${action.base}`;
+        key = "WOULD";
+        expression = "Will → Would";
+      }
+
+      if (pattern === "can") {
+        direct = `"I can ${action.base} ${action.object}," said ${speaker.name}.`;
+        second = `${speaker.name} said ${speaker.pronoun} ______ ${action.object}.`;
+        answer = `could ${action.base}`;
+        key = "COULD";
+        expression = "Can → Could";
+      }
+
+      if (pattern === "may") {
+        direct = `"I may ${action.base} ${action.object} later," said ${speaker.name}.`;
+        second = `${speaker.name} said ${speaker.pronoun} ______ ${action.object} later.`;
+        answer = `might ${action.base}`;
+        key = "MIGHT";
+        expression = "May → Might";
+      }
+
+      if (pattern === "must") {
+        direct = `"I must ${action.base} ${action.object}," said ${speaker.name}.`;
+        second = `${speaker.name} said ${speaker.pronoun} ______ ${action.object}.`;
+        answer = `had to ${action.base}`;
+        key = "HAD";
+        expression = "Must / have to → Had to";
+      }
+
+      return item(
+        "Backshift statements",
+        expression,
+        "Report the statement by changing pronouns and applying the correct backshift.",
+        direct,
+        second,
+        [answer],
+        [key],
+        backshiftDistractors(answer, pattern, action, speaker),
+        "Check the reporting verb, the pronoun and the tense backshift.",
+        `backshift-${pattern}-${action.family}`
+      );
+    }
+
+    function generateSayTellAsk() {
+      const speaker = pick(banks.speakers.filter(s => !s.name.startsWith("The")));
+      const listener = pick(banks.listeners);
+      const action = pick(banks.actions);
+      const pattern = pick(["tell", "say-to", "ask-question"]);
+
+      if (pattern === "tell") {
+        return item(
+          "Say / Tell / Ask",
+          "Say → Tell + object",
+          "Use tell when the listener is mentioned.",
+          `${speaker.name} said to ${listener.object}, "I have checked ${action.object}."`,
+          `${speaker.name} ______ ${speaker.pronoun} had checked ${action.object}.`,
+          [`told ${listener.object} that`],
+          ["TOLD"],
+          [`said ${listener.object} that`, `told that`, `said to ${listener.object}`, `told ${listener.object}`],
+          "Tell is followed directly by the person: told me / told us / told them.",
+          `say-tell-${listener.object}`
+        );
+      }
+
+      if (pattern === "say-to") {
+        return item(
+          "Say / Tell / Ask",
+          "Tell → Say to",
+          "Say can take a listener only with to.",
+          `${speaker.name} told ${listener.object} that ${speaker.pronoun} was busy.`,
+          `${speaker.name} ______ ${listener.object} that ${speaker.pronoun} was busy.`,
+          ["said to"],
+          ["SAID"],
+          ["said", "told to", "told", "asked to"],
+          "Say + to + person is possible, although told me/us/them is usually more common.",
+          `say-to-${listener.object}`
+        );
+      }
+
+      return item(
+        "Say / Tell / Ask",
+        "Ask + object + if/whether",
+        "Ask is used to report questions.",
+        `${speaker.name} said to ${listener.object}, "Have you checked the details?"`,
+        `${speaker.name} ______ had checked the details.`,
+        [`asked ${listener.object} if ${listener.subject}`],
+        ["ASKED"],
+        [`asked ${listener.object} ${listener.subject}`, `said ${listener.object} if ${listener.subject}`, `told ${listener.object} if ${listener.subject}`, `asked if ${listener.subject}`],
+        "For yes/no questions, use asked + person + if/whether.",
+        `ask-if-${listener.object}`
+      );
+    }
+
+    function generateTimePlaceChange() {
+      const speaker = pick(banks.speakers);
+      const action = pick(banks.actions);
+      const change = pick(banks.timeChanges);
+
+      if (change.direct === "here") {
+        return item(
+          "Time and place changes",
+          "Here → There",
+          "Change place reference when the reporting context has changed.",
+          `"I left ${action.object} here," said ${speaker.name}.`,
+          `${speaker.name} said ${speaker.pronoun} had left ${action.object} ______.`,
+          [change.reported],
+          [change.key],
+          ["here", "this place", "that here", "in here"],
+          "Here usually becomes there in reported speech.",
+          `time-place-${change.family}-${action.family}`
+        );
+      }
+
+      return item(
+        "Time and place changes",
+        `${change.direct} → ${change.reported}`,
+        "Update the time expression to match the new reporting context.",
+        `"I will send ${action.object} ${change.direct}," said ${speaker.name}.`,
+        `${speaker.name} said ${speaker.pronoun} would send ${action.object} ______.`,
+        [change.reported],
+        [change.key],
+        timeDistractors(change),
+        "Time expressions often change in reported speech.",
+        `time-place-${change.family}-${action.family}`
+      );
+    }
+
+    function generateYesNoQuestion() {
+      const speaker = pick(banks.speakers.filter(s => !s.name.startsWith("The")));
+      const listener = pick(banks.listeners);
+      const action = pick(banks.actions);
+      const pattern = pick(["present-perfect", "past-simple", "can", "will", "present-simple"]);
+
+      let direct = "";
+      let answer = "";
+      let second = "";
+      let key = Math.random() < 0.5 ? "IF" : "WHETHER";
+      const linker = key.toLowerCase();
+
+      if (pattern === "present-perfect") {
+        direct = `"Have you already ${action.part} ${action.object}?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${linker} ${listener.subject} had ${action.part}`;
+        second = `${speaker.name} asked ${listener.object} ______ ${action.object}.`;
+      }
+
+      if (pattern === "past-simple") {
+        direct = `"Did you ${action.base} ${action.object} yesterday?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${linker} ${listener.subject} had ${action.part}`;
+        second = `${speaker.name} asked ${listener.object} ______ ${action.object}.`;
+      }
+
+      if (pattern === "can") {
+        direct = `"Can you ${action.base} ${action.object}?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${linker} ${listener.subject} could ${action.base}`;
+        second = `${speaker.name} asked ${listener.object} ______ ${action.object}.`;
+      }
+
+      if (pattern === "will") {
+        direct = `"Will you ${action.base} ${action.object} tomorrow?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${linker} ${listener.subject} would ${action.base}`;
+        second = `${speaker.name} asked ${listener.object} ______ ${action.object}.`;
+      }
+
+      if (pattern === "present-simple") {
+        direct = `"Do you usually ${action.base} ${action.object}?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${linker} ${listener.subject} usually ${action.past}`;
+        second = `${speaker.name} asked ${listener.object} ______ ${action.object}.`;
+      }
+
+      return item(
+        "Reported yes/no questions",
+        "Yes/No question → if/whether + statement order",
+        "Use if/whether and change the question into statement word order.",
+        direct,
+        second,
+        [answer],
+        [key],
+        questionDistractors(answer, linker, listener, action),
+        "Do not use question word order in reported questions.",
+        `yesno-${pattern}-${action.family}-${key}`
+      );
+    }
+
+    function generateWhQuestion() {
+      const speaker = pick(banks.speakers.filter(s => !s.name.startsWith("The")));
+      const listener = pick(banks.listeners);
+      const wh = pick(banks.whWords);
+      const pattern = pick(["past-simple", "present-simple", "present-perfect"]);
+
+      let direct = "";
+      let answer = "";
+      let second = "";
+
+      if (pattern === "past-simple") {
+        direct = `"${capitalise(wh.wh)} did you ${wh.verb} ${wh.complement}?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${wh.wh} ${listener.subject} had ${wh.part}`;
+        second = `${speaker.name} wanted to know ______ ${wh.complement}.`;
+      }
+
+      if (pattern === "present-simple") {
+        direct = `"${capitalise(wh.wh)} do you usually ${wh.verb} ${wh.complement}?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${wh.wh} ${listener.subject} usually ${wh.past}`;
+        second = `${speaker.name} wanted to know ______ ${wh.complement}.`;
+      }
+
+      if (pattern === "present-perfect") {
+        direct = `"${capitalise(wh.wh)} have you ${wh.part} ${wh.complement}?" ${speaker.name} asked ${listener.object}.`;
+        answer = `${wh.wh} ${listener.subject} had ${wh.part}`;
+        second = `${speaker.name} wanted to know ______ ${wh.complement}.`;
+      }
+
+      return item(
+        "Reported wh- questions",
+        "Wh- question → wh-word + statement order",
+        "Keep the question word but use statement word order.",
+        direct,
+        second,
+        [answer],
+        [wh.wh.toUpperCase()],
+        whDistractors(answer, wh, listener),
+        "In reported questions, do not use auxiliary + subject word order.",
+        `wh-${wh.family}-${pattern}`
+      );
+    }
+
+    function generateCommandRequest() {
+      const row = pick(banks.commands);
+
+      let direct = "";
+      if (row.answer.includes("not to")) {
+        direct = `"Don't ${row.direct.replace("not ", "")}," the teacher said.`;
+      } else if (row.key === "ASKED") {
+        direct = `"Please ${row.direct}," the teacher said to me.`;
+      } else if (row.key === "REMINDED") {
+        direct = `"Remember to ${row.direct}," my mother said.`;
+      } else if (row.key === "ADVISED") {
+        direct = `"You should ${row.direct}," the advisor said.`;
+      } else {
+        direct = `"${capitalise(row.direct)}," the teacher said.`;
+      }
+
+      return item(
+        "Commands and requests",
+        "Reporting verb + object + (not) to-infinitive",
+        "Commands, requests, reminders and warnings usually use to-infinitive structures.",
+        direct,
+        `The teacher ______ ${row.second}.`,
+        [row.answer],
+        [row.key],
+        commandDistractors(row.answer),
+        "Use to + infinitive after told/asked/reminded/advised/warned. Use not to for negatives.",
+        `command-${row.family}`
+      );
+    }
+
+    function generateToInfinitiveVerb() {
+      const speaker = pick(banks.speakers.filter(s => !s.name.startsWith("The")));
+      const row = pick(banks.toInfinitiveVerbs);
+      const answer = `${row.verb} to ${row.action.split(" ").slice(0, 2).join(" ")}`;
+
+      return item(
+        "Reporting verbs + to-infinitive",
+        `${capitalise(row.verb)} + to-infinitive`,
+        "Some reporting verbs are followed by to + infinitive.",
+        `"I will ${row.action}," said ${speaker.name}.`,
+        `${speaker.name} ______ ${row.second.split(" ").slice(2).join(" ") || ""}.`,
+        [answer.trim()],
+        [row.key],
+        toInfDistractors(answer.trim(), row),
+        "Verbs such as offer, promise, refuse and agree are followed by to + infinitive.",
+        `to-inf-${row.family}`
+      );
+    }
+
+    function generateIngVerb() {
+      const speaker = pick(banks.speakers.filter(s => !s.name.startsWith("The")));
+      const row = pick(banks.ingVerbs);
+      const directOpening = row.verb.includes("denied")
+        ? `"I didn't ${row.action.replace("ing", "")}"`
+        : row.verb.includes("suggested")
+          ? `"Why don't we ${row.action.replace("ing", "")}"`
+          : `"I am sorry about ${row.action}"`;
+
+      return item(
+        "Reporting verbs + -ing",
+        `${capitalise(row.verb)} + -ing`,
+        "Some reporting verbs are followed by -ing, or by a preposition + -ing.",
+        `${directOpening}," said ${speaker.name}.`,
+        `${speaker.name} ______.`,
+        [`${row.verb} ${row.action}`],
+        [row.key],
+        ingDistractors(`${row.verb} ${row.action}`, row),
+        "Watch the verb pattern: suggest/deny/admit + -ing; apologise for + -ing; accuse of + -ing.",
+        `ing-${row.family}`
+      );
+    }
+
+    function generateThatClauseVerb() {
+      const speaker = pick(banks.speakers.filter(s => !s.name.startsWith("The")));
+      const row = pick(banks.thatVerbs);
+
+      return item(
+        "Reporting verbs + that-clause",
+        `${capitalise(row.verb)} + that-clause`,
+        "Some reporting verbs introduce a complete that-clause.",
+        `"${capitalise(row.clause.replace("that ", ""))}," said ${speaker.name}.`,
+        `${speaker.name} ______.`,
+        [`${row.verb} ${row.clause}`],
+        [row.key],
+        thatDistractors(`${row.verb} ${row.clause}`, row),
+        "A that-clause keeps a complete subject + verb structure after the reporting verb.",
+        `that-${row.family}`
+      );
+    }
+
+    function generateNoBackshift() {
+      const truth = pick(banks.generalTruths);
+
+      return item(
+        "No-backshift situations",
+        "No backshift for general truths",
+        "Do not backshift when the information is a general truth or clearly still true.",
+        `"${capitalise(truth.direct)}," the teacher said.`,
+        `The teacher said ______ at all times.`,
+        [truth.answer],
+        [truth.key],
+        [
+          truth.answer.replace(/boils|goes|travels|improves|builds|helps/, "boiled"),
+          truth.answer.replace("that ", ""),
+          truth.answer.replace("that", "if"),
+          truth.answer.replace("that", "whether")
+        ],
+        "General truths often remain in the present tense.",
+        `no-backshift-${truth.family}-${truth.direct.slice(0, 8)}`
+      );
+    }
+
+    function generateTrap() {
+      const traps = [
+        trapWordOrder,
+        trapSayTell,
+        trapIfWhether,
+        trapSuggested,
+        trapWarned,
+        trapTimeChange,
+        trapApologised,
+        trapAccused
+      ];
+      return pick(traps)();
+    }
+
+    function trapWordOrder() {
+      return item(
+        "Cambridge traps",
+        "Reported question word order",
+        "Reported questions use statement word order.",
+        `"Where did you save the file?" Laura asked me.`,
+        `Laura wanted to know ______ the file.`,
+        ["where I had saved"],
+        ["WHERE"],
+        ["where had I saved", "where did I save", "where I saved", "where I have saved"],
+        "Use where + subject + verb, not question word order.",
+        "trap-word-order"
+      );
+    }
+
+    function trapSayTell() {
+      return item(
+        "Cambridge traps",
+        "Say / Tell confusion",
+        "Tell is followed directly by the listener.",
+        `Oliver said to me, "I have finished the report."`,
+        `Oliver ______ he had finished the report.`,
+        ["told me that"],
+        ["TOLD"],
+        ["said me that", "told that", "said to me", "told me"],
+        "Use told me that, not said me that.",
+        "trap-say-tell"
+      );
+    }
+
+    function trapIfWhether() {
+      return item(
+        "Cambridge traps",
+        "Missing if/whether",
+        "Yes/no questions need if or whether.",
+        `"Have you uploaded the file?" the teacher asked me.`,
+        `The teacher asked me ______ the file.`,
+        ["if I had uploaded", "whether I had uploaded"],
+        ["IF", "WHETHER"],
+        ["I had uploaded", "had I uploaded", "if had I uploaded", "whether had I uploaded"],
+        "Reported yes/no questions need if/whether + statement order.",
+        "trap-if-whether"
+      );
+    }
+
+    function trapSuggested() {
+      return item(
+        "Cambridge traps",
+        "Suggest + -ing",
+        "Suggest is followed by -ing, not to-infinitive.",
+        `"Why don't we review the plan?" said Mark.`,
+        `Mark ______ the plan.`,
+        ["suggested reviewing"],
+        ["SUGGESTED"],
+        ["suggested to review", "suggested us reviewing", "suggested that review", "suggested review"],
+        "Use suggested + -ing.",
+        "trap-suggested"
+      );
+    }
+
+    function trapWarned() {
+      return item(
+        "Cambridge traps",
+        "Warn + object + not to",
+        "Warnings normally use object + not to + infinitive.",
+        `"Don't go near the water," the mother said to the children.`,
+        `The mother ______ near the water.`,
+        ["warned the children not to go"],
+        ["WARNED"],
+        ["warned the children to not go", "warned not the children to go", "warned the children don't go", "warned that the children not go"],
+        "Use warned + object + not to + infinitive.",
+        "trap-warned"
+      );
+    }
+
+    function trapTimeChange() {
+      return item(
+        "Cambridge traps",
+        "Tomorrow → the following day",
+        "Change time expressions when the reporting context changes.",
+        `"We will move to London next month," my parents said.`,
+        `My parents said they would move to London ______.`,
+        ["the following month"],
+        ["FOLLOWING"],
+        ["next month", "the next month", "following month", "the month following"],
+        "Next month usually becomes the following month.",
+        "trap-time-change"
+      );
+    }
+
+    function trapApologised() {
+      return item(
+        "Cambridge traps",
+        "Apologise for + -ing",
+        "Apologise is normally followed by for + -ing.",
+        `"I'm sorry I didn't call you earlier," said Julia.`,
+        `Julia apologised ______ earlier.`,
+        ["for not calling me"],
+        ["FOR"],
+        ["for not to call me", "for didn't call me", "that she didn't call", "for not call me"],
+        "Use apologised for not + -ing.",
+        "trap-apologised"
+      );
+    }
+
+    function trapAccused() {
+      return item(
+        "Cambridge traps",
+        "Accuse someone of + -ing",
+        "Accuse is followed by object + of + -ing.",
+        `"You copied my idea!" shouted the designer.`,
+        `The designer ______ her idea.`,
+        ["accused me of copying"],
+        ["ACCUSED"],
+        ["accused me to copy", "accused that I copied", "accused me copying", "accused of me copying"],
+        "Use accused + object + of + -ing.",
+        "trap-accused"
+      );
+    }
+
+    function backshiftDistractors(answer, pattern, action, speaker) {
+      if (pattern === "will") return [`will ${action.base}`, `would ${action.past}`, `had ${action.base}`, `was ${action.ing}`];
+      if (pattern === "can") return [`can ${action.base}`, `could ${action.past}`, `had been able`, `was able`];
+      if (pattern === "may") return [`may ${action.base}`, `might ${action.past}`, `could had ${action.base}`, `would ${action.base}`];
+      if (pattern === "must") return [`must ${action.base}`, `had ${action.base}`, `has to ${action.base}`, `had to ${action.past}`];
+      return [
+        answer.replace("that ", ""),
+        answer.replace("had ", ""),
+        answer.replace("was ", "is "),
+        answer.replace(action.past, action.base),
+        answer.replace(action.part, action.base)
+      ];
+    }
+
+    function timeDistractors(change) {
+      const common = ["the next day", "the following day", "the day before", "the previous day", "that day", "that night", "there", "at that moment"];
+      return common.filter(x => x !== change.reported).slice(0, 4);
+    }
+
+    function questionDistractors(answer, linker, listener, action) {
+      return [
+        answer.replace(`${listener.subject} had`, `had ${listener.subject}`),
+        answer.replace(`${listener.subject} could`, `could ${listener.subject}`),
+        answer.replace(`${listener.subject} would`, `would ${listener.subject}`),
+        answer.replace(linker, ""),
+        answer.replace("had", "have"),
+        answer.replace("would", "will")
+      ];
+    }
+
+    function whDistractors(answer, wh, listener) {
+      return [
+        answer.replace(`${listener.subject} had`, `had ${listener.subject}`),
+        answer.replace(`${listener.subject} usually`, `does ${listener.subject} usually`),
+        answer.replace("had", "have"),
+        answer.replace(wh.wh, "if"),
+        answer.replace(wh.wh, "whether")
+      ];
+    }
+
+    function commandDistractors(answer) {
+      return [
+        answer.replace(" not to ", " to not "),
+        answer.replace(" to ", " that "),
+        answer.replace("not to", "don't"),
+        answer.replace("told", "said"),
+        answer.replace("asked", "said")
+      ];
+    }
+
+    function toInfDistractors(answer, row) {
+      return [
+        answer.replace(" to ", " "),
+        answer.replace(" to ", " that "),
+        answer.replace(row.verb, row.verb + " me"),
+        answer.replace("to", "for")
+      ];
+    }
+
+    function ingDistractors(answer, row) {
+      return [
+        answer.replace("ing", ""),
+        answer.replace(row.action, "to " + row.action.replace("ing", "")),
+        answer.replace(" for ", " to "),
+        answer.replace(" of ", " to "),
+        answer.replace(" on ", " to ")
+      ];
+    }
+
+    function thatDistractors(answer, row) {
+      return [
+        answer.replace("that ", ""),
+        answer.replace("that", "if"),
+        answer.replace("had", "has"),
+        answer.replace("would", "will")
+      ];
+    }
+
+    const generators = {
+      "Backshift statements": [generateBackshiftStatement],
+      "Say / Tell / Ask": [generateSayTellAsk],
+      "Time and place changes": [generateTimePlaceChange],
+      "Reported yes/no questions": [generateYesNoQuestion],
+      "Reported wh- questions": [generateWhQuestion],
+      "Commands and requests": [generateCommandRequest],
+      "Reporting verbs + to-infinitive": [generateToInfinitiveVerb],
+      "Reporting verbs + -ing": [generateIngVerb],
+      "Reporting verbs + that-clause": [generateThatClauseVerb],
+      "No-backshift situations": [generateNoBackshift],
+      "Cambridge traps": [generateTrap]
+    };
+
+    generators["Mixed exam decisions"] = [
+      generateBackshiftStatement,
+      generateSayTellAsk,
+      generateTimePlaceChange,
+      generateYesNoQuestion,
+      generateWhQuestion,
+      generateCommandRequest,
+      generateToInfinitiveVerb,
+      generateIngVerb,
+      generateThatClauseVerb,
+      generateNoBackshift,
+      generateTrap
+    ];
+
+    const allPracticeGenerators = Object.entries(generators)
+      .filter(([category]) => category !== "Mixed exam decisions")
+      .flatMap(([, list]) => list);
+
+    function getGeneratorList(category) {
+      if (category === "All categories") return allPracticeGenerators;
+      if (category === "Mixed exam decisions") return generators["Mixed exam decisions"];
+      return generators[category] || allPracticeGenerators;
+    }
+
+    function safeGenerate(generator) {
+      try {
+        return generator();
+      } catch {
+        return null;
+      }
+    }
+
+    function generateExercise(category = "All categories", mode = "transform", recent = []) {
+      const generatorList = getGeneratorList(category);
+      const usageKey = `${mode}::${category}`;
+      state.usage[usageKey] = state.usage[usageKey] || { pattern: {}, lexical: {} };
+      const usage = state.usage[usageKey];
+
+      const candidates = [];
+
+      for (let i = 0; i < 180; i++) {
+        const generator = pick(generatorList);
+        const exercise = safeGenerate(generator);
+        if (!exercise) continue;
+
+        const validKeys = shuffle(exercise.keyOptions || []).filter(key =>
+          getAcceptedAnswers(exercise).some(answer => keyIsIncluded(answer, key))
+        );
+
+        if (!validKeys.length) continue;
+
+        const selectedKey = pick(validKeys);
+        const accepted = getAcceptedAnswers(exercise).filter(answer => keyIsIncluded(answer, selectedKey));
+
+        const finalExercise = {
+          ...exercise,
+          key: selectedKey,
+          answers: accepted,
+          answer: accepted[0]
+        };
+
+        if (!isValidExercise(finalExercise)) continue;
+        if (mode === "multiple" && cleanDistractors(finalExercise).length < 3) continue;
+
+        const sig = signature(finalExercise);
+        const psig = patternSignature(finalExercise);
+        const lsig = lexicalSignature(finalExercise);
+
+        let score = 0;
+        score += (usage.pattern[psig] || 0) * 14;
+        score += (usage.lexical[lsig] || 0) * 24;
+        if (recent.includes(sig)) score += 1000;
+
+        candidates.push({ exercise: finalExercise, score, psig, lsig, sig });
+      }
+
+      if (!candidates.length) {
+        const fallback = generateBackshiftStatement();
+        return { ...fallback, key: fallback.keyOptions[0] };
+      }
+
+      candidates.sort((a, b) => a.score - b.score);
+      const selected = candidates[0];
+
+      usage.pattern[selected.psig] = (usage.pattern[selected.psig] || 0) + 1;
+      usage.lexical[selected.lsig] = (usage.lexical[selected.lsig] || 0) + 1;
+
+      return selected.exercise;
+    }
+
+    function remember(recentList, exercise) {
+      recentList.push(signature(exercise));
+      while (recentList.length > 90) recentList.shift();
+    }
+
+    function populatePracticeSelect(id, value) {
+      $(id).innerHTML = categories
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function populateStudySelect() {
+      $("studySection").innerHTML = studySections
+        .map((section, index) => `<option value="${index}" ${index === state.studyIndex ? "selected" : ""}>${section.title}</option>`)
+        .join("");
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+      document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+      $(tab).classList.remove("hidden");
+      document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
+    }
+
+    function renderStudy() {
+      const section = studySections[state.studyIndex];
+
+      $("studyCard").innerHTML = `
+        <span class="badge badge-blue">${section.badge}</span>
+        <h2>${section.title}</h2>
+        ${section.html}
+      `;
+
+      $("studyCounter").textContent = `Study section ${state.studyIndex + 1} of ${studySections.length}`;
+      $("studySection").value = String(state.studyIndex);
+    }
+
+    function newMcQuestion() {
+      const exercise = generateExercise(state.mcCategory, "multiple", state.mcRecent);
+      remember(state.mcRecent, exercise);
+
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
+
+      state.mcCurrent = { ...exercise, options };
+      state.mcSelected = null;
+      renderMc();
+    }
+
+    function renderMc() {
+      const q = state.mcCurrent;
+      $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
+
+      if (!q) {
+        $("mcType").textContent = "";
+        $("mcQuestion").textContent = "Click 'New question' to start.";
+        $("mcOptions").innerHTML = "";
+        $("mcFeedback").classList.add("hidden");
+        return;
+      }
+
+      $("mcType").textContent = `${q.type} · Generated transformation`;
+
+      $("mcQuestion").innerHTML = `
+        <p>${q.original}</p>
+        <div class="box">${q.second}</div>
+      `;
+
+      $("mcOptions").innerHTML = "";
+
+      q.options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+
+        if (state.mcSelected) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
+        }
+
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
+      });
+
+      if (state.mcSelected) {
+        const correct = isCorrectAnswer(state.mcSelected, q);
+        $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+        $("mcFeedback").innerHTML = `
+          <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
+          <p>${q.note || ""}</p>
+          <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+        `;
+      } else {
+        $("mcFeedback").classList.add("hidden");
+      }
+    }
+
+    function chooseMc(option) {
+      if (state.mcSelected) return;
+      state.mcSelected = option;
+      state.mcAttempts++;
+      if (isCorrectAnswer(option, state.mcCurrent)) state.mcScore++;
+      renderMc();
+    }
+
+    function newTransformation() {
+      state.trCurrent = generateExercise(state.trCategory, "transform", state.trRecent);
+      remember(state.trRecent, state.trCurrent);
+
+      state.trChecked = false;
+      $("trInput").value = "";
+      $("trFeedback").classList.add("hidden");
+      $("trHintBox").classList.add("hidden");
+      renderTransformation();
+    }
+
+    function renderTransformation() {
+      const q = state.trCurrent;
+      $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
+
+      if (!q) {
+        $("trType").textContent = "";
+        $("trFirst").textContent = "Click 'New exercise' to start.";
+        $("trSecond").textContent = "";
+        $("trKey").textContent = "";
+        return;
+      }
+
+      const input = $("trInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+
+      $("trType").textContent = `${q.type} · Generated transformation`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("trFirst").textContent = q.original;
+      $("trSecond").textContent = q.second;
+      $("trKey").textContent = `Key word: ${q.key}`;
+    }
+
+    function checkTransformation(reveal = false) {
+      if (!state.trCurrent || state.trChecked) return;
+
+      const input = $("trInput").value;
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
+
+      state.trChecked = true;
+      state.trAttempts++;
+      if (correct) state.trScore++;
+
+      $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("trFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
+        <p>${state.trCurrent.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${state.trCurrent.expression}</p>
+        <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
+      `;
+
+      renderTransformation();
+    }
+
+    function showHint() {
+      if (!state.trCurrent) return;
+      $("trHintBox").classList.remove("hidden");
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.meaning}`;
+    }
+
+    function buildExamQuestions() {
+      const selected = [];
+      const used = [];
+
+      for (let attempt = 0; attempt < 220; attempt++) {
+        const exercise = generateExercise(state.examCategory, "transform", used);
+        const sig = signature(exercise);
+
+        if (!used.includes(sig)) {
+          selected.push(exercise);
+          used.push(sig);
+        }
+
+        if (selected.length === 10) break;
+      }
+
+      return selected;
+    }
+
+    function startExam() {
+      state.examQuestions = buildExamQuestions();
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examCard").classList.remove("hidden");
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function resetExam() {
+      state.examQuestions = [];
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.remove("hidden");
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examFeedback").classList.add("hidden");
+      $("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = state.examQuestions.length;
+      const q = state.examQuestions[state.examIndex];
+
+      if (!q || total === 0) {
+        $("examIntro").classList.remove("hidden");
+        $("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = $("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (state.examIndex / total) * 100;
+
+      $("examProgress").style.width = `${progress}%`;
+      $("examType").textContent = `${q.type} · Question ${state.examIndex + 1}/${total}`;
+      $("examScore").textContent = `Score: ${state.examScore}/${state.examIndex}`;
+      $("examWords").textContent = `Words: ${words}/2–5`;
+      $("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("examFirst").textContent = q.original;
+      $("examSecond").textContent = q.second;
+      $("examKey").textContent = `Key word: ${q.key}`;
+      $("examCheck").disabled = state.examChecked;
+      $("examInput").disabled = state.examChecked;
+      $("examNext").disabled = !state.examChecked;
+      $("examNext").textContent = state.examIndex === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (state.examChecked) return;
+
+      const q = state.examQuestions[state.examIndex];
+      const input = $("examInput").value;
+      const correct = isCorrectAnswer(input, q);
+
+      state.examChecked = true;
+
+      if (correct) state.examScore++;
+
+      state.examAnswers.push({
+        number: state.examIndex + 1,
+        pattern: q.expression,
+        correct,
+        userAnswer: input,
+        accepted: acceptedAnswersText(q)
+      });
+
+      $("examFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("examFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+        <p>${q.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+      `;
+      $("examFeedback").classList.remove("hidden");
+
+      renderExam();
+    }
+
+    function nextExamQuestion() {
+      if (!state.examChecked) return;
+
+      if (state.examIndex >= state.examQuestions.length - 1) {
+        finishExam();
+        return;
+      }
+
+      state.examIndex++;
+      state.examChecked = false;
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function finishExam() {
+      const total = state.examQuestions.length;
+      const score = state.examScore;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
+
+      let message = "";
+      if (score >= 9) {
+        message = "Excellent exam control. You are using reported speech transformations with strong accuracy.";
+      } else if (score >= 7) {
+        message = "Good result. Keep practising question word order, reporting verb patterns and time-reference changes.";
+      } else if (score >= 5) {
+        message = "You understand several patterns, but you need more controlled practice with backshift and reporting verbs.";
+      } else {
+        message = "Revise Study Mode carefully, especially backshift, reported questions and advanced reporting verb patterns.";
+      }
+
+      const review = state.examAnswers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.pattern}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+        </tr>
+      `).join("");
+
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.remove("hidden");
+
+      $("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Pattern</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart challenge</button>
+        </div>
+      `;
+
+      $("examAgain").addEventListener("click", startExam);
+    }
+
+    function init() {
+      populateStudySelect();
+      populatePracticeSelect("mcCategory", state.mcCategory);
+      populatePracticeSelect("trCategory", state.trCategory);
+      populatePracticeSelect("examCategory", state.examCategory);
+
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => showTab(button.dataset.tab));
+      });
+
+      $("studySection").addEventListener("change", event => {
+        state.studyIndex = Number(event.target.value);
+        renderStudy();
+      });
+
+      $("studyNext").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex + 1) % studySections.length;
+        renderStudy();
+      });
+
+      $("studyPrev").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex - 1 + studySections.length) % studySections.length;
+        renderStudy();
+      });
+
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        newMcQuestion();
+      });
+
+      $("mcNew").addEventListener("click", newMcQuestion);
+      $("mcReset").addEventListener("click", () => {
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        state.usage[`multiple::${state.mcCategory}`] = { pattern: {}, lexical: {} };
+        renderMc();
+      });
+
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        newTransformation();
+      });
+
+      $("trNew").addEventListener("click", newTransformation);
+      $("trHint").addEventListener("click", showHint);
+      $("trCheck").addEventListener("click", () => checkTransformation(false));
+      $("trReveal").addEventListener("click", () => checkTransformation(true));
+      $("trReset").addEventListener("click", () => {
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        state.usage[`transform::${state.trCategory}`] = { pattern: {}, lexical: {} };
+        renderTransformation();
+      });
+
+      $("trInput").addEventListener("input", renderTransformation);
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") checkTransformation(false);
+      });
+
+      $("examCategory").addEventListener("change", event => {
+        state.examCategory = event.target.value;
+        resetExam();
+      });
+
+      $("examStart").addEventListener("click", startExam);
+      $("examRestart").addEventListener("click", startExam);
+      $("examCheck").addEventListener("click", checkExamAnswer);
+      $("examNext").addEventListener("click", nextExamQuestion);
+      $("examInput").addEventListener("input", renderExam);
+      $("examInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          if (!state.examChecked) checkExamAnswer();
+          else nextExamQuestion();
+        }
+      });
+
+      renderStudy();
+      newMcQuestion();
+      newTransformation();
+    }
+
+    init();
+  </script>
+</body>
+</html>
