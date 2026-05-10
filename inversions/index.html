@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Block 4 · Mr John’s KWT Lab</title>
+  <title>Block 5 · Mr John’s KWT Lab</title>
   <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
 
   <style>
@@ -306,33 +306,6 @@
       margin: 2px 0;
     }
 
-    .tense-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 15px;
-      overflow: hidden;
-      border-radius: 16px;
-    }
-
-    .tense-table th,
-    .tense-table td {
-      border-bottom: 1px solid var(--border);
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
-    }
-
-    .tense-table th {
-      background: var(--light-blue);
-      color: var(--navy);
-      font-weight: 900;
-    }
-
-    .tense-table tr:nth-child(even) td {
-      background: #f8fafc;
-    }
-
     .box {
       background: #f8fafc;
       border: 1px solid #e5e7eb;
@@ -475,7 +448,7 @@
         <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
         <div>
           <span class="brand-title">Mr John’s KWT Lab</span>
-          <span class="brand-subtitle">Block 4 · Passive Voice & Causative</span>
+          <span class="brand-subtitle">Block 5 · Inversions</span>
         </div>
       </div>
 
@@ -484,19 +457,19 @@
 
     <section class="hero">
       <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
-      <h1>Passive & Causative <span class="highlight">Transformation</span> Trainer</h1>
+      <h1>Inversions <span class="highlight">Transformation</span> Trainer</h1>
       <p>
-        Practise B2 First Part 4 transformations with passive voice and causative structures.
-        This version uses an expanded generator with stronger B2 vocabulary, wider tense variety,
-        modal and perfect passive forms, reporting passive, causative structures and common exam traps.
+        Practise B2 First Part 4 transformations with inversion structures: negative adverbials,
+        No sooner / Hardly / Scarcely, conditional inversions, Not only... but also,
+        So / Such inversion, and common exam traps with auxiliary verb order.
       </p>
       <div class="stats">
         <span class="pill">Core patterns</span>
-        <span class="pill">BE + PAST PARTICIPLE</span>
-        <span class="pill">BEING / BEEN</span>
-        <span class="pill">MODAL PASSIVE</span>
-        <span class="pill">REPORTING PASSIVE</span>
-        <span class="pill">HAVE / GET SOMETHING DONE</span>
+        <span class="pill">NEVER / RARELY / SELDOM</span>
+        <span class="pill">NO SOONER / HARDLY</span>
+        <span class="pill">SHOULD / WERE / HAD</span>
+        <span class="pill">NOT ONLY</span>
+        <span class="pill">AUXILIARY + SUBJECT</span>
       </div>
     </section>
 
@@ -595,8 +568,8 @@
           two and five words and include the key word exactly as given.
         </p>
         <div class="box">
-          <strong>Recommended classroom use:</strong> revise the Study Mode theory first, then practise specific categories
-          before attempting Mixed Exam Decisions.
+          <strong>Recommended classroom use:</strong> revise the Study Mode theory first, then
+          practise each category separately before attempting Mixed Exam Decisions.
         </div>
       </div>
 
@@ -632,483 +605,336 @@
     </section>
 
     <footer class="footer">
-      <span><strong>Mr John’s KWT Lab</strong> · Block 4 · v3.0</span>
-      <span>Passive Voice & Causative Structures · Expanded B2 generator · FCE Part 4 focused practice</span>
+      <span><strong>Mr John’s KWT Lab</strong> · Block 5 · v2.0</span>
+      <span>Inversions · Expanded generator · FCE Part 4 focused practice</span>
     </footer>
   </main>
 
   <script>
     const categories = [
       "All categories",
-      "Active → Passive basic",
-      "Passive tense control",
-      "Modal passive",
-      "Perfect passive forms",
-      "Two-object passive",
-      "Reporting passive: It + passive",
-      "Reporting passive: subject + infinitive",
-      "Causative: have/get something done",
-      "Causative: accidents and misfortunes",
-      "Make / Let / Get someone to do",
+      "Negative adverbials",
+      "Only / Not until / Not since",
+      "No sooner / Hardly / Scarcely",
+      "Conditional inversions",
+      "Not only... but also",
+      "So / Such inversion",
       "Mixed exam decisions",
       "Cambridge traps"
     ];
 
     const studySections = [
       {
-        title: "1. Active → Passive: basic transformation",
-        badge: "Passive Voice · Foundation",
+        title: "1. What is an inversion?",
+        badge: "Inversions · Foundation",
         html: `
-          <p>The passive voice is used when the action, result or affected object is more important than the person who does the action.</p>
+          <p>In normal English word order, the subject usually comes before the verb.</p>
+
+          <div class="box">
+            <strong>Normal order:</strong><br>
+            She rarely goes out.<br><br>
+            <strong>Inversion:</strong><br>
+            Rarely does she go out.
+          </div>
+
+          <p>In formal English and in B2 First Key Word Transformations, certain negative or restrictive expressions force the auxiliary verb to move before the subject.</p>
 
           <div class="study-grid">
             <div class="study-mini">
-              <strong>Step 1 · Find the active object</strong>
-              <p>The object of the active sentence becomes the subject of the passive sentence.</p>
-              <p><span class="formula">The committee approved the proposal.</span><br>Object: <strong>the proposal</strong></p>
+              <strong>Normal order</strong>
+              <p><span class="formula">Subject + verb</span></p>
+              <p>She rarely goes out.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Step 2 · Change the verb</strong>
-              <p>The active verb becomes <span class="formula">be + past participle</span>.</p>
-              <p><span class="formula">approved → was approved</span></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>Step 3 · Keep the tense</strong>
-              <p>The tense of <strong>be</strong> must match the tense of the active verb.</p>
-              <p><span class="formula">approves → is approved</span><br><span class="formula">approved → was approved</span></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>Step 4 · Agent with by</strong>
-              <p>Use <strong>by</strong> only when the agent is important.</p>
-              <p><span class="formula">The proposal was approved.</span></p>
+              <strong>Inverted order</strong>
+              <p><span class="formula">Auxiliary + subject + main verb</span></p>
+              <p>Rarely <strong>does she go</strong> out.</p>
             </div>
           </div>
 
           <div class="box">
-            <strong>FCE Part 4 thinking:</strong><br>
-            Active: <em>The authorities postponed the event.</em><br>
-            Passive: <em>The event was postponed.</em><br><br>
-            In KWT, avoid unnecessary words such as <em>by someone</em> unless the sentence clearly requires them.
+            <strong>FCE Part 4 rule:</strong><br>
+            Inversion is not just stylistic. In these transformations, it is a fixed grammatical response to certain opening expressions.
           </div>
         `
       },
       {
-        title: "2. Passive verb changes: tense table",
-        badge: "Passive Voice · Tense Control",
+        title: "2. Negative adverbials",
+        badge: "Inversions · Negative Adverbials",
         html: `
-          <p>This is the key study section. Passive transformations in B2 First often test whether you can keep the tense accurately.</p>
+          <p>When negative or restrictive adverbials begin the sentence, inversion is normally required.</p>
 
-          <table class="tense-table">
-            <thead>
-              <tr>
-                <th>Tense / Form</th>
-                <th>Active</th>
-                <th>Passive</th>
-                <th>FCE trap</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Present Simple</td>
-                <td>reviews</td>
-                <td><strong>is reviewed</strong></td>
-                <td>Do not write <em>is review</em>.</td>
-              </tr>
-              <tr>
-                <td>Present Continuous</td>
-                <td>is reviewing</td>
-                <td><strong>is being reviewed</strong></td>
-                <td>Do not forget <em>being</em>.</td>
-              </tr>
-              <tr>
-                <td>Past Simple</td>
-                <td>reviewed</td>
-                <td><strong>was reviewed</strong></td>
-                <td>Use <em>was/were</em> correctly.</td>
-              </tr>
-              <tr>
-                <td>Past Continuous</td>
-                <td>was reviewing</td>
-                <td><strong>was being reviewed</strong></td>
-                <td>Continuous passive needs <em>being</em>.</td>
-              </tr>
-              <tr>
-                <td>Present Perfect</td>
-                <td>has reviewed</td>
-                <td><strong>has been reviewed</strong></td>
-                <td>Perfect passive needs <em>been</em>.</td>
-              </tr>
-              <tr>
-                <td>Past Perfect</td>
-                <td>had reviewed</td>
-                <td><strong>had been reviewed</strong></td>
-                <td>Do not write the active form.</td>
-              </tr>
-              <tr>
-                <td>Future</td>
-                <td>will review</td>
-                <td><strong>will be reviewed</strong></td>
-                <td>Use <em>will be + past participle</em>.</td>
-              </tr>
-              <tr>
-                <td>Future Perfect</td>
-                <td>will have reviewed</td>
-                <td><strong>will have been reviewed</strong></td>
-                <td>Long but very testable.</td>
-              </tr>
-              <tr>
-                <td>Modal</td>
-                <td>should review</td>
-                <td><strong>should be reviewed</strong></td>
-                <td>Modal + be + past participle.</td>
-              </tr>
-              <tr>
-                <td>Perfect Modal</td>
-                <td>should have reviewed</td>
-                <td><strong>should have been reviewed</strong></td>
-                <td>Modal + have been + past participle.</td>
-              </tr>
-            </tbody>
-          </table>
+          <h3>Common expressions</h3>
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Frequency / experience</strong>
+              <p>Never<br>Rarely<br>Seldom<br>Hardly ever</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Limitation / restriction</strong>
+              <p>Little<br>At no time<br>In no way<br>Under no circumstances</p>
+            </div>
+          </div>
 
           <div class="box">
-            <strong>Very useful rule:</strong><br>
-            Perfect passive forms need <strong>been</strong>. Continuous passive forms need <strong>being</strong>.<br><br>
-            <em>has approved</em> → <strong>has been approved</strong><br>
-            <em>is assessing</em> → <strong>is being assessed</strong>
+            <strong>Examples:</strong><br>
+            I have never seen such talent.<br>
+            → <strong>Never have I seen</strong> such talent.<br><br>
+            They rarely eat out on weekdays.<br>
+            → <strong>Rarely do they eat</strong> out on weekdays.
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            If there is no auxiliary verb, use <strong>do / does / did</strong>.<br><br>
+            She rarely makes mistakes.<br>
+            → Rarely <strong>does she make</strong> mistakes.
           </div>
         `
       },
       {
-        title: "3. Passive with modal verbs",
-        badge: "Passive Voice · Modal Passive",
+        title: "3. Only / Not until / Not since",
+        badge: "Inversions · Restrictive Openings",
         html: `
-          <p>Modal passives are extremely common in Key Word Transformations because they are short, mechanical and easy to test.</p>
+          <p>Expressions with <strong>Only</strong>, <strong>Not until</strong> and <strong>Not since</strong> often trigger inversion, but the inversion usually appears in the main clause.</p>
 
           <div class="study-grid">
             <div class="study-mini">
-              <strong>Basic formula</strong>
-              <p><span class="formula">modal + be + past participle</span></p>
-              <p>must be replaced<br>should be reviewed<br>can be submitted</p>
+              <strong>Only when</strong>
+              <p>Only when she arrived <strong>did we start</strong>.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Active → Passive</strong>
-              <p>They should update the policy.</p>
-              <p><strong>The policy should be updated.</strong></p>
+              <strong>Only after</strong>
+              <p>Only after the film ended <strong>did I understand</strong> the title.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Negative modal passive</strong>
-              <p>They mustn't reveal confidential details.</p>
-              <p><strong>Confidential details mustn't be revealed.</strong></p>
+              <strong>Not until</strong>
+              <p>Not until I got home <strong>did I realise</strong> my mistake.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Perfect modal passive</strong>
-              <p>They should have informed residents.</p>
-              <p><strong>Residents should have been informed.</strong></p>
+              <strong>Not since</strong>
+              <p>Not since I was ten <strong>have I enjoyed</strong> a holiday so much.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Important:</strong><br>
+            Do not invert the time clause after <em>only when</em> or <em>not until</em>.<br><br>
+            ✅ Not until I arrived <strong>did I realise</strong> the problem.<br>
+            ❌ Not until did I arrive I realised the problem.
+          </div>
+        `
+      },
+      {
+        title: "4. No sooner / Hardly / Scarcely",
+        badge: "Inversions · Immediate Succession",
+        html: `
+          <p>These structures describe two events happening immediately one after another.</p>
+
+          <div class="box">
+            <strong>Normal meaning:</strong><br>
+            As soon as she left, the phone rang.<br><br>
+            <strong>Inversion:</strong><br>
+            No sooner <strong>had she left</strong> than the phone rang.
+          </div>
+
+          <h3>Main patterns</h3>
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>No sooner... than</strong>
+              <p><span class="formula">No sooner had + subject + past participle + than + past simple</span></p>
+              <p>No sooner had we arrived than it started raining.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Hardly / Scarcely... when</strong>
+              <p><span class="formula">Hardly had + subject + past participle + when + past simple</span></p>
+              <p>Hardly had I sat down when the bell rang.</p>
             </div>
           </div>
 
           <div class="box">
             <strong>FCE trap:</strong><br>
-            <em>The proposal should approved</em> ❌<br>
-            <em>The proposal should be approved</em> ✅
+            ✅ No sooner <strong>had he sat</strong> down <strong>than</strong> the phone rang.<br>
+            ✅ Hardly <strong>had he sat</strong> down <strong>when</strong> the phone rang.
           </div>
         `
       },
       {
-        title: "4. Passive with two objects",
-        badge: "Passive Voice · Two Objects",
+        title: "5. Conditional inversions",
+        badge: "Inversions · Conditionals",
         html: `
-          <p>Some verbs can take two objects: a person and a thing. In English, the person often becomes the passive subject.</p>
-
-          <div class="box">
-            <strong>Active:</strong><br>
-            The organisation offered the students a scholarship.<br><br>
-            <strong>Most natural passive:</strong><br>
-            The students were offered a scholarship.<br><br>
-            <strong>Also possible:</strong><br>
-            A scholarship was offered to the students.
-          </div>
-
-          <h3>Common two-object verbs in FCE</h3>
-          <div class="study-grid">
-            <div class="study-mini">
-              <strong>give</strong>
-              <p>They gave the applicants clear instructions.<br><strong>The applicants were given clear instructions.</strong></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>offer</strong>
-              <p>They offered Clara a position.<br><strong>Clara was offered a position.</strong></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>award</strong>
-              <p>They awarded the researcher a prize.<br><strong>The researcher was awarded a prize.</strong></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>send</strong>
-              <p>They sent the families detailed information.<br><strong>The families were sent detailed information.</strong></p>
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "5. Reporting passive I: It + passive",
-        badge: "Reporting Passive · It Pattern",
-        html: `
-          <p>Reporting passive is used with verbs such as <strong>say, think, believe, report, expect, claim, know</strong>.</p>
-
-          <div class="box">
-            <strong>Active:</strong><br>
-            People believe that the proposal is realistic.<br><br>
-            <strong>Impersonal passive:</strong><br>
-            It is believed that the proposal is realistic.
-          </div>
+          <p>In formal English, <strong>if</strong> can be removed and replaced by inversion.</p>
 
           <div class="study-grid">
             <div class="study-mini">
-              <strong>People say that...</strong>
-              <p><span class="formula">It is said that...</span></p>
+              <strong>Type 1 / future possibility</strong>
+              <p>If you need help, call me.</p>
+              <p><strong>Should you need</strong> help, call me.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Experts believe that...</strong>
-              <p><span class="formula">It is believed that...</span></p>
+              <strong>Type 2 / hypothetical present</strong>
+              <p>If I were you, I would apologise.</p>
+              <p><strong>Were I you</strong>, I would apologise.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Researchers think that...</strong>
-              <p><span class="formula">It is thought that...</span></p>
+              <strong>Type 3 / hypothetical past</strong>
+              <p>If they had checked the map, they wouldn’t have got lost.</p>
+              <p><strong>Had they checked</strong> the map, they wouldn’t have got lost.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Journalists reported that...</strong>
-              <p><span class="formula">It was reported that...</span></p>
+              <strong>Formal structure</strong>
+              <p>Drop <strong>if</strong>.</p>
+              <p>Move <strong>should / were / had</strong> before the subject.</p>
             </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 tip:</strong><br>
+            In normal English, the version with <em>if</em> may also be grammatical. However, in this block and in these transformations, the target answer is the <strong>inverted conditional</strong>.
           </div>
         `
       },
       {
-        title: "6. Reporting passive II: subject + infinitive",
-        badge: "Reporting Passive · Infinitive Pattern",
+        title: "6. Not only... but also",
+        badge: "Inversions · Not Only",
         html: `
-          <p>This is one of the most important advanced passive patterns in B2 First.</p>
+          <p>When <strong>Not only</strong> starts the sentence, the first clause is inverted. The second clause is not normally inverted.</p>
 
           <div class="box">
-            <strong>Active:</strong><br>
-            Experts believe that the method is reliable.<br><br>
-            <strong>Passive with infinitive:</strong><br>
-            The method is believed to be reliable.
-          </div>
-
-          <h3>The key decision: same time or earlier time?</h3>
-
-          <div class="study-grid">
-            <div class="study-mini">
-              <strong>Same time reference</strong>
-              <p>The method <strong>is</strong> reliable.</p>
-              <p><strong>The method is believed to be reliable.</strong></p>
-              <p><span class="formula">to be / to do</span></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>Earlier past action</strong>
-              <p>The director <strong>resigned</strong>.</p>
-              <p><strong>The director is thought to have resigned.</strong></p>
-              <p><span class="formula">to have + past participle</span></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>Continuous action</strong>
-              <p>The company is developing a new platform.</p>
-              <p><strong>The company is said to be developing a new platform.</strong></p>
-            </div>
-
-            <div class="study-mini">
-              <strong>Passive infinitive</strong>
-              <p>The museum will be reopened.</p>
-              <p><strong>The museum is expected to be reopened.</strong></p>
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "7. Causative I: have/get something done",
-        badge: "Causative · Services and Arrangements",
-        html: `
-          <p>Use causative structures when the subject does not do the action personally. Someone else does it for them.</p>
-
-          <div class="box">
-            <strong>Active idea:</strong><br>
-            A specialist reviewed the contract.<br><br>
-            <strong>Causative:</strong><br>
-            We had the contract reviewed.
+            <strong>Normal:</strong><br>
+            She sings beautifully and plays the violin.<br><br>
+            <strong>Inversion:</strong><br>
+            Not only <strong>does she sing</strong> beautifully, but she also plays the violin.
           </div>
 
           <div class="study-grid">
             <div class="study-mini">
-              <strong>HAVE + object + past participle</strong>
-              <p>We had the website redesigned.</p>
-              <p>She had her application checked.</p>
+              <strong>With be</strong>
+              <p>He is helpful and kind.</p>
+              <p>Not only <strong>is he</strong> helpful, but he is also kind.</p>
             </div>
 
             <div class="study-mini">
-              <strong>GET + object + past participle</strong>
-              <p>They got the documents translated.</p>
-              <p>He got the connection checked.</p>
+              <strong>With lexical verbs</strong>
+              <p>She sings and dances.</p>
+              <p>Not only <strong>does she sing</strong>, but she also dances.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Future causative</strong>
-              <p>I will have the equipment serviced.</p>
-              <p>She is going to get her passport renewed.</p>
+              <strong>Past simple</strong>
+              <p>They arrived late and complained.</p>
+              <p>Not only <strong>did they arrive</strong> late, but they also complained.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Continuous causative</strong>
-              <p>We are having the system upgraded.</p>
-              <p>He is getting his report proofread.</p>
+              <strong>Auxiliary already present</strong>
+              <p>They have helped and donated money.</p>
+              <p>Not only <strong>have they helped</strong>, but they have also donated money.</p>
             </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            ✅ Not only <strong>does she sing</strong> well, but she also dances beautifully.<br>
+            ❌ Not only she sings well, but she also dances beautifully.
           </div>
         `
       },
       {
-        title: "8. Causative II: accidents and misfortunes",
-        badge: "Causative · Misfortunes",
+        title: "7. So / Such inversion",
+        badge: "Inversions · So / Such",
         html: `
-          <p>The causative can also describe bad things that happen to someone. The subject suffers the result; they do not arrange the action.</p>
-
-          <div class="box">
-            <strong>Someone hacked his account.</strong><br>
-            He had his account hacked.<br><br>
-            <strong>Someone damaged their luggage.</strong><br>
-            They had their luggage damaged.
-          </div>
+          <p>Some emphatic result structures also use inversion, especially with <strong>So + adjective</strong> and <strong>Such + be + noun</strong>.</p>
 
           <div class="study-grid">
             <div class="study-mini">
-              <strong>Stolen / hacked</strong>
-              <p>She had her bike stolen.</p>
-              <p>He had his account hacked.</p>
+              <strong>So + adjective</strong>
+              <p>The demand was so high that...</p>
+              <p><strong>So high was the demand</strong> that...</p>
             </div>
 
             <div class="study-mini">
-              <strong>Damaged / scratched</strong>
-              <p>They had their luggage damaged.</p>
-              <p>She had her car scratched.</p>
+              <strong>So + adjective + auxiliary</strong>
+              <p>The demand has been so high that...</p>
+              <p><strong>So high has the demand been</strong> that...</p>
             </div>
 
             <div class="study-mini">
-              <strong>Cancelled / delayed</strong>
-              <p>We had our reservation cancelled.</p>
-              <p>They had their flight delayed.</p>
+              <strong>Such + be + noun</strong>
+              <p>The demands of the job are such that...</p>
+              <p><strong>Such are the demands</strong> of the job that...</p>
             </div>
 
             <div class="study-mini">
-              <strong>Leaked / misplaced</strong>
-              <p>She had her details leaked.</p>
-              <p>They had their documents misplaced.</p>
+              <strong>Exam use</strong>
+              <p>This pattern is less frequent than negative adverbials, but it appears in advanced KWT practice.</p>
             </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE trap:</strong><br>
+            ✅ So high <strong>was the price</strong> that nobody bought it.<br>
+            ✅ So high <strong>has demand been</strong> that extra dates were added.
           </div>
         `
       },
       {
-        title: "9. Causative III: make / let / get someone to do",
-        badge: "Causative · People Doing Actions",
-        html: `
-          <p>These causative verbs are about causing another person to do something. The structure depends on the meaning.</p>
-
-          <table class="tense-table">
-            <thead>
-              <tr>
-                <th>Meaning</th>
-                <th>Structure</th>
-                <th>Example</th>
-                <th>Trap</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Force</td>
-                <td><strong>make + object + bare infinitive</strong></td>
-                <td>The teacher made us rewrite the introduction.</td>
-                <td>Not <em>made us to rewrite</em>.</td>
-              </tr>
-              <tr>
-                <td>Permission</td>
-                <td><strong>let + object + bare infinitive</strong></td>
-                <td>They let the applicants submit the form later.</td>
-                <td>Not <em>let them to submit</em>.</td>
-              </tr>
-              <tr>
-                <td>Persuasion</td>
-                <td><strong>get + object + to-infinitive</strong></td>
-                <td>We got the manager to approve the request.</td>
-                <td>Do not forget <em>to</em>.</td>
-              </tr>
-              <tr>
-                <td>Arrangement / instruction</td>
-                <td><strong>have + object + bare infinitive</strong></td>
-                <td>The director had the assistant prepare the documents.</td>
-                <td>Not <em>had the assistant to prepare</em>.</td>
-              </tr>
-            </tbody>
-          </table>
-        `
-      },
-      {
-        title: "10. Common FCE traps",
+        title: "8. Common FCE traps",
         badge: "Exam Accuracy · Traps",
         html: `
-          <p>These are the mistakes that most often cost marks in B2 First Part 4.</p>
+          <p>Most mistakes in inversion tasks come from word order, missing auxiliaries or wrong connectors.</p>
 
           <div class="study-grid">
             <div class="study-mini">
-              <strong>Forgetting BEING</strong>
-              <p>They are assessing the damage.</p>
-              <p>✅ The damage <strong>is being assessed</strong>.</p>
-              <p>❌ The damage <em>is assessed</em>.</p>
+              <strong>No auxiliary</strong>
+              <p>❌ Rarely she goes out.</p>
+              <p>✅ Rarely <strong>does she go</strong> out.</p>
             </div>
 
             <div class="study-mini">
-              <strong>Forgetting BEEN</strong>
-              <p>They have approved the proposal.</p>
-              <p>✅ The proposal <strong>has been approved</strong>.</p>
-              <p>❌ The proposal <em>has approved</em>.</p>
+              <strong>No sooner</strong>
+              <p>❌ No sooner he had left when...</p>
+              <p>✅ No sooner <strong>had he left than</strong>...</p>
             </div>
 
             <div class="study-mini">
-              <strong>Wrong causative order</strong>
-              <p>✅ We <strong>had the contract reviewed</strong>.</p>
-              <p>❌ We <em>had reviewed the contract</em>.</p>
+              <strong>Hardly / Scarcely</strong>
+              <p>❌ Hardly had we arrived than...</p>
+              <p>✅ Hardly <strong>had we arrived when</strong>...</p>
             </div>
 
             <div class="study-mini">
-              <strong>Wrong infinitive after make / let / get</strong>
-              <p>✅ made us rewrite</p>
-              <p>✅ let them submit</p>
-              <p>✅ got him to approve</p>
+              <strong>Not only</strong>
+              <p>❌ Not only she sings...</p>
+              <p>✅ Not only <strong>does she sing</strong>...</p>
             </div>
 
             <div class="study-mini">
-              <strong>Reporting passive time reference</strong>
-              <p>Same time: <strong>is believed to be</strong></p>
-              <p>Earlier past: <strong>is believed to have been</strong></p>
+              <strong>Conditional inversion</strong>
+              <p>❌ Had I would known...</p>
+              <p>✅ Had I known...</p>
             </div>
 
             <div class="study-mini">
-              <strong>Unnecessary agent</strong>
-              <p>✅ The policy was reviewed.</p>
-              <p>Usually avoid: <em>by someone</em></p>
+              <strong>Not until</strong>
+              <p>❌ Not until did I arrive I realised...</p>
+              <p>✅ Not until I arrived <strong>did I realise</strong>...</p>
             </div>
+          </div>
+
+          <div class="box">
+            <strong>Final FCE reminder:</strong><br>
+            After the opening expression, ask yourself: <strong>Do I need auxiliary + subject?</strong><br>
+            Never forget the 2–5 word limit and the exact key word.
           </div>
         `
       }
@@ -1119,660 +945,995 @@
     }
 
     const banks = {
-      presentSimplePassive: [
-        ["The committee", "reviews", "each proposal", "Each proposal", "is reviewed", "carefully"],
-        ["The platform", "updates", "user profiles", "User profiles", "are updated", "automatically"],
-        ["The organisation", "publishes", "annual results", "Annual results", "are published", "online"],
-        ["The school", "assesses", "oral performance", "Oral performance", "is assessed", "regularly"],
-        ["The company", "processes", "applications", "Applications", "are processed", "within two weeks"],
-        ["The department", "stores", "confidential records", "Confidential records", "are stored", "securely"],
-        ["The council", "maintains", "public facilities", "Public facilities", "are maintained", "throughout the year"],
-        ["The team", "monitors", "student progress", "Student progress", "is monitored", "closely"]
+      rarelyPresentSimple: [
+        ["he", "does", "make", "mistakes", "in exams"],
+        ["she", "does", "forget", "deadlines", "at work"],
+        ["my brother", "does", "arrive", "late", "for training"],
+        ["the manager", "does", "change", "his mind", "during meetings"],
+        ["our teacher", "does", "give", "easy tests", "at the end of term"],
+        ["that student", "does", "ask", "for help", "during lessons"],
+        ["they", "do", "complain", "about homework", "in class"],
+        ["we", "do", "eat", "out", "during the week"],
+        ["the students", "do", "miss", "deadlines", "in this course"],
+        ["my parents", "do", "watch", "television", "during dinner"]
       ],
 
-      pastSimplePassive: [
-        ["The authorities", "postponed", "the conference", "The conference", "was postponed", "after the warning"],
-        ["The board", "approved", "the renovation project", "The renovation project", "was approved", "last month"],
-        ["The organisers", "cancelled", "the final session", "The final session", "was cancelled", "at short notice"],
-        ["The technician", "replaced", "the faulty equipment", "The faulty equipment", "was replaced", "before the inspection"],
-        ["The committee", "rejected", "several applications", "Several applications", "were rejected", "after the interview"],
-        ["The company", "released", "the figures", "The figures", "were released", "yesterday afternoon"],
-        ["The editor", "revised", "the article", "The article", "was revised", "before publication"],
-        ["The police", "investigated", "the complaint", "The complaint", "was investigated", "immediately"]
+      seldomPastSimple: [
+        ["they", "did", "visited", "visit", "the city centre", "after dark"],
+        ["we", "did", "saw", "see", "such behaviour", "at school"],
+        ["the children", "did", "complained", "complain", "about the trip", "last year"],
+        ["my cousins", "did", "travelled", "travel", "abroad", "when they were young"],
+        ["the team", "did", "played", "play", "so badly", "during the tournament"],
+        ["I", "did", "felt", "feel", "so nervous", "before an exam"],
+        ["students", "did", "asked", "ask", "so many questions", "in one lesson"]
       ],
 
-      presentContinuousPassive: [
-        ["Experts", "are assessing", "the damage", "The damage", "is being assessed", "at the moment"],
-        ["The school", "is redesigning", "the website", "The website", "is being redesigned", "this term"],
-        ["Researchers", "are analysing", "the results", "The results", "are being analysed", "carefully"],
-        ["The council", "is restoring", "the old theatre", "The old theatre", "is being restored", "this year"],
-        ["The company", "is upgrading", "the security system", "The security system", "is being upgraded", "now"],
-        ["The teachers", "are reviewing", "the assessment criteria", "The assessment criteria", "are being reviewed", "this week"],
-        ["Technicians", "are testing", "the new equipment", "The new equipment", "is being tested", "before the launch"],
-        ["The organisers", "are preparing", "the final programme", "The final programme", "is being prepared", "today"]
+      neverPerfect: [
+        ["I", "have", "seen", "such a confusing timetable"],
+        ["we", "have", "received", "so many complaints"],
+        ["they", "have", "experienced", "such difficult conditions"],
+        ["I", "have", "heard", "such a strange excuse"],
+        ["we", "have", "visited", "such a peaceful village"],
+        ["I", "have", "felt", "so disappointed"],
+        ["they", "have", "been", "so close to winning"]
       ],
 
-      pastContinuousPassive: [
-        ["The board", "was reviewing", "the proposal", "The proposal", "was being reviewed", "when the announcement was made"],
-        ["The technicians", "were checking", "the sound system", "The sound system", "was being checked", "when we arrived"],
-        ["The committee", "was discussing", "the complaint", "The complaint", "was being discussed", "during the meeting"],
-        ["The staff", "were preparing", "the conference room", "The conference room", "was being prepared", "at lunchtime"],
-        ["The journalists", "were interviewing", "the candidates", "The candidates", "were being interviewed", "outside the building"],
-        ["The developers", "were testing", "the platform", "The platform", "was being tested", "when the error appeared"]
+      neverHasPerfect: [
+        ["she", "has", "felt", "so embarrassed"],
+        ["he", "has", "made", "such a serious mistake"],
+        ["the school", "has", "received", "so many applications"],
+        ["the company", "has", "faced", "such strong criticism"],
+        ["my sister", "has", "won", "such an important prize"],
+        ["the team", "has", "played", "so confidently"]
       ],
 
-      presentPerfectPassive: [
-        ["The company", "has confirmed", "the booking", "The booking", "has been confirmed", "by email"],
-        ["The school", "has published", "the timetable", "The timetable", "has been published", "online"],
-        ["The committee", "has approved", "the proposal", "The proposal", "has been approved", "unanimously"],
-        ["The organisers", "have revised", "the programme", "The programme", "has been revised", "several times"],
-        ["The authorities", "have closed", "the road", "The road", "has been closed", "for safety reasons"],
-        ["The teachers", "have marked", "the essays", "The essays", "have been marked", "this morning"],
-        ["The department", "has updated", "the guidelines", "The guidelines", "have been updated", "recently"],
-        ["The researchers", "have analysed", "the evidence", "The evidence", "has been analysed", "in detail"]
+      seldomPastPerfect: [
+        ["we", "had", "seen", "such beautiful scenery"],
+        ["they", "had", "experienced", "such pressure"],
+        ["I", "had", "felt", "so relieved"],
+        ["the players", "had", "played", "so well"],
+        ["the audience", "had", "heard", "such a powerful speech"],
+        ["we", "had", "been", "so close to success"]
       ],
 
-      pastPerfectPassive: [
-        ["The team", "had completed", "the report", "The report", "had been completed", "before the deadline"],
-        ["The assistant", "had submitted", "the application", "The application", "had been submitted", "before noon"],
-        ["The organisers", "had checked", "all the details", "All the details", "had been checked", "before the event"],
-        ["The company", "had signed", "the agreement", "The agreement", "had been signed", "before the meeting"],
-        ["The school", "had informed", "the families", "The families", "had been informed", "in advance"],
-        ["The technicians", "had restored", "the connection", "The connection", "had been restored", "before the class began"]
+      littleDid: [
+        ["he", "expect", "that his plan would fail"],
+        ["she", "know", "how difficult the exam would be"],
+        ["they", "realise", "how much the project would cost"],
+        ["I", "imagine", "that the journey would take so long"],
+        ["we", "suspect", "that the decision had already been made"],
+        ["the students", "understand", "how important the deadline was"]
       ],
 
-      futurePassive: [
-        ["The results", "will be announced", "tomorrow morning"],
-        ["The decision", "will be confirmed", "by the end of the week"],
-        ["The new policy", "will be introduced", "next term"],
-        ["The final schedule", "will be published", "on Friday"],
-        ["The selected candidates", "will be contacted", "individually"],
-        ["The missing documents", "will be sent", "as soon as possible"],
-        ["The security system", "will be upgraded", "during the holidays"],
-        ["The application form", "will be available", "online"]
+      atNoTime: [
+        ["I", "was", "told", "about the change"],
+        ["we", "were", "informed", "about the delay"],
+        ["the students", "were", "allowed", "to leave early"],
+        ["she", "was", "asked", "to pay extra"],
+        ["they", "were", "given", "a clear explanation"],
+        ["he", "was", "offered", "a refund"]
       ],
 
-      goingToPassive: [
-        ["The results", "is going to be announced", "tonight"],
-        ["The new rules", "are going to be introduced", "next month"],
-        ["The building", "is going to be renovated", "next year"],
-        ["The documents", "are going to be translated", "before the meeting"],
-        ["The online platform", "is going to be updated", "this weekend"],
-        ["The candidates", "are going to be interviewed", "next week"]
+      modalRestrictions: [
+        ["you", "should", "share", "your password"],
+        ["students", "must", "use", "mobile phones"],
+        ["visitors", "can", "enter", "this area"],
+        ["candidates", "should", "open", "the exam paper early"],
+        ["members", "must", "remove", "equipment from the gym"],
+        ["drivers", "can", "park", "outside the emergency exit"]
       ],
 
-      futurePerfectPassive: [
-        ["The extension", "will have been completed", "by June"],
-        ["The final report", "will have been submitted", "by Friday"],
-        ["The new system", "will have been installed", "before September"],
-        ["All applications", "will have been processed", "by the end of the month"],
-        ["The documents", "will have been reviewed", "before the interview"],
-        ["The results", "will have been published", "by the time we arrive"]
+      inNoWayModal: [
+        ["this decision", "can", "be justified"],
+        ["his behaviour", "can", "be accepted"],
+        ["the results", "can", "be considered reliable"],
+        ["the mistake", "can", "be ignored"],
+        ["such behaviour", "should", "be tolerated"],
+        ["the rules", "can", "be changed now"]
       ],
 
-      modalPassive: [
-        ["The policy", "should be reviewed", "before it is published"],
-        ["Confidential details", "must not be revealed", "without permission"],
-        ["The form", "can be submitted", "online"],
-        ["The equipment", "must be replaced", "before the inspection"],
-        ["The proposal", "might be rejected", "if it is incomplete"],
-        ["The decision", "should be reconsidered", "after the new evidence"],
-        ["The problem", "could be solved", "with better planning"],
-        ["The documents", "may be requested", "during the interview"]
+      onlyPastSimple: [
+        ["I got home", "I", "realise", "my mistake"],
+        ["Laura arrived", "we", "start", "eating"],
+        ["I read the email again", "I", "notice", "the error"],
+        ["the teacher explained it twice", "he", "understand", "the instructions"],
+        ["we reached the hotel", "we", "discover", "the booking problem"],
+        ["the meeting had finished", "they", "tell", "us the truth"]
       ],
 
-      modalPerfectPassive: [
-        ["Residents", "should have been informed", "earlier"],
-        ["The mistake", "could have been avoided", "with more care"],
-        ["The documents", "must have been misplaced", "during the move"],
-        ["The application", "should have been submitted", "before the deadline"],
-        ["The error", "might have been detected", "during the final check"],
-        ["The meeting", "could have been postponed", "until next week"],
-        ["The candidates", "should have been contacted", "individually"],
-        ["The equipment", "must have been damaged", "during transport"]
+      onlyModal: [
+        ["we checked the map", "we", "could", "find the village"],
+        ["she apologised", "they", "would", "speak to her again"],
+        ["the teacher explained the rule", "the students", "could", "complete the task"],
+        ["I saw the final paragraph", "I", "could", "understand the joke"],
+        ["the lights came back on", "we", "could", "continue working"]
       ],
 
-      twoObjectPassive: [
-        ["The organisation offered the students a scholarship.", "The students ______ a scholarship.", "were offered", "OFFERED"],
-        ["The committee awarded the researcher a prize.", "The researcher ______ a prize.", "was awarded", "AWARDED"],
-        ["The school sent the families detailed information.", "The families ______ detailed information.", "were sent", "SENT"],
-        ["The guide showed the visitors the exhibition room.", "The visitors ______ the exhibition room.", "were shown", "SHOWN"],
-        ["The manager gave the applicants clear instructions.", "The applicants ______ clear instructions.", "were given", "GIVEN"],
-        ["The company paid the employees a bonus.", "The employees ______ a bonus.", "were paid", "PAID"],
-        ["The university offered Clara a place on the course.", "Clara ______ a place on the course.", "was offered", "WAS"],
-        ["The organisers gave the volunteers official badges.", "The volunteers ______ official badges.", "were given", "GIVEN"],
-        ["Someone taught the new students basic safety rules.", "The new students ______ basic safety rules.", "were taught", "TAUGHT"],
-        ["The sponsors awarded the team a special certificate.", "The team ______ a special certificate.", "was awarded", "AWARDED"]
+      notSincePerfect: [
+        ["I was a child", "I", "have", "enjoyed", "a holiday so much"],
+        ["we moved house", "we", "have", "felt", "so settled"],
+        ["she started university", "she", "has", "worked", "so hard"],
+        ["they won the final", "they", "have", "played", "with such confidence"],
+        ["I left school", "I", "have", "met", "so many new people"]
       ],
 
-      reportingIt: [
-        ["People believe that the proposal is realistic.", "______ that the proposal is realistic.", "it is believed", "BELIEVED"],
-        ["Experts think that the method is highly reliable.", "______ that the method is highly reliable.", "it is thought", "THOUGHT"],
-        ["Journalists reported that the director had resigned.", "______ that the director had resigned.", "it was reported", "REPORTED"],
-        ["People say that the school has achieved excellent results.", "______ that the school has achieved excellent results.", "it is said", "SAID"],
-        ["Researchers claim that the treatment is effective.", "______ that the treatment is effective.", "it is claimed", "CLAIMED"],
-        ["The authorities announced that the road would be closed.", "______ that the road would be closed.", "it was announced", "ANNOUNCED"],
-        ["People expect that the new platform will be successful.", "______ that the new platform will be successful.", "it is expected", "EXPECTED"],
-        ["Experts know that the system has several weaknesses.", "______ that the system has several weaknesses.", "it is known", "KNOWN"]
+      successionPairs: [
+        ["I", "arrived", "the phone rang"],
+        ["we", "sat down", "the bell rang"],
+        ["she", "opened the door", "the dog ran out"],
+        ["they", "left the house", "it started raining"],
+        ["he", "finished the test", "the alarm went off"],
+        ["I", "closed my eyes", "the baby woke up"],
+        ["we", "started the meeting", "the fire alarm sounded"],
+        ["the train", "left the station", "I realised my bag was missing"],
+        ["I", "made a complaint", "the timetable was changed"],
+        ["they", "announced the winner", "the crowd started cheering"]
       ],
 
-      reportingSubject: [
-        ["People believe that the method is reliable.", "The method ______ reliable.", "is believed to be", "BELIEVED"],
-        ["Experts think that the director resigned last week.", "The director ______ last week.", "is thought to have resigned", "THOUGHT"],
-        ["People say that the company is developing a new platform.", "The company ______ a new platform.", "is said to be developing", "SAID"],
-        ["They expect that the museum will be reopened soon.", "The museum ______ soon.", "is expected to be reopened", "EXPECTED"],
-        ["People believe that the missing documents were destroyed.", "The missing documents ______ destroyed.", "are believed to have been", "BELIEVED"],
-        ["Experts consider that the evidence is convincing.", "The evidence ______ convincing.", "is considered to be", "CONSIDERED"],
-        ["They report that the negotiations have reached an agreement.", "The negotiations ______ an agreement.", "are reported to have reached", "REPORTED"],
-        ["People know that the artist influenced a whole generation.", "The artist ______ a whole generation.", "is known to have influenced", "KNOWN"],
-        ["Experts expect that the economy will recover gradually.", "The economy ______ gradually.", "is expected to recover", "EXPECTED"],
-        ["People claim that the new system saves time.", "The new system ______ time.", "is claimed to save", "CLAIMED"]
+      shouldConditionals: [
+        ["you", "need", "further information", "contact reception"],
+        ["you", "require", "assistance", "press the help button"],
+        ["an emergency", "arise", "", "leave the building immediately"],
+        ["the weather", "change", "", "the trip will be cancelled"],
+        ["you", "have", "any questions", "ask your teacher"],
+        ["the problem", "continue", "", "call the technician"],
+        ["you", "wish", "to complain", "complete this form"],
+        ["the system", "fail", "", "restart the computer"]
       ],
 
-      causativeHaveGet: [
-        ["A specialist reviewed the contract.", "We ______ before signing it.", "had the contract reviewed", "HAD"],
-        ["A technician checked the connection.", "They ______ before the online meeting.", "got the connection checked", "GOT"],
-        ["A designer redesigned the school website.", "The school ______ last term.", "had the website redesigned", "HAD"],
-        ["A translator translated the documents.", "We ______ before the interview.", "got the documents translated", "GOT"],
-        ["A mechanic inspected the engine.", "He ______ before the journey.", "had the engine inspected", "HAD"],
-        ["A professional proofread the report.", "She ______ before submitting it.", "had the report proofread", "HAD"],
-        ["A specialist installed the security system.", "They ______ last month.", "got the security system installed", "GOT"],
-        ["A technician serviced the equipment.", "We ______ before the event.", "had the equipment serviced", "HAD"],
-        ["A photographer edited the pictures.", "They ______ for the school magazine.", "got the pictures edited", "GOT"],
-        ["A consultant checked the application.", "She ______ before sending it.", "had the application checked", "HAD"]
+      wereConditionals: [
+        ["I", "you", "I would apologise"],
+        ["she", "available", "we would invite her"],
+        ["he", "more careful", "he would make fewer mistakes"],
+        ["the exam", "easier", "more students would pass"],
+        ["I", "in your position", "I would speak to the manager"],
+        ["they", "interested", "they would have contacted us"]
       ],
 
-      causativeFutureContinuous: [
-        ["An expert will review the contract tomorrow.", "We will ______ tomorrow.", "have the contract reviewed", "HAVE"],
-        ["A technician is upgrading the system today.", "They are ______ today.", "having the system upgraded", "HAVING"],
-        ["A specialist will translate the report next week.", "He will ______ next week.", "get the report translated", "GET"],
-        ["A professional is proofreading her application.", "She is ______ at the moment.", "having her application proofread", "HAVING"],
-        ["An engineer will inspect the equipment on Friday.", "We will ______ on Friday.", "have the equipment inspected", "HAVE"],
-        ["A designer is redesigning our logo.", "We are ______ this month.", "getting our logo redesigned", "GETTING"]
+      hadConditionals: [
+        ["I", "known about the delay", "I would have left later"],
+        ["he", "trained harder", "he could have won"],
+        ["they", "checked the documents", "the mistake would not have happened"],
+        ["we", "booked earlier", "we would have got cheaper tickets"],
+        ["she", "been told the truth", "she would have acted differently"],
+        ["the driver", "seen the sign", "the accident might have been avoided"],
+        ["I", "taken your advice", "I would not have failed"],
+        ["they", "arrived on time", "they would have heard the announcement"]
       ],
 
-      misfortunes: [
-        ["Someone hacked his account during the weekend.", "He ______ during the weekend.", "had his account hacked", "HAD"],
-        ["Someone damaged their luggage during the transfer.", "They ______ during the transfer.", "had their luggage damaged", "HAD"],
-        ["Someone stole her bike outside the station.", "She ______ outside the station.", "had her bike stolen", "HAD"],
-        ["Someone cancelled our reservation by mistake.", "We ______ by mistake.", "had our reservation cancelled", "HAD"],
-        ["Someone misplaced their documents at the airport.", "They ______ at the airport.", "had their documents misplaced", "HAD"],
-        ["Someone scratched his car in the car park.", "He ______ in the car park.", "had his car scratched", "HAD"],
-        ["Someone delayed their flight for technical reasons.", "They ______ for technical reasons.", "had their flight delayed", "HAD"],
-        ["Someone leaked her personal details online.", "She ______ online.", "had her details leaked", "HAD"]
+      notOnlyBe: [
+        ["he", "is", "helpful", "he is also kind"],
+        ["the course", "is", "useful", "it is also enjoyable"],
+        ["the hotel", "was", "expensive", "it was also uncomfortable"],
+        ["the instructions", "were", "unclear", "they were also incomplete"],
+        ["the journey", "was", "long", "it was also exhausting"],
+        ["the students", "were", "tired", "they were also hungry"]
       ],
 
-      makeLetGet: [
-        ["The teacher forced the students to rewrite the introduction.", "The teacher ______ the introduction.", "made the students rewrite", "MADE"],
-        ["The organisers allowed the volunteers to choose their roles.", "The organisers ______ their roles.", "let the volunteers choose", "LET"],
-        ["We persuaded the manager to approve the request.", "We ______ the request.", "got the manager to approve", "GOT"],
-        ["The director asked the assistant to prepare the documents.", "The director ______ the documents.", "had the assistant prepare", "HAD"],
-        ["The coach forced the team to reconsider their strategy.", "The coach ______ their strategy.", "made the team reconsider", "MADE"],
-        ["They allowed the applicants to submit the form later.", "They ______ the form later.", "let the applicants submit", "LET"],
-        ["She persuaded the technician to check the connection.", "She ______ the connection.", "got the technician to check", "GOT"],
-        ["The manager asked the secretary to arrange the meeting.", "The manager ______ the meeting.", "had the secretary arrange", "HAD"],
-        ["The tutor forced us to correct our mistakes.", "The tutor ______ our mistakes.", "made us correct", "MADE"],
-        ["The school allowed the students to use dictionaries.", "The school ______ dictionaries.", "let the students use", "LET"]
+      notOnlyPresentSimple: [
+        ["she", "does", "speak", "French fluently", "she also writes it accurately"],
+        ["he", "does", "play", "the piano beautifully", "he also composes music"],
+        ["the app", "does", "save", "time", "it also reduces errors"],
+        ["the school", "does", "offer", "excellent facilities", "it also provides strong support"],
+        ["this method", "does", "improve", "accuracy", "it also builds confidence"]
+      ],
+
+      notOnlyPastSimple: [
+        ["they", "did", "arrive", "late", "they also forgot the tickets"],
+        ["she", "did", "win", "the race", "she also broke the record"],
+        ["he", "did", "refuse", "to apologise", "he also blamed everyone else"],
+        ["we", "did", "lose", "the map", "we also missed the last bus"],
+        ["the team", "did", "play", "badly", "they also argued afterwards"]
+      ],
+
+      notOnlyPerfectModal: [
+        ["we", "have", "improved", "the design", "we have also reduced the cost"],
+        ["they", "have", "solved", "the main problem", "they have also saved time"],
+        ["he", "can", "speak", "German", "he can also translate technical texts"],
+        ["she", "can", "sing", "beautifully", "she can also play the violin"],
+        ["the system", "will", "store", "your data", "it will also protect your privacy"]
+      ],
+
+      soBe: [
+        ["the price", "was", "high", "nobody bought the tickets"],
+        ["the explanation", "was", "confusing", "nobody understood it"],
+        ["the noise", "was", "loud", "we could not sleep"],
+        ["the exam", "was", "difficult", "few students finished it"],
+        ["the weather", "was", "bad", "the match was cancelled"],
+        ["the queue", "was", "long", "we decided to leave"]
+      ],
+
+      soPerfect: [
+        ["the demand", "has", "been", "high", "extra dates were added"],
+        ["the response", "has", "been", "positive", "the course is now full"],
+        ["the pressure", "had", "been", "intense", "several players made mistakes"],
+        ["the criticism", "has", "been", "strong", "the company has apologised"],
+        ["the support", "has", "been", "generous", "the target has already been reached"]
+      ],
+
+      suchBe: [
+        ["the risks", "are", "that the event may be cancelled"],
+        ["the demands of the job", "are", "that she rarely takes a holiday"],
+        ["the pressure on students", "is", "that many feel exhausted"],
+        ["the consequences", "were", "that the project had to be abandoned"],
+        ["the importance of accuracy", "is", "that every detail matters"]
       ]
     };
 
-    function itemPresentSimplePassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.presentSimplePassive);
+    function itemNegativeRarelyPresent() {
+      const [subject, aux, base, object, context] = pick(banks.rarelyPresentSimple);
+      const answer = `rarely ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} rarely ${presentForm(base, subject)} ${object} ${context}.`;
+      const second = `______ ${object} ${context}.`;
+
       return item(
-        "Active → Passive basic",
-        "Present simple active → present simple passive",
-        "Use present simple passive for facts, routines, systems and regular procedures.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "Rarely + do/does + subject + base verb",
+        "Use do/does when the original sentence has no auxiliary.",
+        original,
+        second,
         [answer],
-        answer.startsWith("is") ? ["IS"] : ["ARE"],
-        makePassiveDistractors(answer, "simple"),
-        "Present simple passive: am/is/are + past participle.",
-        "present-simple-passive"
+        ["RARELY"],
+        [
+          `rarely ${subject} ${presentForm(base, subject)}`,
+          `rarely ${aux} ${subject} ${presentForm(base, subject)}`,
+          `rarely ${subject} ${aux} ${base}`,
+          `rarely ${base} ${subject}`
+        ],
+        "No auxiliary in the original, so use do/does + subject + base verb.",
+        "rarely-present"
       );
     }
 
-    function itemPastSimplePassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.pastSimplePassive);
+    function itemNegativeSeldomPast() {
+      const [subject, aux, wrongPast, base, object, context] = pick(banks.seldomPastSimple);
+      const answer = `seldom ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} seldom ${wrongPast} ${object} ${context}.`;
+      const second = `______ ${object} ${context}.`;
+
       return item(
-        "Active → Passive basic",
-        "Past simple active → past simple passive",
-        "The object becomes the subject and the verb becomes was/were + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "Seldom + did + subject + base verb",
+        "Use did + subject + base verb for past simple inversion.",
+        original,
+        second,
         [answer],
-        answer.startsWith("was") ? ["WAS"] : ["WERE"],
-        makePassiveDistractors(answer, "simple"),
-        "Past simple passive: was/were + past participle.",
-        "past-simple-passive"
+        ["SELDOM"],
+        [
+          `seldom ${subject} ${wrongPast}`,
+          `seldom ${aux} ${subject} ${wrongPast}`,
+          `seldom ${subject} ${aux} ${base}`,
+          `seldom ${base} ${subject}`
+        ],
+        "Past simple inversion uses did + subject + base verb.",
+        "seldom-past"
       );
     }
 
-    function itemPresentContinuousPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.presentContinuousPassive);
+    function itemNeverPerfect() {
+      const [subject, aux, participle, object] = pick(Math.random() < 0.55 ? banks.neverPerfect : banks.neverHasPerfect);
+      const answer = `never ${aux} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${aux} never ${participle} ${object}.`;
+      const second = `______ ${object}.`;
+
       return item(
-        "Passive tense control",
-        "Present continuous passive",
-        "Present continuous active becomes am/is/are being + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "Never + have/has + subject + past participle",
+        "If there is already an auxiliary, move it before the subject.",
+        original,
+        second,
         [answer],
-        ["BEING"],
-        makePassiveDistractors(answer, "continuous"),
-        "Continuous passive forms need being.",
-        "present-continuous-passive"
+        ["NEVER"],
+        [
+          `never ${subject} ${aux} ${participle}`,
+          `never ${aux} ${participle} ${subject}`,
+          `never did ${subject} ${participle}`,
+          `never ${subject} ${participle}`
+        ],
+        "Present perfect inversion: never + have/has + subject + past participle.",
+        "never-perfect"
       );
     }
 
-    function itemPastContinuousPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.pastContinuousPassive);
+    function itemSeldomPastPerfect() {
+      const [subject, aux, participle, object] = pick(banks.seldomPastPerfect);
+      const answer = `seldom ${aux} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${aux} seldom ${participle} ${object}.`;
+      const second = `______ ${object}.`;
+
       return item(
-        "Passive tense control",
-        "Past continuous passive",
-        "Past continuous active becomes was/were being + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "Seldom + had + subject + past participle",
+        "Past perfect inversion moves had before the subject.",
+        original,
+        second,
         [answer],
-        ["BEING"],
-        makePassiveDistractors(answer, "continuous"),
-        "Past continuous passive needs was/were being + past participle.",
-        "past-continuous-passive"
+        ["SELDOM"],
+        [
+          `seldom ${subject} ${aux} ${participle}`,
+          `seldom ${aux} ${participle} ${subject}`,
+          `seldom did ${subject} ${participle}`,
+          `seldom ${subject} ${pastSimpleFromParticiple(participle)}`
+        ],
+        "Past perfect inversion: seldom had we seen / seldom had they experienced.",
+        "seldom-past-perfect"
       );
     }
 
-    function itemPresentPerfectPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.presentPerfectPassive);
+    function itemLittleDid() {
+      const [subject, base, clause] = pick(banks.littleDid);
+      const answer = `little did ${subject} ${base}`;
+      const original = `${capitalise(subject)} little ${pastSimpleFromBase(base)} ${clause}.`;
+      const second = `______ ${clause}.`;
+
       return item(
-        "Perfect passive forms",
-        "Present perfect passive",
-        "Present perfect active becomes has/have been + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "Little + did + subject + base verb",
+        "Little at the beginning requires inversion with did.",
+        original,
+        second,
         [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "perfect"),
-        "Do not forget been in perfect passive forms.",
-        "present-perfect-passive"
+        ["LITTLE"],
+        [
+          `little ${subject} ${pastSimpleFromBase(base)}`,
+          `little did ${subject} ${pastSimpleFromBase(base)}`,
+          `little ${subject} did ${base}`,
+          `little ${base} ${subject}`
+        ],
+        "Little + did + subject + base verb.",
+        "little-did"
       );
     }
 
-    function itemPastPerfectPassive() {
-      const [agent, verb, object, subject, answer, context] = pick(banks.pastPerfectPassive);
+    function itemAtNoTimePassive() {
+      const [subject, be, participle, complement] = pick(banks.atNoTime);
+      const answer = `time ${be} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${be} not ${participle} ${complement} at any time.`;
+      const second = `At no ______ ${complement}.`;
+
       return item(
-        "Perfect passive forms",
-        "Past perfect passive",
-        "Past perfect active becomes had been + past participle.",
-        `${agent} ${verb} ${object} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "At no time + auxiliary + subject + verb",
+        "At no time is followed by inversion.",
+        original,
+        second,
         [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "perfect"),
-        "Past perfect passive: had been + past participle.",
-        "past-perfect-passive"
+        ["TIME"],
+        [
+          `time ${subject} ${be} ${participle}`,
+          `time ${be} ${participle} ${subject}`,
+          `time did ${subject} ${participle}`,
+          `time ${subject} did ${participle}`
+        ],
+        "At no time + auxiliary + subject + verb.",
+        "at-no-time"
       );
     }
 
-    function itemFuturePassive() {
-      const [subject, answer, context] = pick(banks.futurePassive);
+    function itemUnderNoCircumstances() {
+      const [subject, modal, base, object] = pick(banks.modalRestrictions);
+      const answer = `no circumstances ${modal} ${subject}`;
+      const original = `${capitalise(subject)} ${modal} not ${base} ${object} under any circumstances.`;
+      const second = `Under ______ ${base} ${object}.`;
+
       return item(
-        "Passive tense control",
-        "Future passive",
-        "Will + active verb becomes will be + past participle.",
-        `They will complete the action related to ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "Under no circumstances + modal + subject",
+        "This opening expression requires inversion with the modal verb.",
+        original,
+        second,
         [answer],
-        ["BE"],
-        makePassiveDistractors(answer, "future"),
-        "Future passive: will be + past participle.",
-        "future-passive"
+        ["NO"],
+        [
+          `no circumstances ${subject} ${modal}`,
+          `no circumstances ${modal}`,
+          `no circumstances do ${subject}`,
+          `no circumstances ${subject} can`
+        ],
+        "Under no circumstances + modal + subject.",
+        "under-no-circumstances"
       );
     }
 
-    function itemGoingToPassive() {
-      const [subject, answer, context] = pick(banks.goingToPassive);
+    function itemInNoWayModal() {
+      const [subject, modal, be, complement] = pick(banks.inNoWayModal);
+      const answer = `way ${modal} ${subject} ${be}`;
+      const original = `${capitalise(subject)} ${modal} in no way ${be} ${complement}.`;
+      const second = `In no ______ ${complement}.`;
+
       return item(
-        "Passive tense control",
-        "Going to passive",
-        "Going to + verb becomes going to be + past participle.",
-        `They are going to complete the action related to ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Negative adverbials",
+        "In no way + modal + subject + verb",
+        "In no way is followed by auxiliary or modal inversion.",
+        original,
+        second,
         [answer],
-        ["BE"],
-        makePassiveDistractors(answer, "goingto"),
-        "Going to passive: am/is/are going to be + past participle.",
-        "going-to-passive"
+        ["WAY"],
+        [
+          `way ${subject} ${modal} ${be}`,
+          `way ${modal} ${be} ${subject}`,
+          `way ${subject} ${be}`,
+          `way did ${subject} ${be}`
+        ],
+        "In no way + modal + subject + verb.",
+        "in-no-way"
       );
     }
 
-    function itemFuturePerfectPassive() {
-      const [subject, answer, context] = pick(banks.futurePerfectPassive);
+    function itemOnlyPastSimple() {
+      const [timeClause, subject, base, object] = pick(banks.onlyPastSimple);
+      const answer = `did ${subject} ${base}`;
+      const original = `${capitalise(subject)} did not ${base} ${object} until ${timeClause}.`;
+      const second = `Not until ${timeClause} ______ ${object}.`;
+
       return item(
-        "Perfect passive forms",
-        "Future perfect passive",
-        "Future perfect active becomes will have been + past participle.",
-        `They will have completed the action related to ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Only / Not until / Not since",
+        "Not until + time clause + did + subject + base verb",
+        "The time clause is not inverted. The main clause is inverted.",
+        original,
+        second,
         [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "futureperfect"),
-        "Future perfect passive: will have been + past participle.",
-        "future-perfect-passive"
+        ["DID"],
+        [
+          `${subject} ${pastSimpleFromBase(base)}`,
+          `did ${subject} ${pastSimpleFromBase(base)}`,
+          `${subject} did ${base}`,
+          `${pastSimpleFromBase(base)} ${subject}`
+        ],
+        "Not until + normal time clause + did + subject + base verb.",
+        "not-until-past"
       );
     }
 
-    function itemModalPassive() {
-      const [subject, answer, context] = pick(banks.modalPassive);
+    function itemOnlyModal() {
+      const [timeClause, subject, modal, action] = pick(banks.onlyModal);
+      const answer = `${modal} ${subject}`;
+      const original = `${capitalise(subject)} ${modal} ${action} only after ${timeClause}.`;
+      const second = `Only after ${timeClause} ______ ${action}.`;
+
       return item(
-        "Modal passive",
-        "Modal passive",
-        "Modal verbs in the passive use modal + be + past participle.",
-        `They ${modalActiveFromPassive(answer)} ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Only / Not until / Not since",
+        "Only after + clause + modal + subject",
+        "Only after can trigger inversion in the main clause.",
+        original,
+        second,
         [answer],
-        answer.includes("be") ? ["BE"] : [answer.split(" ")[0].toUpperCase()],
-        makePassiveDistractors(answer, "modal"),
-        "Modal passive: modal + be + past participle.",
-        "modal-passive"
+        [modal.toUpperCase()],
+        [
+          `${subject} ${modal}`,
+          `${modal}`,
+          `did ${subject}`,
+          `${subject} did`
+        ],
+        "Only after + clause + modal + subject.",
+        "only-modal"
       );
     }
 
-    function itemModalPerfectPassive() {
-      const [subject, answer, context] = pick(banks.modalPerfectPassive);
+    function itemNotSincePerfect() {
+      const [timeClause, subject, aux, participle, object] = pick(banks.notSincePerfect);
+      const answer = `${aux} ${subject} ${participle}`;
+      const original = `${capitalise(subject)} ${aux} not ${participle} ${object} since ${timeClause}.`;
+      const second = `Not since ${timeClause} ______ ${object}.`;
+
       return item(
-        "Perfect passive forms",
-        "Perfect modal passive",
-        "Perfect modal passive uses modal + have been + past participle.",
-        `They ${modalPerfectActiveFromPassive(answer)} ${subject.toLowerCase()} ${context}.`,
-        `${subject} ______ ${context}.`,
+        "Only / Not until / Not since",
+        "Not since + time clause + have/has + subject + past participle",
+        "Not since often works with present perfect inversion.",
+        original,
+        second,
         [answer],
-        ["BEEN"],
-        makePassiveDistractors(answer, "modalperfect"),
-        "Perfect modal passive: modal + have been + past participle.",
-        "modal-perfect-passive"
+        [aux.toUpperCase()],
+        [
+          `${subject} ${aux} ${participle}`,
+          `${aux} ${subject} ${baseFromParticiple(participle)}`,
+          `did ${subject} ${participle}`,
+          `${subject} ${pastSimpleFromParticiple(participle)}`
+        ],
+        "Not since + time clause + have/has + subject + past participle.",
+        "not-since-perfect"
       );
     }
 
-    function itemTwoObjectPassive() {
-      const [original, second, answer, key] = pick(banks.twoObjectPassive);
+    function itemSuccessionNoSooner() {
+      const [subject, event1, event2] = pick(banks.successionPairs);
+      const answer = `sooner had ${subject} ${event1}`;
+      const original = `As soon as ${subject} ${pastSimplePhrase(event1)}, ${event2}.`;
+      const second = `No ______ than ${event2}.`;
+
       return item(
-        "Two-object passive",
-        "Two-object passive: person as subject",
-        "With verbs like give, send, offer, show, award and teach, the person often becomes the passive subject.",
+        "No sooner / Hardly / Scarcely",
+        "No sooner had + subject + past participle + than",
+        "Use No sooner... than for two immediate events.",
+        original,
+        second,
+        [answer],
+        ["SOONER"],
+        [
+          `sooner ${subject} had ${event1}`,
+          `sooner had ${subject} ${pastSimplePhrase(event1)}`,
+          `sooner had ${subject} ${event1} when`,
+          `sooner did ${subject} ${basePhrase(event1)}`
+        ],
+        "No sooner had + subject + past participle + than.",
+        "no-sooner"
+      );
+    }
+
+    function itemSuccessionHardly() {
+      const [subject, event1, event2] = pick(banks.successionPairs);
+      const opening = Math.random() < 0.5 ? "Hardly" : "Scarcely";
+      const key = opening.toUpperCase();
+      const answer = `${opening.toLowerCase()} had ${subject} ${event1}`;
+      const original = `${capitalise(subject)} had just ${event1} when ${event2}.`;
+      const second = `______ when ${event2}.`;
+
+      return item(
+        "No sooner / Hardly / Scarcely",
+        `${opening} had + subject + past participle + when`,
+        `${opening}... when expresses two immediate events.`,
         original,
         second,
         [answer],
         [key],
-        makeTwoObjectDistractors(answer),
-        "The person receiving something is often the most natural passive subject.",
-        "two-object-passive"
+        [
+          `${opening.toLowerCase()} ${subject} had ${event1}`,
+          `${opening.toLowerCase()} had ${subject} ${event1} than`,
+          `${opening.toLowerCase()} did ${subject} ${basePhrase(event1)}`,
+          `${opening.toLowerCase()} had ${event1} ${subject}`
+        ],
+        `${opening} had + subject + past participle + when.`,
+        opening.toLowerCase()
       );
     }
 
-    function itemReportingIt() {
-      const [original, second, answer, key] = pick(banks.reportingIt);
+    function itemConditionalShould() {
+      const [subject, base, object, result] = pick(banks.shouldConditionals);
+      const gapObject = object ? ` ${object}` : "";
+      const answer = `should ${subject} ${base}`;
+      const original = `If ${subject} ${presentForm(base, subject)}${gapObject}, ${result}.`;
+      const second = `______${gapObject}, ${result}.`;
+
       return item(
-        "Reporting passive: It + passive",
-        "It + passive reporting verb + that-clause",
-        "Use It + passive reporting verb + that-clause for impersonal reporting.",
+        "Conditional inversions",
+        "Should + subject + base verb",
+        "In formal first conditional inversion, remove if and use should + subject + base verb.",
         original,
         second,
         [answer],
-        [key],
-        makeReportingDistractors(answer),
-        "Do not forget the passive auxiliary be.",
-        "reporting-it"
+        ["SHOULD"],
+        [
+          `should ${subject} ${presentForm(base, subject)}`,
+          `${subject} should ${base}`,
+          `should ${base} ${subject}`,
+          `should ${subject} ${base}ing`
+        ],
+        "Target inversion: Should + subject + base verb. Do not use IF in the answer.",
+        "conditional-should"
       );
     }
 
-    function itemReportingSubject() {
-      const [original, second, answer, key] = pick(banks.reportingSubject);
+    function itemConditionalWere() {
+      const [subject, complement, result] = pick(banks.wereConditionals);
+      const answer = `were ${subject} ${complement}`;
+      const original = `If ${subject} were ${complement}, ${result}.`;
+      const second = `______ , ${result}.`;
+
       return item(
-        "Reporting passive: subject + infinitive",
-        "Subject + passive reporting verb + infinitive",
-        "Choose to be / to do for same time reference, and to have done / to have been for earlier time reference.",
+        "Conditional inversions",
+        "Were + subject + complement",
+        "In formal second conditional inversion, remove if and move were before the subject.",
         original,
         second,
         [answer],
-        [key],
-        makeReportingDistractors(answer),
-        "Check whether the reported action is simultaneous or earlier.",
-        "reporting-subject"
+        ["WERE"],
+        [
+          `were ${subject} was ${complement}`,
+          `${subject} were ${complement}`,
+          `were ${complement} ${subject}`,
+          `was ${subject} ${complement}`
+        ],
+        "Target inversion: Were + subject + complement. Do not use IF in the answer.",
+        "conditional-were"
       );
     }
 
-    function itemCausativeHaveGet() {
-      const [original, second, answer, key] = pick(banks.causativeHaveGet);
+    function itemConditionalHad() {
+      const [subject, pastParticiplePhrase, result] = pick(banks.hadConditionals);
+      const answer = `had ${subject} ${pastParticiplePhrase}`;
+      const original = `If ${subject} had ${pastParticiplePhrase}, ${result}.`;
+      const second = `______ , ${result}.`;
+
       return item(
-        "Causative: have/get something done",
-        "Have/Get + object + past participle",
-        "Use have/get something done when someone else performs a service for the subject.",
+        "Conditional inversions",
+        "Had + subject + past participle",
+        "In formal third conditional inversion, remove if and move had before the subject.",
         original,
         second,
         [answer],
-        [key],
-        makeCausativeDistractors(answer),
-        "Correct order: have/get + object + past participle.",
-        "causative-have-get"
-      );
-    }
-
-    function itemCausativeFutureContinuous() {
-      const [original, second, answer, key] = pick(banks.causativeFutureContinuous);
-      return item(
-        "Causative: have/get something done",
-        "Future / continuous causative",
-        "Causatives can also appear in future and continuous forms.",
-        original,
-        second,
-        [answer],
-        [key],
-        makeCausativeDistractors(answer),
-        "The subject arranges the action; someone else does it.",
-        "causative-future-continuous"
-      );
-    }
-
-    function itemMisfortune() {
-      const [original, second, answer, key] = pick(banks.misfortunes);
-      return item(
-        "Causative: accidents and misfortunes",
-        "Misfortune causative",
-        "Use have + possession + past participle when something bad happens to the subject.",
-        original,
-        second,
-        [answer],
-        [key],
-        makeCausativeDistractors(answer),
-        "This structure focuses on the person affected by the negative event.",
-        "causative-misfortune"
-      );
-    }
-
-    function itemMakeLetGet() {
-      const [original, second, answer, key] = pick(banks.makeLetGet);
-      return item(
-        "Make / Let / Get someone to do",
-        "Make / Let / Get / Have someone do something",
-        "Choose the structure according to meaning: force, permission, persuasion or arrangement.",
-        original,
-        second,
-        [answer],
-        [key],
-        makePeopleCausativeDistractors(answer),
-        "MAKE and LET take bare infinitive. GET takes to-infinitive. HAVE can take object + bare infinitive.",
-        "make-let-get"
-      );
-    }
-
-    function trapBeing() {
-      return item(
-        "Cambridge traps",
-        "Do not forget BEING in continuous passive",
-        "Continuous passive forms need being.",
-        "Experts are assessing the damage at the moment.",
-        "The damage ______ at the moment.",
-        ["is being assessed"],
-        ["BEING"],
-        ["is assessed", "has been assessed", "is assessing", "is been assessed"],
-        "Present continuous passive: is being assessed.",
-        "trap-being"
-      );
-    }
-
-    function trapBeen() {
-      return item(
-        "Cambridge traps",
-        "Do not forget BEEN in perfect passive",
-        "Perfect passive forms need been.",
-        "The committee has approved the proposal.",
-        "The proposal ______.",
-        ["has been approved"],
-        ["BEEN"],
-        ["has approved", "was been approved", "has being approved", "has been approving"],
-        "Present perfect passive: has been approved.",
-        "trap-been"
-      );
-    }
-
-    function trapModalBe() {
-      return item(
-        "Cambridge traps",
-        "Modal passive needs BE",
-        "After a modal, the passive uses be + past participle.",
-        "The school should update the policy.",
-        "The policy ______.",
-        ["should be updated"],
-        ["BE"],
-        ["should updated", "should been updated", "should be updating", "should update"],
-        "Modal passive: should be updated.",
-        "trap-modal-be"
-      );
-    }
-
-    function trapCausativeOrder() {
-      return item(
-        "Cambridge traps",
-        "Causative word order",
-        "Have/get something done requires object before past participle.",
-        "A specialist reviewed the contract.",
-        "We ______.",
-        ["had the contract reviewed"],
         ["HAD"],
-        ["had reviewed the contract", "had the contract review", "was had the contract reviewed", "had the contract reviewing"],
-        "Correct order: had + object + past participle.",
-        "trap-causative-order"
+        [
+          `had ${subject} would ${pastParticiplePhrase}`,
+          `${subject} had ${pastParticiplePhrase}`,
+          `had ${pastParticiplePhrase} ${subject}`,
+          `had ${subject} ${pastParticipleToBasePhrase(pastParticiplePhrase)}`
+        ],
+        "Target inversion: Had + subject + past participle. Do not use IF in the answer.",
+        "conditional-had"
       );
     }
 
-    function trapReportingPast() {
+    function itemNotOnlyBe() {
+      const [subject, be, adjective, resultClause] = pick(banks.notOnlyBe);
+      const answer = `not only ${be} ${subject}`;
+      const original = `${capitalise(subject)} ${be} ${adjective}, and ${resultClause}.`;
+      const second = `______ ${adjective}, but ${resultClause}.`;
+
       return item(
-        "Cambridge traps",
-        "Reporting passive: perfect infinitive",
-        "Earlier past action after reporting passive needs to have + past participle.",
-        "People believe that the director resigned last week.",
-        "The director ______ last week.",
-        ["is believed to have resigned"],
-        ["BELIEVED"],
-        ["is believed to resign", "is believed resigned", "is believed have resigned", "believes to have resigned"],
-        "Earlier action: is believed to have resigned.",
-        "trap-reporting-past"
+        "Not only... but also",
+        "Not only + be + subject",
+        "When Not only begins the sentence, invert the first clause.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${be}`,
+          `not only ${be} ${adjective}`,
+          `only ${be} ${subject}`,
+          `not only did ${subject}`
+        ],
+        "With be, invert be and subject.",
+        "not-only-be"
       );
     }
 
-    function trapMakeLetGet() {
+    function itemNotOnlyPresent() {
+      const [subject, aux, base, object, resultClause] = pick(banks.notOnlyPresentSimple);
+      const answer = `not only ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} ${presentForm(base, subject)} ${object}, and ${resultClause}.`;
+      const second = `______ ${object}, but ${resultClause}.`;
+
+      return item(
+        "Not only... but also",
+        "Not only + does + subject + base verb",
+        "Use do/does support when there is no auxiliary.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${presentForm(base, subject)}`,
+          `not only ${aux} ${subject} ${presentForm(base, subject)}`,
+          `only ${aux} ${subject} ${base}`,
+          `not only ${base} ${subject}`
+        ],
+        "Not only + does/do + subject + base verb.",
+        "not-only-present"
+      );
+    }
+
+    function itemNotOnlyPast() {
+      const [subject, aux, base, object, resultClause] = pick(banks.notOnlyPastSimple);
+      const answer = `not only ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} ${pastSimpleFromBase(base)} ${object}, and ${resultClause}.`;
+      const second = `______ ${object}, but ${resultClause}.`;
+
+      return item(
+        "Not only... but also",
+        "Not only + did + subject + base verb",
+        "Past simple inversion uses did + subject + base verb.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${pastSimpleFromBase(base)}`,
+          `not only ${aux} ${subject} ${pastSimpleFromBase(base)}`,
+          `only ${aux} ${subject} ${base}`,
+          `not only ${base} ${subject}`
+        ],
+        "Not only + did + subject + base verb.",
+        "not-only-past"
+      );
+    }
+
+    function itemNotOnlyPerfectModal() {
+      const [subject, aux, base, object, resultClause] = pick(banks.notOnlyPerfectModal);
+      const answer = `not only ${aux} ${subject} ${base}`;
+      const original = `${capitalise(subject)} ${aux} ${base} ${object}, and ${resultClause}.`;
+      const second = `______ ${object}, but ${resultClause}.`;
+
+      return item(
+        "Not only... but also",
+        "Not only + auxiliary/modal + subject + verb",
+        "If there is already an auxiliary or modal, move it before the subject.",
+        original,
+        second,
+        [answer],
+        ["ONLY"],
+        [
+          `not only ${subject} ${aux} ${base}`,
+          `not only ${aux} ${base} ${subject}`,
+          `only ${aux} ${subject} ${base}`,
+          `not only did ${subject} ${base}`
+        ],
+        "Move the existing auxiliary or modal before the subject.",
+        "not-only-perfect-modal"
+      );
+    }
+
+    function itemSoBe() {
+      const [subject, be, adjective, result] = pick(banks.soBe);
+      const answer = `so ${adjective} ${be} ${subject}`;
+      const original = `${capitalise(subject)} ${be} so ${adjective} that ${result}.`;
+      const second = `______ that ${result}.`;
+
+      return item(
+        "So / Such inversion",
+        "So + adjective + be + subject + that",
+        "In emphatic result clauses, so + adjective can trigger inversion.",
+        original,
+        second,
+        [answer],
+        ["SO"],
+        [
+          `so ${adjective} ${subject} ${be}`,
+          `so ${be} ${adjective} ${subject}`,
+          `${subject} ${be} so ${adjective}`,
+          `so ${adjective} did ${subject}`
+        ],
+        "So + adjective + be + subject + that.",
+        "so-be"
+      );
+    }
+
+    function itemSoPerfect() {
+      const [subject, aux, been, adjective, result] = pick(banks.soPerfect);
+      const answer = `so ${adjective} ${aux} ${subject}`;
+      const original = `${capitalise(subject)} ${aux} ${been} so ${adjective} that ${result}.`;
+      const second = `______ been that ${result}.`;
+
+      return item(
+        "So / Such inversion",
+        "So + adjective + auxiliary + subject + been + that",
+        "With perfect forms, the auxiliary moves before the subject.",
+        original,
+        second,
+        [answer],
+        ["SO"],
+        [
+          `so ${adjective} ${subject} ${aux}`,
+          `so ${aux} ${adjective} ${subject}`,
+          `${subject} ${aux} so ${adjective}`,
+          `so ${adjective} did ${subject}`
+        ],
+        "So + adjective + has/had + subject + been.",
+        "so-perfect"
+      );
+    }
+
+    function itemSuchBe() {
+      const [subject, be, result] = pick(banks.suchBe);
+      const answer = `such ${be} ${subject}`;
+      const original = `${capitalise(subject)} ${be} such that ${result}.`;
+      const second = `______ that ${result}.`;
+
+      return item(
+        "So / Such inversion",
+        "Such + be + noun phrase + that",
+        "Such can introduce an emphatic result structure with inversion.",
+        original,
+        second,
+        [answer],
+        ["SUCH"],
+        [
+          `such ${subject} ${be}`,
+          `such ${be}`,
+          `${subject} ${be} such`,
+          `such did ${subject}`
+        ],
+        "Such + be + noun phrase + that.",
+        "such-be"
+      );
+    }
+
+    function trapNoAuxiliary() {
       return item(
         "Cambridge traps",
-        "Make / Let / Get patterns",
-        "MAKE and LET take bare infinitive. GET takes to-infinitive.",
-        "We persuaded the manager to approve the request.",
-        "We ______ the request.",
-        ["got the manager to approve"],
-        ["GOT"],
-        ["got the manager approve", "made the manager to approve", "let the manager to approve", "got to the manager approve"],
-        "Correct: got the manager to approve.",
-        "trap-make-let-get"
+        "Missing do-support after a negative adverbial",
+        "If there is no auxiliary in the original sentence, use do / does / did.",
+        "She rarely makes mistakes in tests.",
+        "Rarely ______ in tests.",
+        ["does she make mistakes"],
+        ["RARELY"],
+        ["she makes mistakes", "she does make mistakes", "does she makes mistakes", "make she mistakes"],
+        "After rarely at the start, use does + subject + base verb.",
+        "trap-no-auxiliary"
       );
+    }
+
+    function trapNoSoonerConnector() {
+      return item(
+        "Cambridge traps",
+        "No sooner pairs with than",
+        "No sooner uses had + subject + past participle + than.",
+        "He sat down and the telephone rang immediately.",
+        "No sooner ______ the telephone rang.",
+        ["had he sat down than"],
+        ["SOONER"],
+        ["he had sat down than", "had he sat down when", "had sat he down than", "did he sit down than"],
+        "No sooner... than. Hardly/Scarcely... when.",
+        "trap-no-sooner"
+      );
+    }
+
+    function trapHardlyConnector() {
+      return item(
+        "Cambridge traps",
+        "Hardly pairs with when",
+        "Hardly uses had + subject + past participle + when.",
+        "We had just finished breakfast when they called us.",
+        "Hardly ______ they called us.",
+        ["had we finished breakfast when"],
+        ["HARDLY"],
+        ["we had finished breakfast when", "had we finished breakfast than", "had finished we breakfast when", "did we finish breakfast when"],
+        "Hardly... when, not hardly... than.",
+        "trap-hardly"
+      );
+    }
+
+    function trapConditionalHad() {
+      return item(
+        "Cambridge traps",
+        "Had + subject + past participle",
+        "In third conditional inversion, remove IF and use Had + subject + past participle.",
+        "If I had known about the delay, I would have left later.",
+        "______ about the delay, I would have left later.",
+        ["had I known"],
+        ["HAD"],
+        ["had I would known", "I had known", "had known I", "had I knew"],
+        "Target inversion: Had + subject + past participle. The normal IF conditional is grammatical English, but it is not the target transformation and is not used as an option.",
+        "trap-had"
+      );
+    }
+
+    function trapNotOnly() {
+      return item(
+        "Cambridge traps",
+        "Not only requires inversion",
+        "After Not only at the beginning, invert the first clause.",
+        "She sings well and dances beautifully.",
+        "______ well, but she also dances beautifully.",
+        ["not only does she sing"],
+        ["ONLY"],
+        ["not only she sings", "not only does she sings", "only does she sing", "not only sing she"],
+        "Not only + does + subject + base verb.",
+        "trap-not-only"
+      );
+    }
+
+    function trapNotUntil() {
+      return item(
+        "Cambridge traps",
+        "Not until: inversion in the main clause",
+        "The clause after Not until is not inverted; the main clause is inverted.",
+        "I didn't notice the error until I read the email again.",
+        "Not until I read the email again ______ the error.",
+        ["did I notice"],
+        ["DID"],
+        ["I noticed", "did I noticed", "I did notice", "noticed I"],
+        "Not until + normal clause + did + subject + base verb.",
+        "trap-not-until"
+      );
+    }
+
+    function trapShouldWere() {
+      return Math.random() < 0.5
+        ? item(
+            "Cambridge traps",
+            "Should + subject + base verb",
+            "First conditional inversion uses should + subject + base verb.",
+            "If you require assistance, press the help button.",
+            "______ assistance, press the help button.",
+            ["should you require"],
+            ["SHOULD"],
+            ["should you required", "you should require", "should require you", "should you requiring"],
+            "Should + subject + base verb.",
+            "trap-should"
+          )
+        : item(
+            "Cambridge traps",
+            "Were + subject + complement",
+            "Second conditional inversion uses were + subject.",
+            "If I were in your position, I would complain.",
+            "______ , I would complain.",
+            ["were I in your position"],
+            ["WERE"],
+            ["were I was in your position", "I were in your position", "were in I your position", "was I in your position"],
+            "Were + subject + complement.",
+            "trap-were"
+          );
     }
 
     const generators = {
-      "Active → Passive basic": [
-        itemPresentSimplePassive,
-        itemPastSimplePassive,
-        itemFuturePassive,
-        itemGoingToPassive
+      "Negative adverbials": [
+        itemNegativeRarelyPresent,
+        itemNegativeSeldomPast,
+        itemNeverPerfect,
+        itemSeldomPastPerfect,
+        itemLittleDid,
+        itemAtNoTimePassive,
+        itemUnderNoCircumstances,
+        itemInNoWayModal
       ],
-      "Passive tense control": [
-        itemPresentSimplePassive,
-        itemPresentContinuousPassive,
-        itemPastContinuousPassive,
-        itemFuturePassive,
-        itemGoingToPassive,
-        itemModalPassive
+      "Only / Not until / Not since": [
+        itemOnlyPastSimple,
+        itemOnlyModal,
+        itemNotSincePerfect
       ],
-      "Modal passive": [
-        itemModalPassive,
-        itemModalPerfectPassive
+      "No sooner / Hardly / Scarcely": [
+        itemSuccessionNoSooner,
+        itemSuccessionHardly
       ],
-      "Perfect passive forms": [
-        itemPresentPerfectPassive,
-        itemPastPerfectPassive,
-        itemFuturePerfectPassive,
-        itemModalPerfectPassive
+      "Conditional inversions": [
+        itemConditionalShould,
+        itemConditionalWere,
+        itemConditionalHad
       ],
-      "Two-object passive": [
-        itemTwoObjectPassive
+      "Not only... but also": [
+        itemNotOnlyBe,
+        itemNotOnlyPresent,
+        itemNotOnlyPast,
+        itemNotOnlyPerfectModal
       ],
-      "Reporting passive: It + passive": [
-        itemReportingIt
-      ],
-      "Reporting passive: subject + infinitive": [
-        itemReportingSubject
-      ],
-      "Causative: have/get something done": [
-        itemCausativeHaveGet,
-        itemCausativeFutureContinuous
-      ],
-      "Causative: accidents and misfortunes": [
-        itemMisfortune
-      ],
-      "Make / Let / Get someone to do": [
-        itemMakeLetGet
+      "So / Such inversion": [
+        itemSoBe,
+        itemSoPerfect,
+        itemSuchBe
       ],
       "Cambridge traps": [
-        trapBeing,
-        trapBeen,
-        trapModalBe,
-        trapCausativeOrder,
-        trapReportingPast,
-        trapMakeLetGet
+        trapNoAuxiliary,
+        trapNoSoonerConnector,
+        trapHardlyConnector,
+        trapConditionalHad,
+        trapNotOnly,
+        trapNotUntil,
+        trapShouldWere
       ]
     };
 
     generators["Mixed exam decisions"] = [
-      itemPresentSimplePassive,
-      itemPastSimplePassive,
-      itemPresentContinuousPassive,
-      itemPastContinuousPassive,
-      itemPresentPerfectPassive,
-      itemPastPerfectPassive,
-      itemFuturePassive,
-      itemGoingToPassive,
-      itemFuturePerfectPassive,
-      itemModalPassive,
-      itemModalPerfectPassive,
-      itemTwoObjectPassive,
-      itemReportingIt,
-      itemReportingSubject,
-      itemCausativeHaveGet,
-      itemCausativeFutureContinuous,
-      itemMisfortune,
-      itemMakeLetGet,
-      trapBeing,
-      trapBeen,
-      trapModalBe,
-      trapCausativeOrder,
-      trapReportingPast,
-      trapMakeLetGet
+      itemNegativeRarelyPresent,
+      itemNegativeSeldomPast,
+      itemNeverPerfect,
+      itemSeldomPastPerfect,
+      itemLittleDid,
+      itemAtNoTimePassive,
+      itemUnderNoCircumstances,
+      itemInNoWayModal,
+      itemOnlyPastSimple,
+      itemOnlyModal,
+      itemNotSincePerfect,
+      itemSuccessionNoSooner,
+      itemSuccessionHardly,
+      itemConditionalShould,
+      itemConditionalWere,
+      itemConditionalHad,
+      itemNotOnlyBe,
+      itemNotOnlyPresent,
+      itemNotOnlyPast,
+      itemNotOnlyPerfectModal,
+      itemSoBe,
+      itemSoPerfect,
+      itemSuchBe,
+      trapNoAuxiliary,
+      trapNoSoonerConnector,
+      trapHardlyConnector,
+      trapConditionalHad,
+      trapNotOnly,
+      trapNotUntil,
+      trapShouldWere
     ];
 
     const allPracticeGenerators = Object.entries(generators)
@@ -1819,6 +1980,135 @@
       return array[Math.floor(Math.random() * array.length)];
     }
 
+    function capitalise(text) {
+      return String(text).charAt(0).toUpperCase() + String(text).slice(1);
+    }
+
+    function presentForm(base, subject) {
+      const singularSubjects = ["he", "she", "it", "my brother", "the manager", "our teacher", "that student", "the school", "the company", "the app", "this method"];
+      if (!singularSubjects.includes(subject.toLowerCase())) return base;
+      if (base.endsWith("ch") || base.endsWith("sh") || base.endsWith("x") || base.endsWith("ss")) return base + "es";
+      if (base.endsWith("y")) return base.slice(0, -1) + "ies";
+      return base + "s";
+    }
+
+    function pastSimpleFromBase(base) {
+      const irregular = {
+        go: "went",
+        see: "saw",
+        feel: "felt",
+        know: "knew",
+        make: "made",
+        hear: "heard",
+        eat: "ate",
+        give: "gave",
+        take: "took",
+        speak: "spoke",
+        win: "won",
+        lose: "lost",
+        arrive: "arrived",
+        visit: "visited",
+        complain: "complained",
+        travel: "travelled",
+        play: "played",
+        ask: "asked",
+        expect: "expected",
+        realise: "realised",
+        imagine: "imagined",
+        suspect: "suspected",
+        understand: "understood",
+        notice: "noticed",
+        start: "started",
+        discover: "discovered",
+        tell: "told",
+        require: "required",
+        need: "needed",
+        arise: "arose",
+        change: "changed",
+        have: "had",
+        continue: "continued",
+        wish: "wished",
+        fail: "failed",
+        speak: "spoke",
+        save: "saved",
+        offer: "offered",
+        improve: "improved",
+        refuse: "refused"
+      };
+      return irregular[base] || base + "ed";
+    }
+
+    function pastSimpleFromParticiple(participle) {
+      const map = {
+        seen: "saw",
+        been: "was",
+        felt: "felt",
+        heard: "heard",
+        received: "received",
+        experienced: "experienced",
+        visited: "visited",
+        made: "made",
+        won: "won",
+        played: "played"
+      };
+      return map[participle] || participle;
+    }
+
+    function baseFromParticiple(participle) {
+      const map = {
+        seen: "see",
+        been: "be",
+        felt: "feel",
+        heard: "hear",
+        received: "receive",
+        experienced: "experience",
+        visited: "visit",
+        made: "make",
+        won: "win",
+        played: "play",
+        enjoyed: "enjoy",
+        worked: "work",
+        met: "meet"
+      };
+      return map[participle] || participle.replace(/ed$/, "");
+    }
+
+    function pastParticipleToBasePhrase(phrase) {
+      return phrase
+        .replace("known", "know")
+        .replace("trained", "train")
+        .replace("checked", "check")
+        .replace("booked", "book")
+        .replace("been told", "be told")
+        .replace("seen", "see")
+        .replace("taken", "take")
+        .replace("arrived", "arrive");
+    }
+
+    function pastSimplePhrase(phrase) {
+      return phrase
+        .replace("arrived", "arrived")
+        .replace("sat down", "sat down")
+        .replace("opened", "opened")
+        .replace("left", "left")
+        .replace("finished", "finished")
+        .replace("closed", "closed")
+        .replace("started", "started")
+        .replace("made", "made");
+    }
+
+    function basePhrase(phrase) {
+      return phrase
+        .replace("arrived", "arrive")
+        .replace("sat down", "sit down")
+        .replace("opened", "open")
+        .replace("left", "leave")
+        .replace("finished", "finish")
+        .replace("closed", "close")
+        .replace("started", "start")
+        .replace("made", "make");
+    }
+
     function normalise(text) {
       return String(text || "")
         .toLowerCase()
@@ -1858,6 +2148,7 @@
 
     function isValidExercise(exercise) {
       const answers = getAcceptedAnswers(exercise);
+
       return answers.length > 0 && answers.every(answer => {
         const count = wordCount(answer);
         return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
@@ -1891,33 +2182,21 @@
       return generators[category] || allPracticeGenerators;
     }
 
-    function safeGenerate(generator) {
-      try {
-        return generator();
-      } catch {
-        return null;
-      }
-    }
-
     function generateExercise(category = "All categories", mode = "transform", recent = []) {
       const generatorList = getGeneratorList(category);
       const localPatternCount = state.patternHistory[category] || {};
 
-      for (let attempt = 0; attempt < 180; attempt++) {
-        const candidates = shuffle(generatorList)
-          .map(generator => {
-            const exercise = safeGenerate(generator);
-            if (!exercise) return null;
-            const count = localPatternCount[patternSignature(exercise)] || 0;
-            return { generator, exercise, count };
-          })
-          .filter(Boolean)
-          .sort((a, b) => a.count - b.count);
+      for (let attempt = 0; attempt < 160; attempt++) {
+        const sortedGenerators = shuffle(generatorList).sort((a, b) => {
+          const ea = safeGenerate(a);
+          const eb = safeGenerate(b);
+          const pa = ea ? (localPatternCount[patternSignature(ea)] || 0) : 999;
+          const pb = eb ? (localPatternCount[patternSignature(eb)] || 0) : 999;
+          return pa - pb;
+        });
 
-        const selected = candidates[0];
-        if (!selected) continue;
-
-        const exercise = selected.exercise;
+        const generator = sortedGenerators[0] || pick(generatorList);
+        const exercise = generator();
 
         const validKeys = shuffle(exercise.keyOptions || []).filter(key =>
           getAcceptedAnswers(exercise).some(answer => keyIsIncluded(answer, key))
@@ -1942,7 +2221,7 @@
         const psig = patternSignature(finalExercise);
 
         if (recent.includes(sig) && attempt < 120) continue;
-        if ((localPatternCount[psig] || 0) > 3 && attempt < 100) continue;
+        if ((localPatternCount[psig] || 0) > 2 && attempt < 100) continue;
 
         state.patternHistory[category] = state.patternHistory[category] || {};
         state.patternHistory[category][psig] = (state.patternHistory[category][psig] || 0) + 1;
@@ -1950,149 +2229,24 @@
         return finalExercise;
       }
 
-      const fallback = itemPresentPerfectPassive();
+      const fallback = itemNegativeRarelyPresent();
       return {
         ...fallback,
         key: fallback.keyOptions[0]
       };
     }
 
+    function safeGenerate(generator) {
+      try {
+        return generator();
+      } catch {
+        return null;
+      }
+    }
+
     function remember(recentList, exercise) {
       recentList.push(signature(exercise));
-      while (recentList.length > 40) recentList.shift();
-    }
-
-    function makePassiveDistractors(answer, type) {
-      const a = answer;
-
-      if (type === "continuous") {
-        return [
-          a.replace("being ", ""),
-          a.replace("being ", "been "),
-          a.replace(/is |are |was |were /, ""),
-          a.replace("assessed", "assessing").replace("redesigned", "redesigning").replace("analysed", "analysing").replace("restored", "restoring").replace("upgraded", "upgrading").replace("reviewed", "reviewing").replace("tested", "testing").replace("prepared", "preparing")
-        ];
-      }
-
-      if (type === "perfect") {
-        return [
-          a.replace("been ", ""),
-          a.replace("been ", "being "),
-          a.replace("has ", "was ").replace("have ", "were ").replace("had ", "was "),
-          a.replace("approved", "approving").replace("confirmed", "confirming").replace("published", "publishing").replace("completed", "completing").replace("submitted", "submitting")
-        ];
-      }
-
-      if (type === "futureperfect") {
-        return [
-          a.replace("been ", ""),
-          a.replace("will have been", "will be"),
-          a.replace("will have been", "will have"),
-          a.replace("been ", "being ")
-        ];
-      }
-
-      if (type === "modalperfect") {
-        return [
-          a.replace("been ", ""),
-          a.replace("have been", "be"),
-          a.replace("been ", "being "),
-          a.replace("should have", "should").replace("could have", "could").replace("must have", "must").replace("might have", "might")
-        ];
-      }
-
-      if (type === "modal") {
-        return [
-          a.replace("be ", ""),
-          a.replace("be ", "been "),
-          a.replace("be ", "being "),
-          a.replace("reviewed", "review").replace("revealed", "reveal").replace("submitted", "submit").replace("replaced", "replace").replace("rejected", "reject").replace("reconsidered", "reconsidered")
-        ];
-      }
-
-      if (type === "future") {
-        return [
-          a.replace("will be ", "will "),
-          a.replace("will be ", "will been "),
-          a.replace("will be ", "will being "),
-          a.replace("announced", "announcing").replace("confirmed", "confirming").replace("introduced", "introducing").replace("published", "publishing")
-        ];
-      }
-
-      if (type === "goingto") {
-        return [
-          a.replace("to be ", "to "),
-          a.replace("to be ", "to been "),
-          a.replace("to be ", "to being "),
-          a.replace("announced", "announce").replace("introduced", "introduce").replace("renovated", "renovate").replace("translated", "translate")
-        ];
-      }
-
-      return [
-        a.replace("is ", ""),
-        a.replace("are ", ""),
-        a.replace("was ", "is "),
-        a.replace("were ", "are "),
-        a.replace("reviewed", "reviewing").replace("approved", "approving").replace("published", "publishing").replace("processed", "processing")
-      ];
-    }
-
-    function makeTwoObjectDistractors(answer) {
-      return [
-        answer.replace("was", "were").replace("were", "was"),
-        answer.replace("offered", "offer").replace("awarded", "award").replace("sent", "send").replace("shown", "show").replace("given", "gave").replace("paid", "pay").replace("taught", "teach"),
-        answer.replace("were ", "").replace("was ", ""),
-        answer.replace("offered", "offering").replace("awarded", "awarding").replace("sent", "sending").replace("shown", "showing").replace("given", "giving")
-      ];
-    }
-
-    function makeReportingDistractors(answer) {
-      return [
-        answer.replace("is ", ""),
-        answer.replace("are ", ""),
-        answer.replace("was ", ""),
-        answer.replace("to have ", "to "),
-        answer.replace("to be ", "being "),
-        answer.replace("believed", "believing").replace("thought", "thinking").replace("reported", "reporting").replace("expected", "expecting").replace("claimed", "claiming").replace("considered", "considering")
-      ];
-    }
-
-    function makeCausativeDistractors(answer) {
-      return [
-        answer.replace(/had |got |will have |will get |having |getting /, "had "),
-        answer.replace(/ reviewed| checked| redesigned| translated| inspected| proofread| installed| serviced| edited| upgraded| renewed| damaged| stolen| hacked| cancelled| misplaced| scratched| delayed| leaked/g, " review"),
-        answer.replace(/had |got |having |getting /, "was "),
-        answer.replace(/ reviewed| checked| redesigned| translated| inspected| proofread| installed| serviced| edited| upgraded| renewed| damaged| stolen| hacked| cancelled| misplaced| scratched| delayed| leaked/g, " reviewing")
-      ];
-    }
-
-    function makePeopleCausativeDistractors(answer) {
-      return [
-        answer.replace(" to ", " "),
-        answer.replace("made ", "made to "),
-        answer.replace("let ", "let to "),
-        answer.replace("got ", "got to "),
-        answer.replace("had ", "had to ")
-      ];
-    }
-
-    function modalActiveFromPassive(answer) {
-      return answer
-        .replace("should be", "should")
-        .replace("must not be", "must not")
-        .replace("must be", "must")
-        .replace("can be", "can")
-        .replace("might be", "might")
-        .replace("could be", "could")
-        .replace("may be", "may");
-    }
-
-    function modalPerfectActiveFromPassive(answer) {
-      return answer
-        .replace("should have been", "should have")
-        .replace("could have been", "could have")
-        .replace("must have been", "must have")
-        .replace("might have been", "might have");
+      while (recentList.length > 35) recentList.shift();
     }
 
     function populatePracticeSelect(id, value) {
@@ -2403,13 +2557,13 @@
 
       let message = "";
       if (score >= 9) {
-        message = "Excellent exam control. You are handling passive and causative transformations with strong accuracy.";
+        message = "Excellent exam control. You are using inversion structures with strong accuracy.";
       } else if (score >= 7) {
-        message = "Good result. Keep practising tense control, reporting passive and causative structures.";
+        message = "Good result. Keep practising auxiliary position, tense variety and connector choice.";
       } else if (score >= 5) {
-        message = "You understand several patterns, but you need more controlled practice with passive verb forms, modals and causatives.";
+        message = "You understand several patterns, but you need more controlled practice with inversion word order.";
       } else {
-        message = "Revise Study Mode carefully, especially the tense table, perfect passive forms and causative patterns.";
+        message = "Revise Study Mode carefully, especially negative adverbials, No sooner/Hardly and conditional inversions.";
       }
 
       const review = state.examAnswers.map(item => `
