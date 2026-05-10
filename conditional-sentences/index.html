@@ -1,1 +1,2558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block 8 · Mr John’s KWT Lab</title>
+  <link rel="icon" type="image/png" href="../assets/logo-final3.png" />
 
+  <style>
+    :root {
+      --navy: #062b63;
+      --blue: #005eb8;
+      --light-blue: #eaf3ff;
+      --orange: #f28c00;
+      --orange-soft: #fff3df;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d9e2ef;
+      --white: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 16px 36px rgba(6, 43, 99, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 94, 184, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 0, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 46px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 0 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand img {
+      height: auto;
+      width: 260px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .home-link {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(6, 43, 99, 0.06);
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--orange-soft);
+      color: #9a5700;
+      border: 1px solid rgba(242, 140, 0, 0.25);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -1.4px;
+    }
+
+    .highlight { color: var(--orange); }
+
+    .hero p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 920px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    button,
+    .tab {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
+
+    button:hover,
+    .tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(6, 43, 99, 0.10);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .tab.active,
+    .primary {
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      border-color: transparent;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    select,
+    input {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+    }
+
+    select { min-width: 300px; }
+    input { width: 100%; }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hidden { display: none !important; }
+
+    .badge,
+    .pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .badge-blue {
+      background: var(--light-blue);
+      color: var(--blue);
+      border-color: rgba(0, 94, 184, 0.18);
+    }
+
+    .badge-orange {
+      background: var(--orange-soft);
+      color: #9a5700;
+      border-color: rgba(242, 140, 0, 0.25);
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: #bbf7d0;
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: #fecaca;
+    }
+
+    .muted { color: var(--muted); }
+
+    .study-card {
+      min-height: 480px;
+    }
+
+    .study-card h2 {
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+      margin: 12px 0 12px;
+    }
+
+    .study-card h3 {
+      color: var(--navy);
+      margin: 18px 0 8px;
+      font-size: 21px;
+    }
+
+    .study-card p,
+    .study-card li {
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .study-mini {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .study-mini strong {
+      color: var(--navy);
+    }
+
+    .formula {
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--navy);
+      border: 1px solid rgba(0, 94, 184, 0.18);
+      border-radius: 10px;
+      padding: 3px 7px;
+      font-weight: 900;
+      margin: 2px 0;
+    }
+
+    .warning-line {
+      display: inline-block;
+      background: var(--red-soft);
+      color: #7f1d1d;
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      padding: 5px 8px;
+      font-weight: 900;
+      margin-top: 6px;
+    }
+
+    .pattern-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 15px;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .pattern-table th,
+    .pattern-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .pattern-table th {
+      background: var(--light-blue);
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .pattern-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      border-color: #fecaca;
+      color: #7f1d1d;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      text-align: left;
+      min-height: 58px;
+    }
+
+    .option.good {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: #14532d;
+    }
+
+    .option.bad {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: #7f1d1d;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+
+    .result-number {
+      color: var(--navy);
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin: 8px 0;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 760px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brand img {
+        width: 220px;
+        height: auto;
+      }
+
+      .tabs,
+      .answer-row,
+      .option-grid,
+      .study-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding: 26px 20px; }
+      select { width: 100%; min-width: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/logo-final3.png" alt="Mr John’s KWT Lab logo" />
+        <div>
+          <span class="brand-title">Mr John’s KWT Lab</span>
+          <span class="brand-subtitle">Block 8 · Conditional Sentences & Condition Linkers</span>
+        </div>
+      </div>
+
+      <a class="home-link" href="../index.html">← Back to Lab Home</a>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Cambridge B2 First · Key Word Transformation</span>
+      <h1>Conditional Sentences <span class="highlight">Transformation</span> Trainer</h1>
+      <p>
+        Practise B2 First Part 4 transformations with IF, UNLESS, AS LONG AS,
+        PROVIDED THAT, ON CONDITION THAT, WOULD, SHOULD, HAD, WERE and formal inverted conditionals.
+        This block trains conditional logic, not word-by-word translation.
+      </p>
+      <div class="stats">
+        <span class="pill">Core patterns</span>
+        <span class="pill">IF ⇄ UNLESS</span>
+        <span class="pill">AS LONG AS</span>
+        <span class="pill">PROVIDED THAT</span>
+        <span class="pill">ON CONDITION THAT</span>
+        <span class="pill">SECOND CONDITIONAL</span>
+        <span class="pill">THIRD CONDITIONAL</span>
+        <span class="pill">SHOULD / WERE / HAD</span>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="study">🧠 Study Mode</button>
+      <button class="tab" data-tab="multiple">✓ Multiple Choice</button>
+      <button class="tab" data-tab="transform">✎ Transformations</button>
+      <button class="tab" data-tab="exam">🏆 Exam Mode</button>
+    </nav>
+
+    <section id="study" class="tab-section">
+      <div class="toolbar">
+        <select id="studySection"></select>
+        <div class="button-group">
+          <button id="studyPrev">Previous</button>
+          <button id="studyNext" class="primary">Next</button>
+        </div>
+      </div>
+
+      <div id="studyCard" class="card study-card"></div>
+      <p id="studyCounter" class="muted" style="text-align:center"></p>
+    </section>
+
+    <section id="multiple" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="mcCategory"></select>
+        <div class="button-group">
+          <button id="mcNew">New question</button>
+          <button id="mcReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="mcType" class="badge badge-blue"></span>
+          <span id="mcScore" class="pill"></span>
+        </div>
+
+        <div id="mcQuestion" class="question"></div>
+        <div id="mcOptions" class="option-grid"></div>
+        <div id="mcFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="transform" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="trCategory"></select>
+        <div class="button-group">
+          <button id="trHint">Hint</button>
+          <button id="trNew">New exercise</button>
+          <button id="trReset">Reset score</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <span id="trType" class="badge badge-blue"></span>
+          <span id="trWords" class="pill">Words: 0/2–5</span>
+          <span id="trScore" class="pill"></span>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="trFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="trSecond" class="box"></div>
+
+        <p><span id="trKey" class="badge badge-orange"></span></p>
+
+        <div id="trHintBox" class="box hidden"></div>
+
+        <div class="answer-row">
+          <input id="trInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="trCheck" class="primary">Check</button>
+          <button id="trReveal">Reveal</button>
+        </div>
+
+        <div id="trFeedback" class="box hidden"></div>
+      </div>
+    </section>
+
+    <section id="exam" class="tab-section hidden">
+      <div class="toolbar">
+        <select id="examCategory"></select>
+        <div class="button-group">
+          <button id="examStart" class="primary">Start official 6-question round</button>
+          <button id="examRestart">Restart round</button>
+        </div>
+      </div>
+
+      <div class="card" id="examIntro">
+        <span class="badge badge-orange">Exam Mode</span>
+        <h2 style="color:var(--navy); margin-bottom:8px;">6-question official-style round</h2>
+        <p class="muted">
+          Complete 6 written Key Word Transformations. Each answer must contain between
+          two and five words and include the key word exactly as given.
+        </p>
+        <div class="box">
+          <strong>Round design:</strong> each round includes IF/UNLESS, condition linkers,
+          first conditional logic, second conditional, third conditional, and either because → if
+          or inverted conditionals.
+        </div>
+      </div>
+
+      <div class="card hidden" id="examCard">
+        <div class="toolbar">
+          <span id="examType" class="badge badge-blue"></span>
+          <span id="examScore" class="pill"></span>
+          <span id="examWords" class="pill">Words: 0/2–5</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="examProgress" class="progress-bar"></div>
+        </div>
+
+        <p class="muted"><strong>First sentence</strong></p>
+        <div id="examFirst" class="question"></div>
+
+        <p class="muted"><strong>Complete the second sentence</strong></p>
+        <div id="examSecond" class="box"></div>
+
+        <p><span id="examKey" class="badge badge-orange"></span></p>
+
+        <div class="answer-row">
+          <input id="examInput" type="text" placeholder="Write only the missing words..." autocomplete="off" />
+          <button id="examCheck" class="primary">Check</button>
+          <button id="examNext" disabled>Next</button>
+        </div>
+
+        <div id="examFeedback" class="box hidden"></div>
+      </div>
+
+      <div class="card hidden" id="examResult"></div>
+    </section>
+
+    <footer class="footer">
+      <span><strong>Mr John’s KWT Lab</strong> · Block 8 · v1.0</span>
+      <span>Conditional Sentences · Large-scale B2 generator · FCE Part 4 focused practice</span>
+    </footer>
+  </main>
+
+  <script>
+    const categories = [
+      "All categories",
+      "IF / UNLESS",
+      "Condition linkers",
+      "First conditional",
+      "Second conditional",
+      "Advice structures",
+      "Third conditional",
+      "Because → If",
+      "Inverted conditionals",
+      "Mixed exam decisions",
+      "Cambridge traps"
+    ];
+
+    const studySections = [
+      {
+        title: "1. What conditional transformations test",
+        badge: "Conditionals · Foundation",
+        html: `
+          <p>Conditional sentences describe a condition and a result. In B2 First Part 4, you are not just changing a word. You are changing the grammatical frame while keeping the same logic.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Step 1 · Find the condition</strong>
+              <p>What needs to happen?</p>
+              <p><span class="formula">if you study regularly</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 2 · Find the result</strong>
+              <p>What happens because of that condition?</p>
+              <p><span class="formula">you will pass the exam</span></p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 3 · Identify the time logic</strong>
+              <p>Is it real future, imaginary present, unreal past, advice, or formal inversion?</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Step 4 · Respect the key word</strong>
+              <p>The missing words must include the key word unchanged and must contain 2–5 words.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>FCE Part 4 priority:</strong><br>
+            Do not translate word by word. First understand the condition-result relationship, then choose the correct transformation pattern.
+          </div>
+        `
+      },
+      {
+        title: "2. IF NOT → UNLESS",
+        badge: "IF / UNLESS",
+        html: `
+          <p><strong>UNLESS</strong> means <strong>IF NOT</strong>. This is one of the most frequent conditional transformations in B2 First.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Original idea</strong>
+              <p>If you do not practise, you will not improve.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Transformation</strong>
+              <p>You will not improve <span class="formula">unless you practise</span>.</p>
+            </div>
+          </div>
+
+          <h3>Structure</h3>
+          <p><span class="formula">if + negative verb</span> → <span class="formula">unless + positive verb</span></p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>First sentence</th>
+                <th>Key word</th>
+                <th>Second sentence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>You won’t improve if you don’t practise regularly.</td>
+                <td>UNLESS</td>
+                <td>You won’t improve <strong>unless you practise regularly</strong>.</td>
+              </tr>
+              <tr>
+                <td>If you don’t read the instructions, you won’t understand the task.</td>
+                <td>UNLESS</td>
+                <td>You won’t understand the task <strong>unless you read the instructions</strong>.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="warning-line">Common trap: Do not use another negative after UNLESS.</p>
+          <p>❌ You won’t pass unless you don’t study.<br>✅ You won’t pass unless you study.</p>
+        `
+      },
+      {
+        title: "3. UNLESS → IF + negative",
+        badge: "IF / UNLESS",
+        html: `
+          <p>The opposite transformation is also common. When you change <strong>UNLESS</strong> into <strong>IF</strong>, you normally need a negative verb.</p>
+
+          <h3>Structure</h3>
+          <p><span class="formula">unless + positive verb</span> → <span class="formula">if + negative verb</span></p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>UNLESS sentence</strong>
+              <p>You won’t be allowed in unless you show your ticket.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>IF sentence</strong>
+              <p>You won’t be allowed in <span class="formula">if you don’t show</span> your ticket.</p>
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Exam note:</strong><br>
+            Check the logic carefully. UNLESS already contains a negative meaning, so the IF version usually needs <strong>don’t / doesn’t / didn’t</strong>.
+          </div>
+        `
+      },
+      {
+        title: "4. AS LONG AS, PROVIDED THAT and ON CONDITION THAT",
+        badge: "Condition Linkers",
+        html: `
+          <p>These linkers introduce a condition. They are especially useful when the sentence means “only if this condition is respected”.</p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Linker</th>
+                <th>Meaning</th>
+                <th>Example</th>
+                <th>Exam trap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AS LONG AS</td>
+                <td>if / only if</td>
+                <td>You can use my laptop <strong>as long as you are</strong> careful.</td>
+                <td>The key word LONG is part of the expression AS LONG AS.</td>
+              </tr>
+              <tr>
+                <td>PROVIDED THAT</td>
+                <td>if / on the condition that</td>
+                <td>We’ll go camping <strong>provided that the weather</strong> improves.</td>
+                <td>After PROVIDED THAT, use present simple for real future conditions.</td>
+              </tr>
+              <tr>
+                <td>ON CONDITION THAT</td>
+                <td>only if</td>
+                <td>I’ll lend you the money <strong>on condition that you</strong> pay me back.</td>
+                <td>Do not write “in condition that” or “with condition that”.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>FCE pattern:</strong><br>
+            IF can often become AS LONG AS, PROVIDED THAT or ON CONDITION THAT when the condition is clear and the result depends on it.
+          </div>
+        `
+      },
+      {
+        title: "5. First conditional and real future conditions",
+        badge: "First Conditional",
+        html: `
+          <p>The first conditional describes a real possible situation in the future.</p>
+
+          <h3>Structure</h3>
+          <p><span class="formula">If + present simple</span>, <span class="formula">will + infinitive</span></p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Real future condition</strong>
+              <p>If you arrive early, you will get a good seat.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Warning / imperative logic</strong>
+              <p>Hurry up or you’ll miss the bus.<br>→ You’ll miss the bus <strong>if you don’t hurry</strong>.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>In case</strong>
+              <p>Take a jacket because it might get cold.<br>→ Take a jacket <strong>in case it gets</strong> cold.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Important</strong>
+              <p>After IF, UNLESS, AS LONG AS and PROVIDED THAT, use present simple, not WILL.</p>
+            </div>
+          </div>
+
+          <p class="warning-line">Common trap: If you will arrive late, call me. ✗</p>
+          <p>✅ If you arrive late, call me.</p>
+        `
+      },
+      {
+        title: "6. Second conditional",
+        badge: "Second Conditional",
+        html: `
+          <p>The second conditional describes an imaginary or unlikely situation in the present or future.</p>
+
+          <h3>Structure</h3>
+          <p><span class="formula">If + past simple</span>, <span class="formula">would / could + infinitive</span></p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Real situation</th>
+                <th>Transformation</th>
+                <th>Logic</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>I don’t have enough money, so I can’t buy a new laptop.</td>
+                <td>If I had enough money, I <strong>would buy</strong> a new laptop.</td>
+                <td>Imaginary present situation.</td>
+              </tr>
+              <tr>
+                <td>She doesn’t know his address, so she can’t send him an invitation.</td>
+                <td>If she knew his address, she <strong>could send him</strong> an invitation.</td>
+                <td>Imaginary ability.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>Important:</strong><br>
+            The past simple in the if-clause does not refer to the past. It shows that the situation is imaginary.
+          </div>
+        `
+      },
+      {
+        title: "7. IF I WERE YOU → advice",
+        badge: "Advice Structures",
+        html: `
+          <p><strong>If I were you</strong> is used to give advice. In Part 4, it often becomes SHOULD, OUGHT TO or HAD BETTER.</p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Original sentence</th>
+                <th>Key word</th>
+                <th>Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>If I were you, I’d apologise.</td>
+                <td>SHOULD</td>
+                <td>You <strong>should apologise</strong>.</td>
+              </tr>
+              <tr>
+                <td>If I were you, I wouldn’t leave it until tomorrow.</td>
+                <td>BETTER</td>
+                <td>You <strong>had better not leave</strong> it until tomorrow.</td>
+              </tr>
+              <tr>
+                <td>If I were you, I’d ask the teacher.</td>
+                <td>OUGHT</td>
+                <td>You <strong>ought to ask</strong> the teacher.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="warning-line">Common trap: HAD BETTER is followed by infinitive without TO.</p>
+          <p>✅ You had better revise.<br>❌ You had better to revise.</p>
+        `
+      },
+      {
+        title: "8. Third conditional",
+        badge: "Third Conditional",
+        html: `
+          <p>The third conditional describes an unreal past situation. It imagines a different result for something that did not happen.</p>
+
+          <h3>Structure</h3>
+          <p><span class="formula">If + past perfect</span>, <span class="formula">would have + past participle</span></p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Real past</th>
+                <th>Imagined past</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>He didn’t study, so he failed the exam.</td>
+                <td>If he had studied, he <strong>would have passed</strong> the exam.</td>
+              </tr>
+              <tr>
+                <td>She forgot her passport, so she missed the flight.</td>
+                <td>She <strong>would not have missed</strong> the flight if she had remembered her passport.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>FCE logic:</strong><br>
+            The real past action is reversed. The result becomes WOULD HAVE + PAST PARTICIPLE.
+          </div>
+        `
+      },
+      {
+        title: "9. BECAUSE → IF",
+        badge: "Third Conditional Logic",
+        html: `
+          <p>Some third conditional transformations start with <strong>because</strong>. You must identify the real cause and imagine the opposite situation.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Real past</strong>
+              <p>I didn’t phone you because I didn’t have your number.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Imagined past</strong>
+              <p>I <strong>would have phoned</strong> you if I had had your number.</p>
+            </div>
+          </div>
+
+          <h3>Thinking process</h3>
+          <ol>
+            <li>Find the real past cause.</li>
+            <li>Reverse it with IF + PAST PERFECT.</li>
+            <li>Rewrite the result with WOULD HAVE + PAST PARTICIPLE.</li>
+          </ol>
+
+          <div class="box">
+            <strong>Typical keywords:</strong> WOULD, HAVE, NOT, HAD, PASSED, WON, MISSED.
+          </div>
+        `
+      },
+      {
+        title: "10. Inverted conditionals: SHOULD, WERE and HAD",
+        badge: "Formal Conditionals",
+        html: `
+          <p>Formal conditional sentences can be written without IF. This is common in advanced transformations and overlaps with the inversions block.</p>
+
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Normal conditional</th>
+                <th>Inverted conditional</th>
+                <th>Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>If you need help</td>
+                <td><strong>Should you need</strong> help</td>
+                <td>Possible future condition</td>
+              </tr>
+              <tr>
+                <td>If I were richer</td>
+                <td><strong>Were I richer</strong></td>
+                <td>Imaginary present/future condition</td>
+              </tr>
+              <tr>
+                <td>If she had known</td>
+                <td><strong>Had she known</strong></td>
+                <td>Unreal past condition</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="box">
+            <strong>Rule:</strong><br>
+            Remove IF and invert the subject and auxiliary: <span class="formula">Should you need</span>, <span class="formula">Were I richer</span>, <span class="formula">Had I known</span>.
+          </div>
+        `
+      },
+      {
+        title: "11. Common Cambridge traps",
+        badge: "Exam Accuracy · Traps",
+        html: `
+          <p>Most conditional mistakes in Part 4 come from a small number of repeated traps.</p>
+
+          <div class="study-grid">
+            <div class="study-mini">
+              <strong>Trap 1 · WILL after IF</strong>
+              <p>❌ If you will arrive late, call me.</p>
+              <p>✅ If you arrive late, call me.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 2 · Double negative with UNLESS</strong>
+              <p>❌ You won’t pass unless you don’t study.</p>
+              <p>✅ You won’t pass unless you study.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 3 · WOULD in the IF-clause</strong>
+              <p>❌ If I would have more time, I would help.</p>
+              <p>✅ If I had more time, I would help.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 4 · Second vs third conditional</strong>
+              <p>Second: If I had time, I would help.</p>
+              <p>Third: If I had had time, I would have helped.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 5 · Missing past perfect</strong>
+              <p>❌ If he studied, he would have passed.</p>
+              <p>✅ If he had studied, he would have passed.</p>
+            </div>
+
+            <div class="study-mini">
+              <strong>Trap 6 · Wrong inversion</strong>
+              <p>❌ If had I known...</p>
+              <p>✅ Had I known...</p>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    const firstConditionalScenarios = [
+      { id: "study_regularly", subject: "you", auxNeg: "don’t", condition: "study regularly", result: "pass the exam", resultNeg: "won’t pass the exam", resultPos: "will pass the exam" },
+      { id: "read_instructions", subject: "you", auxNeg: "don’t", condition: "read the instructions", result: "understand the task", resultNeg: "won’t understand the task", resultPos: "will understand the task" },
+      { id: "show_ticket", subject: "you", auxNeg: "don’t", condition: "show your ticket", result: "be allowed in", resultNeg: "won’t be allowed in", resultPos: "will be allowed in" },
+      { id: "bring_id", subject: "you", auxNeg: "don’t", condition: "bring your ID", result: "enter the building", resultNeg: "won’t enter the building", resultPos: "will enter the building" },
+      { id: "finish_homework", subject: "you", auxNeg: "don’t", condition: "finish your homework", result: "go out tonight", resultNeg: "won’t go out tonight", resultPos: "will go out tonight" },
+      { id: "practise_daily", subject: "you", auxNeg: "don’t", condition: "practise every day", result: "improve your speaking", resultNeg: "won’t improve your speaking", resultPos: "will improve your speaking" },
+      { id: "arrive_early", subject: "you", auxNeg: "don’t", condition: "arrive early", result: "get a good seat", resultNeg: "won’t get a good seat", resultPos: "will get a good seat" },
+      { id: "revise_vocab", subject: "you", auxNeg: "don’t", condition: "revise the vocabulary", result: "do well in the test", resultNeg: "won’t do well in the test", resultPos: "will do well in the test" },
+      { id: "ask_help", subject: "you", auxNeg: "don’t", condition: "ask for help", result: "solve the problem", resultNeg: "won’t solve the problem", resultPos: "will solve the problem" },
+      { id: "save_money", subject: "you", auxNeg: "don’t", condition: "save enough money", result: "buy the laptop", resultNeg: "won’t buy the laptop", resultPos: "will buy the laptop" },
+      { id: "check_answers", subject: "you", auxNeg: "don’t", condition: "check your answers", result: "avoid careless mistakes", resultNeg: "won’t avoid careless mistakes", resultPos: "will avoid careless mistakes" },
+      { id: "follow_advice", subject: "you", auxNeg: "don’t", condition: "follow the advice", result: "make progress", resultNeg: "won’t make progress", resultPos: "will make progress" },
+      { id: "submit_form", subject: "you", auxNeg: "don’t", condition: "submit the form", result: "join the course", resultNeg: "won’t join the course", resultPos: "will join the course" },
+      { id: "pay_fee", subject: "you", auxNeg: "don’t", condition: "pay the fee", result: "take part", resultNeg: "won’t take part", resultPos: "will take part" },
+      { id: "download_app", subject: "you", auxNeg: "don’t", condition: "download the app", result: "receive updates", resultNeg: "won’t receive updates", resultPos: "will receive updates" },
+      { id: "book_early", subject: "you", auxNeg: "don’t", condition: "book early", result: "get a discount", resultNeg: "won’t get a discount", resultPos: "will get a discount" },
+      { id: "charge_phone", subject: "you", auxNeg: "don’t", condition: "charge your phone", result: "contact us later", resultNeg: "won’t contact us later", resultPos: "will contact us later" },
+      { id: "keep_receipt", subject: "you", auxNeg: "don’t", condition: "keep the receipt", result: "return the item", resultNeg: "won’t return the item", resultPos: "will return the item" },
+      { id: "prepare_questions", subject: "you", auxNeg: "don’t", condition: "prepare some questions", result: "benefit from the interview", resultNeg: "won’t benefit from the interview", resultPos: "will benefit from the interview" },
+      { id: "use_examples", subject: "you", auxNeg: "don’t", condition: "use clear examples", result: "convince the examiner", resultNeg: "won’t convince the examiner", resultPos: "will convince the examiner" }
+    ];
+
+    const permissionScenarios = [
+      { id: "borrow_laptop", result: "You can borrow my laptop", condition: "you promise to look after it", tail: "to look after it" },
+      { id: "use_room", result: "You can use the study room", condition: "you leave it tidy", tail: "it tidy" },
+      { id: "join_club", result: "You can join the club", condition: "you pay the fee", tail: "the fee" },
+      { id: "leave_early", result: "You may leave early", condition: "your parents have signed the form", tail: "your parents have signed the form" },
+      { id: "borrow_notes", result: "You can borrow my notes", condition: "you return them tomorrow", tail: "them tomorrow" },
+      { id: "attend_workshop", result: "You can attend the workshop", condition: "you register online", tail: "online" },
+      { id: "use_camera", result: "You can use my camera", condition: "you handle it carefully", tail: "it carefully" },
+      { id: "submit_late", result: "The teacher will accept your essay", condition: "you hand it in today", tail: "it in today" },
+      { id: "take_exam", result: "You will be allowed to take the exam", condition: "you bring identification", tail: "identification" },
+      { id: "change_group", result: "You can change groups", condition: "there is enough space", tail: "is enough space" },
+      { id: "use_tablet", result: "You may use the tablet", condition: "you keep it charged", tail: "it charged" },
+      { id: "extend_deadline", result: "They will extend the deadline", condition: "you provide evidence", tail: "evidence" },
+      { id: "publish_article", result: "The magazine will publish your article", condition: "you shorten the introduction", tail: "the introduction" },
+      { id: "accept_proposal", result: "We’ll accept your proposal", condition: "you reduce the cost", tail: "the cost" },
+      { id: "give_refund", result: "They will give you a refund", condition: "you show proof of purchase", tail: "proof of purchase" },
+      { id: "join_trip", result: "You can join the trip", condition: "you return the form today", tail: "the form today" }
+    ];
+
+    const firstImperativeScenarios = [
+      { id: "hurry_bus", imperative: "Hurry up", result: "you’ll miss the bus", second: "You’ll miss the bus ______.", answer: "if you don’t hurry", key: "IF" },
+      { id: "book_seat", imperative: "Book early", result: "you won’t get a seat", second: "You won’t get a seat ______.", answer: "if you don’t book", key: "IF" },
+      { id: "touch_wire", imperative: "Don’t touch that wire", result: "you’ll hurt yourself", second: "You’ll hurt yourself ______ that wire.", answer: "if you touch", key: "IF" },
+      { id: "write_note", imperative: "Write it down", result: "you might forget it", second: "Write it down ______ it.", answer: "in case you forget", key: "CASE" },
+      { id: "take_jacket", imperative: "Take a jacket", result: "it might get cold later", second: "Take a jacket ______ cold later.", answer: "in case it gets", key: "CASE" },
+      { id: "save_work", imperative: "Save your work", result: "the computer might crash", second: "Save your work ______ crashes.", answer: "in case the computer", key: "CASE" },
+      { id: "bring_snack", imperative: "Bring a snack", result: "you might get hungry", second: "Bring a snack ______ hungry.", answer: "in case you get", key: "CASE" },
+      { id: "check_platform", imperative: "Check the platform", result: "it might have changed", second: "Check the platform ______ changed.", answer: "in case it has", key: "CASE" },
+      { id: "revise_tonight", imperative: "Revise tonight", result: "you won’t be ready", second: "You won’t be ready ______ tonight.", answer: "if you don’t revise", key: "IF" },
+      { id: "arrive_time", imperative: "Leave now", result: "you’ll be late", second: "You’ll be late ______ now.", answer: "if you don’t leave", key: "IF" },
+      { id: "protect_file", imperative: "Make a copy", result: "you might lose the file", second: "Make a copy ______ the file.", answer: "in case you lose", key: "CASE" },
+      { id: "call_ahead", imperative: "Call before you go", result: "the office might be closed", second: "Call before you go ______ closed.", answer: "in case the office is", key: "CASE" }
+    ];
+
+    const secondConditionalScenarios = [
+      { id: "money_laptop", situation: "I don’t have enough money, so I can’t buy a new laptop.", subject: "I", ifClause: "If I had enough money", result: "would buy", object: "a new laptop", key: "WOULD" },
+      { id: "time_club", situation: "I don’t have enough free time, so I can’t join the drama club.", subject: "I", ifClause: "If I had enough free time", result: "would join", object: "the drama club", key: "WOULD" },
+      { id: "german_job", situation: "I don’t speak German, so I can’t apply for the job.", subject: "I", ifClause: "If I spoke German", result: "could apply", object: "for the job", key: "COULD" },
+      { id: "address_invitation", situation: "She doesn’t know his address, so she can’t send him an invitation.", subject: "she", ifClause: "If she knew his address", result: "could send him", object: "an invitation", key: "COULD" },
+      { id: "room_guests", situation: "They don’t have a bigger room, so they can’t invite more guests.", subject: "they", ifClause: "If they had a bigger room", result: "would invite", object: "more guests", key: "WOULD" },
+      { id: "confidence_questions", situation: "She is very shy, so she doesn’t ask many questions.", subject: "she", ifClause: "If she weren’t so shy", result: "would ask", object: "more questions", key: "WOULD" },
+      { id: "listen_mistakes", situation: "He doesn’t listen carefully, so he makes a lot of mistakes.", subject: "he", ifClause: "If he listened carefully", result: "would not make", object: "so many mistakes", key: "NOT" },
+      { id: "bike_school", situation: "I don’t have a bike, so I walk to school.", subject: "I", ifClause: "If I had a bike", result: "would cycle", object: "to school", key: "WOULD" },
+      { id: "experience_manager", situation: "She lacks experience, so she can’t manage the project.", subject: "she", ifClause: "If she had more experience", result: "could manage", object: "the project", key: "COULD" },
+      { id: "equipment_research", situation: "They don’t have the right equipment, so they can’t complete the research.", subject: "they", ifClause: "If they had the right equipment", result: "could complete", object: "the research", key: "COULD" },
+      { id: "confidence_speech", situation: "He isn’t confident enough, so he doesn’t give presentations.", subject: "he", ifClause: "If he were more confident", result: "would give", object: "presentations", key: "WOULD" },
+      { id: "knowledge_decision", situation: "We don’t know the facts, so we can’t make a decision.", subject: "we", ifClause: "If we knew the facts", result: "could make", object: "a decision", key: "COULD" },
+      { id: "car_commute", situation: "She doesn’t have a car, so she spends a long time commuting.", subject: "she", ifClause: "If she had a car", result: "would spend", object: "less time commuting", key: "WOULD" },
+      { id: "support_campaign", situation: "The campaign doesn’t have enough support, so it won’t succeed.", subject: "it", ifClause: "If the campaign had more support", result: "would succeed", object: "", key: "WOULD" },
+      { id: "internet_work", situation: "The internet connection is unreliable, so we can’t work efficiently.", subject: "we", ifClause: "If the connection were reliable", result: "could work", object: "efficiently", key: "COULD" },
+      { id: "budget_expand", situation: "The school doesn’t have a bigger budget, so it can’t expand the programme.", subject: "it", ifClause: "If the school had a bigger budget", result: "could expand", object: "the programme", key: "COULD" }
+    ];
+
+    const adviceScenarios = [
+      { id: "revise_vocab", advice: "revise the vocabulary", negativeAdvice: "leave it until tomorrow" },
+      { id: "ask_teacher", advice: "ask the teacher", negativeAdvice: "ignore the teacher’s advice" },
+      { id: "check_answers", advice: "check your answers", negativeAdvice: "hand in the test yet" },
+      { id: "start_now", advice: "start preparing now", negativeAdvice: "wait until Friday" },
+      { id: "apologise", advice: "apologise to her", negativeAdvice: "pretend nothing happened" },
+      { id: "sleep_early", advice: "go to bed earlier", negativeAdvice: "stay up so late" },
+      { id: "read_feedback", advice: "read the feedback carefully", negativeAdvice: "repeat the same mistake" },
+      { id: "save_document", advice: "save the document now", negativeAdvice: "close the file yet" },
+      { id: "speak_coordinator", advice: "speak to the coordinator", negativeAdvice: "make a decision alone" },
+      { id: "wear_jacket", advice: "take a jacket", negativeAdvice: "go out without one" },
+      { id: "practise_oral", advice: "practise the oral task", negativeAdvice: "underestimate the speaking exam" },
+      { id: "apply_soon", advice: "apply as soon as possible", negativeAdvice: "miss the deadline" }
+    ];
+
+    const thirdConditionalScenarios = [
+      { id: "study_pass", cause: "he didn’t study", resultReal: "he failed the exam", ifClause: "if he had studied", result: "would have passed", object: "the exam", key: "HAVE" },
+      { id: "alarm_meeting", cause: "she forgot to set her alarm", resultReal: "she missed the meeting", ifClause: "if she had set her alarm", result: "would not have missed", object: "the meeting", key: "NOT" },
+      { id: "bus_late", cause: "they took the wrong bus", resultReal: "they arrived late", ifClause: "if they had not taken the wrong bus", result: "would have arrived", object: "on time", key: "HAVE" },
+      { id: "tickets_seats", cause: "we didn’t buy the tickets early", resultReal: "we didn’t get seats", ifClause: "if we had bought the tickets early", result: "would have got", object: "seats", key: "HAVE" },
+      { id: "passport_flight", cause: "she forgot her passport", resultReal: "she missed the flight", ifClause: "if she had remembered her passport", result: "would not have missed", object: "the flight", key: "NOT" },
+      { id: "weather_match", cause: "the weather was terrible", resultReal: "they cancelled the match", ifClause: "if the weather had been better", result: "would not have cancelled", object: "the match", key: "NOT" },
+      { id: "number_call", cause: "I didn’t have your number", resultReal: "I didn’t call you", ifClause: "if I had had your number", result: "would have called", object: "you", key: "WOULD" },
+      { id: "instructions_mistake", cause: "he didn’t read the instructions", resultReal: "he made a mistake", ifClause: "if he had read the instructions", result: "would not have made", object: "a mistake", key: "NOT" },
+      { id: "train_delay", cause: "we left too late", resultReal: "we missed the train", ifClause: "if we had left earlier", result: "would not have missed", object: "the train", key: "NOT" },
+      { id: "attachment_reply", cause: "she didn’t see the attachment", resultReal: "she didn’t reply", ifClause: "if she had seen the attachment", result: "would have replied", object: "", key: "WOULD" },
+      { id: "evidence_case", cause: "they ignored the evidence", resultReal: "they reached the wrong conclusion", ifClause: "if they had considered the evidence", result: "would not have reached", object: "the wrong conclusion", key: "NOT" },
+      { id: "map_lost", cause: "we forgot the map", resultReal: "we got lost", ifClause: "if we had taken the map", result: "would not have got", object: "lost", key: "NOT" },
+      { id: "deadline_project", cause: "he started too late", resultReal: "he didn’t finish the project", ifClause: "if he had started earlier", result: "would have finished", object: "the project", key: "HAVE" },
+      { id: "practice_performance", cause: "they didn’t practise enough", resultReal: "they performed badly", ifClause: "if they had practised enough", result: "would have performed", object: "better", key: "HAVE" },
+      { id: "booking_hotel", cause: "we didn’t book in advance", resultReal: "we paid more", ifClause: "if we had booked in advance", result: "would have paid", object: "less", key: "HAVE" },
+      { id: "backup_data", cause: "he didn’t back up the data", resultReal: "he lost the file", ifClause: "if he had backed up the data", result: "would not have lost", object: "the file", key: "NOT" }
+    ];
+
+    const invertedConditionalScenarios = [
+      { id: "need_help", normal: "If you need help, ask your teacher.", key: "SHOULD", answer: "Should you need", second: "______ help, ask your teacher.", note: "IF YOU NEED becomes SHOULD YOU NEED." },
+      { id: "require_assistance", normal: "If you require assistance, press this button.", key: "SHOULD", answer: "Should you require", second: "______ assistance, press this button.", note: "IF YOU REQUIRE becomes SHOULD YOU REQUIRE." },
+      { id: "need_info", normal: "If you need more information, contact reception.", key: "SHOULD", answer: "Should you need", second: "______ more information, contact reception.", note: "Formal first conditional inversion uses SHOULD." },
+      { id: "notice_error", normal: "If you notice an error, inform the supervisor.", key: "SHOULD", answer: "Should you notice", second: "______ an error, inform the supervisor.", note: "Remove IF and invert SHOULD + subject." },
+      { id: "know_problem", normal: "If I had known about the problem, I would have helped you.", key: "HAD", answer: "Had I known", second: "______ about the problem, I would have helped you.", note: "IF I HAD KNOWN becomes HAD I KNOWN." },
+      { id: "leave_earlier", normal: "If we had left earlier, we wouldn’t have missed the train.", key: "HAD", answer: "Had we left", second: "______ earlier, we wouldn’t have missed the train.", note: "Third conditional inversion uses HAD + subject + past participle." },
+      { id: "read_instructions", normal: "If he had read the instructions, he would not have made a mistake.", key: "HAD", answer: "Had he read", second: "______ the instructions, he would not have made a mistake.", note: "Remove IF and invert HAD." },
+      { id: "follow_advice", normal: "If they had followed the advice, they would have avoided the problem.", key: "HAD", answer: "Had they followed", second: "______ the advice, they would have avoided the problem.", note: "HAD + subject + past participle." },
+      { id: "be_richer", normal: "If I were richer, I would travel more.", key: "WERE", answer: "Were I richer", second: "______, I would travel more.", note: "IF I WERE can become WERE I." },
+      { id: "be_patient", normal: "If he were more patient, he would be a better teacher.", key: "WERE", answer: "Were he more", second: "______ patient, he would be a better teacher.", note: "Second conditional inversion with WERE is formal." },
+      { id: "be_available", normal: "If she were available, she would attend the meeting.", key: "WERE", answer: "Were she available", second: "______, she would attend the meeting.", note: "WERE + subject + complement." },
+      { id: "be_possible", normal: "If it were possible, we would extend the deadline.", key: "WERE", answer: "Were it possible", second: "______, we would extend the deadline.", note: "Formal inversion with WERE." }
+    ];
+
+    const trapItems = [
+      {
+        id: "trap_unless_negative",
+        type: "Cambridge traps",
+        expression: "UNLESS without double negative",
+        meaning: "UNLESS already means IF NOT.",
+        sentence1: "You won’t improve if you don’t practise regularly.",
+        sentence2: "You won’t improve ______ regularly.",
+        key: "UNLESS",
+        answers: ["unless you practise"],
+        distractors: ["unless you don’t practise", "if you practise", "if you will practise", "unless practising"],
+        explanation: "UNLESS means IF NOT. Do not use another negative after UNLESS.",
+        family: "trap-unless"
+      },
+      {
+        id: "trap_if_will",
+        type: "Cambridge traps",
+        expression: "No WILL after IF",
+        meaning: "Use present simple after IF in real future conditions.",
+        sentence1: "Book early or you won’t get a seat.",
+        sentence2: "You won’t get a seat ______ early.",
+        key: "IF",
+        answers: ["if you don’t book"],
+        distractors: ["if you won’t book", "if you didn’t book", "unless you don’t book", "if will you book"],
+        explanation: "After IF, use present simple for real future conditions.",
+        family: "trap-if-will"
+      },
+      {
+        id: "trap_second_would_have",
+        type: "Cambridge traps",
+        expression: "Second conditional, not third conditional",
+        meaning: "Imaginary present or future uses WOULD + infinitive.",
+        sentence1: "I don’t have enough time, so I can’t join the club.",
+        sentence2: "If I had enough time, I ______ the club.",
+        key: "WOULD",
+        answers: ["would join"],
+        distractors: ["would have joined", "will join", "had joined", "would joined"],
+        explanation: "This is an imaginary present situation, not an unreal past situation.",
+        family: "trap-second"
+      },
+      {
+        id: "trap_third_would",
+        type: "Cambridge traps",
+        expression: "Third conditional result",
+        meaning: "Unreal past uses WOULD HAVE + past participle.",
+        sentence1: "He didn’t read the instructions, so he made a mistake.",
+        sentence2: "He ______ a mistake if he had read the instructions.",
+        key: "NOT",
+        answers: ["would not have made", "wouldn’t have made"],
+        distractors: ["would not make", "will not have made", "had not made", "would not made"],
+        explanation: "This is an unreal past situation, so use WOULD HAVE + past participle.",
+        family: "trap-third"
+      },
+      {
+        id: "trap_if_clause_would",
+        type: "Cambridge traps",
+        expression: "No WOULD in the IF-clause",
+        meaning: "The IF-clause in the second conditional uses past simple.",
+        sentence1: "I don’t have a car, so I walk to school.",
+        sentence2: "If I ______, I would cycle to school.",
+        key: "HAD",
+        answers: ["had a car"],
+        distractors: ["would have a car", "have a car", "had had a car", "will have a car"],
+        explanation: "Do not use WOULD in the IF-clause.",
+        family: "trap-would-if"
+      },
+      {
+        id: "trap_had_better",
+        type: "Cambridge traps",
+        expression: "HAD BETTER + bare infinitive",
+        meaning: "HAD BETTER is followed by infinitive without TO.",
+        sentence1: "If I were you, I wouldn’t wait until Friday.",
+        sentence2: "You ______ until Friday.",
+        key: "BETTER",
+        answers: ["had better not wait"],
+        distractors: ["had better not to wait", "would better not wait", "had better don’t wait", "better not to wait"],
+        explanation: "Use HAD BETTER NOT + infinitive without TO.",
+        family: "trap-better"
+      },
+      {
+        id: "trap_inverted_had",
+        type: "Cambridge traps",
+        expression: "Inverted third conditional",
+        meaning: "Remove IF and invert HAD + subject.",
+        sentence1: "If I had known about the delay, I would have left later.",
+        sentence2: "______ about the delay, I would have left later.",
+        key: "HAD",
+        answers: ["Had I known"],
+        distractors: ["If had I known", "Had known I", "I had known", "Would I have known"],
+        explanation: "In formal inversion, IF I HAD KNOWN becomes HAD I KNOWN.",
+        family: "trap-inversion-had"
+      },
+      {
+        id: "trap_provided",
+        type: "Cambridge traps",
+        expression: "PROVIDED THAT + present simple",
+        meaning: "Use present simple after PROVIDED THAT for real future conditions.",
+        sentence1: "You can join the workshop if you register today.",
+        sentence2: "You can join the workshop ______ today.",
+        key: "PROVIDED",
+        answers: ["provided that you register"],
+        distractors: ["provided that you will register", "provided you registered", "provided if you register", "providing you will register"],
+        explanation: "After PROVIDED THAT, use present simple in real future conditions.",
+        family: "trap-provided"
+      }
+    ];
+
+    const state = {
+      studyIndex: 0,
+      mcCategory: "All categories",
+      mcCurrent: null,
+      mcSelected: null,
+      mcScore: 0,
+      mcAttempts: 0,
+      mcRecent: [],
+      trCategory: "All categories",
+      trCurrent: null,
+      trChecked: false,
+      trScore: 0,
+      trAttempts: 0,
+      trRecent: [],
+      examCategory: "All categories",
+      examQuestions: [],
+      examIndex: 0,
+      examScore: 0,
+      examChecked: false,
+      examAnswers: [],
+      usage: {}
+    };
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function pick(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function capitalise(text) {
+      return String(text).charAt(0).toUpperCase() + String(text).slice(1);
+    }
+
+    function normalise(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/\bdo not\b/g, "don't")
+        .replace(/\bdoes not\b/g, "doesn't")
+        .replace(/\bdid not\b/g, "didn't")
+        .replace(/\bwill not\b/g, "won't")
+        .replace(/\bwould not\b/g, "wouldn't")
+        .replace(/\bhad not\b/g, "hadn't")
+        .replace(/\bis not\b/g, "isn't")
+        .replace(/\bare not\b/g, "aren't")
+        .replace(/\bwere not\b/g, "weren't")
+        .replace(/[.,!?;]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function wordCount(text) {
+      const clean = String(text || "")
+        .trim()
+        .replace(/[.,!?;]/g, "")
+        .replace(/\s+/g, " ");
+
+      if (!clean) return 0;
+      return clean.split(" ").filter(Boolean).length;
+    }
+
+    function keyIsIncluded(answer, key) {
+      const answerWords = normalise(answer).split(" ");
+      const keyWords = normalise(key).split(" ");
+      return keyWords.every(word => answerWords.includes(word));
+    }
+
+    function expandAcceptedAnswers(answers) {
+      const expanded = [];
+
+      answers.forEach(answer => {
+        expanded.push(answer);
+
+        const variants = [
+          [/\bdon't\b/gi, "do not"],
+          [/\bdoesn't\b/gi, "does not"],
+          [/\bdidn't\b/gi, "did not"],
+          [/\bwon't\b/gi, "will not"],
+          [/\bwouldn't\b/gi, "would not"],
+          [/\bhadn't\b/gi, "had not"],
+          [/\bisn't\b/gi, "is not"],
+          [/\baren't\b/gi, "are not"],
+          [/\bweren't\b/gi, "were not"],
+          [/\bwould not\b/gi, "wouldn't"],
+          [/\bhad not\b/gi, "hadn't"],
+          [/\bdo not\b/gi, "don't"],
+          [/\bdoes not\b/gi, "doesn't"],
+          [/\bdid not\b/gi, "didn't"]
+        ];
+
+        variants.forEach(([pattern, replacement]) => {
+          const variant = answer.replace(pattern, replacement);
+          if (variant !== answer) expanded.push(variant);
+        });
+      });
+
+      return [...new Set(expanded)].filter(answer => wordCount(answer) >= 2 && wordCount(answer) <= 5);
+    }
+
+    function makeItem(data) {
+      const answers = expandAcceptedAnswers(data.answers || [data.answer]);
+
+      return {
+        type: data.type,
+        expression: data.expression,
+        meaning: data.meaning,
+        original: data.sentence1,
+        second: data.sentence2,
+        key: data.key,
+        keyOptions: data.keyOptions || [data.key],
+        answers,
+        answer: answers[0],
+        distractors: data.distractors || [],
+        note: data.explanation || data.note || "",
+        trap: data.trap || "",
+        family: data.family || data.id || data.expression
+      };
+    }
+
+    function getAcceptedAnswers(exercise) {
+      return Array.isArray(exercise.answers) && exercise.answers.length > 0 ? exercise.answers : [exercise.answer];
+    }
+
+    function primaryAnswer(exercise) {
+      return getAcceptedAnswers(exercise)[0];
+    }
+
+    function acceptedAnswersText(exercise) {
+      return getAcceptedAnswers(exercise).join(" / ");
+    }
+
+    function isCorrectAnswer(input, exercise) {
+      return getAcceptedAnswers(exercise).map(normalise).includes(normalise(input));
+    }
+
+    function isValidExercise(exercise) {
+      return getAcceptedAnswers(exercise).every(answer => {
+        const count = wordCount(answer);
+        return count >= 2 && count <= 5 && keyIsIncluded(answer, exercise.key);
+      });
+    }
+
+    function cleanDistractors(exercise) {
+      const accepted = getAcceptedAnswers(exercise).map(normalise);
+
+      return [...new Set(exercise.distractors || [])]
+        .map(option => String(option || "").trim())
+        .filter(option =>
+          wordCount(option) >= 2 &&
+          wordCount(option) <= 5 &&
+          keyIsIncluded(option, exercise.key) &&
+          !accepted.includes(normalise(option))
+        )
+        .slice(0, 8);
+    }
+
+    function signature(exercise) {
+      return normalise(`${exercise.original} ${exercise.second} ${primaryAnswer(exercise)}`);
+    }
+
+    function patternSignature(exercise) {
+      return `${exercise.type}::${exercise.family || exercise.expression}`;
+    }
+
+    function lexicalSignature(exercise) {
+      return normalise(`${exercise.family || ""} ${exercise.second} ${primaryAnswer(exercise)}`);
+    }
+
+    function remember(recentList, exercise) {
+      recentList.push(signature(exercise));
+      while (recentList.length > 140) recentList.shift();
+    }
+
+    function generateIfNotToUnless() {
+      const s = pick(firstConditionalScenarios);
+      const variant = pick(["A", "B", "C"]);
+
+      let sentence1 = "";
+      let sentence2 = `${capitalise(s.subject)} ${s.resultNeg.replace(/^won’t /, "won’t ")} ______.`;
+      const answer = `unless ${s.subject} ${s.condition}`;
+
+      if (variant === "A") {
+        sentence1 = `${capitalise(s.subject)} ${s.resultNeg} if ${s.subject} ${s.auxNeg} ${s.condition}.`;
+      }
+
+      if (variant === "B") {
+        sentence1 = `If ${s.subject} ${s.auxNeg} ${s.condition}, ${s.subject} ${s.resultNeg}.`;
+      }
+
+      if (variant === "C") {
+        sentence1 = `${capitalise(s.subject)} need to ${s.condition}, or ${s.subject} ${s.resultNeg}.`;
+      }
+
+      return makeItem({
+        type: "IF / UNLESS",
+        expression: "IF NOT → UNLESS",
+        meaning: "Change a negative IF condition into UNLESS + positive verb.",
+        sentence1,
+        sentence2,
+        key: "UNLESS",
+        answers: [answer],
+        distractors: [
+          `unless ${s.subject} ${s.auxNeg} ${s.condition}`,
+          `if ${s.subject} ${s.condition}`,
+          `if ${s.subject} will ${s.condition}`,
+          `unless ${s.condition.split(" ")[0]}ing`
+        ],
+        explanation: "UNLESS means IF NOT, so the verb after UNLESS is normally positive in this transformation.",
+        family: `if-not-unless-${s.id}-${variant}`
+      });
+    }
+
+    function generateUnlessToIf() {
+      const s = pick(firstConditionalScenarios);
+      const words = s.condition.split(" ");
+      const verb = words[0];
+      const rest = words.slice(1).join(" ");
+      const answer = `if ${s.subject} ${s.auxNeg} ${verb}`;
+      const secondTail = rest ? ` ${rest}` : "";
+
+      return makeItem({
+        type: "IF / UNLESS",
+        expression: "UNLESS → IF + negative",
+        meaning: "Change UNLESS into IF with a negative verb.",
+        sentence1: `${capitalise(s.subject)} ${s.resultNeg} unless ${s.subject} ${s.condition}.`,
+        sentence2: `${capitalise(s.subject)} ${s.resultNeg} ______${secondTail}.`,
+        key: "IF",
+        answers: [answer],
+        distractors: [
+          `if ${s.subject} ${verb}`,
+          `unless ${s.subject} ${verb}`,
+          `if ${s.subject} will not ${verb}`,
+          `if ${s.subject} didn't ${verb}`
+        ],
+        explanation: "UNLESS can usually be rewritten as IF + negative verb.",
+        family: `unless-if-${s.id}`
+      });
+    }
+
+    function generateAsLongAs() {
+      const s = pick(permissionScenarios);
+      const words = s.condition.split(" ");
+      const answer = `as long as ${words.slice(0, 2).join(" ")}`;
+      const rest = words.slice(2).join(" ");
+      const sentence2 = `${s.result} ______${rest ? " " + rest : ""}.`;
+
+      return makeItem({
+        type: "Condition linkers",
+        expression: "IF → AS LONG AS",
+        meaning: "Use AS LONG AS to introduce the condition that must be respected.",
+        sentence1: `${s.result} if ${s.condition}.`,
+        sentence2,
+        key: "LONG",
+        answers: [answer],
+        distractors: [
+          `as long ${words.slice(0, 2).join(" ")}`,
+          `so long that ${words[0]}`,
+          `as long as will ${words[0]}`,
+          `as long than ${words[0]}`
+        ],
+        explanation: "The correct expression is AS LONG AS + subject + verb.",
+        family: `as-long-${s.id}`
+      });
+    }
+
+    function generateProvidedThat() {
+      const s = pick(permissionScenarios);
+      const words = s.condition.split(" ");
+      const answer = `provided that ${words.slice(0, 2).join(" ")}`;
+      const rest = words.slice(2).join(" ");
+
+      return makeItem({
+        type: "Condition linkers",
+        expression: "IF → PROVIDED THAT",
+        meaning: "Use PROVIDED THAT for a slightly more formal condition.",
+        sentence1: `${s.result} if ${s.condition}.`,
+        sentence2: `${s.result} ______${rest ? " " + rest : ""}.`,
+        key: "PROVIDED",
+        answers: [answer],
+        distractors: [
+          `provided ${words[0]} will ${words[1] || ""}`.trim(),
+          `provided if ${words[0]} ${words[1] || ""}`.trim(),
+          `provided to ${words[0]} ${words[1] || ""}`.trim(),
+          `provided that will ${words[0]}`
+        ],
+        explanation: "PROVIDED THAT means IF. In real future conditions, use present simple after it.",
+        family: `provided-${s.id}`
+      });
+    }
+
+    function generateOnConditionThat() {
+      const s = pick(permissionScenarios);
+      const startsWithYou = s.condition.startsWith("you ");
+      const answer = startsWithYou ? "on condition that you" : "on condition that";
+      const rest = startsWithYou ? s.condition.replace(/^you /, "") : s.condition;
+
+      return makeItem({
+        type: "Condition linkers",
+        expression: "IF → ON CONDITION THAT",
+        meaning: "Use ON CONDITION THAT when the speaker sets a clear condition.",
+        sentence1: `${s.result} if ${s.condition}.`,
+        sentence2: `${s.result} ______ ${rest}.`,
+        key: "CONDITION",
+        answers: [answer],
+        distractors: [
+          startsWithYou ? "in condition that you" : "in condition that",
+          startsWithYou ? "with condition that you" : "with condition that",
+          startsWithYou ? "on condition if you" : "on condition if",
+          startsWithYou ? "on the condition you" : "on the condition"
+        ],
+        explanation: "The fixed expression is ON CONDITION THAT.",
+        family: `condition-${s.id}`
+      });
+    }
+
+    function generateFirstConditional() {
+      const s = pick(firstImperativeScenarios);
+
+      return makeItem({
+        type: "First conditional",
+        expression: s.key === "CASE" ? "IN CASE + present simple" : "Imperative / or else → IF",
+        meaning: s.key === "CASE"
+          ? "Use IN CASE for something that might happen."
+          : "Rewrite a warning or consequence using IF.",
+        sentence1: `${s.imperative}, or ${s.result}.`,
+        sentence2: s.second,
+        key: s.key,
+        answers: [s.answer],
+        distractors: firstConditionalDistractors(s),
+        explanation: s.key === "CASE"
+          ? "IN CASE means because something might happen."
+          : "Use IF + present simple, not IF + WILL.",
+        family: `first-${s.id}`
+      });
+    }
+
+    function generateSecondConditional() {
+      const s = pick(secondConditionalScenarios);
+      const useResultGap = Math.random() < 0.75;
+
+      if (useResultGap) {
+        return makeItem({
+          type: "Second conditional",
+          expression: "Imaginary present/future → WOULD / COULD + infinitive",
+          meaning: "Use the second conditional for an unreal present or future situation.",
+          sentence1: s.situation,
+          sentence2: `${s.ifClause}, ${s.subject} ______${s.object ? " " + s.object : ""}.`,
+          key: s.key,
+          answers: [s.result],
+          distractors: secondConditionalDistractors(s),
+          explanation: "This is an imaginary present or future situation, so use WOULD/COULD + infinitive.",
+          family: `second-result-${s.id}`
+        });
+      }
+
+      if (s.ifClause.includes(" had ")) {
+        const afterIf = s.ifClause.replace(/^If /, "");
+        return makeItem({
+          type: "Second conditional",
+          expression: "Real present → IF + past simple",
+          meaning: "Build the imaginary condition using past simple.",
+          sentence1: s.situation,
+          sentence2: `If ${afterIf.replace("had ", "______ ")}, ${s.subject} ${s.result} ${s.object}.`,
+          key: "HAD",
+          answers: ["had"],
+          distractors: ["would have", "will have", "have", "had had"],
+          explanation: "The if-clause in the second conditional uses past simple.",
+          family: `second-if-had-${s.id}`
+        });
+      }
+
+      return makeItem({
+        type: "Second conditional",
+        expression: "Imaginary condition with WERE",
+        meaning: "Use WERE for imaginary situations with be.",
+        sentence1: s.situation,
+        sentence2: `${s.ifClause.replace(/^If /, "If ______")}, ${s.subject} ${s.result} ${s.object}.`,
+        key: "WERE",
+        answers: ["were"],
+        distractors: ["would be", "will be", "was", "had been"],
+        explanation: "In formal or exam English, WERE is often used in imaginary conditional clauses.",
+        family: `second-were-${s.id}`
+      });
+    }
+
+    function generateAdvice() {
+      const s = pick(adviceScenarios);
+      const pattern = pick(["should", "ought", "better-positive", "better-negative", "should-negative"]);
+
+      if (pattern === "should") {
+        return makeItem({
+          type: "Advice structures",
+          expression: "IF I WERE YOU → SHOULD",
+          meaning: "Transform IF I WERE YOU into direct advice with SHOULD.",
+          sentence1: `If I were you, I’d ${s.advice}.`,
+          sentence2: `You ______.`,
+          key: "SHOULD",
+          answers: [`should ${s.advice}`],
+          distractors: [`would ${s.advice}`, `had ${s.advice}`, `should to ${s.advice.split(" ")[0]}`, `will ${s.advice}`],
+          explanation: "IF I WERE YOU is often transformed into SHOULD.",
+          family: `advice-should-${s.id}`
+        });
+      }
+
+      if (pattern === "ought") {
+        return makeItem({
+          type: "Advice structures",
+          expression: "IF I WERE YOU → OUGHT TO",
+          meaning: "Transform IF I WERE YOU into advice with OUGHT TO.",
+          sentence1: `If I were you, I’d ${s.advice}.`,
+          sentence2: `You ______.`,
+          key: "OUGHT",
+          answers: [`ought to ${s.advice}`],
+          distractors: [`ought ${s.advice}`, `ought to ${s.advice.split(" ").slice(1).join(" ")}`, `would ought ${s.advice.split(" ")[0]}`, `should to ${s.advice.split(" ")[0]}`],
+          explanation: "OUGHT is followed by TO + infinitive.",
+          family: `advice-ought-${s.id}`
+        });
+      }
+
+      if (pattern === "better-positive") {
+        return makeItem({
+          type: "Advice structures",
+          expression: "Good idea → HAD BETTER",
+          meaning: "Use HAD BETTER for strong advice.",
+          sentence1: `It would be a good idea for you to ${s.advice}.`,
+          sentence2: `You ______.`,
+          key: "BETTER",
+          answers: [`had better ${s.advice}`],
+          distractors: [`had better to ${s.advice.split(" ")[0]}`, `would better ${s.advice.split(" ")[0]}`, `better ${s.advice}`, `had to better ${s.advice.split(" ")[0]}`],
+          explanation: "HAD BETTER is followed by the infinitive without TO.",
+          family: `advice-better-positive-${s.id}`
+        });
+      }
+
+      if (pattern === "better-negative") {
+        return makeItem({
+          type: "Advice structures",
+          expression: "IF I WERE YOU, I WOULDN’T → HAD BETTER NOT",
+          meaning: "Use HAD BETTER NOT for strong negative advice.",
+          sentence1: `If I were you, I wouldn’t ${s.negativeAdvice}.`,
+          sentence2: `You ______.`,
+          key: "BETTER",
+          answers: [`had better not ${s.negativeAdvice}`],
+          distractors: [`had better not to ${s.negativeAdvice.split(" ")[0]}`, `would better not ${s.negativeAdvice.split(" ")[0]}`, `had better don't ${s.negativeAdvice.split(" ")[0]}`, `better not to ${s.negativeAdvice.split(" ")[0]}`],
+          explanation: "Use HAD BETTER NOT + infinitive without TO.",
+          family: `advice-better-negative-${s.id}`
+        });
+      }
+
+      return makeItem({
+        type: "Advice structures",
+        expression: "IF I WERE YOU, I WOULDN’T → SHOULD NOT",
+        meaning: "Transform negative advice with SHOULD NOT.",
+        sentence1: `If I were you, I wouldn’t ${s.negativeAdvice}.`,
+        sentence2: `You ______.`,
+        key: "SHOULD",
+        answers: [`should not ${s.negativeAdvice}`],
+        distractors: [`would not ${s.negativeAdvice}`, `should not to ${s.negativeAdvice.split(" ")[0]}`, `shouldn't to ${s.negativeAdvice.split(" ")[0]}`, `should have not ${s.negativeAdvice.split(" ")[0]}`],
+        explanation: "SHOULD NOT is followed by the infinitive without TO.",
+        family: `advice-should-negative-${s.id}`
+      });
+    }
+
+    function generateThirdConditional() {
+      const s = pick(thirdConditionalScenarios);
+      const pattern = pick(["result-gap", "condition-gap", "because-style"]);
+
+      if (pattern === "result-gap") {
+        return makeItem({
+          type: "Third conditional",
+          expression: "Unreal past result → WOULD HAVE + past participle",
+          meaning: "Use the third conditional for an unreal past situation.",
+          sentence1: `${capitalise(s.cause)}, so ${s.resultReal}.`,
+          sentence2: `${capitalise(s.ifClause)}, ${s.result.includes("would") ? "he" : ""} ______${s.object ? " " + s.object : ""}.`.replace(" ,", ",").replace("he he", "he"),
+          key: s.key,
+          answers: [s.result],
+          distractors: thirdConditionalDistractors(s),
+          explanation: "This is an unreal past situation, so use WOULD HAVE + past participle.",
+          family: `third-result-${s.id}`
+        });
+      }
+
+      if (pattern === "condition-gap") {
+        const ifClause = s.ifClause.replace(/^if /, "");
+        const parts = ifClause.split(" ");
+        const answer = parts.slice(0, 4).join(" ");
+        const rest = parts.slice(4).join(" ");
+
+        return makeItem({
+          type: "Third conditional",
+          expression: "Unreal past condition → IF + PAST PERFECT",
+          meaning: "Build the unreal past condition using past perfect.",
+          sentence1: `${capitalise(s.cause)}, so ${s.resultReal}.`,
+          sentence2: `${capitalise(s.result)} ${s.object} if ______${rest ? " " + rest : ""}.`,
+          key: answer.includes("not") ? "NOT" : "HAD",
+          answers: [answer],
+          distractors: [
+            answer.replace("had", "would"),
+            answer.replace("had", "has"),
+            answer.replace("had", "would have"),
+            answer.replace("had", "")
+          ],
+          explanation: "The condition in the third conditional uses past perfect.",
+          family: `third-condition-${s.id}`
+        });
+      }
+
+      return generateBecauseToIf();
+    }
+
+    function generateBecauseToIf() {
+      const s = pick(thirdConditionalScenarios);
+      const subject = s.resultReal.split(" ")[0];
+
+      return makeItem({
+        type: "Because → If",
+        expression: "BECAUSE → third conditional",
+        meaning: "Identify the real past cause and imagine the opposite situation.",
+        sentence1: `${capitalise(s.resultReal)} because ${s.cause}.`,
+        sentence2: `${capitalise(subject)} ______ ${s.object} ${s.ifClause}.`.replace(`${capitalise(subject)} ${s.resultReal.split(" ").slice(1).join(" ")}`, capitalise(subject)),
+        key: s.key,
+        answers: [s.result],
+        distractors: thirdConditionalDistractors(s),
+        explanation: "BECAUSE gives the real past cause. The transformation imagines a different past result.",
+        family: `because-if-${s.id}`
+      });
+    }
+
+    function generateInvertedConditional() {
+      const s = pick(invertedConditionalScenarios);
+
+      return makeItem({
+        type: "Inverted conditionals",
+        expression: s.key === "SHOULD"
+          ? "IF → SHOULD inversion"
+          : s.key === "HAD"
+            ? "IF + past perfect → HAD inversion"
+            : "IF + WERE → WERE inversion",
+        meaning: "Formal conditionals can remove IF and invert the subject and auxiliary.",
+        sentence1: s.normal,
+        sentence2: s.second,
+        key: s.key,
+        answers: [s.answer],
+        distractors: inversionDistractors(s),
+        explanation: s.note,
+        family: `inversion-${s.id}`
+      });
+    }
+
+    function generateTrap() {
+      return makeItem(pick(trapItems));
+    }
+
+    function firstConditionalDistractors(s) {
+      if (s.key === "CASE") {
+        return [
+          s.answer.replace("in case", "if"),
+          s.answer.replace("in case", "unless"),
+          s.answer.replace("gets", "will get"),
+          s.answer.replace("has", "will have"),
+          s.answer.replace("is", "will be")
+        ];
+      }
+
+      return [
+        s.answer.replace("don’t", "will not"),
+        s.answer.replace("don’t", "didn’t"),
+        s.answer.replace("if", "unless"),
+        s.answer.replace("if", "provided"),
+        s.answer.replace("if you", "if will you")
+      ];
+    }
+
+    function secondConditionalDistractors(s) {
+      const base = s.result
+        .replace("would ", "")
+        .replace("could ", "")
+        .replace("would not ", "")
+        .replace("could not ", "");
+
+      return [
+        `will ${base}`,
+        `would have ${base}`,
+        `had ${base}`,
+        `would ${base}ed`,
+        s.result.replace("would", "will"),
+        s.result.replace("could", "can")
+      ];
+    }
+
+    function thirdConditionalDistractors(s) {
+      const result = s.result;
+      const simplified = result
+        .replace("would have ", "would ")
+        .replace("would not have ", "would not ")
+        .replace("wouldn’t have ", "wouldn’t ");
+
+      return [
+        simplified,
+        result.replace("would", "will"),
+        result.replace("would have", "had"),
+        result.replace("would not have", "had not"),
+        result.replace("have", "had"),
+        result.replace("would", "would had")
+      ];
+    }
+
+    function inversionDistractors(s) {
+      if (s.key === "SHOULD") {
+        return [
+          s.answer.replace("Should", "If should"),
+          s.answer.replace("Should", "Should if"),
+          s.answer.replace("Should you", "You should"),
+          s.answer.replace("Should", "Would")
+        ];
+      }
+
+      if (s.key === "HAD") {
+        return [
+          s.answer.replace("Had", "If had"),
+          s.answer.replace("Had I", "I had"),
+          s.answer.replace("Had we", "We had"),
+          s.answer.replace("Had he", "He had"),
+          s.answer.replace("Had they", "They had")
+        ];
+      }
+
+      return [
+        s.answer.replace("Were", "If were"),
+        s.answer.replace("Were I", "I were"),
+        s.answer.replace("Were he", "He were"),
+        s.answer.replace("Were she", "She were"),
+        s.answer.replace("Were it", "It were")
+      ];
+    }
+
+    const generators = {
+      "IF / UNLESS": [generateIfNotToUnless, generateUnlessToIf],
+      "Condition linkers": [generateAsLongAs, generateProvidedThat, generateOnConditionThat],
+      "First conditional": [generateFirstConditional],
+      "Second conditional": [generateSecondConditional],
+      "Advice structures": [generateAdvice],
+      "Third conditional": [generateThirdConditional],
+      "Because → If": [generateBecauseToIf],
+      "Inverted conditionals": [generateInvertedConditional],
+      "Cambridge traps": [generateTrap]
+    };
+
+    generators["Mixed exam decisions"] = [
+      generateIfNotToUnless,
+      generateUnlessToIf,
+      generateAsLongAs,
+      generateProvidedThat,
+      generateOnConditionThat,
+      generateFirstConditional,
+      generateSecondConditional,
+      generateAdvice,
+      generateThirdConditional,
+      generateBecauseToIf,
+      generateInvertedConditional,
+      generateTrap
+    ];
+
+    const allPracticeGenerators = Object.entries(generators)
+      .filter(([category]) => category !== "Mixed exam decisions")
+      .flatMap(([, list]) => list);
+
+    function getGeneratorList(category) {
+      if (category === "All categories") return allPracticeGenerators;
+      if (category === "Mixed exam decisions") return generators["Mixed exam decisions"];
+      return generators[category] || allPracticeGenerators;
+    }
+
+    function safeGenerate(generator) {
+      try {
+        return generator();
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function generateExercise(category = "All categories", mode = "transform", recent = []) {
+      const generatorList = getGeneratorList(category);
+      const usageKey = `${mode}::${category}`;
+      state.usage[usageKey] = state.usage[usageKey] || { pattern: {}, lexical: {} };
+      const usage = state.usage[usageKey];
+
+      const candidates = [];
+
+      for (let i = 0; i < 260; i++) {
+        const generator = pick(generatorList);
+        const exercise = safeGenerate(generator);
+        if (!exercise) continue;
+
+        const validKeys = shuffle(exercise.keyOptions || [exercise.key]).filter(key =>
+          getAcceptedAnswers(exercise).some(answer => keyIsIncluded(answer, key))
+        );
+
+        if (!validKeys.length) continue;
+
+        const selectedKey = pick(validKeys);
+        const accepted = getAcceptedAnswers(exercise).filter(answer => keyIsIncluded(answer, selectedKey));
+        const finalExercise = {
+          ...exercise,
+          key: selectedKey,
+          answers: accepted,
+          answer: accepted[0]
+        };
+
+        if (!isValidExercise(finalExercise)) continue;
+        if (mode === "multiple" && cleanDistractors(finalExercise).length < 3) continue;
+
+        const sig = signature(finalExercise);
+        const psig = patternSignature(finalExercise);
+        const lsig = lexicalSignature(finalExercise);
+
+        let score = 0;
+        score += (usage.pattern[psig] || 0) * 16;
+        score += (usage.lexical[lsig] || 0) * 30;
+        if (recent.includes(sig)) score += 2000;
+
+        candidates.push({ exercise: finalExercise, score, psig, lsig, sig });
+      }
+
+      if (!candidates.length) {
+        const fallback = makeItem(trapItems[0]);
+        return fallback;
+      }
+
+      candidates.sort((a, b) => a.score - b.score);
+      const selected = candidates[0];
+
+      usage.pattern[selected.psig] = (usage.pattern[selected.psig] || 0) + 1;
+      usage.lexical[selected.lsig] = (usage.lexical[selected.lsig] || 0) + 1;
+
+      return selected.exercise;
+    }
+
+    function populatePracticeSelect(id, value) {
+      $(id).innerHTML = categories
+        .map(category => `<option value="${category}" ${category === value ? "selected" : ""}>${category}</option>`)
+        .join("");
+    }
+
+    function populateStudySelect() {
+      $("studySection").innerHTML = studySections
+        .map((section, index) => `<option value="${index}" ${index === state.studyIndex ? "selected" : ""}>${section.title}</option>`)
+        .join("");
+    }
+
+    function showTab(tab) {
+      document.querySelectorAll(".tab-section").forEach(section => section.classList.add("hidden"));
+      document.querySelectorAll(".tab").forEach(button => button.classList.remove("active"));
+      $(tab).classList.remove("hidden");
+      document.querySelector(`[data-tab="${tab}"]`).classList.add("active");
+    }
+
+    function renderStudy() {
+      const section = studySections[state.studyIndex];
+
+      $("studyCard").innerHTML = `
+        <span class="badge badge-blue">${section.badge}</span>
+        <h2>${section.title}</h2>
+        ${section.html}
+      `;
+
+      $("studyCounter").textContent = `Study section ${state.studyIndex + 1} of ${studySections.length}`;
+      $("studySection").value = String(state.studyIndex);
+    }
+
+    function newMcQuestion() {
+      const exercise = generateExercise(state.mcCategory, "multiple", state.mcRecent);
+      remember(state.mcRecent, exercise);
+
+      const options = shuffle([primaryAnswer(exercise), ...shuffle(cleanDistractors(exercise)).slice(0, 3)]);
+
+      state.mcCurrent = { ...exercise, options };
+      state.mcSelected = null;
+      renderMc();
+    }
+
+    function renderMc() {
+      const q = state.mcCurrent;
+      $("mcScore").textContent = `Score: ${state.mcScore}/${state.mcAttempts}`;
+
+      if (!q) {
+        $("mcType").textContent = "";
+        $("mcQuestion").textContent = "Click 'New question' to start.";
+        $("mcOptions").innerHTML = "";
+        $("mcFeedback").classList.add("hidden");
+        return;
+      }
+
+      $("mcType").textContent = `${q.type} · Generated transformation`;
+
+      $("mcQuestion").innerHTML = `
+        <p>${q.original}</p>
+        <div class="box">${q.second}</div>
+      `;
+
+      $("mcOptions").innerHTML = "";
+
+      q.options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+
+        if (state.mcSelected) {
+          if (getAcceptedAnswers(q).map(normalise).includes(normalise(option))) {
+            button.classList.add("good");
+          } else if (normalise(option) === normalise(state.mcSelected)) {
+            button.classList.add("bad");
+          }
+        }
+
+        button.addEventListener("click", () => chooseMc(option));
+        $("mcOptions").appendChild(button);
+      });
+
+      if (state.mcSelected) {
+        const correct = isCorrectAnswer(state.mcSelected, q);
+        $("mcFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+        $("mcFeedback").innerHTML = `
+          <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+          <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+          <p><strong>Key word used:</strong> ${q.key}</p>
+          <p>${q.note || ""}</p>
+          <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+        `;
+      } else {
+        $("mcFeedback").classList.add("hidden");
+      }
+    }
+
+    function chooseMc(option) {
+      if (state.mcSelected) return;
+      state.mcSelected = option;
+      state.mcAttempts++;
+      if (isCorrectAnswer(option, state.mcCurrent)) state.mcScore++;
+      renderMc();
+    }
+
+    function newTransformation() {
+      state.trCurrent = generateExercise(state.trCategory, "transform", state.trRecent);
+      remember(state.trRecent, state.trCurrent);
+
+      state.trChecked = false;
+      $("trInput").value = "";
+      $("trFeedback").classList.add("hidden");
+      $("trHintBox").classList.add("hidden");
+      renderTransformation();
+    }
+
+    function renderTransformation() {
+      const q = state.trCurrent;
+      $("trScore").textContent = `Score: ${state.trScore}/${state.trAttempts}`;
+
+      if (!q) {
+        $("trType").textContent = "";
+        $("trFirst").textContent = "Click 'New exercise' to start.";
+        $("trSecond").textContent = "";
+        $("trKey").textContent = "";
+        return;
+      }
+
+      const input = $("trInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+
+      $("trType").textContent = `${q.type} · Generated transformation`;
+      $("trWords").textContent = `Words: ${words}/2–5`;
+      $("trWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("trFirst").textContent = q.original;
+      $("trSecond").textContent = q.second;
+      $("trKey").textContent = `Key word: ${q.key}`;
+    }
+
+    function checkTransformation(reveal = false) {
+      if (!state.trCurrent || state.trChecked) return;
+
+      const input = $("trInput").value;
+      const correct = !reveal && isCorrectAnswer(input, state.trCurrent);
+
+      state.trChecked = true;
+      state.trAttempts++;
+      if (correct) state.trScore++;
+
+      $("trFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("trFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : reveal ? "Answer revealed." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(state.trCurrent)}</strong></p>
+        <p>${state.trCurrent.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${state.trCurrent.expression}</p>
+        <p class="muted">Official rule applied: every accepted answer contains the key word and has between two and five words.</p>
+      `;
+
+      $("trFeedback").classList.remove("hidden");
+      renderTransformation();
+    }
+
+    function showHint() {
+      if (!state.trCurrent) return;
+      $("trHintBox").classList.remove("hidden");
+      $("trHintBox").innerHTML = `<strong>Hint:</strong> ${state.trCurrent.meaning}`;
+    }
+
+    function buildOfficialExamQuestions() {
+      const roundPlan = [
+        ["IF / UNLESS"],
+        ["Condition linkers"],
+        ["First conditional"],
+        ["Second conditional"],
+        ["Third conditional"],
+        ["Because → If", "Inverted conditionals", "Cambridge traps"]
+      ];
+
+      const selected = [];
+      const used = [];
+
+      roundPlan.forEach(group => {
+        let exercise = null;
+
+        for (let attempt = 0; attempt < 80; attempt++) {
+          const category = pick(group);
+          const candidate = generateExercise(category, "transform", used);
+          const sig = signature(candidate);
+
+          if (!used.includes(sig)) {
+            exercise = candidate;
+            used.push(sig);
+            break;
+          }
+        }
+
+        if (exercise) selected.push(exercise);
+      });
+
+      return selected;
+    }
+
+    function buildExamQuestions() {
+      if (state.examCategory === "All categories" || state.examCategory === "Mixed exam decisions") {
+        return buildOfficialExamQuestions();
+      }
+
+      const selected = [];
+      const used = [];
+
+      for (let attempt = 0; attempt < 220; attempt++) {
+        const exercise = generateExercise(state.examCategory, "transform", used);
+        const sig = signature(exercise);
+
+        if (!used.includes(sig)) {
+          selected.push(exercise);
+          used.push(sig);
+        }
+
+        if (selected.length === 6) break;
+      }
+
+      return selected;
+    }
+
+    function startExam() {
+      state.examQuestions = buildExamQuestions();
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examCard").classList.remove("hidden");
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function resetExam() {
+      state.examQuestions = [];
+      state.examIndex = 0;
+      state.examScore = 0;
+      state.examChecked = false;
+      state.examAnswers = [];
+
+      $("examIntro").classList.remove("hidden");
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.add("hidden");
+      $("examFeedback").classList.add("hidden");
+      $("examInput").value = "";
+    }
+
+    function renderExam() {
+      const total = state.examQuestions.length;
+      const q = state.examQuestions[state.examIndex];
+
+      if (!q || total === 0) {
+        $("examIntro").classList.remove("hidden");
+        $("examCard").classList.add("hidden");
+        return;
+      }
+
+      const input = $("examInput").value.trim();
+      const words = input ? input.split(/\s+/).length : 0;
+      const progress = (state.examIndex / total) * 100;
+
+      $("examProgress").style.width = `${progress}%`;
+      $("examType").textContent = `${q.type} · Question ${state.examIndex + 1}/${total}`;
+      $("examScore").textContent = `Score: ${state.examScore}/${state.examIndex}`;
+      $("examWords").textContent = `Words: ${words}/2–5`;
+      $("examWords").className = `pill ${
+        words === 0 ? "" : words >= 2 && words <= 5 ? "badge-green" : "badge-red"
+      }`;
+
+      $("examFirst").textContent = q.original;
+      $("examSecond").textContent = q.second;
+      $("examKey").textContent = `Key word: ${q.key}`;
+      $("examCheck").disabled = state.examChecked;
+      $("examInput").disabled = state.examChecked;
+      $("examNext").disabled = !state.examChecked;
+      $("examNext").textContent = state.examIndex === total - 1 ? "Finish" : "Next";
+    }
+
+    function checkExamAnswer() {
+      if (state.examChecked) return;
+
+      const q = state.examQuestions[state.examIndex];
+      const input = $("examInput").value;
+      const correct = isCorrectAnswer(input, q);
+
+      state.examChecked = true;
+
+      if (correct) state.examScore++;
+
+      state.examAnswers.push({
+        number: state.examIndex + 1,
+        pattern: q.expression,
+        correct,
+        userAnswer: input,
+        accepted: acceptedAnswersText(q)
+      });
+
+      $("examFeedback").className = `box feedback ${correct ? "correct" : "incorrect"}`;
+      $("examFeedback").innerHTML = `
+        <p><strong>${correct ? "Correct." : "Not quite."}</strong></p>
+        <p>Accepted answer(s): <strong>${acceptedAnswersText(q)}</strong></p>
+        <p>${q.note || ""}</p>
+        <p class="muted"><strong>Target pattern:</strong> ${q.expression}</p>
+      `;
+      $("examFeedback").classList.remove("hidden");
+
+      renderExam();
+    }
+
+    function nextExamQuestion() {
+      if (!state.examChecked) return;
+
+      if (state.examIndex >= state.examQuestions.length - 1) {
+        finishExam();
+        return;
+      }
+
+      state.examIndex++;
+      state.examChecked = false;
+      $("examInput").value = "";
+      $("examInput").disabled = false;
+      $("examFeedback").classList.add("hidden");
+      renderExam();
+
+      setTimeout(() => $("examInput").focus(), 100);
+    }
+
+    function finishExam() {
+      const total = state.examQuestions.length;
+      const score = state.examScore;
+      const percentage = total ? Math.round((score / total) * 100) : 0;
+
+      let message = "";
+      if (score >= 6) {
+        message = "Excellent exam control. You are handling conditional transformations with strong accuracy.";
+      } else if (score >= 5) {
+        message = "Very good result. Keep practising the exact form of third conditionals and formal inversions.";
+      } else if (score >= 4) {
+        message = "Good progress. Review the difference between second and third conditional forms.";
+      } else if (score >= 3) {
+        message = "You understand some patterns, but you need more controlled practice with IF, UNLESS and conditional verb forms.";
+      } else {
+        message = "Revise Study Mode carefully before repeating Exam Mode, especially UNLESS, third conditional and inversion.";
+      }
+
+      const review = state.examAnswers.map(item => `
+        <tr>
+          <td>${item.number}</td>
+          <td>${item.correct ? "✓" : "✗"}</td>
+          <td>${item.pattern}</td>
+          <td>${item.userAnswer || "<em>blank</em>"}</td>
+          <td>${item.accepted}</td>
+        </tr>
+      `).join("");
+
+      $("examCard").classList.add("hidden");
+      $("examResult").classList.remove("hidden");
+
+      $("examResult").innerHTML = `
+        <span class="badge badge-orange">Exam Mode completed</span>
+        <div class="result-number">${score}/${total}</div>
+        <p><strong>Percentage:</strong> ${percentage}%</p>
+        <div class="box">${message}</div>
+        <p class="muted">
+          Official rule applied throughout: every accepted answer contains the key word and has between two and five words.
+        </p>
+        <div class="box" style="overflow-x:auto;">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Pattern</th>
+                <th>Your answer</th>
+                <th>Accepted</th>
+              </tr>
+            </thead>
+            <tbody>${review}</tbody>
+          </table>
+        </div>
+        <div class="button-group" style="margin-top:16px;">
+          <button class="primary" id="examAgain">Restart official round</button>
+        </div>
+      `;
+
+      $("examAgain").addEventListener("click", startExam);
+    }
+
+    function init() {
+      populateStudySelect();
+      populatePracticeSelect("mcCategory", state.mcCategory);
+      populatePracticeSelect("trCategory", state.trCategory);
+      populatePracticeSelect("examCategory", state.examCategory);
+
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => showTab(button.dataset.tab));
+      });
+
+      $("studySection").addEventListener("change", event => {
+        state.studyIndex = Number(event.target.value);
+        renderStudy();
+      });
+
+      $("studyNext").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex + 1) % studySections.length;
+        renderStudy();
+      });
+
+      $("studyPrev").addEventListener("click", () => {
+        state.studyIndex = (state.studyIndex - 1 + studySections.length) % studySections.length;
+        renderStudy();
+      });
+
+      $("mcCategory").addEventListener("change", event => {
+        state.mcCategory = event.target.value;
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        newMcQuestion();
+      });
+
+      $("mcNew").addEventListener("click", newMcQuestion);
+
+      $("mcReset").addEventListener("click", () => {
+        state.mcScore = 0;
+        state.mcAttempts = 0;
+        state.mcRecent = [];
+        state.usage[`multiple::${state.mcCategory}`] = { pattern: {}, lexical: {} };
+        renderMc();
+      });
+
+      $("trCategory").addEventListener("change", event => {
+        state.trCategory = event.target.value;
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        newTransformation();
+      });
+
+      $("trNew").addEventListener("click", newTransformation);
+      $("trHint").addEventListener("click", showHint);
+      $("trCheck").addEventListener("click", () => checkTransformation(false));
+      $("trReveal").addEventListener("click", () => checkTransformation(true));
+
+      $("trReset").addEventListener("click", () => {
+        state.trScore = 0;
+        state.trAttempts = 0;
+        state.trRecent = [];
+        state.usage[`transform::${state.trCategory}`] = { pattern: {}, lexical: {} };
+        renderTransformation();
+      });
+
+      $("trInput").addEventListener("input", renderTransformation);
+      $("trInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") checkTransformation(false);
+      });
+
+      $("examCategory").addEventListener("change", event => {
+        state.examCategory = event.target.value;
+        resetExam();
+      });
+
+      $("examStart").addEventListener("click", startExam);
+      $("examRestart").addEventListener("click", startExam);
+      $("examCheck").addEventListener("click", checkExamAnswer);
+      $("examNext").addEventListener("click", nextExamQuestion);
+      $("examInput").addEventListener("input", renderExam);
+      $("examInput").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          if (!state.examChecked) checkExamAnswer();
+          else nextExamQuestion();
+        }
+      });
+
+      renderStudy();
+      newMcQuestion();
+      newTransformation();
+    }
+
+    init();
+  </script>
+</body>
+</html>
